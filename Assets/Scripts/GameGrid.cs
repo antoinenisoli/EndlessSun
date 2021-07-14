@@ -8,11 +8,17 @@ public class GameGrid : MonoBehaviour
     [SerializeField] GameObject cellPrefab;
     [SerializeField] Sprite[] randomVisual;
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireCube(transform.position, (Vector2)gridSize);
+    }
+
     private void Awake()
     {
-        for (int x = 0; x < gridSize.x; x++)
+        for (int x = -gridSize.x/2; x < gridSize.x/2; x++)
         {
-            for (int y = 0; y < gridSize.y; y++)
+            for (int y = -gridSize.y / 2; y < gridSize.y/2; y++)
             {
                 GameObject newCell = Instantiate(cellPrefab, transform.position + new Vector3(x, y), cellPrefab.transform.rotation, transform);
                 newCell.GetComponentInChildren<SpriteRenderer>().sprite = randomVisual[Random.Range(0, randomVisual.Length)];

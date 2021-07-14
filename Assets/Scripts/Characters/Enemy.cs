@@ -2,22 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Entity
 {
-    Rigidbody2D rb;
-    Vector3 m_Velocity;
-    SpriteRenderer spr;
-    Animator anim;
+    [SerializeField] ItemDrop[] loots;
 
-    private void Awake()
+    public override void Death()
     {
-        rb = GetComponent<Rigidbody2D>();
-        spr = GetComponentInChildren<SpriteRenderer>();
-        anim = GetComponentInChildren<Animator>();
-    }
-
-    public void Hit()
-    {
-        anim.SetTrigger("Death");
+        base.Death();
+        foreach (var item in loots)
+        {
+            float random = Random.value;
+            if (random < item.prob)
+                Instantiate(item.itemPrefab, transform.position, Quaternion.identity);
+        }
     }
 }
