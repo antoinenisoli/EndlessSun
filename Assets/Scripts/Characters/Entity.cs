@@ -5,21 +5,18 @@ using DG.Tweening;
 
 public class Entity : MonoBehaviour
 {
+    [Header("Entity")]
     public Health health;
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
     [SerializeField] protected SpriteRenderer spr;
     protected Animator anim;
 
-    public void Awake()
+    public virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
-    }
-
-    private void Start()
-    {
         health.Initialize();
     }
 
@@ -28,7 +25,7 @@ public class Entity : MonoBehaviour
         anim.SetTrigger("Death");
     }
 
-    public virtual void Hit(Vector2 force)
+    public virtual void Hit(Vector2 force = new Vector2())
     {
         if (health.isDead)
             return;

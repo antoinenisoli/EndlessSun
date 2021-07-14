@@ -167,17 +167,24 @@ MonoBehaviour:
     currentHealth: 0
     maxHealth: 50
   spr: {fileID: 822972059179743088}
+  myXP:
+    currentXP: 0
+    currentLevel: 1
+    powerIncrement: 2
+    levels: 64000000000000000000000000000000000000000000000000000000000000000000000000000000
   currentState: 0
   speed: 5
   movementSmoothing: 0.05
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  attackDelay: 0.3
   attackAnimCount: 3
   attackRadius: 0.5
   attackRange: 0.187
   pushForce: 5
+  arrowPrefab: {fileID: 3389072804642720021, guid: 978e2c6fb1e21ab4aa6d1ff515447ca3,
+    type: 3}
+  arrowForce: 15
 --- !u!61 &822972060138402188
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -222,8 +229,8 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!1 &4071406047616465356
 GameObject:

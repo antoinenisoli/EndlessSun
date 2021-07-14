@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class PlayerAnimManager : MonoBehaviour
 {
-    public void Attack()
+    public void SwordAttack()
     {
         GameManager.Player.Attack();
+    }
+
+    public void BowAttack()
+    {
+        GameManager.Player.FireArrow();
     }
 }

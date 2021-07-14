@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class PickupItem : MonoBehaviour
+public abstract class PickupItem : MonoBehaviour
 {
-    [SerializeField] Transform item;
-    [SerializeField] float animDuration = 1;
-    [SerializeField] float spawnRadius = 0.5f;
-    [SerializeField] float pickupRadius = 1f;
-    bool canBePicked;
+    [SerializeField] protected Transform item;
+    [SerializeField] protected float animDuration = 1;
+    [SerializeField] protected float spawnRadius = 0.5f;
+    [SerializeField] protected float pickupRadius = 1f;
+    protected bool canBePicked;
+    bool dragging;
 
     private void OnDrawGizmosSelected()
     {
@@ -18,10 +19,20 @@ public class PickupItem : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, pickupRadius);
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (canBePicked && collision.gameObject == GameManager.Player.gameObject)
+        {
+            Effect(GameManager.Player);
+        }
+    }
+
     private void Awake()
     {
         SpawnAnim();
     }
+
+    public abstract void Effect(PlayerController2D player);
 
     void SpawnAnim()
     {
@@ -34,16 +45,14 @@ public class PickupItem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-            SpawnAnim();
-
-        if (canBePicked)
+        if (canBePicked && !dragging)
         {
             float dist = Vector2.Distance(GameManager.Player.transform.position, transform.position);
             if (dist < pickupRadius)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, GameManager.Player.transform.position, Time.deltaTime * 5f);
-            }
+                dragging = true;
         }
+
+        if (dragging)
+            transform.position = Vector3.MoveTowards(transform.position, GameManager.Player.transform.position, Time.deltaTime * 5f);
     }
 }

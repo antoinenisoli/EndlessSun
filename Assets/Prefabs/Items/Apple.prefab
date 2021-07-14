@@ -174,7 +174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5935628196445679052}
-  - component: {fileID: 5935628196445679054}
+  - component: {fileID: 5935730494940171829}
   - component: {fileID: 5935628196445679053}
   m_Layer: 0
   m_Name: Apple
@@ -191,7 +191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5935628196445679051}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.528, y: 6.479, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5935628194586165571}
@@ -199,7 +199,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5935628196445679054
+--- !u!114 &5935730494940171829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,12 +208,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5935628196445679051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 109a27f7f429fae47b191743fc3315fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c85ef241f4882da4f84ec460cc0687f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 5935628194586165571}
-  animDuration: 0.8
-  radius: 0.85
+  animDuration: 1
+  spawnRadius: 0.5
+  pickupRadius: 1
 --- !u!61 &5935628196445679053
 BoxCollider2D:
   m_ObjectHideFlags: 0

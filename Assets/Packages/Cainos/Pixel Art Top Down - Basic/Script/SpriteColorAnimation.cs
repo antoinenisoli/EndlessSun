@@ -1,33 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace Cainos.PixelArtTopDown_Basic
+//animate the sprite color base on the gradient and time
+public class SpriteColorAnimation : MonoBehaviour
 {
-    //animate the sprite color base on the gradient and time
-    public class SpriteColorAnimation : MonoBehaviour
+    public Gradient gradient;
+    public float time;
+
+    [SerializeField] Image image;
+    [SerializeField] SpriteRenderer sr;
+    float timer;
+
+    private void Start()
     {
-        public Gradient gradient;
-        public float time;
+        timer = time * Random.value;
+    }
 
-        private SpriteRenderer sr;
-        private float timer;
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer > time) timer = 0.0f;
 
-        private void Start()
-        {
-            timer = time * Random.value;
-            sr = GetComponent<SpriteRenderer>();
-        }
-
-        private void Update()
-        {
-            if (sr)
-            {
-                timer += Time.deltaTime;
-                if (timer > time) timer = 0.0f;
-
-                sr.color = gradient.Evaluate(timer / time);
-            }
-        }
+        if (sr)
+            sr.color = gradient.Evaluate(timer / time);
+        if (image)
+            image.color = gradient.Evaluate(timer / time);
     }
 }

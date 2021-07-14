@@ -48,10 +48,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     currentHealth: 0
-    maxHealth: 5
+    maxHealth: 1
   spr: {fileID: 4349680770242010597}
+  xpPrefab: {fileID: 6746842895930322274, guid: da1eb68032f44f94b8a2b6b4c035afcf,
+    type: 3}
+  xpAmount: 25
   loots:
-  - {fileID: 5935628196445679051, guid: ec0cf905c9e3fe04bb810abf2749039e, type: 3}
+  - itemPrefab: {fileID: 5935628196445679051, guid: ec0cf905c9e3fe04bb810abf2749039e,
+      type: 3}
+    dropCount: 1
+    prob: 0.179
 --- !u!61 &4349680769149131545
 BoxCollider2D:
   m_ObjectHideFlags: 0

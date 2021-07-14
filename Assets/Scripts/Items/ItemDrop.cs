@@ -6,5 +6,6 @@ using UnityEngine;
 public struct ItemDrop
 {
     public GameObject itemPrefab;
+    public int dropCount;
     [Range(0,1)] public float prob;
 }
