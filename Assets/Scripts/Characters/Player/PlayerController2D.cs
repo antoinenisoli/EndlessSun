@@ -42,8 +42,9 @@ public class PlayerController2D : Entity
         Gizmos.DrawSphere(transform.position + spr.transform.right * attackRange, attackRadius);
     }
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         myXP.GenerateLevels();
     }
 

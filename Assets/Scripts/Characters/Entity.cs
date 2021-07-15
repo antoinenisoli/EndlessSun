@@ -17,6 +17,10 @@ public class Entity : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
+    }
+
+    public virtual void Start()
+    {
         health.Initialize();
     }
 

@@ -21,6 +21,7 @@ public class Health
                 value = maxHealth;
 
             currentHealth = value;
+            UIManager.Instance.UpdateUI();
         }
     }
 

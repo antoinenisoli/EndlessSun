@@ -125,7 +125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 822972060138402190}
-  - component: {fileID: 822972060138402189}
+  - component: {fileID: 3437488683681455469}
   - component: {fileID: 822972060138402188}
   - component: {fileID: 822972060138402191}
   m_Layer: 6
@@ -151,7 +151,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &822972060138402189
+--- !u!114 &3437488683681455469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,23 +168,44 @@ MonoBehaviour:
     maxHealth: 50
   spr: {fileID: 822972059179743088}
   myXP:
-    currentXP: 0
-    currentLevel: 1
+    currentLevel:
+      index: 0
+      xpStep: 100
     powerIncrement: 2
-    levels: 64000000000000000000000000000000000000000000000000000000000000000000000000000000
+    levels:
+    - index: 0
+      xpStep: 0
+    - index: 0
+      xpStep: 0
+    - index: 0
+      xpStep: 0
+    - index: 0
+      xpStep: 0
+    - index: 0
+      xpStep: 0
+    - index: 0
+      xpStep: 0
+    - index: 0
+      xpStep: 0
+    - index: 0
+      xpStep: 0
+    - index: 0
+      xpStep: 0
+    - index: 0
+      xpStep: 0
   currentState: 0
-  speed: 5
+  speed: 8
   movementSmoothing: 0.05
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   attackAnimCount: 3
   attackRadius: 0.5
-  attackRange: 0.187
+  attackRange: 0.5
   pushForce: 5
   arrowPrefab: {fileID: 3389072804642720021, guid: 978e2c6fb1e21ab4aa6d1ff515447ca3,
     type: 3}
-  arrowForce: 15
+  arrowForce: 2
 --- !u!61 &822972060138402188
 BoxCollider2D:
   m_ObjectHideFlags: 0
