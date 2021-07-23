@@ -47,8 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    currentHealth: 0
-    maxHealth: 1
+    statName: Health
+    currentValue: 0
+    maxValue: 50
+    thisStat: 0
   spr: {fileID: 4349680770242010597}
   xpPrefab: {fileID: 6746842895930322274, guid: da1eb68032f44f94b8a2b6b4c035afcf,
     type: 3}

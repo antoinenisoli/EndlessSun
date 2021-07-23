@@ -8,10 +8,8 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] Image xpSlider;
     [SerializeField] Text currentLevelText;
-    [SerializeField] SpriteColorAnimation colorAnimation;
-    [SerializeField] int heartPulse;
-    [SerializeField] Slider healthSlider, manaSlider, staminaSlider;
     public static UIManager Instance;
+    HUD[] allMenus;
 
     private void Awake()
     {
@@ -19,6 +17,8 @@ public class UIManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+        allMenus = FindObjectsOfType<HUD>();
     }
 
     private void Start()
@@ -29,8 +29,10 @@ public class UIManager : MonoBehaviour
     public void UpdateUI()
     {
         currentLevelText.text = GameManager.Player.myXP.CurrentLevel.index + 1 + "";
-        xpSlider.DOFillAmount((float)GameManager.Player.myXP.CurrentLevel.CurrentXP / (float)GameManager.Player.myXP.CurrentLevel.xpStep, 0.15f);
-        healthSlider.DOValue(GameManager.Player.health.CurrentHealth / GameManager.Player.health.MaxHealth, 1f);
-        colorAnimation.time = 0.3f + (heartPulse * healthSlider.value);
+        float computeXP = (float)GameManager.Player.myXP.CurrentLevel.CurrentXP / (float)GameManager.Player.myXP.CurrentLevel.xpStep;
+        xpSlider.DOFillAmount(computeXP, 0.15f);
+
+        foreach (var item in allMenus)
+            item.UpdateUI();
     }
 }

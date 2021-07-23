@@ -3,37 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Health
+public class Health : PlayerStat
 {
-    [SerializeField] float currentHealth;
-    [SerializeField] float maxHealth = 50;
-    public bool isDead => CurrentHealth <= 0;
-
-    public float CurrentHealth
-    {
-        get => currentHealth;
-        set
-        {
-            if (value < 0)
-                value = 0;
-
-            if (value > maxHealth)
-                value = maxHealth;
-
-            currentHealth = value;
-            UIManager.Instance.UpdateUI();
-        }
-    }
-
-    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+    public bool isDead => CurrentValue <= 0;
 
     public void Initialize()
     {
-        CurrentHealth = MaxHealth;
+        CurrentValue = MaxValue;
     }
 
     public void ModifyValue(float amount)
     {
-        CurrentHealth += amount;
+        CurrentValue += amount;
     }
 }

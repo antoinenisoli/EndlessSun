@@ -33,7 +33,7 @@ Transform:
   - {fileID: 158522192948777189}
   m_Father: {fileID: 822972060138402190}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 152.969, z: 0}
 --- !u!114 &8380866944853111424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,9 +164,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    currentHealth: 0
-    maxHealth: 50
+    statName: Health
+    currentValue: 0
+    maxValue: 50
+    thisStat: 0
   spr: {fileID: 822972059179743088}
+  Survival:
+    stats:
+    - statName: Hunger
+      currentValue: 0
+      maxValue: 100
+      thisStat: 3
+      timerDelay: 5
+      looseAmount: 5
+    - statName: Thirst
+      currentValue: 0
+      maxValue: 100
+      thisStat: 4
+      timerDelay: 5
+      looseAmount: 5
+    - statName: Energy
+      currentValue: 0
+      maxValue: 100
+      thisStat: 5
+      timerDelay: 5
+      looseAmount: 5
   myXP:
     currentLevel:
       index: 0
@@ -193,19 +215,32 @@ MonoBehaviour:
       xpStep: 0
     - index: 0
       xpStep: 0
+  Combat:
+    stats:
+    - statName: Mana
+      currentValue: 0
+      maxValue: 100
+      thisStat: 1
+    - statName: Stamina
+      currentValue: 0
+      maxValue: 100
+      thisStat: 2
+    enemyLayer:
+      serializedVersion: 2
+      m_Bits: 128
+    attackAnimCount: 3
+    attackRadius: 0.5
+    attackRange: 0.5
+    pushForce: 5
+    arrowPrefab: {fileID: 3389072804642720021, guid: 978e2c6fb1e21ab4aa6d1ff515447ca3,
+      type: 3}
+    arrowForce: 15
+    storedVelocity: {x: 0, y: 0}
   currentState: 0
   speed: 8
   movementSmoothing: 0.05
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 128
   attackAnimCount: 3
-  attackRadius: 0.5
-  attackRange: 0.5
-  pushForce: 5
-  arrowPrefab: {fileID: 3389072804642720021, guid: 978e2c6fb1e21ab4aa6d1ff515447ca3,
-    type: 3}
-  arrowForce: 2
+  idleSword: 0
 --- !u!61 &822972060138402188
 BoxCollider2D:
   m_ObjectHideFlags: 0

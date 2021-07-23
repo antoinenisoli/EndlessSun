@@ -6,11 +6,11 @@ public class PlayerAnimManager : MonoBehaviour
 {
     public void SwordAttack()
     {
-        GameManager.Player.Attack();
+        GameManager.Player.Combat.Attack();
     }
 
     public void BowAttack()
     {
-        GameManager.Player.FireArrow();
+        GameManager.Player.Combat.FireArrow();
     }
 }

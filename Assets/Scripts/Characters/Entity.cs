@@ -9,7 +9,7 @@ public class Entity : MonoBehaviour
     public Health health;
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
-    [SerializeField] protected SpriteRenderer spr;
+    public SpriteRenderer spr;
     protected Animator anim;
 
     public virtual void Awake()
@@ -22,6 +22,11 @@ public class Entity : MonoBehaviour
     public virtual void Start()
     {
         health.Initialize();
+    }
+
+    public virtual void WriteName()
+    {
+        health.statName = health.thisStat.ToString();
     }
 
     public virtual void Death()

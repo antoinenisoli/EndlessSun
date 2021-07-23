@@ -12,40 +12,53 @@ public enum PlayerState
 public class PlayerController2D : Entity
 {
     [Header("PLAYER")]
+    public PlayerSurvival Survival;
     public PlayerXP myXP;
+    public PlayerCombat Combat;
     public PlayerState currentState;
     [SerializeField] float speed;
     [SerializeField] float movementSmoothing = 0.05f;
 
     [Header("Attack")]
-    [SerializeField] LayerMask enemyLayer;
+    [SerializeField] float staminaCost = 15f;
     [SerializeField] int attackAnimCount = 3;
-    [SerializeField] [Range(0,1)] float attackRadius = 0.5f, attackRange = 0.5f;
-    [SerializeField] float pushForce = 5f;
-    bool idleSword;
-
-    [Header("Bow")]
-    [SerializeField] GameObject arrowPrefab;
-    [SerializeField] float arrowForce = 2f;
-    Vector2 storedVelocity;
+    public bool idleSword;
 
     float inputX, inputY;
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, spr.transform.right * attackRange);
-        Gizmos.DrawWireSphere(transform.position + spr.transform.right * attackRange, attackRadius);
+        Gizmos.DrawRay(transform.position, spr.transform.right * Combat.attackRange);
+        Gizmos.DrawWireSphere(transform.position + spr.transform.right * Combat.attackRange, Combat.attackRadius);
         Color clone = Color.red;
         clone.a = 0.25f;
         Gizmos.color = clone;
-        Gizmos.DrawSphere(transform.position + spr.transform.right * attackRange, attackRadius);
+        Gizmos.DrawSphere(transform.position + spr.transform.right * Combat.attackRange, Combat.attackRadius);
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
+        Survival.Init();
+        Combat.Init();
     }
 
     public override void Start()
     {
         base.Start();
         myXP.GenerateLevels();
+    }
+
+    [ContextMenu("Write names")]
+    public override void WriteName()
+    {
+        base.WriteName();
+        foreach (var item in Survival.stats)
+            item.statName = item.thisStat.ToString();
+
+        foreach (var item in Combat.stats)
+            item.statName = item.thisStat.ToString();
     }
 
     void Inputs()
@@ -101,51 +114,27 @@ public class PlayerController2D : Entity
 
     void LaunchAttack(bool sword)
     {
-        rb.velocity = new Vector3();
-        SetState(PlayerState.Attacking);
-        if (!sword)
+        if (PlayerCombat.Stamina.CurrentValue > staminaCost)
         {
-            anim.SetTrigger("Bow");
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            storedVelocity = mousePos - (Vector2)transform.position;
-            storedVelocity.Normalize();
+            rb.velocity = new Vector3();
+            SetState(PlayerState.Attacking);
+            if (!sword)
+            {
+                anim.SetTrigger("Bow");
+                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 vel = mousePos - (Vector2)transform.position;
+                vel.Normalize();
+                Combat.storedVelocity = vel;
+            }
+            else
+                anim.SetTrigger("Attack" + Random.Range(0, attackAnimCount).ToString());
+
+            float point = Input.mousePosition.x;
+            if (point < Screen.width / 2)
+                spr.transform.eulerAngles = new Vector3(0, 180, 0);
+            else
+                spr.transform.eulerAngles = new Vector3(0, 0, 0);
         }
-        else
-            anim.SetTrigger("Attack" + Random.Range(0, attackAnimCount).ToString());
-
-        float point = Input.mousePosition.x;
-        if (point < Screen.width/2)
-            spr.transform.eulerAngles = new Vector3(0, 180, 0);
-        else
-            spr.transform.eulerAngles = new Vector3(0, 0, 0);
-    }
-
-    public void Attack()
-    {
-        SetState(PlayerState.Idle);
-        RaycastHit2D[] colls = Physics2D.CircleCastAll(transform.position, attackRadius, spr.transform.right, attackRange, enemyLayer);
-        idleSword = true;
-        if (colls.Length > 0)
-            GameManager.Instance.CameraShake(0.2f);
-        else
-            return;
-
-        foreach (var item in colls)
-        {
-            Enemy enemy = item.transform.GetComponent<Enemy>();
-            if (enemy)
-                enemy.Hit(-item.normal * pushForce);
-        }
-    }
-
-    public void FireArrow()
-    {
-        SetState(PlayerState.Idle);
-        GameObject arrow = Instantiate(arrowPrefab, transform.position, arrowPrefab.transform.rotation);
-        Rigidbody2D arrowRB = arrow.GetComponent<Rigidbody2D>();
-        float rot_z = Mathf.Atan2(storedVelocity.y, storedVelocity.x) * Mathf.Rad2Deg;
-        arrow.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
-        arrowRB.AddForce(storedVelocity * arrowForce, ForceMode2D.Impulse);
     }
 
     void ManageStates()
@@ -163,5 +152,6 @@ public class PlayerController2D : Entity
         ManageAnimations();
         ManageAttacks();
         ManageStates();
+        Survival.Update();
     }
 }
