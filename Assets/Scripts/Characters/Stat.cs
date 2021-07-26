@@ -17,12 +17,12 @@ public abstract class Stat
             if (value < 0)
                 value = 0;
 
-            if (value > maxValue)
-                value = maxValue;
+            if (value > MaxValue)
+                value = MaxValue;
 
             currentValue = value;
         }
     }
 
-    public float MaxValue { get => maxValue; set => maxValue = value; }
+    public virtual float MaxValue { get => maxValue; set => maxValue = value; }
 }

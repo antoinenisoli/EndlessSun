@@ -4139,6 +4139,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
         type: 3}
+      propertyPath: Combat.stamina.maxValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
+        type: 3}
+      propertyPath: Combat.stamina.statName
+      value: Stamina
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
+        type: 3}
+      propertyPath: Combat.stamina.thisStat
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
+        type: 3}
+      propertyPath: Combat.stats.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
+        type: 3}
       propertyPath: Survival.stats.Array.data[0].timerDelay
       value: 0.5
       objectReference: {fileID: 0}

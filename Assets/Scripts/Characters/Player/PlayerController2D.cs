@@ -153,5 +153,6 @@ public class PlayerController2D : Entity
         ManageAttacks();
         ManageStates();
         Survival.Update();
+        Combat.Update();
     }
 }

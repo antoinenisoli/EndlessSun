@@ -7,6 +7,11 @@ public class PlayerStat : Stat
 {
     public PlayerStatName thisStat;
 
+    public virtual void Init()
+    {
+        CurrentValue = MaxValue;
+    }
+
     public override float CurrentValue
     {
         get => base.CurrentValue;

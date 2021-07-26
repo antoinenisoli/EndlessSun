@@ -7,8 +7,9 @@ public class PlayerCombat
 {
     PlayerController2D player => GameManager.Player;
     public static PlayerStat Mana;
-    public static PlayerStat Stamina;
+    public static StaminaStat Stamina;
 
+    [SerializeField] StaminaStat stamina;
     public PlayerStat[] stats = new PlayerStat[3];
     Dictionary<PlayerStatName, PlayerStat> dico = new Dictionary<PlayerStatName, PlayerStat>();
 
@@ -28,11 +29,12 @@ public class PlayerCombat
         foreach (var item in stats)
         {
             dico.Add(item.thisStat, item);
-            item.CurrentValue = item.MaxValue;
+            item.Init(); 
         }
 
         Mana = dico[PlayerStatName.Mana];
-        Stamina = dico[PlayerStatName.Stamina];
+        Stamina = stamina;
+        Stamina.Init();
     }
 
     public void Attack()
@@ -58,10 +60,16 @@ public class PlayerCombat
     {
         Stamina.CurrentValue -= 15f;
         player.SetState(PlayerState.Idle);
-        GameObject arrow = MonoBehaviour.Instantiate(arrowPrefab, player.transform.position, arrowPrefab.transform.rotation);
+        GameObject arrow = Object.Instantiate(arrowPrefab, player.transform.position, arrowPrefab.transform.rotation);
         Rigidbody2D arrowRB = arrow.GetComponent<Rigidbody2D>();
         float rot_z = Mathf.Atan2(storedVelocity.y, storedVelocity.x) * Mathf.Rad2Deg;
         arrow.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
         arrowRB.AddForce(storedVelocity * arrowForce, ForceMode2D.Impulse);
+    }
+
+    public void Update()
+    {
+        float computeEnergy = PlayerSurvival.Energy.MaxValue - PlayerSurvival.Energy.CurrentValue;
+        Stamina.MaxValue = Stamina.BaseMaxValue - computeEnergy;
     }
 }
