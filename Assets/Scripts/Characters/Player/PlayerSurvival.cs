@@ -36,6 +36,14 @@ public class PlayerSurvival
         Energy = dico[PlayerStatName.Energy];
     }
 
+    public SurvivalStat GetSurvivalStat(PlayerStatName statName)
+    {
+        if (dico.TryGetValue(statName, out SurvivalStat stat))
+            return stat;
+
+        return null;
+    }
+
     public void Update()
     {
         foreach (var item in stats)

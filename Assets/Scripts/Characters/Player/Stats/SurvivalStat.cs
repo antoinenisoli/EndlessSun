@@ -5,18 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public class SurvivalStat : PlayerStat
 {
-    public float timerDelay = 5;
-    public float looseAmount = 5;
-    float timer;
+    public float changeAmount = 5;
 
-    public void Update()
+    public virtual void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > timerDelay)
-        {
-            CurrentValue -= looseAmount;
-            timer = 0;
-            UIManager.Instance.UpdateUI();
-        }
+        TimerEffect();
+    }
+
+    public virtual void TimerEffect()
+    {
+        CurrentValue += changeAmount;
+        UIManager.Instance.UpdateUI();
     }
 }

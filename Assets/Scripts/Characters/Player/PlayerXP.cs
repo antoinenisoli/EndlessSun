@@ -43,5 +43,6 @@ public class PlayerXP
     {
         CurrentLevel = NextLevel;
         EventManager.Instance.onLevelUp.Invoke();
+        GameManager.Player.LevelUp();
     }
 }

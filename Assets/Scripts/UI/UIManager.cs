@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+    [SerializeField] CanvasGroup levelUpPanel;
     [SerializeField] Image xpSlider;
     [SerializeField] Text currentLevelText;
-    public static UIManager Instance;
     HUD[] allMenus;
 
     private void Awake()
@@ -34,5 +35,13 @@ public class UIManager : MonoBehaviour
 
         foreach (var item in allMenus)
             item.UpdateUI();
+    }
+
+    public void LevelUp()
+    {
+        Sequence seq = DOTween.Sequence();
+        seq.Append(levelUpPanel.DOFade(1f, 0.5f));
+        seq.AppendInterval(0.3f);
+        seq.SetLoops(2, LoopType.Yoyo);
     }
 }

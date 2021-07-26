@@ -24,6 +24,7 @@ public abstract class PickupItem : MonoBehaviour
         if (canBePicked && collision.gameObject == GameManager.Player.gameObject)
         {
             Effect(GameManager.Player);
+            Destroy(gameObject);
         }
     }
 

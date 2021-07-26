@@ -54,11 +54,9 @@ public class PlayerHUD : HUD
 
     void UpdateStamina()
     {
-        energySlider.DOComplete();
-        staminaSlider.DOComplete();
         float stamina = PlayerSurvival.Energy.MaxValue - PlayerSurvival.Energy.CurrentValue;
-        energySlider.DOValue(stamina, 0.3f);
-        staminaSlider.DOValue(PlayerCombat.Stamina.CurrentValue, 0.3f);
+        energySlider.value = stamina;
+        staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
     }
 
     void UpdateThirst()

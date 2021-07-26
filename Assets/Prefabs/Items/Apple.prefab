@@ -208,13 +208,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5935628196445679051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85ef241f4882da4f84ec460cc0687f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 149dae677a6510844be23af5368f41d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 5935628194586165571}
   animDuration: 1
   spawnRadius: 0.5
   pickupRadius: 1
+  myFood: {fileID: 11400000, guid: 0bfab8e6ad38ec742b9423d6ef4becb2, type: 2}
 --- !u!61 &5935628196445679053
 BoxCollider2D:
   m_ObjectHideFlags: 0

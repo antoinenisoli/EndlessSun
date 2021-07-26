@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public enum PlayerState
@@ -94,6 +95,38 @@ public class PlayerController2D : Entity
         anim.SetBool("IdleSword", idleSword);
     }
 
+    public void LevelUp()
+    {
+        UIManager.Instance.LevelUp();
+        StopAllCoroutines();
+        StartCoroutine(GlowFeedback());
+    }
+
+    IEnumerator GlowFeedback()
+    {
+        Color col = new Color();
+        float timer = 0;
+        float delay = 1f;
+        Time.timeScale = 0.1f;
+        VFXManager.Instance.PlayVFX("LevelUp", transform.position, true, transform);
+
+        while (timer < delay)
+        {
+            rb.velocity = Vector2.zero;
+            timer += Time.unscaledDeltaTime;
+            Time.timeScale += 0.01f;
+            float oui = 0.01f;
+            yield return null;
+            col.r += oui;
+            col.g += oui;
+            col.b += oui;
+            spr.material.SetColor("_GlobalGlow", col);
+        }
+
+        Time.timeScale = 1f;
+        spr.material.SetColor("_GlobalGlow", Color.black);
+    }
+
     void Move()
     {
         Vector2 inputs = new Vector2(inputX, inputY);
@@ -116,6 +149,7 @@ public class PlayerController2D : Entity
     {
         if (PlayerCombat.Stamina.CurrentValue > staminaCost)
         {
+            PlayerCombat.Stamina.StopRecovery();
             rb.velocity = new Vector3();
             SetState(PlayerState.Attacking);
             if (!sword)

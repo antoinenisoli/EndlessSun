@@ -14,6 +14,7 @@ public class PlayerCombat
     Dictionary<PlayerStatName, PlayerStat> dico = new Dictionary<PlayerStatName, PlayerStat>();
 
     [Header("Attack")]
+    [SerializeField] float staminaCost = 15f;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] int attackAnimCount = 3;
     [Range(0, 1)] public float attackRadius = 0.5f, attackRange = 0.5f;
@@ -35,11 +36,20 @@ public class PlayerCombat
         Mana = dico[PlayerStatName.Mana];
         Stamina = stamina;
         Stamina.Init();
+        dico.Add(Stamina.thisStat, Stamina);
+    }
+
+    public PlayerStat GetCombatStat(PlayerStatName statName)
+    {
+        if (dico.TryGetValue(statName, out PlayerStat stat))
+            return stat;
+
+        return null;
     }
 
     public void Attack()
     {
-        Stamina.CurrentValue -= 15f;
+        Stamina.StaminaCost(staminaCost);
         player.SetState(PlayerState.Idle);
         RaycastHit2D[] colls = Physics2D.CircleCastAll(player.transform.position, attackRadius, player.spr.transform.right, attackRange, enemyLayer);
         player.idleSword = true;
@@ -58,7 +68,7 @@ public class PlayerCombat
 
     public void FireArrow()
     {
-        Stamina.CurrentValue -= 15f;
+        Stamina.StaminaCost(staminaCost);
         player.SetState(PlayerState.Idle);
         GameObject arrow = Object.Instantiate(arrowPrefab, player.transform.position, arrowPrefab.transform.rotation);
         Rigidbody2D arrowRB = arrow.GetComponent<Rigidbody2D>();
@@ -71,5 +81,9 @@ public class PlayerCombat
     {
         float computeEnergy = PlayerSurvival.Energy.MaxValue - PlayerSurvival.Energy.CurrentValue;
         Stamina.MaxValue = Stamina.BaseMaxValue - computeEnergy;
+        Stamina.Update();
+
+        float computeHunger = PlayerSurvival.Hunger.MaxValue - PlayerSurvival.Hunger.CurrentValue;
+        Mana.MaxValue = Mana.BaseMaxValue - computeHunger;
     }
 }
