@@ -25,21 +25,6 @@ public class StaminaStat : PlayerStat
         }
     }
 
-    public override float MaxValue 
-    { 
-        get => base.MaxValue; 
-        set
-        {
-            if (CurrentValue < 0)
-                CurrentValue = 0;
-
-            if (CurrentValue > MaxValue)
-                CurrentValue = MaxValue;
-
-            maxValue = value;
-        }
-    }
-
     public void Update()
     {
         if (CurrentValue < MaxValue)

@@ -6,15 +6,6 @@ using UnityEngine;
 public class PlayerStat : Stat
 {
     public float BaseMaxValue { get; set; }
-
-    public PlayerStatName thisStat;
-
-    public virtual void Init()
-    {
-        CurrentValue = MaxValue;
-        BaseMaxValue = MaxValue;
-    }
-
     public override float CurrentValue
     {
         get => base.CurrentValue;
@@ -24,5 +15,28 @@ public class PlayerStat : Stat
             if (UIManager.Instance)
                 UIManager.Instance.UpdateUI();
         }
+    }
+
+    public override float MaxValue
+    {
+        get => base.MaxValue;
+        set
+        {
+            if (CurrentValue < 0)
+                CurrentValue = 0;
+
+            if (CurrentValue > MaxValue)
+                CurrentValue = MaxValue;
+
+            maxValue = value;
+        }
+    }
+
+    public PlayerStatName thisStat;
+
+    public virtual void Init()
+    {
+        CurrentValue = MaxValue;
+        BaseMaxValue = MaxValue;
     }
 }

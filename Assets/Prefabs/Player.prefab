@@ -166,7 +166,7 @@ MonoBehaviour:
   health:
     statName: Health
     currentValue: 0
-    maxValue: 50
+    maxValue: 100
     thisStat: 0
   spr: {fileID: 822972059179743088}
   Survival:
@@ -219,7 +219,7 @@ MonoBehaviour:
       maxValue: 1000
       thisStat: 2
       recoveryDelay: 2
-      recoveryAmount: 5
+      recoveryAmount: 18
     stats:
     - statName: Mana
       currentValue: 0

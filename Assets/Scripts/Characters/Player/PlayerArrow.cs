@@ -17,7 +17,7 @@ public class PlayerArrow : MonoBehaviour
     {
         if (collision.TryGetComponent(out Enemy enemy))
         {
-            enemy.Hit(rb.velocity * 0.5f);
+            enemy.Hit(1, rb.velocity * 0.5f);
             Destroy(gameObject);
         }
     }

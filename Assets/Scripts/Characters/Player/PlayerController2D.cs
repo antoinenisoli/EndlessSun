@@ -8,6 +8,7 @@ public enum PlayerState
     Idle,
     Moving,
     Attacking,
+    Dead,
 }
 
 public class PlayerController2D : Entity
@@ -64,7 +65,7 @@ public class PlayerController2D : Entity
 
     void Inputs()
     {
-        if (currentState != PlayerState.Attacking)
+        if (currentState != PlayerState.Attacking && currentState != PlayerState.Dead)
         {
             inputX = Input.GetAxisRaw("Horizontal");
             inputY = Input.GetAxisRaw("Vertical");
@@ -93,38 +94,81 @@ public class PlayerController2D : Entity
 
         anim.SetFloat("Speed", rb.velocity.sqrMagnitude);
         anim.SetBool("IdleSword", idleSword);
+        anim.SetBool("Dead", health.isDead);
+    }
+
+    public override void Death()
+    {
+        base.Death();
+        rb.velocity = new Vector2();
+        SetState(PlayerState.Dead);
+        anim.SetTrigger("Die");
+    }
+
+    IEnumerator FreezeFrame(float delay, float startScale = 0.1f)
+    {
+        float timer = 0;
+        Time.timeScale = startScale;
+
+        while (timer < delay)
+        {
+            yield return null;
+            timer += Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 1, timer / delay);
+        }
+
+        Time.timeScale = 1f;
+    }
+
+    public void Hurt(float amount)
+    {
+        health.ModifyValue(-amount);
+        StartCoroutine(FreezeFrame(0.4f));
+        StartCoroutine(Glow(0.1f, Color.red));
+        CameraManager.Instance.CameraShake(0.3f, 2);
+
+        if (health.isDead)
+            Death();
     }
 
     public void LevelUp()
     {
+        CameraManager.Instance.UnZoom();
         UIManager.Instance.LevelUp();
         StopAllCoroutines();
-        StartCoroutine(GlowFeedback());
+        StartCoroutine(LevelUpFeedback(1.5f));
+        StartCoroutine(Glow(1.5f, Color.white));
+        StartCoroutine(FreezeFrame(1.5f));
     }
 
-    IEnumerator GlowFeedback()
+    IEnumerator Glow(float delay, Color targetColor = new Color())
     {
         Color col = new Color();
         float timer = 0;
-        float delay = 1f;
-        Time.timeScale = 0.1f;
-        VFXManager.Instance.PlayVFX("LevelUp", transform.position, true, transform);
 
         while (timer < delay)
         {
-            rb.velocity = Vector2.zero;
-            timer += Time.unscaledDeltaTime;
-            Time.timeScale += 0.01f;
-            float oui = 0.01f;
             yield return null;
-            col.r += oui;
-            col.g += oui;
-            col.b += oui;
+            timer += Time.unscaledDeltaTime;
+            col = Color.Lerp(col, targetColor, timer / delay);
             spr.material.SetColor("_GlobalGlow", col);
         }
 
-        Time.timeScale = 1f;
         spr.material.SetColor("_GlobalGlow", Color.black);
+    }
+
+    IEnumerator LevelUpFeedback(float delay)
+    {
+        float timer = 0;
+        VFXManager.Instance.PlayVFX("LevelUp", transform.position, true, transform);
+        CameraManager.Instance.CameraShake(delay/2);
+
+        while (timer < delay)
+        {
+            yield return null;
+            rb.velocity = Vector2.zero;
+            timer += Time.unscaledDeltaTime;
+        }
     }
 
     void Move()
@@ -188,5 +232,8 @@ public class PlayerController2D : Entity
         ManageStates();
         Survival.Update();
         Combat.Update();
+
+        if (Input.GetKeyDown(KeyCode.E))
+            Hurt(45);
     }
 }

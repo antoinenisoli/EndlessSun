@@ -34,12 +34,12 @@ public class Entity : MonoBehaviour
         anim.SetTrigger("Death");
     }
 
-    public virtual void Hit(Vector2 force = new Vector2())
+    public virtual void Hit(float amount, Vector2 force = new Vector2())
     {
         if (health.isDead)
             return;
 
-        health.ModifyValue(-1);
+        health.ModifyValue(-amount);
         anim.SetTrigger("Hit");
         spr.transform.DOPunchScale(Vector3.one * 0.5f, 0.1f);
         rb.AddForce(force, ForceMode2D.Impulse);

@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        levelUpPanel.DOFade(0f, 0f);
         UpdateUI();
     }
 
@@ -39,9 +40,11 @@ public class UIManager : MonoBehaviour
 
     public void LevelUp()
     {
-        Sequence seq = DOTween.Sequence();
-        seq.Append(levelUpPanel.DOFade(1f, 0.5f));
-        seq.AppendInterval(0.3f);
-        seq.SetLoops(2, LoopType.Yoyo);
+        Sequence fadeSeq = DOTween.Sequence();
+        fadeSeq.SetUpdate(true);
+        fadeSeq.Append(levelUpPanel.DOFade(1f, 0.5f));
+        fadeSeq.Join(levelUpPanel.transform.DOScale(Vector3.one * 1f, 0.7f));
+        fadeSeq.AppendInterval(1f);
+        fadeSeq.SetLoops(2, LoopType.Yoyo);
     }
 }

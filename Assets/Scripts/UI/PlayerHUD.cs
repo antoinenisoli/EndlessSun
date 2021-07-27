@@ -67,9 +67,9 @@ public class PlayerHUD : HUD
 
     public override void UpdateUI()
     {
-        float computeHealth = GameManager.Player.health.CurrentValue;
-        healthSlider.DOValue(computeHealth, 0.5f);
-        colorAnimation.time = 0.3f + (heartPulse * healthSlider.value);
+        float computeHealth = GameManager.Player.health.CurrentValue / GameManager.Player.health.MaxValue; 
+        healthSlider.DOValue(GameManager.Player.health.CurrentValue, 0.5f);
+        colorAnimation.time = 0.3f + (heartPulse * computeHealth);
 
         UpdateMana();
         UpdateStamina();

@@ -54,7 +54,7 @@ public class PlayerCombat
         RaycastHit2D[] colls = Physics2D.CircleCastAll(player.transform.position, attackRadius, player.spr.transform.right, attackRange, enemyLayer);
         player.idleSword = true;
         if (colls.Length > 0)
-            GameManager.Instance.CameraShake(0.2f);
+            CameraManager.Instance.CameraShake(0.2f);
         else
             return;
 
@@ -62,7 +62,7 @@ public class PlayerCombat
         {
             Enemy enemy = item.transform.GetComponent<Enemy>();
             if (enemy)
-                enemy.Hit(-item.normal * pushForce);
+                enemy.Hit(1, -item.normal * pushForce);
         }
     }
 
