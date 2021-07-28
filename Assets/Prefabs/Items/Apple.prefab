@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5935628194586165571}
   - component: {fileID: 5935628194586165572}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5935628195879298074}
   - component: {fileID: 5935628195879298075}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: 'Shadow '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 5935628196445679052}
   - component: {fileID: 5935730494940171829}
   - component: {fileID: 5935628196445679053}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149dae677a6510844be23af5368f41d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPickUp: 0
   item: {fileID: 5935628194586165571}
   animDuration: 1
   spawnRadius: 0.5

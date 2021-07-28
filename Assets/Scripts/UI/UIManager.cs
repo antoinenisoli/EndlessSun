@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     [SerializeField] CanvasGroup levelUpPanel;
+    [SerializeField] CanvasGroup pickUpItemPanel;
     [SerializeField] Image xpSlider;
     [SerializeField] Text currentLevelText;
     HUD[] allMenus;
@@ -36,6 +37,20 @@ public class UIManager : MonoBehaviour
 
         foreach (var item in allMenus)
             item.UpdateUI();
+    }
+
+    public void ShowPickUp(PickupItem item)
+    {
+        pickUpItemPanel.DOComplete();
+        if (item)
+        {
+            pickUpItemPanel.DOFade(1f, 0.2f);
+            pickUpItemPanel.transform.position = Camera.main.WorldToScreenPoint(item.transform.position + Vector3.up * 1.5f);
+        }
+        else if (pickUpItemPanel.alpha == 1)
+        {
+            pickUpItemPanel.DOFade(0f, 0.2f);
+        }
     }
 
     public void LevelUp()

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class PickupItem : MonoBehaviour
 {
+    [SerializeField] protected bool autoPickUp;
     [SerializeField] protected Transform item;
     [SerializeField] protected float animDuration = 1;
     [SerializeField] protected float spawnRadius = 0.5f;
@@ -21,10 +22,17 @@ public abstract class PickupItem : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (canBePicked && collision.gameObject == GameManager.Player.gameObject)
+        bool onPlayer = collision.gameObject == GameManager.Player.gameObject;
+        if (!onPlayer)
+            return;
+
+        if (autoPickUp)
         {
-            Effect(GameManager.Player);
-            Destroy(gameObject);
+            if (canBePicked)
+            {
+                Effect(GameManager.Player);
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -44,16 +52,29 @@ public abstract class PickupItem : MonoBehaviour
         transform.DOMove((Vector2)transform.position + randomPos, animDuration).OnComplete(() => { canBePicked = true; });
     }
 
+    public void ProposeToPick()
+    {
+        UIManager.Instance.ShowPickUp(this);
+    }
+
+    void ManagePickUp()
+    {
+        if (autoPickUp)
+        {
+            if (canBePicked && !dragging)
+            {
+                float dist = Vector2.Distance(GameManager.Player.transform.position, transform.position);
+                if (dist < pickupRadius)
+                    dragging = true;
+            }
+
+            if (dragging)
+                transform.position = Vector3.MoveTowards(transform.position, GameManager.Player.transform.position, Time.deltaTime * 5f);
+        }
+    }
+
     private void Update()
     {
-        if (canBePicked && !dragging)
-        {
-            float dist = Vector2.Distance(GameManager.Player.transform.position, transform.position);
-            if (dist < pickupRadius)
-                dragging = true;
-        }
-
-        if (dragging)
-            transform.position = Vector3.MoveTowards(transform.position, GameManager.Player.transform.position, Time.deltaTime * 5f);
+        ManagePickUp();
     }
 }

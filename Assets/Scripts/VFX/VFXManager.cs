@@ -33,7 +33,7 @@ public class VFXManager : MonoBehaviour
     /// <summary>
     /// Spawn and play a stored VFX prefab at a given position by calling it by his name.
     /// </summary>
-    public GameObject PlayVFX(string name = "ManaBurst", Vector3 pos = new Vector3(), bool destroy = true, Transform parent = null)
+    public GameObject PlayVFX(string name, Vector3 pos, bool destroy = true, Transform parent = null)
     {
         if (allVFX.TryGetValue(name, out GameObject prefab))
         {

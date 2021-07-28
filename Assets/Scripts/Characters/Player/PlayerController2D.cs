@@ -7,6 +7,7 @@ public enum PlayerState
 {
     Idle,
     Moving,
+    Sprinting,
     Attacking,
     Dead,
 }
@@ -18,13 +19,20 @@ public class PlayerController2D : Entity
     public PlayerXP myXP;
     public PlayerCombat Combat;
     public PlayerState currentState;
-    [SerializeField] float speed;
+    [SerializeField] float sprintCost = 15f;
+    [SerializeField] float baseSpeed = 4, sprintSpeed = 7;
     [SerializeField] float movementSmoothing = 0.05f;
+    bool sprinting;
 
     [Header("Attack")]
     [SerializeField] float staminaCost = 15f;
     [SerializeField] int attackAnimCount = 3;
     public bool idleSword;
+
+    [Header("Items")]
+    [SerializeField] float interactionRadius = 2f;
+    [SerializeField] LayerMask itemLayer;
+    public PickupItem lastDetectedItem;
 
     float inputX, inputY;
 
@@ -37,6 +45,9 @@ public class PlayerController2D : Entity
         clone.a = 0.25f;
         Gizmos.color = clone;
         Gizmos.DrawSphere(transform.position + spr.transform.right * Combat.attackRange, Combat.attackRadius);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, interactionRadius);
     }
 
     public override void Awake()
@@ -95,6 +106,7 @@ public class PlayerController2D : Entity
         anim.SetFloat("Speed", rb.velocity.sqrMagnitude);
         anim.SetBool("IdleSword", idleSword);
         anim.SetBool("Dead", health.isDead);
+        anim.speed = Mathf.Lerp(anim.speed, sprinting ? 2 : 1, Time.deltaTime * 10f);
     }
 
     public override void Death()
@@ -141,20 +153,22 @@ public class PlayerController2D : Entity
         StartCoroutine(FreezeFrame(1.5f));
     }
 
-    IEnumerator Glow(float delay, Color targetColor = new Color())
+    public IEnumerator Glow(float delay, Color targetColor = new Color())
     {
-        Color col = new Color();
         float timer = 0;
+        float intensity = 0;
 
         while (timer < delay)
         {
             yield return null;
             timer += Time.unscaledDeltaTime;
-            col = Color.Lerp(col, targetColor, timer / delay);
-            spr.material.SetColor("_GlobalGlow", col);
+            intensity = Mathf.Lerp(intensity, 2f, timer / delay);
+            float factor = Mathf.Pow(2, intensity);
+            Color col = new Color(targetColor.r * factor, targetColor.g * factor, targetColor.b * factor);
+            spr.material.SetColor("_Tint", col);
         }
 
-        spr.material.SetColor("_GlobalGlow", Color.black);
+        spr.material.SetColor("_Tint", Color.white);
     }
 
     IEnumerator LevelUpFeedback(float delay)
@@ -174,7 +188,11 @@ public class PlayerController2D : Entity
     void Move()
     {
         Vector2 inputs = new Vector2(inputX, inputY);
-        Vector2 targetVelocity = inputs.normalized * speed;
+        sprinting = Input.GetKey(KeyCode.LeftShift) && inputs.sqrMagnitude > 0.1f && PlayerCombat.Stamina.CurrentValue > 0;
+        if (sprinting)
+            PlayerCombat.Stamina.StaminaCost(sprintCost);
+
+        Vector2 targetVelocity = inputs.normalized * (sprinting ? sprintSpeed : baseSpeed);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref m_Velocity, movementSmoothing);
     }
 
@@ -232,8 +250,39 @@ public class PlayerController2D : Entity
         ManageStates();
         Survival.Update();
         Combat.Update();
+        if (lastDetectedItem)
+        {
+            lastDetectedItem.ProposeToPick();
+        }
+        else
+            UIManager.Instance.ShowPickUp(null);
 
         if (Input.GetKeyDown(KeyCode.E))
             Hurt(45);
+    }
+
+    PickupItem ClosestItem()
+    {
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, interactionRadius, itemLayer);
+        float inf = Mathf.Infinity;
+        PickupItem currentItem = null;
+
+        foreach (var collider in cols)
+        {
+            float distance = Vector3.Distance(transform.position, collider.transform.position);
+            if (distance < inf)
+            {
+                PickupItem item = collider.GetComponent<PickupItem>();
+                inf = distance;
+                currentItem = item;
+            }
+        }
+
+        return currentItem;
+    }
+
+    private void FixedUpdate()
+    {
+        lastDetectedItem = ClosestItem();
     }
 }
