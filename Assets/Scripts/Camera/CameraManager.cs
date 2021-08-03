@@ -15,14 +15,18 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
+        Singleton();
+        cinemachineCam = FindObjectOfType<CinemachineVirtualCamera>();
+        baseZoomValue = cinemachineCam.m_Lens.OrthographicSize;
+        currentZoomValue = baseZoomValue;
+    }
+
+    void Singleton()
+    {
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
-
-        cinemachineCam = FindObjectOfType<CinemachineVirtualCamera>();
-        baseZoomValue = cinemachineCam.m_Lens.OrthographicSize;
-        currentZoomValue = baseZoomValue;
     }
 
     public void UnZoom()

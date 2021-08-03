@@ -250,15 +250,24 @@ public class PlayerController2D : Entity
         ManageStates();
         Survival.Update();
         Combat.Update();
+
+        if (lastDetectedItem)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                lastDetectedItem.Pick();
+            }
+        }
+    }
+
+    void LateUpdate()
+    {
         if (lastDetectedItem)
         {
             lastDetectedItem.ProposeToPick();
         }
         else
             UIManager.Instance.ShowPickUp(null);
-
-        if (Input.GetKeyDown(KeyCode.E))
-            Hurt(45);
     }
 
     PickupItem ClosestItem()

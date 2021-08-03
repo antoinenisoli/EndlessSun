@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ebd4a324b451d64b846f39ebe0e825d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d163b4eae9eb22408ee5a9523f8c312, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  foodName: Apple
-  foodSprite: {fileID: 21300000, guid: 6e824099c9d9fb24aba65634158e3ad9, type: 3}
-  feedAmount: 150
-  changeStats: 03000000
+  FoodItem:
+    Name: Apple
+    Description: It's an apple.
+    Sprite: {fileID: 21300000, guid: 6e824099c9d9fb24aba65634158e3ad9, type: 3}
+    feedEffects:
+    - feedAmount: 10
+      changeStat: 3

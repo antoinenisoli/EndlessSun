@@ -12,21 +12,27 @@ public class UIManager : MonoBehaviour
     [SerializeField] Image xpSlider;
     [SerializeField] Text currentLevelText;
     HUD[] allMenus;
+    Camera mainCam;
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-
+        Singleton();
         allMenus = FindObjectsOfType<HUD>();
+        mainCam = Camera.main;
     }
 
     private void Start()
     {
         levelUpPanel.DOFade(0f, 0f);
         UpdateUI();
+    }
+
+    void Singleton()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
     public void UpdateUI()
@@ -45,7 +51,7 @@ public class UIManager : MonoBehaviour
         if (item)
         {
             pickUpItemPanel.DOFade(1f, 0.2f);
-            pickUpItemPanel.transform.position = Camera.main.WorldToScreenPoint(item.transform.position + Vector3.up * 1.5f);
+            pickUpItemPanel.transform.position = mainCam.WorldToScreenPoint(item.transform.position + Vector3.up * -0.5f);
         }
         else if (pickUpItemPanel.alpha == 1)
         {

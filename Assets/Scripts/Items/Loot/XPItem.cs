@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XPItem : PickupItem
+public class XPItem : AutoCollectItem
 {
+    [Header("XP ITEM")]
     public int xpAmount;
 
     public override void Effect(PlayerController2D player)

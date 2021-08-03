@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : PickupItem
+[System.Serializable]
+public class Item
 {
-    public override void Effect(PlayerController2D player)
-    {
-        Destroy(gameObject);
-    }
+    public string Name;
+    [TextArea] public string Description;
+    public Sprite Sprite;
+
+    public virtual void Effect() { }
 }
