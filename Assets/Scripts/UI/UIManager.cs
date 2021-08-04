@@ -14,11 +14,14 @@ public class UIManager : MonoBehaviour
     HUD[] allMenus;
     Camera mainCam;
 
+    public PlayerInventoryUI inventoryUI;
+
     private void Awake()
     {
         Singleton();
         allMenus = FindObjectsOfType<HUD>();
         mainCam = Camera.main;
+        inventoryUI = FindObjectOfType<PlayerInventoryUI>();
     }
 
     private void Start()
@@ -47,15 +50,10 @@ public class UIManager : MonoBehaviour
 
     public void ShowPickUp(PickupItem item)
     {
-        pickUpItemPanel.DOComplete();
+        pickUpItemPanel.gameObject.SetActive(item != null);
         if (item)
         {
-            pickUpItemPanel.DOFade(1f, 0.2f);
-            pickUpItemPanel.transform.position = mainCam.WorldToScreenPoint(item.transform.position + Vector3.up * -0.5f);
-        }
-        else if (pickUpItemPanel.alpha == 1)
-        {
-            pickUpItemPanel.DOFade(0f, 0.2f);
+            pickUpItemPanel.transform.position = mainCam.WorldToScreenPoint(item.transform.position - Vector3.up * 0.1f);
         }
     }
 

@@ -241,35 +241,6 @@ public class PlayerController2D : Entity
             SetState(PlayerState.Moving);
     }
 
-    private void Update()
-    {
-        Inputs();
-        Move();
-        ManageAnimations();
-        ManageAttacks();
-        ManageStates();
-        Survival.Update();
-        Combat.Update();
-
-        if (lastDetectedItem)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                lastDetectedItem.Pick();
-            }
-        }
-    }
-
-    void LateUpdate()
-    {
-        if (lastDetectedItem)
-        {
-            lastDetectedItem.ProposeToPick();
-        }
-        else
-            UIManager.Instance.ShowPickUp(null);
-    }
-
     PickupItem ClosestItem()
     {
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, interactionRadius, itemLayer);
@@ -288,6 +259,38 @@ public class PlayerController2D : Entity
         }
 
         return currentItem;
+    }
+
+    private void Update()
+    {
+        Inputs();
+        Move();
+        ManageAnimations();
+        ManageAttacks();
+        ManageStates();
+        Survival.Update();
+        Combat.Update();
+
+        if (lastDetectedItem)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+                lastDetectedItem.Pick();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            UIManager.Instance.inventoryUI.Switch();
+        }
+    }
+
+    void LateUpdate()
+    {
+        if (lastDetectedItem)
+        {
+            lastDetectedItem.ProposeToPick();
+        }
+        else
+            UIManager.Instance.ShowPickUp(null);
     }
 
     private void FixedUpdate()

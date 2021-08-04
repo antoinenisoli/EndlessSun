@@ -1,31 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerInventoryUI : HUD
 {
-    GridLayoutGroup gridGroup;
+    [SerializeField] Transform inventoryContent;
+    ItemSlotUI[] itemSlots;
 
     private void Awake()
     {
-        gridGroup = GetComponentInChildren<GridLayoutGroup>();
+        itemSlots = inventoryContent.GetComponentsInChildren<ItemSlotUI>();
+        Close();
+    }
+
+    public override void Open()
+    {
+        base.Open();
+        inventoryContent.gameObject.SetActive(true);
+        inventoryContent.DOKill(true);
+        UpdateUI();
+        inventoryContent.DOScale(Vector3.one, 0.5f).SetEase(Ease.InCubic);
+    }
+
+    public override void Close()
+    {
+        base.Close();
+        inventoryContent.DOKill(true);
+        inventoryContent.DOScale(Vector3.one * 0.001f, 0.5f).SetEase(Ease.OutCubic).OnComplete(() =>
+        {
+            inventoryContent.gameObject.SetActive(false);
+        });
     }
 
     public override void UpdateUI()
     {
-        for (int i = 0; i < gridGroup.transform.childCount; i++)
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            Transform itemSlot = gridGroup.transform.GetChild(i);
             Item item = PlayerInventory.Instance.GetItem(i);
             if (item != null)
-            {
-                itemSlot.GetChild(0).GetComponentInChildren<Image>().sprite = item.Sprite;
-            }
+                itemSlots[i].Assign(item);
             else
-            {
-                itemSlot.GetChild(0).GetComponentInChildren<Image>().sprite = null;
-            }
+                itemSlots[i].Assign(null);
         }
     }
 }

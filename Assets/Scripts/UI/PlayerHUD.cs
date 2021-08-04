@@ -45,11 +45,11 @@ public class PlayerHUD : HUD
     void UpdateMana()
     {
         float hunger = PlayerSurvival.Hunger.MaxValue - PlayerSurvival.Hunger.CurrentValue;
-        hungerSlider.DOValue(hunger, 0.3f);
+        hungerSlider.value = hunger;
         if ((hungerSlider.maxValue - hungerSlider.value) < manaSlider.value)
-            manaSlider.DOValue(PlayerCombat.Mana.CurrentValue - hunger, 0.3f);
+            manaSlider.value = PlayerCombat.Mana.CurrentValue - hunger;
         else
-            manaSlider.DOValue(PlayerCombat.Mana.CurrentValue, 0.3f);
+            manaSlider.value = PlayerCombat.Mana.CurrentValue;
     }
 
     void UpdateStamina()
@@ -62,13 +62,13 @@ public class PlayerHUD : HUD
     void UpdateThirst()
     {
         float computeThirst = PlayerSurvival.Thirsty.CurrentValue;
-        thirstySlider.DOValue(computeThirst, 0.5f);
+        thirstySlider.value = computeThirst;
     }
 
     public override void UpdateUI()
     {
         float computeHealth = GameManager.Player.health.CurrentValue / GameManager.Player.health.MaxValue; 
-        healthSlider.DOValue(GameManager.Player.health.CurrentValue, 0.5f);
+        healthSlider.DOValue(GameManager.Player.health.CurrentValue, 0.3f);
         colorAnimation.time = 0.3f + (heartPulse * computeHealth);
 
         UpdateMana();
