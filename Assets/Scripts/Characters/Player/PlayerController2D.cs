@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum PlayerState
 {
@@ -38,14 +39,7 @@ public class PlayerController2D : Entity
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, spr.transform.right * Combat.attackRange);
-        Gizmos.DrawWireSphere(transform.position + spr.transform.right * Combat.attackRange, Combat.attackRadius);
-        Color clone = Color.red;
-        clone.a = 0.25f;
-        Gizmos.color = clone;
-        Gizmos.DrawSphere(transform.position + spr.transform.right * Combat.attackRange, Combat.attackRadius);
-
+        Combat.Gizmo(this);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, interactionRadius);
     }
@@ -117,25 +111,10 @@ public class PlayerController2D : Entity
         anim.SetTrigger("Die");
     }
 
-    IEnumerator FreezeFrame(float delay, float startScale = 0.1f)
-    {
-        float timer = 0;
-        Time.timeScale = startScale;
-
-        while (timer < delay)
-        {
-            yield return null;
-            timer += Time.unscaledDeltaTime;
-            Time.timeScale = Mathf.Lerp(Time.timeScale, 1, timer / delay);
-        }
-
-        Time.timeScale = 1f;
-    }
-
     public void Hurt(float amount)
     {
         health.ModifyValue(-amount);
-        StartCoroutine(FreezeFrame(0.4f));
+        GameManager.Instance.FreezeFrame(0.4f);
         StartCoroutine(Glow(0.1f, Color.red));
         CameraManager.Instance.CameraShake(0.3f, 2);
 
@@ -150,7 +129,7 @@ public class PlayerController2D : Entity
         StopAllCoroutines();
         StartCoroutine(LevelUpFeedback(1.5f));
         StartCoroutine(Glow(1.5f, Color.white));
-        StartCoroutine(FreezeFrame(1.5f));
+        GameManager.Instance.FreezeFrame(0.4f);
     }
 
     public IEnumerator Glow(float delay, Color targetColor = new Color())
@@ -198,7 +177,7 @@ public class PlayerController2D : Entity
 
     void ManageAttacks()
     {
-        if (currentState != PlayerState.Attacking)
+        if (currentState != PlayerState.Attacking && !EventSystem.current.IsPointerOverGameObject())
         {
             if (Input.GetMouseButtonDown(0))
                 LaunchAttack(true);
@@ -286,9 +265,7 @@ public class PlayerController2D : Entity
     void LateUpdate()
     {
         if (lastDetectedItem)
-        {
             lastDetectedItem.ProposeToPick();
-        }
         else
             UIManager.Instance.ShowPickUp(null);
     }

@@ -33,6 +33,11 @@ public class PlayerInventory : MonoBehaviour
     public void AddItem(Item item)
     {
         InventoryItems.Add(item);
-        UIManager.Instance.UpdateUI();
+    }
+
+    public void RemoveItem(Item item)
+    {
+        if (InventoryItems.Contains(item))
+            InventoryItems.Remove(item);
     }
 }

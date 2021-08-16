@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     HUD[] allMenus;
     Camera mainCam;
 
-    public PlayerInventoryUI inventoryUI;
+    [HideInInspector] public PlayerInventoryUI inventoryUI;
 
     private void Awake()
     {
@@ -52,9 +52,7 @@ public class UIManager : MonoBehaviour
     {
         pickUpItemPanel.gameObject.SetActive(item != null);
         if (item)
-        {
             pickUpItemPanel.transform.position = mainCam.WorldToScreenPoint(item.transform.position - Vector3.up * 0.1f);
-        }
     }
 
     public void LevelUp()

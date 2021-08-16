@@ -46,10 +46,7 @@ public class PlayerHUD : HUD
     {
         float hunger = PlayerSurvival.Hunger.MaxValue - PlayerSurvival.Hunger.CurrentValue;
         hungerSlider.value = hunger;
-        if ((hungerSlider.maxValue - hungerSlider.value) < manaSlider.value)
-            manaSlider.value = PlayerCombat.Mana.CurrentValue - hunger;
-        else
-            manaSlider.value = PlayerCombat.Mana.CurrentValue;
+        manaSlider.value = PlayerCombat.Mana.CurrentValue;
     }
 
     void UpdateStamina()

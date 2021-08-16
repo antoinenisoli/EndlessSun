@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class PlayerCombat
@@ -37,6 +38,17 @@ public class PlayerCombat
         Stamina = stamina;
         Stamina.Init();
         dico.Add(Stamina.thisStat, Stamina);
+    }
+
+    public void Gizmo(PlayerController2D player)
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(player.transform.position, player.spr.transform.right * attackRange);
+        Gizmos.DrawWireSphere(player.transform.position + player.spr.transform.right * attackRange, attackRadius);
+        Color clone = Color.red;
+        clone.a = 0.25f;
+        Gizmos.color = clone;
+        Gizmos.DrawSphere(player.transform.position + player.spr.transform.right * attackRange, attackRadius);
     }
 
     public PlayerStat GetCombatStat(PlayerStatName statName)
