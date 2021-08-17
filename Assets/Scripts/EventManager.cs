@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour
 {
     public static EventManager Instance;
     public UnityEvent onLevelUp = new UnityEvent();
+    public UnityEvent onPlayerSleep = new UnityEvent();
 
     private void Awake()
     {

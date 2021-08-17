@@ -3,13 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class LootItem : MonoBehaviour
+public abstract class LootItem : Interactable
 {
     [Header("Spawn animation")]
     [SerializeField] protected Transform itemTransform;
     [SerializeField] protected float animDuration = 1;
     [SerializeField] protected float spawnRadius = 0.5f;
-    [SerializeField] protected float pickupRadius = 1f;
     protected bool canBePicked;
 
     public virtual void OnDrawGizmosSelected()

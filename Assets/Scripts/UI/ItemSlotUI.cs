@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ItemSlotUI : MonoBehaviour
 {
-    PlayerInventoryUI playerInventoryUI;
     Item myItem;
     [SerializeField] Image itemImage;
     Button myButton;
@@ -13,7 +12,6 @@ public class ItemSlotUI : MonoBehaviour
     private void Awake()
     {
         myButton = GetComponentInChildren<Button>();
-        playerInventoryUI = GetComponentInParent<PlayerInventoryUI>();
     }
 
     public void Assign(Item item)
@@ -37,7 +35,7 @@ public class ItemSlotUI : MonoBehaviour
         if (myItem == null)
             return;
 
-        TooltipSystem.Instance.Show(myItem.Name, myItem.Description, itemImage.rectTransform);
+        TooltipSystem.Instance.Show(myItem.Name, myItem.ToString(), itemImage.rectTransform);
     }
 
     public void HideTooltip()
@@ -50,6 +48,7 @@ public class ItemSlotUI : MonoBehaviour
 
     public void Select()
     {
+        TooltipSystem.Instance.Hide();
         myItem.Effect();
         PlayerInventory.Instance.RemoveItem(myItem);
         myItem = null;

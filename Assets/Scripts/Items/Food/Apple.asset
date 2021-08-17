@@ -17,5 +17,5 @@ MonoBehaviour:
     Description: It's an apple.
     Sprite: {fileID: 21300000, guid: 6e824099c9d9fb24aba65634158e3ad9, type: 3}
     feedEffects:
-    - feedAmount: 10
+    - feedAmount: 100
       changeStat: 3

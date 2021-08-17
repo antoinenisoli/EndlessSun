@@ -19,4 +19,16 @@ public class FoodItem : Item
         foreach (var item in feedEffects)
             GameManager.Player.Survival.GetSurvivalStat(item.changeStat).CurrentValue += item.feedAmount;
     }
+
+    public override string ToString()
+    {
+        string effectText = "";
+        foreach (var item in feedEffects)
+        {
+            effectText += "- Restore " + item.feedAmount + " " + item.changeStat + ".";
+            effectText += "\n";
+        }
+
+        return Description + "\n" + effectText;
+    }
 }

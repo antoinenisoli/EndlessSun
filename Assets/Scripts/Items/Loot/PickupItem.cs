@@ -8,14 +8,14 @@ public class PickupItem : LootItem
     [Header("PICK UP ITEM")]
     [SerializeField] protected ItemProfile itemProfile;
 
-    public void ProposeToPick()
-    {
-        UIManager.Instance.ShowPickUp(this);
-    }
-
-    public void Pick()
+    public override void Interact()
     {
         PlayerInventory.Instance.AddItem(itemProfile.Item);
         Destroy(gameObject);
+    }
+
+    public override string ToString()
+    {
+        return "Pick";
     }
 }

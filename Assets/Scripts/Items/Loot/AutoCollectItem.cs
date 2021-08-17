@@ -7,11 +7,13 @@ public abstract class AutoCollectItem : LootItem
 {
     [Header("AUTO COLLECT ITEM")]
     bool dragging;
+    [SerializeField] protected float interactRadius = 1f;
 
     public override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
-        Gizmos.DrawWireSphere(transform.position, pickupRadius);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, interactRadius);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -32,7 +34,7 @@ public abstract class AutoCollectItem : LootItem
         if (canBePicked && !dragging)
         {
             float dist = Vector2.Distance(GameManager.Player.transform.position, transform.position);
-            if (dist < pickupRadius)
+            if (dist < interactRadius)
                 dragging = true;
         }
 

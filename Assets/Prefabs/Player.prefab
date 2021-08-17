@@ -246,10 +246,11 @@ MonoBehaviour:
   staminaCost: 15
   attackAnimCount: 3
   idleSword: 0
-  interactionRadius: 1
-  itemLayer:
+  interactionRadius: 0.5
+  interactLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
+  lastDetectedInteractable: {fileID: 0}
 --- !u!50 &822972060138402191
 Rigidbody2D:
   serializedVersion: 4

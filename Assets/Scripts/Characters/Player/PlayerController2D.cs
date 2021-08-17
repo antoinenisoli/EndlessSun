@@ -32,8 +32,8 @@ public class PlayerController2D : Entity
 
     [Header("Items")]
     [SerializeField] float interactionRadius = 2f;
-    [SerializeField] LayerMask itemLayer;
-    public PickupItem lastDetectedItem;
+    [SerializeField] LayerMask interactLayer;
+    public Interactable lastDetectedInteractable;
 
     float inputX, inputY;
 
@@ -220,24 +220,24 @@ public class PlayerController2D : Entity
             SetState(PlayerState.Moving);
     }
 
-    PickupItem ClosestItem()
+    Interactable ClosestInteractable()
     {
-        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, interactionRadius, itemLayer);
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, interactionRadius, interactLayer);
         float inf = Mathf.Infinity;
-        PickupItem currentItem = null;
+        Interactable currentInteractable = null;
 
         foreach (var collider in cols)
         {
             float distance = Vector3.Distance(transform.position, collider.transform.position);
             if (distance < inf)
             {
-                PickupItem item = collider.GetComponent<PickupItem>();
+                Interactable item = collider.GetComponent<Interactable>();
                 inf = distance;
-                currentItem = item;
+                currentInteractable = item;
             }
         }
 
-        return currentItem;
+        return currentInteractable;
     }
 
     private void Update()
@@ -250,10 +250,10 @@ public class PlayerController2D : Entity
         Survival.Update();
         Combat.Update();
 
-        if (lastDetectedItem)
+        if (lastDetectedInteractable)
         {
             if (Input.GetKeyDown(KeyCode.E))
-                lastDetectedItem.Pick();
+                lastDetectedInteractable.Interact();
         }
 
         if (Input.GetKeyDown(KeyCode.I))
@@ -264,14 +264,14 @@ public class PlayerController2D : Entity
 
     void LateUpdate()
     {
-        if (lastDetectedItem)
-            lastDetectedItem.ProposeToPick();
+        if (lastDetectedInteractable)
+            lastDetectedInteractable.ProposeToInteract();
         else
             UIManager.Instance.ShowPickUp(null);
     }
 
     private void FixedUpdate()
     {
-        lastDetectedItem = ClosestItem();
+        lastDetectedInteractable = ClosestInteractable();
     }
 }

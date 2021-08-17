@@ -8,9 +8,12 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     [SerializeField] CanvasGroup levelUpPanel;
-    [SerializeField] CanvasGroup pickUpItemPanel;
-    [SerializeField] Image xpSlider;
     [SerializeField] Text currentLevelText;
+
+    [SerializeField] CanvasGroup interactTooltip;
+    [SerializeField] Text interactTooltipText;
+
+    [SerializeField] Image xpSlider;
     HUD[] allMenus;
     Camera mainCam;
 
@@ -48,11 +51,14 @@ public class UIManager : MonoBehaviour
             item.UpdateUI();
     }
 
-    public void ShowPickUp(PickupItem item)
+    public void ShowPickUp(Interactable item)
     {
-        pickUpItemPanel.gameObject.SetActive(item != null);
+        interactTooltip.gameObject.SetActive(item != null);
         if (item)
-            pickUpItemPanel.transform.position = mainCam.WorldToScreenPoint(item.transform.position - Vector3.up * 0.1f);
+        {
+            interactTooltip.transform.position = mainCam.WorldToScreenPoint(item.transform.position - Vector3.up * 0.1f);
+            interactTooltipText.text = item.ToString();
+        }
     }
 
     public void LevelUp()

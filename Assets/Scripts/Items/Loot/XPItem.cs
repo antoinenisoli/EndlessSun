@@ -14,4 +14,9 @@ public class XPItem : AutoCollectItem
         VFXManager.Instance.PlayVFX("XPCoin", transform.position);
         Destroy(gameObject);
     }
+
+    public override void Interact()
+    {
+        
+    }
 }
