@@ -11,6 +11,7 @@ public enum PlayerState
     Sprinting,
     Attacking,
     Dead,
+    Deactivated,
 }
 
 public class PlayerController2D : Entity
@@ -68,9 +69,18 @@ public class PlayerController2D : Entity
             item.statName = item.thisStat.ToString();
     }
 
+    bool CanMove()
+    {
+        return 
+            currentState != PlayerState.Attacking 
+            && currentState != PlayerState.Dead
+            && currentState != PlayerState.Deactivated
+            ;
+    }
+
     void Inputs()
     {
-        if (currentState != PlayerState.Attacking && currentState != PlayerState.Dead)
+        if (CanMove())
         {
             inputX = Input.GetAxisRaw("Horizontal");
             inputY = Input.GetAxisRaw("Vertical");
@@ -177,11 +187,11 @@ public class PlayerController2D : Entity
 
     void ManageAttacks()
     {
-        if (currentState != PlayerState.Attacking && !EventSystem.current.IsPointerOverGameObject())
+        if (CanMove() && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetButtonDown("MainAttack"))
                 LaunchAttack(true);
-            else if (Input.GetMouseButtonDown(1))
+            else if (Input.GetButtonDown("SecondaryAttack"))
                 LaunchAttack(false);
         }
     }
@@ -250,15 +260,16 @@ public class PlayerController2D : Entity
         Survival.Update();
         Combat.Update();
 
-        if (lastDetectedInteractable)
+        if (CanMove())
         {
-            if (Input.GetKeyDown(KeyCode.E))
-                lastDetectedInteractable.Interact();
-        }
+            if (lastDetectedInteractable)
+            {
+                if (Input.GetButtonDown("Interaction"))
+                    lastDetectedInteractable.Interact();
+            }
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            UIManager.Instance.inventoryUI.Switch();
+            if (Input.GetButtonDown("Inventory"))
+                UIManager.Instance.inventoryUI.Switch();
         }
     }
 

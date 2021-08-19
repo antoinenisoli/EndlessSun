@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class Tent : Interactable
 {
+    [SerializeField] Transform entrance;
+
+    private void Start()
+    {
+        EventManager.Instance.onPlayerAwake.AddListener(PlayerAwake);
+    }
+
     public override void Interact()
     {
         PlayerSurvival.Energy.Init();
         EventManager.Instance.onPlayerSleep.Invoke();
+        GameManager.Player.SetState(PlayerState.Deactivated);
+    }
+
+    public void PlayerAwake()
+    {
+        GameManager.Player.transform.position = entrance.position;
+        GameManager.Player.SetState(PlayerState.Idle);
     }
 
     public override string ToString()

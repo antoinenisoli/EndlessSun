@@ -249,7 +249,7 @@ MonoBehaviour:
   interactionRadius: 0.5
   interactLayer:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 1792
   lastDetectedInteractable: {fileID: 0}
 --- !u!50 &822972060138402191
 Rigidbody2D:

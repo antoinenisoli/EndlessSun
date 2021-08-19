@@ -9,9 +9,9 @@ public class GameGrid : MonoBehaviour
     [SerializeField] Sprite[] randomVisual;
     Cell[,] allCells = new Cell[0,0];
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
+        Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position, (Vector2)gridSize);
     }
 
