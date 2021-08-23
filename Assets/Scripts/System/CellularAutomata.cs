@@ -7,41 +7,92 @@ public class CellularAutomata : MonoBehaviour
 {
     [SerializeField] Vector2Int gridSize;
     [SerializeField] GameObject cellPrefab;
-    [SerializeField] Sprite[] randomVisual;
+    [SerializeField] Sprite[] groundSprites;
 
     [SerializeField] string seed;
     [SerializeField] int smoothIterations = 5;
     [SerializeField] bool useRandomSeed;
-    [SerializeField] [Range(0, 100)] int randomFillPercent = 50;
+    [SerializeField] [Range(0, 100)] float randomFillPercent = 50;
     int[,] map;
 	Dictionary<Vector2Int, Cell> allCells = new Dictionary<Vector2Int, Cell>();
-
-	void OnDrawGizmos()
-	{
-		if (map == null)
-			return;
-
-		for (int x = 0; x < gridSize.x; x++)
-			for (int y = 0; y < gridSize.y; y++)
-			{
-				Gizmos.color = map[x, y] == 1 ? Color.black : Color.white;
-				Vector2 pos = new Vector2(-gridSize.x / 2 + x + 0.5f, -gridSize.y / 2 + y + 0.5f);
-				Gizmos.DrawCube(pos, Vector3.one);
-			}
-	}
 
 	void Start()
 	{
 		GenerateMap();
+		AssignSprites();
 	}
 
 	void GenerateMap()
 	{
 		map = new int[gridSize.x, gridSize.y];
-		RandomFillMap();
+        foreach (var item in allCells.Values)
+			Destroy(item.gameObject);
 
+		allCells.Clear();
+		RandomFillMap();
 		for (int i = 0; i < smoothIterations; i++)
 			SmoothMap();
+	}
+
+	string WriteMatrix(bool[,] matrix)
+    {
+		string output = " ";
+		for (int x = 0; x <= matrix.GetLength(0) - 1; x++)
+			for (int y = 0; y <= matrix.GetLength(1) - 1; y++)
+				output += " " + matrix[x, y].GetHashCode() + " ";
+
+		return output;
+	}
+
+	bool[,] GetNeighboorIndex(Cell cell)
+    {
+		bool[,] neighbourIndex = new bool[3,3];
+
+		for (int y = -1; y <= 1; y++)
+		{
+			for (int x = -1; x <= 1; x++)
+			{
+				bool correct = (x != 0 || y != 0) 
+					&& cell.coordinates.x + x >= 0 
+					&& cell.coordinates.x + x < gridSize.x 
+					&& cell.coordinates.y + y >= 0 
+					&& cell.coordinates.y + y < gridSize.y;
+
+				if (correct)
+				{
+					if (map[cell.coordinates.x + x, cell.coordinates.y + y] == 0)
+                    {
+						neighbourIndex[x + 1, y + 1] = true;
+						cell.neighbours.Add(GetCell(cell.coordinates.x + x, cell.coordinates.y + y));
+					}
+				}
+			}
+		}
+
+		return neighbourIndex;
+	}
+
+	void AssignSprites()
+    {
+		foreach (var item in allCells.Values)
+        {
+			if (map[item.coordinates.x, item.coordinates.y] == 0)
+			{
+				bool[,] index = GetNeighboorIndex(item);
+				if (item.neighbours.Count >= 8)
+					continue;
+				else
+                {
+					print(item.coordinates + WriteMatrix(index));
+					if (index[1, 2] && index[1,0])
+                    {
+						item.SetSprite(groundSprites[1]);
+					}
+				}
+			}
+			else
+				continue;
+		}
 	}
 
 	void RandomFillMap()
@@ -58,6 +109,7 @@ public class CellularAutomata : MonoBehaviour
 				Cell cellScript = newCell.GetComponent<Cell>();
 				Vector2Int coordinates = new Vector2Int(x, y);
 				allCells.Add(coordinates, cellScript);
+				cellScript.Initialize(coordinates);
 
 				if (x == 0 || x == gridSize.x - 1 || y == 0 || y == gridSize.y - 1)
                 {

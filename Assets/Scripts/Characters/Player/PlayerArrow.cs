@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerArrow : MonoBehaviour
 {
     [SerializeField] Transform arrowSprite;
+    [SerializeField] float minimumForce = 10f;
     Rigidbody2D rb;
 
     private void Awake()
@@ -15,7 +16,7 @@ public class PlayerArrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Enemy enemy))
+        if (collision.TryGetComponent(out Enemy enemy) && rb.velocity.sqrMagnitude > minimumForce)
         {
             enemy.Hit(1, rb.velocity * 0.5f);
             Destroy(gameObject);

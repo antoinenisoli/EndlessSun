@@ -3249,11 +3249,19 @@ MonoBehaviour:
   gridSize: {x: 120, y: 120}
   cellPrefab: {fileID: 7483044120027432093, guid: e264fed921266494e9691c63c71dae4a,
     type: 3}
-  randomVisual: []
+  groundSprites:
+  - {fileID: 7351790756814780031, guid: 6c8ac65b743da174eac173839e828b7a, type: 3}
+  - {fileID: 5555268923945687646, guid: 6c8ac65b743da174eac173839e828b7a, type: 3}
+  - {fileID: 6546694170437140924, guid: 6c8ac65b743da174eac173839e828b7a, type: 3}
+  - {fileID: -404077479236420439, guid: 6c8ac65b743da174eac173839e828b7a, type: 3}
+  - {fileID: 7351790756814780031, guid: 6c8ac65b743da174eac173839e828b7a, type: 3}
+  - {fileID: 7351790756814780031, guid: 6c8ac65b743da174eac173839e828b7a, type: 3}
+  - {fileID: 7351790756814780031, guid: 6c8ac65b743da174eac173839e828b7a, type: 3}
+  - {fileID: 7351790756814780031, guid: 6c8ac65b743da174eac173839e828b7a, type: 3}
   seed: 0
   smoothIterations: 5
   useRandomSeed: 1
-  randomFillPercent: 45
+  randomFillPercent: 46
 --- !u!1 &468196703
 GameObject:
   m_ObjectHideFlags: 0
