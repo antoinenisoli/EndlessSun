@@ -18,6 +18,10 @@ public class GameGrid : MonoBehaviour
     private void Awake()
     {
         CreateGrid();
+    }
+
+    private void Start()
+    {
         GetGridBorder();
     }
 
