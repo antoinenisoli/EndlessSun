@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class CellularAutomata : MonoBehaviour
 {
-    [SerializeField] Vector2Int gridSize;
+	public static CellularAutomata Instance;
+
+	[SerializeField] Vector2Int gridSize;
     [SerializeField] GameObject cellPrefab;
     [SerializeField] Sprite[] groundSprites;
 
+	[Header("Generate Map")]
     [SerializeField] string seed;
     [SerializeField] int smoothIterations = 5;
     [SerializeField] bool useRandomSeed;
@@ -16,10 +19,28 @@ public class CellularAutomata : MonoBehaviour
     int[,] map;
 	Dictionary<Vector2Int, Cell> allCells = new Dictionary<Vector2Int, Cell>();
 
-	void Start()
+	[Header("Generate Props")]
+	[SerializeField] GameObject[] props;
+	[SerializeField] float propsProb = 30f;
+
+    private void Awake()
+    {
+		Singleton();
+    }
+
+    public void Start()
 	{
 		GenerateMap();
 		AssignSprites();
+		GenerateProps();
+	}
+
+	void Singleton()
+	{
+		if (Instance == null)
+			Instance = this;
+		else
+			Destroy(gameObject);
 	}
 
 	void GenerateMap()
@@ -32,16 +53,6 @@ public class CellularAutomata : MonoBehaviour
 		RandomFillMap();
 		for (int i = 0; i < smoothIterations; i++)
 			SmoothMap();
-	}
-
-	string WriteMatrix(bool[,] matrix)
-    {
-		string output = " ";
-		for (int x = 0; x <= matrix.GetLength(0) - 1; x++)
-			for (int y = 0; y <= matrix.GetLength(1) - 1; y++)
-				output += " " + matrix[x, y].GetHashCode() + " ";
-
-		return output;
 	}
 
 	bool[,] GetNeighboorIndex(Cell cell)
@@ -76,22 +87,33 @@ public class CellularAutomata : MonoBehaviour
     {
 		foreach (var item in allCells.Values)
         {
-			if (map[item.coordinates.x, item.coordinates.y] == 0)
+			if (item.myType == CellType.Ground)
 			{
 				bool[,] index = GetNeighboorIndex(item);
 				if (item.neighbours.Count >= 8)
 					continue;
 				else
                 {
-					print(item.coordinates + WriteMatrix(index));
-					if (index[1, 2] && index[1,0])
-                    {
-						item.SetSprite(groundSprites[1]);
-					}
+					int i = TilePattern.GetPatternIndex(index);
+					print(i + " / /" + item.coordinates + TilePattern.WriteMatrix(index));
+					item.SetSprite(groundSprites[i]);
 				}
 			}
-			else
-				continue;
+		}
+	}
+
+	void GenerateProps()
+    {
+		foreach (var item in allCells.Values)
+		{
+			if (item.myType == CellType.Ground)
+			{
+				float r = UnityEngine.Random.Range(0, 100);
+				if (r < propsProb)
+                {
+					GameObject g = Instantiate(props[0], item.transform.position, Quaternion.identity, item.transform);
+                }
+			}
 		}
 	}
 

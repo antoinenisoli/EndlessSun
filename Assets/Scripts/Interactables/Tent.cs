@@ -13,7 +13,6 @@ public class Tent : Interactable
 
     public override void Interact()
     {
-        PlayerSurvival.Energy.Init();
         EventManager.Instance.onPlayerSleep.Invoke();
         GameManager.Player.SetState(PlayerState.Deactivated);
     }
@@ -22,6 +21,8 @@ public class Tent : Interactable
     {
         GameManager.Player.transform.position = entrance.position;
         GameManager.Player.SetState(PlayerState.Idle);
+        PlayerSurvival.Energy.Init();
+        CellularAutomata.Instance.Start();
     }
 
     public override string ToString()

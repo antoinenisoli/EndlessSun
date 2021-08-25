@@ -32,11 +32,11 @@ public class TooltipSystem : MonoBehaviour
 
     public void Show(string headerText, string contentText, RectTransform uiTarget)
     {
-        Vector2 position = uiTarget.transform.position;
+        /*Vector2 position = uiTarget.transform.position;
         float pivotX = position.x / Screen.width;
         float pivotY = position.y / Screen.height;
         rectTransform.pivot = new Vector2(pivotX, pivotY);
-        transform.position = position;
+        rectTransform.position = position;*/
 
         hidden = false;
         tooltipContainer.SetActive(true);
@@ -60,11 +60,11 @@ public class TooltipSystem : MonoBehaviour
     {
         if (!hidden)
         {
-            Vector2 position = Input.mousePosition;
+            Vector2 position = Input.mousePosition + Vector3.right * 150f;
             float pivotX = position.x / Screen.width;
             float pivotY = position.y / Screen.height;
             rectTransform.pivot = new Vector2(pivotX, pivotY);
-            transform.position = position;
+            rectTransform.position = position;
         }
     }
 }
