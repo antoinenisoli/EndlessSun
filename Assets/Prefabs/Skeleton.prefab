@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8455785323417378793}
   - component: {fileID: 208660123831550522}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,6 +136,7 @@ MonoBehaviour:
     currentValue: 0
     maxValue: 3
     thisStat: 0
+  baseSpeed: 200
   spr: {fileID: 4349680770242010597}
   healthBarPivot: {fileID: 2791671961560245372}
   healthBar: {fileID: 8455785323417378793}
@@ -147,6 +148,7 @@ MonoBehaviour:
       type: 3}
     dropCount: 1
     prob: 0.179
+  minDistance: 1
 --- !u!61 &4349680769149131545
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -193,7 +195,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &4349680770242010599
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +207,7 @@ GameObject:
   - component: {fileID: 4349680770242010598}
   - component: {fileID: 4349680770242010597}
   - component: {fileID: 4129203241537691841}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5698266774970747064}
   - component: {fileID: 1967592564040240481}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -391,7 +393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2791671961560245372}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -423,7 +425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 722962315941479667}
   - component: {fileID: 5850318619324865930}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -506,7 +508,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3820684431532751472}
   - component: {fileID: 6990335931295944972}
-  m_Layer: 7
+  - component: {fileID: 8178510508452911802}
+  m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,3 +582,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &8178510508452911802
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187833102218927066}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.050806105, y: 0.0749827}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.70363104, y: 0.5501038}
+  m_EdgeRadius: 0

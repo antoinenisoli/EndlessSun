@@ -14,6 +14,8 @@ public class Enemy : Entity
     [SerializeField] ItemDrop[] loots;
     float alpha;
 
+    [SerializeField] float minDistance = 1f;
+
     public override void Start()
     {
         base.Start();
@@ -23,7 +25,15 @@ public class Enemy : Entity
     public override void Hit(float amount, Vector2 force = default)
     {
         base.Hit(amount, force);
+        stunned = true;
+        StartCoroutine(Unstun());
         healthBarPivot.DOScaleX((float)health.CurrentValue / (float)health.MaxValue, 0.3f);
+    }
+
+    IEnumerator Unstun()
+    {
+        yield return new WaitForSeconds(0.45f);
+        stunned = false;
     }
 
     public override void Death()
@@ -46,14 +56,23 @@ public class Enemy : Entity
         Destroy(gameObject, 2f);
     }
 
-    public void Update()
+    public override void Update()
     {
+        base.Update();
         alpha = Mathf.Lerp(alpha, health.CurrentValue < health.MaxValue ? 1 : 0, 15 * Time.deltaTime);
         foreach (var item in healthBarSprites)
         {
             Color col = item.color;
             col.a = alpha;
             item.color = col;
+        }
+
+        if (GameManager.Player && !health.isDead)
+        {
+            spr.flipX = transform.position.x > GameManager.Player.transform.position.x;
+            float distance = Vector2.Distance(GameManager.Player.transform.position, transform.position);
+            if (distance > minDistance)
+                rb.AddForce((GameManager.Player.transform.position - transform.position).normalized * baseSpeed * Time.deltaTime);
         }
     }
 }

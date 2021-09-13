@@ -7,10 +7,12 @@ public class Entity : MonoBehaviour
 {
     [Header("Entity")]
     public Health health;
+    [SerializeField] protected float baseSpeed = 5f;
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
     public SpriteRenderer spr;
     protected Animator anim;
+    protected bool stunned;
 
     public virtual void Awake()
     {
@@ -22,6 +24,12 @@ public class Entity : MonoBehaviour
     public virtual void Start()
     {
         health.Initialize();
+    }
+
+    public virtual void ManageAnimations()
+    {
+        anim.SetFloat("Speed", rb.velocity.sqrMagnitude);
+        anim.SetBool("Dead", health.isDead);
     }
 
     public virtual void WriteName()
@@ -45,5 +53,10 @@ public class Entity : MonoBehaviour
         rb.AddForce(force, ForceMode2D.Impulse);
         if (health.isDead)
             Death();
+    }
+
+    public virtual void Update()
+    {
+        ManageAnimations();
     }
 }

@@ -22,7 +22,7 @@ public class PlayerController2D : Entity
     public PlayerCombat Combat;
     public PlayerState currentState;
     [SerializeField] float sprintCost = 15f;
-    [SerializeField] float baseSpeed = 4, sprintSpeed = 7;
+    [SerializeField] float sprintSpeed = 7;
     [SerializeField] float movementSmoothing = 0.05f;
     bool sprinting;
 
@@ -102,14 +102,13 @@ public class PlayerController2D : Entity
         currentState = newState;
     }
 
-    void ManageAnimations()
+    public override void ManageAnimations()
     {
+        base.ManageAnimations();
         if (idleSword && rb.velocity.sqrMagnitude > 0.1f)
             idleSword = false;
 
-        anim.SetFloat("Speed", rb.velocity.sqrMagnitude);
         anim.SetBool("IdleSword", idleSword);
-        anim.SetBool("Dead", health.isDead);
         anim.speed = Mathf.Lerp(anim.speed, sprinting ? 2 : 1, Time.deltaTime * 10f);
     }
 
@@ -250,11 +249,11 @@ public class PlayerController2D : Entity
         return currentInteractable;
     }
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         Inputs();
         Move();
-        ManageAnimations();
         ManageAttacks();
         ManageStates();
         Survival.Update();
