@@ -2935,7 +2935,7 @@ MonoBehaviour:
   seed: 0
   smoothIterations: 5
   useRandomSeed: 1
-  randomFillPercent: 46
+  randomFillPercent: 45
   propsTiles: {fileID: 11400000, guid: e8e34ecc8dbe9fe47931303c8e279afb, type: 2}
   propsProb: 10
 --- !u!1 &468196703

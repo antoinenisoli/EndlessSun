@@ -32,11 +32,6 @@ public class Entity : MonoBehaviour
         anim.SetBool("Dead", health.isDead);
     }
 
-    public virtual void WriteName()
-    {
-        health.statName = health.thisStat.ToString();
-    }
-
     public virtual void Death()
     {
         anim.SetTrigger("Death");

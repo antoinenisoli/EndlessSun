@@ -91,11 +91,11 @@ public class PlayerCombat
 
     public void Update()
     {
-        float computeEnergy = PlayerSurvival.Energy.MaxValue - PlayerSurvival.Energy.CurrentValue;
+        float computeEnergy = PlayerSurvival.Instance.Energy.MaxValue - PlayerSurvival.Instance.Energy.CurrentValue;
         Stamina.MaxValue = Stamina.BaseMaxValue - computeEnergy;
         Stamina.Update();
 
-        float computeHunger = PlayerSurvival.Hunger.MaxValue - PlayerSurvival.Hunger.CurrentValue;
+        float computeHunger = PlayerSurvival.Instance.Hunger.MaxValue - PlayerSurvival.Instance.Hunger.CurrentValue;
         Mana.MaxValue = Mana.BaseMaxValue - computeHunger;
     }
 }

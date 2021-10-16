@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class SurvivalStat : PlayerStat
 {
-    public float changeAmount = 5;
+    [Range(0, 0.1f)] public float changeAmount = 0.5f;
 
     public virtual void Update()
     {
@@ -14,7 +14,7 @@ public class SurvivalStat : PlayerStat
 
     public virtual void TimerEffect()
     {
-        CurrentValue += changeAmount;
+        CurrentValue -= changeAmount;
         UIManager.Instance.UpdateUI();
     }
 }

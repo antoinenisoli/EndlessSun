@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: BeachRuleTile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -340047698080285647, guid: 0118ad02cca4bbe40bd543a63eba89a4,
-    type: 3}
+  m_DefaultSprite: {fileID: 0}
   m_DefaultGameObject: {fileID: 7483044120027432093, guid: e264fed921266494e9691c63c71dae4a,
     type: 3}
   m_DefaultColliderType: 0
@@ -144,7 +143,7 @@ MonoBehaviour:
     - {x: -1, y: 0, z: 0}
     - {x: 1, y: 0, z: 0}
     m_RuleTransform: 0
-  - m_Id: 0
+  - m_Id: 7
     m_Sprites:
     - {fileID: 5696352974611328151, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
     m_GameObject: {fileID: 7483044120027432093, guid: e264fed921266494e9691c63c71dae4a,
@@ -161,4 +160,24 @@ MonoBehaviour:
     - {x: 0, y: -1, z: 0}
     - {x: -1, y: 0, z: 0}
     - {x: 1, y: 0, z: 0}
+    m_RuleTransform: 0
+  - m_Id: 8
+    m_Sprites:
+    - {fileID: 6748760472633149300, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
+    - {fileID: -1297112307461012975, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
+    - {fileID: -340047698080285647, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
+    - {fileID: 2825952700906447149, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
+    - {fileID: -7137526854015264804, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
+    - {fileID: -4845711639201268268, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
+    - {fileID: 5795057581675584768, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
+    m_GameObject: {fileID: 7483044120027432093, guid: e264fed921266494e9691c63c71dae4a,
+      type: 3}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.885
+    m_Output: 1
+    m_ColliderType: 0
+    m_RandomTransform: 0
+    m_Neighbors: 
+    m_NeighborPositions: []
     m_RuleTransform: 0

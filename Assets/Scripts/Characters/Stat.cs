@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Stat
 {
-    public string statName;
     [SerializeField] protected float currentValue;
     [SerializeField] protected float maxValue = 50; 
 

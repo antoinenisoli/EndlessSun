@@ -30,6 +30,11 @@ public class Enemy : Entity
         healthBarPivot.DOScaleX((float)health.CurrentValue / (float)health.MaxValue, 0.3f);
     }
 
+    public virtual void Attack(Entity target)
+    {
+        
+    }
+
     IEnumerator Unstun()
     {
         yield return new WaitForSeconds(0.45f);

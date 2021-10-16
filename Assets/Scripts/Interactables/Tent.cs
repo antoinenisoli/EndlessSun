@@ -21,7 +21,7 @@ public class Tent : Interactable
     {
         GameManager.Player.transform.position = entrance.position;
         GameManager.Player.SetState(PlayerState.Idle);
-        PlayerSurvival.Energy.Init();
+        PlayerSurvival.Instance.Energy.Init();
         CellularAutomata.Instance.Start();
     }
 

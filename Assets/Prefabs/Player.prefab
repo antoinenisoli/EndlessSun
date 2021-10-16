@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 158522192948777189}
   m_Father: {fileID: 822972060138402190}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180.789, z: 0}
 --- !u!114 &8380866944853111424
 MonoBehaviour:
@@ -173,6 +173,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 3609506836243044850}
   - {fileID: 300071174457204636}
   - {fileID: 822972059179743091}
   m_Father: {fileID: 0}
@@ -191,28 +192,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    statName: Health
     currentValue: 0
     maxValue: 100
     thisStat: 0
+  baseSpeed: 4
   spr: {fileID: 822972059179743088}
-  Survival:
-    stats:
-    - statName: Hunger
-      currentValue: 0
-      maxValue: 1000
-      thisStat: 3
-      changeAmount: -0.1
-    - statName: Thirst
-      currentValue: 0
-      maxValue: 1000
-      thisStat: 4
-      changeAmount: -0.1
-    - statName: Energy
-      currentValue: 0
-      maxValue: 1000
-      thisStat: 5
-      changeAmount: -0.1
   myXP:
     currentLevel:
       index: 0
@@ -241,15 +225,13 @@ MonoBehaviour:
       xpStep: 0
   Combat:
     stamina:
-      statName: Stamina
       currentValue: 0
       maxValue: 1000
       thisStat: 2
       recoveryDelay: 2
       recoveryAmount: 18
     stats:
-    - statName: Mana
-      currentValue: 0
+    - currentValue: 0
       maxValue: 1000
       thisStat: 1
     staminaCost: 150
@@ -266,7 +248,6 @@ MonoBehaviour:
     storedVelocity: {x: 0, y: 0}
   currentState: 0
   sprintCost: 15
-  baseSpeed: 4
   sprintSpeed: 6
   movementSmoothing: 0.2
   staminaCost: 15
@@ -314,6 +295,64 @@ CircleCollider2D:
   m_Offset: {x: -0.0057047904, y: -0.045638204}
   serializedVersion: 2
   m_Radius: 0.26039946
+--- !u!1 &3369555832798029268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3609506836243044850}
+  - component: {fileID: 8715393673869753200}
+  m_Layer: 6
+  m_Name: SurvivalManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3609506836243044850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3369555832798029268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 822972060138402190}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8715393673869753200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3369555832798029268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d668777070a3a8429d1e828f449b774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hunger:
+    currentValue: 0
+    maxValue: 1000
+    thisStat: 3
+    changeAmount: 0.0169
+  thirsty:
+    currentValue: 0
+    maxValue: 1000
+    thisStat: 4
+    changeAmount: 0.0224
+  energy:
+    currentValue: 0
+    maxValue: 1000
+    thisStat: 5
+    changeAmount: 0.0219
 --- !u!1 &4071406047616465356
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +382,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 822972060138402190}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6385254710109228378
 MonoBehaviour:

@@ -13,7 +13,7 @@ public class CellularAutomata : MonoBehaviour
 	GridLayout grid;
 
 	[Header("Generate Map")]
-    [SerializeField] string seed;
+    [SerializeField] int seed;
     [SerializeField] int smoothIterations = 5;
     [SerializeField] bool useRandomSeed;
     [SerializeField] [Range(0, 100)] float randomFillPercent = 50;
@@ -110,6 +110,9 @@ public class CellularAutomata : MonoBehaviour
 
 	void GenerateProps()
     {
+		if (!propsTiles)
+			return;
+
 		foreach (var item in allCells.Values)
 		{
 			if (item.myType == CellType.Ground)
@@ -127,9 +130,9 @@ public class CellularAutomata : MonoBehaviour
 	void RandomFillMap()
 	{
 		if (useRandomSeed)
-			seed = Time.time.ToString();
-
-		System.Random pseudoRandom = new System.Random(seed.GetHashCode());
+			seed = UnityEngine.Random.Range(-5000, 5000);
+		
+		System.Random pseudoRandom = new System.Random(seed);
 		for (int x = 0; x < gridSize.x; x++)
 			for (int y = 0; y < gridSize.y; y++)
 			{

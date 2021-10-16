@@ -13,32 +13,36 @@ public enum PlayerStatName
     Energy,
 }
 
-[System.Serializable]
-public class PlayerSurvival
+public class PlayerSurvival : MonoBehaviour
 {
-    public static SurvivalStat Hunger;
-    public static SurvivalStat Thirsty;
-    public static SurvivalStat Energy;
+    public static PlayerSurvival Instance;
+    [SerializeField] SurvivalStat hunger;
+    [SerializeField] SurvivalStat thirsty;
+    [SerializeField] SurvivalStat energy;
+    Dictionary<PlayerStatName, SurvivalStat> d_stats = new Dictionary<PlayerStatName, SurvivalStat>();
 
-    public SurvivalStat[] stats = new SurvivalStat[3];
-    Dictionary<PlayerStatName, SurvivalStat> dico = new Dictionary<PlayerStatName, SurvivalStat>();
+    public SurvivalStat Hunger { get => hunger; set => hunger = value; }
+    public SurvivalStat Thirsty { get => thirsty; set => thirsty = value; }
+    public SurvivalStat Energy { get => energy; set => energy = value; }
+
+    private void Awake()
+    {
+        Instance = this;
+        Init();
+    }
 
     public void Init()
     {
-        foreach (var item in stats)
-        {
-            dico.Add(item.thisStat, item);
-            item.CurrentValue = item.MaxValue;
-        }
-
-        Hunger = dico[PlayerStatName.Hunger];
-        Thirsty = dico[PlayerStatName.Thirst];
-        Energy = dico[PlayerStatName.Energy];
+        d_stats.Add(Hunger.thisStat, Hunger);
+        d_stats.Add(Thirsty.thisStat, Thirsty);
+        d_stats.Add(Energy.thisStat, Energy);
+        foreach (var item in d_stats.Values)
+            item.Init();
     }
 
     public SurvivalStat GetSurvivalStat(PlayerStatName statName)
     {
-        if (dico.TryGetValue(statName, out SurvivalStat stat))
+        if (d_stats.TryGetValue(statName, out SurvivalStat stat))
             return stat;
 
         return null;
@@ -46,7 +50,7 @@ public class PlayerSurvival
 
     public void Update()
     {
-        foreach (var item in stats)
+        foreach (var item in d_stats.Values)
             item.Update();
     }
 }

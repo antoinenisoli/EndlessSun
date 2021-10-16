@@ -16,8 +16,9 @@ public enum PlayerState
 
 public class PlayerController2D : Entity
 {
+    public PlayerSurvival Survival => PlayerSurvival.Instance;
+
     [Header("PLAYER")]
-    public PlayerSurvival Survival;
     public PlayerXP myXP;
     public PlayerCombat Combat;
     public PlayerState currentState;
@@ -48,7 +49,6 @@ public class PlayerController2D : Entity
     public override void Awake()
     {
         base.Awake();
-        Survival.Init();
         Combat.Init();
     }
 
@@ -56,17 +56,6 @@ public class PlayerController2D : Entity
     {
         base.Start();
         myXP.GenerateLevels();
-    }
-
-    [ContextMenu("Write names")]
-    public override void WriteName()
-    {
-        base.WriteName();
-        foreach (var item in Survival.stats)
-            item.statName = item.thisStat.ToString();
-
-        foreach (var item in Combat.stats)
-            item.statName = item.thisStat.ToString();
     }
 
     bool CanMove()

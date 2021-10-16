@@ -32,33 +32,33 @@ public class PlayerHUD : HUD
         staminaSlider.maxValue = PlayerCombat.Stamina.MaxValue;
         staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
 
-        hungerSlider.maxValue = PlayerSurvival.Hunger.MaxValue;
-        hungerSlider.value = PlayerSurvival.Hunger.CurrentValue;
+        hungerSlider.maxValue = PlayerSurvival.Instance.Hunger.MaxValue;
+        hungerSlider.value = PlayerSurvival.Instance.Hunger.CurrentValue;
 
-        thirstySlider.maxValue = PlayerSurvival.Thirsty.MaxValue;
-        thirstySlider.value = PlayerSurvival.Thirsty.CurrentValue;
+        thirstySlider.maxValue = PlayerSurvival.Instance.Thirsty.MaxValue;
+        thirstySlider.value = PlayerSurvival.Instance.Thirsty.CurrentValue;
 
-        energySlider.maxValue = PlayerSurvival.Energy.MaxValue;
-        energySlider.value = PlayerSurvival.Energy.CurrentValue;
+        energySlider.maxValue = PlayerSurvival.Instance.Energy.MaxValue;
+        energySlider.value = PlayerSurvival.Instance.Energy.CurrentValue;
     }
 
     void UpdateMana()
     {
-        float hunger = PlayerSurvival.Hunger.MaxValue - PlayerSurvival.Hunger.CurrentValue;
+        float hunger = PlayerSurvival.Instance.Hunger.MaxValue - PlayerSurvival.Instance.Hunger.CurrentValue;
         hungerSlider.value = hunger;
         manaSlider.value = PlayerCombat.Mana.CurrentValue;
     }
 
     void UpdateStamina()
     {
-        float stamina = PlayerSurvival.Energy.MaxValue - PlayerSurvival.Energy.CurrentValue;
+        float stamina = PlayerSurvival.Instance.Energy.MaxValue - PlayerSurvival.Instance.Energy.CurrentValue;
         energySlider.value = stamina;
         staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
     }
 
     void UpdateThirst()
     {
-        float computeThirst = PlayerSurvival.Thirsty.CurrentValue;
+        float computeThirst = PlayerSurvival.Instance.Thirsty.CurrentValue;
         thirstySlider.value = computeThirst;
     }
 
