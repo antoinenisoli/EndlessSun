@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class CellularAutomata : MonoBehaviour
 {
 	public static CellularAutomata Instance;
-
 	[SerializeField] Vector2Int gridSize;
-    [SerializeField] GameObject cellPrefab;
-    [SerializeField] Sprite[] groundSprites;
+	[SerializeField] RuleTile beachTile, waterTile;
+	[SerializeField] Tilemap groundTilemap, propsTilemap;
+	GridLayout grid;
 
 	[Header("Generate Map")]
     [SerializeField] string seed;
@@ -20,18 +21,26 @@ public class CellularAutomata : MonoBehaviour
 	Dictionary<Vector2Int, Cell> allCells = new Dictionary<Vector2Int, Cell>();
 
 	[Header("Generate Props")]
-	[SerializeField] GameObject[] props;
+	[SerializeField] RuleTile propsTiles;
 	[SerializeField] float propsProb = 30f;
+
+    private void OnDrawGizmos()
+    {
+		Gizmos.color = Color.green;
+		Gizmos.DrawWireCube(transform.position + new Vector3(gridSize.x/2, gridSize.y/2), new Vector3(gridSize.x, gridSize.y));
+    }
 
     private void Awake()
     {
 		Singleton();
+		grid = FindObjectOfType<GridLayout>();
     }
 
-    public void Start()
+    public IEnumerator Start()
 	{
 		GenerateMap();
-		AssignSprites();
+		yield return new WaitForSeconds(0.1f);
+		AssignTypes();
 		GenerateProps();
 	}
 
@@ -55,51 +64,48 @@ public class CellularAutomata : MonoBehaviour
 			SmoothMap();
 	}
 
-	bool[,] GetNeighboorIndex(Cell cell)
+	void AssignTypes()
     {
-		bool[,] neighbourIndex = new bool[3,3];
-
-		for (int y = -1; y <= 1; y++)
-		{
-			for (int x = -1; x <= 1; x++)
+		for (int x = 0; x < gridSize.x; x++)
+			for (int y = 0; y < gridSize.y; y++)
 			{
-				bool correct = (x != 0 || y != 0) 
-					&& cell.coordinates.x + x >= 0 
-					&& cell.coordinates.x + x < gridSize.x 
-					&& cell.coordinates.y + y >= 0 
-					&& cell.coordinates.y + y < gridSize.y;
+				Vector2 pos = new Vector2(x, y);
+				Vector3Int worldToCell = grid.WorldToCell(new Vector3Int((int)pos.x, (int)pos.y, 0));
+				GameObject newCell = groundTilemap.GetInstantiatedObject(worldToCell);
+				Cell cellScript = newCell.GetComponent<Cell>();
 
-				if (correct)
-				{
-					if (map[cell.coordinates.x + x, cell.coordinates.y + y] == 0)
-                    {
-						neighbourIndex[x + 1, y + 1] = true;
-						cell.neighbours.Add(GetCell(cell.coordinates.x + x, cell.coordinates.y + y));
-					}
-				}
-			}
-		}
+				Vector2Int coords = new Vector2Int(x, y);
+				cellScript.Initialize(coords);
+				allCells.Add(coords, cellScript);
 
-		return neighbourIndex;
+                switch (map[x, y])
+                {
+                    case 0:
+						cellScript.SetType(CellType.Ground);
+						break;
+
+					case 1:
+						cellScript.SetType(CellType.Water);
+						break;
+                }
+            }
 	}
 
-	void AssignSprites()
+	bool IsBorder(Cell cell)
     {
-		foreach (var item in allCells.Values)
+        for (int x = -2; x < 2; x++)
         {
-			if (item.myType == CellType.Ground)
-			{
-				bool[,] index = GetNeighboorIndex(item);
-				if (item.neighbours.Count >= 8)
+            for (int y = -2; y < 2; y++)
+            {
+				if (x == 0 || y == 0)
 					continue;
-				else
-                {
-					int i = TilePattern.GetPatternIndex(index);
-					print(i + " / /" + item.coordinates + TilePattern.WriteMatrix(index));
-					item.SetSprite(groundSprites[i]);
-				}
-			}
-		}
+
+				if (map[cell.coordinates.x + x, cell.coordinates.y + y] == 1)
+					return true;
+            }
+        }
+
+		return false;
 	}
 
 	void GenerateProps()
@@ -109,9 +115,10 @@ public class CellularAutomata : MonoBehaviour
 			if (item.myType == CellType.Ground)
 			{
 				float r = UnityEngine.Random.Range(0, 100);
-				if (r < propsProb)
+				if (r < propsProb && !IsBorder(item))
                 {
-					GameObject g = Instantiate(props[0], item.transform.position, Quaternion.identity, item.transform);
+					Vector3Int worldToCell = grid.WorldToCell(new Vector3Int(item.coordinates.x, item.coordinates.y, 0));
+					propsTilemap.SetTile(worldToCell, propsTiles);
                 }
 			}
 		}
@@ -126,17 +133,13 @@ public class CellularAutomata : MonoBehaviour
 		for (int x = 0; x < gridSize.x; x++)
 			for (int y = 0; y < gridSize.y; y++)
 			{
-				Vector2 pos = new Vector2(-gridSize.x / 2 + x + 0.5f, -gridSize.y / 2 + y + 0.5f);
-				GameObject newCell = Instantiate(cellPrefab, pos, Quaternion.identity, transform);
-				Cell cellScript = newCell.GetComponent<Cell>();
-				Vector2Int coordinates = new Vector2Int(x, y);
-				allCells.Add(coordinates, cellScript);
-				cellScript.Initialize(coordinates);
+				Vector2 pos = new Vector2(x, y);
+				Vector3Int worldToCell = grid.WorldToCell(new Vector3Int((int)pos.x, (int)pos.y, 0));
 
 				if (x == 0 || x == gridSize.x - 1 || y == 0 || y == gridSize.y - 1)
                 {
 					map[x, y] = 1;
-					cellScript.SetType(CellType.Water);
+					groundTilemap.SetTile(worldToCell, waterTile);
 				}
 				else
                 {
@@ -144,46 +147,49 @@ public class CellularAutomata : MonoBehaviour
 					if (random < randomFillPercent)
                     {
 						map[x, y] = 1;
-						cellScript.SetType(CellType.Water);
+						groundTilemap.SetTile(worldToCell, waterTile);
 					}
 					else
                     {
 						map[x, y] = 0;
-						cellScript.SetType(CellType.Ground);
+						groundTilemap.SetTile(worldToCell, beachTile);
 					}
 				}
 			}
 	}
 
-	Cell GetCell(int x = 0, int y = 0, Vector2Int coord = default)
+	Cell GetCell(int x = 0, int y = 0)
     {
-		if (allCells.ContainsKey(coord) && coord != default)
+		Vector2Int newCoords = new Vector2Int(x, y);
+		return GetCell(newCoords);
+    }
+
+	Cell GetCell(Vector2Int coord = default)
+	{
+		if (allCells.ContainsKey(coord))
 			return allCells[coord];
-		else
-        {
-			Vector2Int newCoords = new Vector2Int(x, y);
-			if (allCells.ContainsKey(newCoords))
-				return allCells[newCoords];
-		}
 
 		return null;
-    }
+	}
 
 	void SmoothMap()
 	{
 		for (int x = 0; x < gridSize.x; x++)
 			for (int y = 0; y < gridSize.y; y++)
 			{
+				Vector2 pos = new Vector2(x, y);
+				Vector3Int worldToCell = grid.WorldToCell(new Vector3Int((int)pos.x, (int)pos.y, 0));
 				int neighbourWallTiles = GetSurroundingWallCount(x, y);
+
 				if (neighbourWallTiles > 4)
                 {
 					map[x, y] = 1;
-					GetCell(x, y).SetType(CellType.Water);
+					groundTilemap.SetTile(worldToCell, waterTile);
 				}
 				else if (neighbourWallTiles < 4)
                 {
 					map[x, y] = 0;
-					GetCell(x, y).SetType(CellType.Ground);
+					groundTilemap.SetTile(worldToCell, beachTile);
 				}
 			}
 	}
