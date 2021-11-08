@@ -20,7 +20,9 @@ class Chasing : EnemyBehaviour
         base.Update();
         if (myEnemy.NearToTarget(target.transform.position))
             myEnemy.SetBehaviour(new Attacking(target, myEnemy));
+        else if (!myEnemy.DetectTargets(target.transform.position))
+            myEnemy.SetBehaviour(new Wait(target, myEnemy, 2, EnemyState.Patrolling));
         else
-            myEnemy.Move(target.transform.position);
+            myEnemy.Move(target.transform.position, true);
     }
 }

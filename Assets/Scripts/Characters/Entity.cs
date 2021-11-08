@@ -7,23 +7,34 @@ public class Entity : MonoBehaviour
 {
     [Header("Entity")]
     public Health health;
-    [SerializeField] protected float baseSpeed = 5f;
+    public SpriteRenderer spr;
+
+    [Header("_Movements")]
+    [SerializeField] protected float walkSpeed = 5f, runSpeed = 10f;
+
+    [Header("_Fight")]
+    [SerializeField] float balance = 2;
+    [SerializeField] int force;
+
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
-    public SpriteRenderer spr;
     protected Animator anim;
     protected bool stunned;
 
     public virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        spr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
     }
 
     public virtual void Start()
     {
         health.Initialize();
+    }
+
+    public int ComputeDamages()
+    {
+        return (int)Mathf.Round(50 / 100 * (float)force);
     }
 
     public virtual void ManageAnimations()

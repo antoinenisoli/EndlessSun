@@ -23,7 +23,6 @@ public class PlayerController2D : Entity
     public PlayerCombat Combat;
     public PlayerState currentState;
     [SerializeField] float sprintCost = 15f;
-    [SerializeField] float sprintSpeed = 7;
     [SerializeField] float movementSmoothing = 0.05f;
     bool sprinting;
 
@@ -169,7 +168,7 @@ public class PlayerController2D : Entity
         if (sprinting)
             PlayerCombat.Stamina.StaminaCost(sprintCost);
 
-        Vector2 targetVelocity = inputs.normalized * (sprinting ? sprintSpeed : baseSpeed);
+        Vector2 targetVelocity = inputs.normalized * (sprinting ? runSpeed : walkSpeed);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref m_Velocity, movementSmoothing);
     }
 

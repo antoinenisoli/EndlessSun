@@ -23,6 +23,9 @@ public class Enemy : Entity
     Vector2 startPosition;
 
     [Header("Detection")]
+    public float reactTimer = 0.3f;
+    [SerializeField] SpriteRenderer detectIcon;
+    Vector3 detectIconBaseScale;
     [SerializeField] float visionDistance = 20f;
 
     [Header("Chase")]
@@ -44,14 +47,23 @@ public class Enemy : Entity
 
         c = Color.green;
         Gizmos.color = c;
-        Gizmos.DrawWireSphere(startPosition, randomPatrolRange.y);
+        if (startPosition == Vector2.zero)
+            Gizmos.DrawWireSphere(transform.position, randomPatrolRange.y);
+        else
+            Gizmos.DrawWireSphere(startPosition, randomPatrolRange.y);
+
         c.g -= 25f;
-        Gizmos.DrawWireSphere(startPosition, randomPatrolRange.x);
+        if (startPosition == Vector2.zero)
+            Gizmos.DrawWireSphere(transform.position, randomPatrolRange.x);
+        else
+            Gizmos.DrawWireSphere(startPosition, randomPatrolRange.x);
     }
 
     public override void Start()
     {
         base.Start();
+        detectIconBaseScale = detectIcon.transform.localScale;
+        detectIcon.gameObject.SetActive(false);
         startPosition = transform.position;
         behaviour = new Patrolling(Player, this);
         healthBarSprites = healthBar.GetComponentsInChildren<SpriteRenderer>();
@@ -84,13 +96,29 @@ public class Enemy : Entity
         Destroy(gameObject, 2f);
     }
 
+    public void ReactToTarget()
+    {
+        anim.SetTrigger("React");
+        detectIcon.gameObject.SetActive(true);
+        detectIcon.transform.localScale = detectIconBaseScale;
+        detectIcon.DOFade(1, 0);
+
+        Sequence tweenSequence = DOTween.Sequence();
+        tweenSequence.Append(detectIcon.transform.DOScale(detectIconBaseScale * 1.2f, 0.3f));
+        tweenSequence.Append(detectIcon.DOFade(0, 0.3f));
+        tweenSequence.OnComplete(() =>
+        {
+            detectIcon.gameObject.SetActive(false);
+        });
+    }
+
     public float RandomDelay()
     {
         float delay = Random.Range(randomDelayBounds.x, randomDelayBounds.y);
         return delay;
     }
 
-    public Vector3 RandomPatrolPosition()
+    public Vector2 RandomPatrolPosition()
     {
         float randomRange = Random.Range(randomPatrolRange.x, randomPatrolRange.y);
         Vector2 randomPos = Random.insideUnitCircle * randomRange;
@@ -129,21 +157,30 @@ public class Enemy : Entity
     public void SetBehaviour(EnemyBehaviour newBehaviour)
     {
         behaviour = newBehaviour;
-        if (newBehaviour.State == EnemyState.Chasing)
-            anim.SetTrigger("React");
     }
 
     public bool isMoving()
     {
-        return rb.velocity.magnitude > 1f;
+        return rb.velocity.sqrMagnitude > 1.5f;
     }
 
-    public void Move(Vector3 targetPos)
+    public void Stop()
+    {
+        rb.velocity = Vector2.zero;
+    }
+
+    public void Move(Vector3 targetPos, bool chase = false)
     {
         spr.flipX = transform.position.x > targetPos.x;
         float distance = Vector2.Distance(targetPos, transform.position);
+        float speed = chase ? runSpeed : walkSpeed;
         if (distance > minDistance)
-            rb.AddForce((targetPos - transform.position).normalized * baseSpeed * Time.deltaTime);
+        {
+            //rb.AddForce((targetPos - transform.position).normalized * speed * Time.deltaTime);
+            rb.velocity = (targetPos - transform.position).normalized * speed;
+        }
+        else
+            Stop();
     }
 
     void ManageHealthbars()

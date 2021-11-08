@@ -7,13 +7,15 @@ using UnityEngine;
 public class Patrolling : EnemyBehaviour
 {
     public override EnemyState State => EnemyState.Patrolling;
-    float patrolTimer;
-    float delay;
+    float newPatrolTimer;
+    float newPatrolDelay;
     Vector3 pos;
+
+    float cooldownTimer;
 
     public Patrolling(Entity target, Enemy myEnemy) : base(target, myEnemy)
     {
-        delay = myEnemy.RandomDelay();
+        newPatrolDelay = myEnemy.RandomDelay();
         pos = myEnemy.RandomPatrolPosition();
     }
 
@@ -21,14 +23,15 @@ public class Patrolling : EnemyBehaviour
     {
         base.Update();
         if (myEnemy.DetectTargets(target.transform.position))
-            myEnemy.SetBehaviour(new Chasing(target, myEnemy));
-        else
+            myEnemy.SetBehaviour(new Reacting(target, myEnemy, myEnemy.reactTimer));
+        else if (!myEnemy.isMoving())
         {
-            patrolTimer += Time.deltaTime;
-            if (patrolTimer > delay && !myEnemy.isMoving())
+            newPatrolTimer += Time.deltaTime;
+            if (newPatrolTimer > newPatrolDelay)
             {
-                patrolTimer = 0;
-                delay = myEnemy.RandomDelay();
+                myEnemy.Stop();
+                newPatrolTimer = 0;
+                newPatrolDelay = myEnemy.RandomDelay();
                 pos = myEnemy.RandomPatrolPosition();
             }
 
