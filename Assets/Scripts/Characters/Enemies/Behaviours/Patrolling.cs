@@ -9,26 +9,30 @@ public class Patrolling : EnemyBehaviour
     public override EnemyState State => EnemyState.Patrolling;
     float patrolTimer;
     float delay;
+    Vector3 pos;
 
-    public Patrolling(CharacterController player, Enemy myEnemy) : base(player, myEnemy)
+    public Patrolling(Entity target, Enemy myEnemy) : base(target, myEnemy)
     {
-        //delay = myEnemy.RandomDelay();
+        delay = myEnemy.RandomDelay();
+        pos = myEnemy.RandomPatrolPosition();
     }
 
     public override void Update()
     {
         base.Update();
-        /*if (myEnemy.NearPlayer(false))
-            myEnemy.SetBehaviour(new Chasing(player, myEnemy));
+        if (myEnemy.DetectTargets(target.transform.position))
+            myEnemy.SetBehaviour(new Chasing(target, myEnemy));
         else
         {
             patrolTimer += Time.deltaTime;
-            if (patrolTimer > delay)
+            if (patrolTimer > delay && !myEnemy.isMoving())
             {
                 patrolTimer = 0;
                 delay = myEnemy.RandomDelay();
-                myEnemy.PatrolMove();
+                pos = myEnemy.RandomPatrolPosition();
             }
-        }*/
+
+            myEnemy.Move(pos);
+        }
     }
 }

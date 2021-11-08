@@ -11,7 +11,7 @@ class Attacking : EnemyBehaviour
     public override EnemyState State => EnemyState.Attacking;
     float timer;
 
-    public Attacking(CharacterController player, Enemy myEnemy) : base(player, myEnemy)
+    public Attacking(Entity target, Enemy myEnemy) : base(target, myEnemy)
     {
         
     }
@@ -19,18 +19,17 @@ class Attacking : EnemyBehaviour
     public override void Update()
     {
         base.Update();
-        /*myEnemy.Stop();
         if (timer >= myEnemy.attackRate)
         {
             timer = 0;
-            myEnemy.Attack(player);
+            myEnemy.Attack(target);
         }
         else
             timer += Time.deltaTime;
 
-        if (!myEnemy.NearPlayer(true))
-            myEnemy.SetBehaviour(new Chasing(player, myEnemy));
-        else if (!myEnemy.NearPlayer(false))
-            myEnemy.SetBehaviour(new Patrolling(player, myEnemy));*/
+        if (!myEnemy.NearToTarget(target.transform.position))
+            myEnemy.SetBehaviour(new Chasing(target, myEnemy));
+        else if (!myEnemy.DetectTargets(target.transform.position))
+            myEnemy.SetBehaviour(new Patrolling(target, myEnemy));
     }
 }

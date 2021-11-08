@@ -8,6 +8,7 @@ using UnityEngine;
 public enum EnemyState
 {
     Patrolling,
+    React,
     Chasing,
     Attacking,
 }
@@ -17,18 +18,18 @@ public abstract class EnemyBehaviour
 {
     public abstract EnemyState State { get; }
 
-    protected CharacterController player;
+    protected Entity target;
     protected Enemy myEnemy;
 
-    protected EnemyBehaviour(CharacterController player, Enemy myEnemy)
+    protected EnemyBehaviour(Entity target, Enemy myEnemy)
     {
-        this.player = player;
+        this.target = target;
         this.myEnemy = myEnemy;
     }
 
     public virtual void Update()
     {
-        if (!myEnemy || !player)
+        if (!myEnemy || !target)
             return;
     }
 }
