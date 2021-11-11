@@ -23,11 +23,11 @@ public class PlayerHUD : HUD
 
     private void Start()
     {
-        healthSlider.maxValue = GameManager.Player.health.MaxValue;
-        healthSlider.value = GameManager.Player.health.CurrentValue;
+        healthSlider.maxValue = GameManager.Player.Health.MaxValue;
+        healthSlider.value = GameManager.Player.Health.CurrentValue;
 
-        manaSlider.maxValue = PlayerCombat.Mana.MaxValue;
-        manaSlider.value = PlayerCombat.Mana.CurrentValue;
+        manaSlider.maxValue = PlayerMagic.Mana.MaxValue;
+        manaSlider.value = PlayerMagic.Mana.CurrentValue;
 
         staminaSlider.maxValue = PlayerCombat.Stamina.MaxValue;
         staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
@@ -46,7 +46,7 @@ public class PlayerHUD : HUD
     {
         float hunger = PlayerSurvival.Instance.Hunger.MaxValue - PlayerSurvival.Instance.Hunger.CurrentValue;
         hungerSlider.value = hunger;
-        manaSlider.value = PlayerCombat.Mana.CurrentValue;
+        manaSlider.value = PlayerMagic.Mana.CurrentValue;
     }
 
     void UpdateStamina()
@@ -56,20 +56,21 @@ public class PlayerHUD : HUD
         staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
     }
 
-    void UpdateThirst()
+    void UpdateHealth()
     {
-        float computeThirst = PlayerSurvival.Instance.Thirsty.CurrentValue;
+        float computeThirst = PlayerSurvival.Instance.Thirsty.Difference();
         thirstySlider.value = computeThirst;
+
+        float computeHealth = GameManager.Player.Health.CurrentValue / GameManager.Player.Health.MaxValue;
+        healthSlider.maxValue = GameManager.Player.Health.MaxValue;
+        healthSlider.value = GameManager.Player.Health.CurrentValue;
+        colorAnimation.time = 0.3f + (heartPulse * computeHealth);
     }
 
     public override void UpdateUI()
     {
-        float computeHealth = GameManager.Player.health.CurrentValue / GameManager.Player.health.MaxValue; 
-        healthSlider.DOValue(GameManager.Player.health.CurrentValue, 0.3f);
-        colorAnimation.time = 0.3f + (heartPulse * computeHealth);
-
         UpdateMana();
         UpdateStamina();
-        UpdateThirst();
+        UpdateHealth();
     }
 }

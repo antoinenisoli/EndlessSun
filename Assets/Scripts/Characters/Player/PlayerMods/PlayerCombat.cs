@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [System.Serializable]
-public class PlayerCombat
+public class PlayerCombat : PlayerMod
 {
-    PlayerController2D player => GameManager.Player;
-    public static PlayerStat Mana;
     public static StaminaStat Stamina;
 
     [SerializeField] StaminaStat stamina;
@@ -26,15 +24,15 @@ public class PlayerCombat
     [SerializeField] float arrowForce = 15f;
     public Vector2 storedVelocity;
 
-    public void Init()
+    public override void Init()
     {
+        base.Init();
         foreach (var item in stats)
         {
             dico.Add(item.thisStat, item);
-            item.Init(); 
+            item.Init();
         }
 
-        Mana = dico[PlayerStatName.Mana];
         Stamina = stamina;
         Stamina.Init();
         dico.Add(Stamina.thisStat, Stamina);
@@ -59,6 +57,11 @@ public class PlayerCombat
         return null;
     }
 
+    public bool EnoughStamina()
+    {
+        return Stamina.CurrentValue > staminaCost;
+    }
+
     public void Attack()
     {
         Stamina.StaminaCost(staminaCost);
@@ -74,7 +77,12 @@ public class PlayerCombat
         {
             Enemy enemy = item.transform.GetComponent<Enemy>();
             if (enemy)
-                enemy.Hit(1, -item.normal * pushForce);
+            {
+                if (player.BalanceDraw(enemy))
+                    enemy.Hit(player.ComputeDamages(), -item.normal * pushForce);
+                else
+                    enemy.Hit(player.ComputeDamages());
+            }
         }
     }
 
@@ -89,13 +97,10 @@ public class PlayerCombat
         arrowRB.AddForce(storedVelocity * arrowForce, ForceMode2D.Impulse);
     }
 
-    public void Update()
+    public override void Update()
     {
         float computeEnergy = PlayerSurvival.Instance.Energy.MaxValue - PlayerSurvival.Instance.Energy.CurrentValue;
         Stamina.MaxValue = Stamina.BaseMaxValue - computeEnergy;
         Stamina.Update();
-
-        float computeHunger = PlayerSurvival.Instance.Hunger.MaxValue - PlayerSurvival.Instance.Hunger.CurrentValue;
-        Mana.MaxValue = Mana.BaseMaxValue - computeHunger;
     }
 }

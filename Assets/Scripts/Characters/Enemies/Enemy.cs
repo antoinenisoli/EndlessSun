@@ -72,9 +72,12 @@ public class Enemy : Entity
     public override void Hit(float amount, Vector2 force = default)
     {
         base.Hit(amount, force);
-        stunned = true;
-        StartCoroutine(Unstun());
-        healthBarPivot.DOScaleX((float)health.CurrentValue / (float)health.MaxValue, 0.3f);
+        healthBarPivot.DOScaleX((float)Health.CurrentValue / (float)Health.MaxValue, 0.3f);
+        if (force.sqrMagnitude > 0)
+        {
+            stunned = true;
+            StartCoroutine(Unstun());
+        }
     }
 
     public virtual void Attack(Entity target)
@@ -185,7 +188,7 @@ public class Enemy : Entity
 
     void ManageHealthbars()
     {
-        alpha = Mathf.Lerp(alpha, health.CurrentValue < health.MaxValue ? 1 : 0, 15 * Time.deltaTime);
+        alpha = Mathf.Lerp(alpha, Health.CurrentValue < Health.MaxValue ? 1 : 0, 15 * Time.deltaTime);
         foreach (var item in healthBarSprites)
         {
             Color col = item.color;
@@ -198,7 +201,7 @@ public class Enemy : Entity
     {
         base.Update();
         ManageHealthbars();
-        if (GameManager.Player && !health.isDead)
+        if (GameManager.Player && !Health.isDead)
             behaviour.Update();
     }
 }

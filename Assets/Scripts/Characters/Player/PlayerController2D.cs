@@ -17,17 +17,21 @@ public enum PlayerState
 public class PlayerController2D : Entity
 {
     public PlayerSurvival Survival => PlayerSurvival.Instance;
+    public override HealthStat Health => playerHealth;
 
     [Header("PLAYER")]
+    public PlayerHealth playerHealth;
     public PlayerXP myXP;
     public PlayerCombat Combat;
+    public PlayerMagic Magic;
+    PlayerMod[] mods;
+
     public PlayerState currentState;
     [SerializeField] float sprintCost = 15f;
     [SerializeField] float movementSmoothing = 0.05f;
     bool sprinting;
 
     [Header("Attack")]
-    [SerializeField] float staminaCost = 15f;
     [SerializeField] int attackAnimCount = 3;
     public bool idleSword;
 
@@ -48,7 +52,14 @@ public class PlayerController2D : Entity
     public override void Awake()
     {
         base.Awake();
-        Combat.Init();
+        mods = new PlayerMod[] 
+        { 
+            Combat, 
+            Magic,
+        };
+
+        foreach (var item in mods)
+            item.Init();
     }
 
     public override void Start()
@@ -110,12 +121,12 @@ public class PlayerController2D : Entity
 
     public void Hurt(float amount)
     {
-        health.ModifyValue(-amount);
+        Health.ModifyValue(-amount);
         GameManager.Instance.FreezeFrame(0.4f);
         StartCoroutine(Glow(0.1f, Color.red));
         CameraManager.Instance.CameraShake(0.3f, 2);
 
-        if (health.isDead)
+        if (Health.isDead)
             Death();
     }
 
@@ -185,7 +196,7 @@ public class PlayerController2D : Entity
 
     void LaunchAttack(bool sword)
     {
-        if (PlayerCombat.Stamina.CurrentValue > staminaCost)
+        if (Combat.EnoughStamina())
         {
             PlayerCombat.Stamina.StopRecovery();
             rb.velocity = new Vector3();
@@ -245,7 +256,9 @@ public class PlayerController2D : Entity
         ManageAttacks();
         ManageStates();
         Survival.Update();
-        Combat.Update();
+        playerHealth.Update();
+        foreach (var item in mods)
+            item.Update();
 
         if (CanMove())
         {

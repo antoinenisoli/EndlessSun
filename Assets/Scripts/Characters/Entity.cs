@@ -5,16 +5,18 @@ using DG.Tweening;
 
 public class Entity : MonoBehaviour
 {
+    public virtual HealthStat Health => health;
+    public AttributeList AttributeList { get => attributeList; set => attributeList = value; }
+
     [Header("Entity")]
-    public Health health;
     public SpriteRenderer spr;
+    [SerializeField] CharacterProfile profile;
+    [SerializeField] AttributeList attributeList;
+    [SerializeField] HealthStat health;
 
     [Header("_Movements")]
-    [SerializeField] protected float walkSpeed = 5f, runSpeed = 10f;
-
-    [Header("_Fight")]
-    [SerializeField] float balance = 2;
-    [SerializeField] int force;
+    [SerializeField] protected float walkSpeed = 5f;
+    [SerializeField] protected float runSpeed = 10f;
 
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
@@ -25,22 +27,26 @@ public class Entity : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        if (profile)
+            AttributeList = profile.AttributeList;
+
+        AttributeList.Init();
     }
 
     public virtual void Start()
     {
-        health.Initialize();
+        Health.Init();
     }
 
     public int ComputeDamages()
     {
-        return (int)Mathf.Round(50 / 100 * (float)force);
+        return AttributeList.ComputeDamages();
     }
 
     public virtual void ManageAnimations()
     {
         anim.SetFloat("Speed", rb.velocity.sqrMagnitude);
-        anim.SetBool("Dead", health.isDead);
+        anim.SetBool("Dead", Health.isDead);
     }
 
     public virtual void Death()
@@ -48,16 +54,22 @@ public class Entity : MonoBehaviour
         anim.SetTrigger("Death");
     }
 
+    public bool BalanceDraw(Entity target)
+    {
+        print(attributeList.BalanceDraw(target));
+        return attributeList.BalanceDraw(target);
+    }
+
     public virtual void Hit(float amount, Vector2 force = new Vector2())
     {
-        if (health.isDead)
+        if (Health.isDead)
             return;
 
-        health.ModifyValue(-amount);
+        Health.ModifyValue(-amount);
         anim.SetTrigger("Hit");
         spr.transform.DOPunchScale(Vector3.one * 0.5f, 0.1f);
         rb.AddForce(force, ForceMode2D.Impulse);
-        if (health.isDead)
+        if (Health.isDead)
             Death();
     }
 

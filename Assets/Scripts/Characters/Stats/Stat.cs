@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Stat
 {
+    protected PlayerController2D player => GameManager.Player;
     [SerializeField] protected float currentValue;
     [SerializeField] protected float maxValue = 50; 
 
@@ -21,6 +22,11 @@ public abstract class Stat
 
             currentValue = value;
         }
+    }
+
+    public float Difference()
+    {
+        return MaxValue - CurrentValue;
     }
 
     public virtual float MaxValue { get => maxValue; set => maxValue = value; }

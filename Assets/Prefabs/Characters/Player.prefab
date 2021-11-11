@@ -191,12 +191,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27405d5957d44b44d9b28b33a25a6564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spr: {fileID: 822972059179743088}
+  profile: {fileID: 11400000, guid: d06c5e40d37a7d544af5008b45ae3169, type: 2}
+  attributeList:
+    attributeList:
+    - name: Strength
+      attributeType: 0
+      value: 5
+    - name: Durability
+      attributeType: 1
+      value: 6
+    - name: Endurance
+      attributeType: 2
+      value: 3
+    - name: Knowledge
+      attributeType: 3
+      value: 2
+    - name: Speed
+      attributeType: 4
+      value: 5
   health:
     currentValue: 0
-    maxValue: 100
+    maxValue: 5000
     thisStat: 0
-  baseSpeed: 4
-  spr: {fileID: 822972059179743088}
+  walkSpeed: 5
+  runSpeed: 10
+  playerHealth:
+    currentValue: 0
+    maxValue: 50
+    thisStat: 0
   myXP:
     currentLevel:
       index: 0
@@ -246,11 +269,14 @@ MonoBehaviour:
       type: 3}
     arrowForce: 22
     storedVelocity: {x: 0, y: 0}
+  Magic:
+    _Mana:
+      currentValue: 0
+      maxValue: 50
+      thisStat: 0
   currentState: 0
   sprintCost: 15
-  sprintSpeed: 6
-  movementSmoothing: 0.2
-  staminaCost: 15
+  movementSmoothing: 0.15
   attackAnimCount: 3
   idleSword: 0
   interactionRadius: 0.5
