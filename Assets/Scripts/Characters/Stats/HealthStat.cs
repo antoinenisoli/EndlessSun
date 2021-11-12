@@ -5,7 +5,18 @@ using UnityEngine;
 [System.Serializable]
 public class HealthStat : PlayerStat
 {
-    public bool isDead => CurrentValue <= 0;
+    public bool isDead;
+
+    public override float CurrentValue 
+    { 
+        get => base.CurrentValue; 
+        set
+        {
+            base.CurrentValue = value;
+            if (value <= 0 && !isDead)
+                isDead = true;
+        }
+    }
 
     public override void Init()
     {

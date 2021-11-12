@@ -115,7 +115,7 @@ public class Enemy : Entity
 
     public override void Attack()
     {
-        if (pushed)
+        if (pushed || !NearToTarget())
             return;
 
         base.Attack();
@@ -251,6 +251,9 @@ public class Enemy : Entity
     {
         base.Update();
         ManageHealthbars();
+        if (Target)
+            spr.flipX = transform.position.x > Target.transform.position.x;
+
         if (GameManager.Player && !Health.isDead)
             behaviour.Update();
     }

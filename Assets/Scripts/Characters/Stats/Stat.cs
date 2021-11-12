@@ -29,5 +29,7 @@ public abstract class Stat
         return MaxValue - CurrentValue;
     }
 
+    public virtual float Coeff() { return CurrentValue / MaxValue; }
+
     public virtual float MaxValue { get => maxValue; set => maxValue = value; }
 }

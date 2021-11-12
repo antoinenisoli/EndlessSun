@@ -32,11 +32,12 @@ public class Entity : MonoBehaviour
             AttributeList = profile.AttributeList;
 
         AttributeList.Init();
+        Health.Init();
     }
 
     public virtual void Start()
     {
-        Health.Init();
+        
     }
 
     public int ComputeDamages()

@@ -23,8 +23,8 @@ public class PlayerHUD : HUD
 
     private void Start()
     {
-        healthSlider.maxValue = GameManager.Player.Health.MaxValue;
-        healthSlider.value = GameManager.Player.Health.CurrentValue;
+        healthSlider.value = GameManager.Player.Health.Coeff();
+        thirstySlider.value = PlayerSurvival.Instance.Thirsty.Coeff();
 
         manaSlider.maxValue = PlayerMagic.Mana.MaxValue;
         manaSlider.value = PlayerMagic.Mana.CurrentValue;
@@ -34,9 +34,6 @@ public class PlayerHUD : HUD
 
         hungerSlider.maxValue = PlayerSurvival.Instance.Hunger.MaxValue;
         hungerSlider.value = PlayerSurvival.Instance.Hunger.CurrentValue;
-
-        thirstySlider.maxValue = PlayerSurvival.Instance.Thirsty.MaxValue;
-        thirstySlider.value = PlayerSurvival.Instance.Thirsty.CurrentValue;
 
         energySlider.maxValue = PlayerSurvival.Instance.Energy.MaxValue;
         energySlider.value = PlayerSurvival.Instance.Energy.CurrentValue;
@@ -58,12 +55,9 @@ public class PlayerHUD : HUD
 
     void UpdateHealth()
     {
-        float computeThirst = PlayerSurvival.Instance.Thirsty.Difference();
-        thirstySlider.value = computeThirst;
-
-        float computeHealth = GameManager.Player.Health.CurrentValue / GameManager.Player.Health.MaxValue;
-        healthSlider.maxValue = GameManager.Player.Health.MaxValue;
-        healthSlider.value = GameManager.Player.Health.CurrentValue;
+        float computeHealth = GameManager.Player.Health.Coeff();
+        healthSlider.value = computeHealth;
+        thirstySlider.value = 1 - computeHealth;
         colorAnimation.time = 0.3f + (heartPulse * computeHealth);
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class SurvivalStat : PlayerStat
 {
-    [Range(0, 1f)] public float changeAmount = 0.5f;
+    [Range(0, 100f)] public float changeAmount = 0.5f;
     float timer;
 
     public virtual void Update()
@@ -21,5 +21,8 @@ public class SurvivalStat : PlayerStat
         timer = 0;
         CurrentValue -= changeAmount;
         UIManager.Instance.UpdateUI();
+
+        if (!player.Health.isDead && CurrentValue <= 0)
+            player.Death();
     }
 }

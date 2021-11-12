@@ -13,7 +13,7 @@ class Attacking : EnemyBehaviour
 
     public Attacking(Enemy myEnemy) : base(myEnemy)
     {
-        
+        myEnemy.Stop();
     }
 
     public override void Update()
