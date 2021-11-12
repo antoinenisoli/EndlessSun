@@ -191,6 +191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27405d5957d44b44d9b28b33a25a6564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
   spr: {fileID: 822972059179743088}
   profile: {fileID: 11400000, guid: d06c5e40d37a7d544af5008b45ae3169, type: 2}
   attributeList:
@@ -258,9 +261,6 @@ MonoBehaviour:
       maxValue: 1000
       thisStat: 1
     staminaCost: 150
-    enemyLayer:
-      serializedVersion: 2
-      m_Bits: 128
     attackAnimCount: 3
     attackRadius: 0.5
     attackRange: 0.5

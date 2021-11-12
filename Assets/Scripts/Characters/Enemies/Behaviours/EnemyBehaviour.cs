@@ -18,18 +18,17 @@ public abstract class EnemyBehaviour
 {
     public abstract EnemyState State { get; }
 
-    protected Entity target;
     protected Enemy myEnemy;
 
-    protected EnemyBehaviour(Entity target, Enemy myEnemy)
+    protected EnemyBehaviour(Enemy myEnemy)
     {
-        this.target = target;
+        myEnemy.UnStun();
         this.myEnemy = myEnemy;
     }
 
     public virtual void Update()
     {
-        if (!myEnemy || !target)
+        if (!myEnemy)
             return;
     }
 }

@@ -9,7 +9,7 @@ public class PlayerHealth : HealthStat
     {
         float computeThirsty = BaseMaxValue - (PlayerSurvival.Instance.Thirsty.Difference() / BaseMaxValue);
         MaxValue = computeThirsty;
-        if (CurrentValue < MaxValue)
+        if (CurrentValue >= MaxValue)
             CurrentValue = MaxValue;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerStat : Stat
 {
     public float BaseMaxValue { get; set; }
+
     public override float CurrentValue
     {
         get => base.CurrentValue;

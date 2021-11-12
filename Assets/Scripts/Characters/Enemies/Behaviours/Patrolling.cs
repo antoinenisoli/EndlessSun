@@ -10,10 +10,9 @@ public class Patrolling : EnemyBehaviour
     float newPatrolTimer;
     float newPatrolDelay;
     Vector3 pos;
-
     float cooldownTimer;
 
-    public Patrolling(Entity target, Enemy myEnemy) : base(target, myEnemy)
+    public Patrolling(Enemy myEnemy) : base(myEnemy)
     {
         newPatrolDelay = myEnemy.RandomDelay();
         pos = myEnemy.RandomPatrolPosition();
@@ -22,8 +21,8 @@ public class Patrolling : EnemyBehaviour
     public override void Update()
     {
         base.Update();
-        if (myEnemy.DetectTargets(target.transform.position))
-            myEnemy.SetBehaviour(new Reacting(target, myEnemy, myEnemy.reactTimer));
+        if (myEnemy.DetectTargets())
+            myEnemy.SetBehaviour(new Reacting(myEnemy, myEnemy.reactTimer));
         else if (!myEnemy.isMoving())
         {
             newPatrolTimer += Time.deltaTime;

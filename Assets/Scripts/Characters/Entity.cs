@@ -7,8 +7,10 @@ public class Entity : MonoBehaviour
 {
     public virtual HealthStat Health => health;
     public AttributeList AttributeList { get => attributeList; set => attributeList = value; }
+    public Entity Target { get; set; }
 
     [Header("Entity")]
+    public LayerMask targetLayer;
     public SpriteRenderer spr;
     [SerializeField] CharacterProfile profile;
     [SerializeField] AttributeList attributeList;
@@ -21,7 +23,6 @@ public class Entity : MonoBehaviour
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
     protected Animator anim;
-    protected bool stunned;
 
     public virtual void Awake()
     {
@@ -51,24 +52,39 @@ public class Entity : MonoBehaviour
 
     public virtual void Death()
     {
+        health.CurrentValue = 0;
         anim.SetTrigger("Death");
     }
 
     public bool BalanceDraw(Entity target)
     {
-        print(attributeList.BalanceDraw(target));
         return attributeList.BalanceDraw(target);
     }
 
-    public virtual void Hit(float amount, Vector2 force = new Vector2())
+    public void KnockBack(Vector2 force)
+    {
+        Stun();
+        rb.AddForce(force, ForceMode2D.Impulse);
+    }
+
+    public virtual void Attack()
+    {
+        Target.Hit(ComputeDamages());
+    }
+
+    public virtual void Stun()
+    {
+        
+    }
+
+    public virtual void Hit(float amount)
     {
         if (Health.isDead)
             return;
 
         Health.ModifyValue(-amount);
         anim.SetTrigger("Hit");
-        spr.transform.DOPunchScale(Vector3.one * 0.5f, 0.1f);
-        rb.AddForce(force, ForceMode2D.Impulse);
+        //spr.transform.DOPunchScale(Vector3.one * 0.5f, 0.1f);
         if (Health.isDead)
             Death();
     }

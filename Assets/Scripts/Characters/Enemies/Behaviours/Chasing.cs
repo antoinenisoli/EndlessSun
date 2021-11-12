@@ -10,7 +10,7 @@ class Chasing : EnemyBehaviour
 {
     public override EnemyState State => EnemyState.Chasing;
 
-    public Chasing(Entity target, Enemy myEnemy) : base(target, myEnemy)
+    public Chasing(Enemy myEnemy) : base(myEnemy)
     {
         
     }
@@ -18,11 +18,14 @@ class Chasing : EnemyBehaviour
     public override void Update()
     {
         base.Update();
-        if (myEnemy.NearToTarget(target.transform.position))
-            myEnemy.SetBehaviour(new Attacking(target, myEnemy));
-        else if (!myEnemy.DetectTargets(target.transform.position))
-            myEnemy.SetBehaviour(new Wait(target, myEnemy, 2, EnemyState.Patrolling));
+        if (myEnemy.NearToTarget())
+            myEnemy.SetBehaviour(new Attacking(myEnemy));
+        else if (!myEnemy.DetectTargets() || myEnemy.Target.Health.isDead)
+        {
+            myEnemy.Target = null;
+            myEnemy.SetBehaviour(new Wait(myEnemy, 2, EnemyState.Patrolling));
+        }
         else
-            myEnemy.Move(target.transform.position, true);
+            myEnemy.Move(myEnemy.Target.transform.position, true);
     }
 }

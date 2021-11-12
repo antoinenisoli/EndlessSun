@@ -217,6 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08464dc9772c8714eafe518da5d0358c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
   spr: {fileID: 4349680770242010597}
   profile: {fileID: 11400000, guid: 5c7a085510773ef4296c377115ed26d0, type: 2}
   attributeList:
@@ -258,7 +261,7 @@ MonoBehaviour:
   detectIcon: {fileID: 1843389711}
   visionDistance: 4
   minDistance: 1.5
-  attackRate: 3
+  attackRate: 1.5
   attackRange: 0.5
 --- !u!61 &4349680769149131545
 BoxCollider2D:
@@ -316,6 +319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4349680770242010598}
+  - component: {fileID: 7642952826422893749}
   - component: {fileID: 4349680770242010597}
   - component: {fileID: 4129203241537691841}
   m_Layer: 0
@@ -339,6 +343,18 @@ Transform:
   m_Father: {fileID: 4349680769149131547}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 152.969, z: 0}
+--- !u!114 &7642952826422893749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4349680770242010599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446062982cdb6da49895e7f15d56a85f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &4349680770242010597
 SpriteRenderer:
   m_ObjectHideFlags: 0

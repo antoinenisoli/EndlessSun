@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class AttributeList
 {
-    Dictionary<AttributeType, CharacterAttribute> _attributes;
+    Dictionary<AttributeType, CharacterAttribute> _attributes = new Dictionary<AttributeType, CharacterAttribute>();
     #region "Create attributes"
     [SerializeField] CharacterAttribute[] attributeList = new CharacterAttribute[]
     {
@@ -41,7 +41,8 @@ public class AttributeList
 
     public int ComputeDamages()
     {
-        return (int)Mathf.Round(50 / 100 * (float)Strength.value);
+        int compute = Mathf.RoundToInt((float)50 / (float)100 * (float)Strength.value);
+        return compute;
     }
 
     public bool BalanceDraw(Entity target)

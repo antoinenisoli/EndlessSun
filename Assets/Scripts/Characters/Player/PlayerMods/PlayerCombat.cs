@@ -14,7 +14,6 @@ public class PlayerCombat : PlayerMod
 
     [Header("Attack")]
     [SerializeField] float staminaCost = 15f;
-    [SerializeField] LayerMask enemyLayer;
     [SerializeField] int attackAnimCount = 3;
     [Range(0, 1)] public float attackRadius = 0.5f, attackRange = 0.5f;
     [SerializeField] float pushForce = 5f;
@@ -66,7 +65,7 @@ public class PlayerCombat : PlayerMod
     {
         Stamina.StaminaCost(staminaCost);
         player.SetState(PlayerState.Idle);
-        RaycastHit2D[] colls = Physics2D.CircleCastAll(player.transform.position, attackRadius, player.spr.transform.right, attackRange, enemyLayer);
+        RaycastHit2D[] colls = Physics2D.CircleCastAll(player.transform.position, attackRadius, player.spr.transform.right, attackRange, player.targetLayer);
         player.idleSword = true;
         if (colls.Length > 0)
             CameraManager.Instance.CameraShake(0.2f);
@@ -78,10 +77,9 @@ public class PlayerCombat : PlayerMod
             Enemy enemy = item.transform.GetComponent<Enemy>();
             if (enemy)
             {
+                enemy.Hit(player.ComputeDamages());
                 if (player.BalanceDraw(enemy))
-                    enemy.Hit(player.ComputeDamages(), -item.normal * pushForce);
-                else
-                    enemy.Hit(player.ComputeDamages());
+                    enemy.KnockBack(-item.normal * pushForce);
             }
         }
     }

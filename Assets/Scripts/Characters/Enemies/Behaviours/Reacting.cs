@@ -10,7 +10,7 @@ public class Reacting : EnemyBehaviour
     float timer;
     float delay;
 
-    public Reacting(Entity target, Enemy myEnemy, float delay = 0) : base(target, myEnemy)
+    public Reacting(Enemy myEnemy, float delay = 0) : base(myEnemy)
     {
         this.delay = delay;
         myEnemy.ReactToTarget();
@@ -21,8 +21,6 @@ public class Reacting : EnemyBehaviour
         base.Update();
         timer += Time.deltaTime;
         if (timer > delay)
-        {
-            myEnemy.SetBehaviour(new Chasing(target, myEnemy));
-        }
+            myEnemy.SetBehaviour(new Chasing(myEnemy));
     }
 }

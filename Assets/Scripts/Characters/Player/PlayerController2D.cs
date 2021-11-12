@@ -119,13 +119,12 @@ public class PlayerController2D : Entity
         anim.SetTrigger("Die");
     }
 
-    public void Hurt(float amount)
+    public override void Hit(float amount)
     {
-        Health.ModifyValue(-amount);
+        base.Hit(amount);
         GameManager.Instance.FreezeFrame(0.4f);
-        StartCoroutine(Glow(0.1f, Color.red));
+        StartCoroutine(Glow(0.1f, Color.white));
         CameraManager.Instance.CameraShake(0.3f, 2);
-
         if (Health.isDead)
             Death();
     }

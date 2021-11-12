@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Enemy : Entity
 {
@@ -16,6 +17,7 @@ public class Enemy : Entity
     [SerializeField] int xpAmount = 25;
     [SerializeField] ItemDrop[] loots;
     float alpha;
+    bool pushed;
 
     [Header("Patrol")]
     [SerializeField] Vector2 randomDelayBounds;
@@ -59,37 +61,64 @@ public class Enemy : Entity
             Gizmos.DrawWireSphere(startPosition, randomPatrolRange.x);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!pushed)
+            return;
+
+        if (collision.CompareTag("ObstacleTilemap"))
+        {
+            Stop();
+            Hit(5f);
+        }
+        else if (collision.CompareTag("GroundTilemap"))
+        {            
+            Death();
+        }
+    }
+
     public override void Start()
     {
         base.Start();
         detectIconBaseScale = detectIcon.transform.localScale;
         detectIcon.gameObject.SetActive(false);
         startPosition = transform.position;
-        behaviour = new Patrolling(Player, this);
+        behaviour = new Patrolling(this);
         healthBarSprites = healthBar.GetComponentsInChildren<SpriteRenderer>();
     }
 
-    public override void Hit(float amount, Vector2 force = default)
+    public override void Hit(float amount)
     {
-        base.Hit(amount, force);
+        base.Hit(amount);
         healthBarPivot.DOScaleX((float)Health.CurrentValue / (float)Health.MaxValue, 0.3f);
-        if (force.sqrMagnitude > 0)
-        {
-            stunned = true;
-            StartCoroutine(Unstun());
-        }
     }
 
-    public virtual void Attack(Entity target)
+    public override void Stun()
     {
+        base.Stun();
+        SetBehaviour(new Wait(this, 0.4f, EnemyState.Chasing));
+        pushed = true;
+    }
+
+    public void UnStun()
+    {
+        pushed = false;
+    }
+
+    public void LaunchAttack()
+    {
+        if (pushed)
+            return;
+
         anim.SetTrigger("Attack");
-
     }
 
-    IEnumerator Unstun()
+    public override void Attack()
     {
-        yield return new WaitForSeconds(0.45f);
-        stunned = false;
+        if (pushed)
+            return;
+
+        base.Attack();
     }
 
     public override void Death()
@@ -145,15 +174,37 @@ public class Enemy : Entity
             Instantiate(xpPrefab, transform.position, Quaternion.identity);
     }
 
-    public bool DetectTargets(Vector3 targetPos)
+    public bool DetectTargets()
     {
-        float distance = Vector2.Distance(targetPos, transform.position);
-        return distance < visionDistance;
+        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, visionDistance, targetLayer);
+        if (colls.Length > 0)
+        {
+            foreach (var item in colls)
+            {
+                Entity entity = item.GetComponent<Entity>();
+                if (entity)
+                {
+                    float distance = Vector2.Distance(entity.transform.position, transform.position);
+                    if (distance < visionDistance && !entity.Health.isDead)
+                    {
+                        Target = entity;
+                        return true;
+                    }
+                }
+            }
+        }
+        else
+            Target = null;
+
+        return false;
     }
 
-    public bool NearToTarget(Vector3 targetPos)
+    public bool NearToTarget()
     {
-        float distance = Vector2.Distance(targetPos, transform.position);
+        if (!Target)
+            return false;
+
+        float distance = Vector2.Distance(Target.transform.position, transform.position);
         return distance < minDistance;
     }
 
@@ -179,7 +230,6 @@ public class Enemy : Entity
         float speed = chase ? runSpeed : walkSpeed;
         if (distance > minDistance)
         {
-            //rb.AddForce((targetPos - transform.position).normalized * speed * Time.deltaTime);
             rb.velocity = (targetPos - transform.position).normalized * speed;
         }
         else

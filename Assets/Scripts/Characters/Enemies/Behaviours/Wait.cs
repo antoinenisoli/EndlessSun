@@ -11,32 +11,32 @@ public class Wait : EnemyBehaviour
     float delay;
     EnemyState nextState;
 
-    public Wait(Entity target, Enemy myEnemy, float delay, EnemyState nextState) : base(target, myEnemy)
+    public Wait(Enemy myEnemy, float delay, EnemyState nextState) : base(myEnemy)
     {
         this.delay = delay;
         this.nextState = nextState;
+        myEnemy.Stop();
     }
 
     public override void Update()
     {
         base.Update();
-        myEnemy.Stop();
         timer += Time.deltaTime;
         if (timer > delay)
         {
             switch (nextState)
             {
                 case EnemyState.Patrolling:
-                    myEnemy.SetBehaviour(new Patrolling(target, myEnemy));
+                    myEnemy.SetBehaviour(new Patrolling(myEnemy));
                     break;
                 case EnemyState.React:
-                    myEnemy.SetBehaviour(new Reacting(target, myEnemy));
+                    myEnemy.SetBehaviour(new Reacting(myEnemy));
                     break;
                 case EnemyState.Chasing:
-                    myEnemy.SetBehaviour(new Chasing(target, myEnemy));
+                    myEnemy.SetBehaviour(new Chasing(myEnemy));
                     break;
                 case EnemyState.Attacking:
-                    myEnemy.SetBehaviour(new Attacking(target, myEnemy));
+                    myEnemy.SetBehaviour(new Attacking(myEnemy));
                     break;
             }
         }

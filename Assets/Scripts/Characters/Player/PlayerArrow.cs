@@ -18,7 +18,10 @@ public class PlayerArrow : MonoBehaviour
     {
         if (collision.TryGetComponent(out Enemy enemy) && rb.velocity.sqrMagnitude > minimumForce)
         {
-            enemy.Hit(1, rb.velocity * 0.5f);
+            enemy.Hit(1);
+            if (GameManager.Player.BalanceDraw(enemy))
+                enemy.KnockBack(rb.velocity * 0.5f);
+
             Destroy(gameObject);
         }
     }
