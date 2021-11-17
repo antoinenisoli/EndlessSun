@@ -22,7 +22,7 @@ public class Tent : Interactable
         GameManager.Player.transform.position = entrance.position;
         GameManager.Player.SetState(PlayerState.Idle);
         PlayerSurvival.Instance.Energy.Init();
-        CellularAutomata.Instance.Start();
+        GridManager.Instance.Start();
     }
 
     public override string ToString()

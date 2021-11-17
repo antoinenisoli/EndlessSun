@@ -2805,10 +2805,11 @@ MonoBehaviour:
   waterTile: {fileID: 11400000, guid: 4631f0bdbdcafa04fb2311a773392eb9, type: 2}
   groundTilemap: {fileID: 2033001925}
   propsTilemap: {fileID: 1721729681}
-  seed: 0
-  smoothIterations: 3
-  useRandomSeed: 1
-  randomFillPercent: 45
+  cellularAutomata:
+    seed: 0
+    smoothIterations: 5
+    useRandomSeed: 1
+    randomFillPercent: 50
   propsTiles: {fileID: 11400000, guid: e8e34ecc8dbe9fe47931303c8e279afb, type: 2}
   propsProb: 10
 --- !u!1 &468196703
@@ -8709,7 +8710,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1817965394
 GameObject:
@@ -10501,7 +10502,7 @@ PrefabInstance:
     - target: {fileID: 822972060138402190, guid: c1ec0bc398df03a4481b74c86a620929,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 822972060138402190, guid: c1ec0bc398df03a4481b74c86a620929,
         type: 3}

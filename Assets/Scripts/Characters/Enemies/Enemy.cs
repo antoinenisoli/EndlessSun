@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Pathfinding;
 
 public class Enemy : Entity
 {
     protected PlayerController2D Player => GameManager.Player;
     protected EnemyBehaviour behaviour = null;
+
+    AIPath aiAgent;
+    AIDestinationSetter destinationSetter;
 
     [Header("ENEMY")]
     [SerializeField] Transform healthBarPivot;
@@ -20,6 +24,7 @@ public class Enemy : Entity
     bool pushed;
 
     [Header("Patrol")]
+    [SerializeField] Transform destinationPoint;
     [SerializeField] Vector2 randomDelayBounds;
     [SerializeField] Vector2 randomPatrolRange;
     Vector2 startPosition;
@@ -80,6 +85,10 @@ public class Enemy : Entity
     public override void Start()
     {
         base.Start();
+        aiAgent = GetComponentInParent<AIPath>();
+        destinationSetter = GetComponentInParent<AIDestinationSetter>();
+
+        rb.isKinematic = true;
         detectIconBaseScale = detectIcon.transform.localScale;
         detectIcon.gameObject.SetActive(false);
         startPosition = transform.position;
@@ -89,6 +98,7 @@ public class Enemy : Entity
 
     public override void Hit(float amount)
     {
+        rb.isKinematic = false;
         base.Hit(amount);
         healthBarPivot.DOScaleX((float)Health.CurrentValue / (float)Health.MaxValue, 0.3f);
     }
@@ -103,6 +113,7 @@ public class Enemy : Entity
     public void UnStun()
     {
         pushed = false;
+        rb.isKinematic = true;
     }
 
     public void LaunchAttack()
@@ -221,6 +232,7 @@ public class Enemy : Entity
     public void Stop()
     {
         rb.velocity = Vector2.zero;
+        aiAgent.enabled = false;
     }
 
     public void Move(Vector3 targetPos, bool chase = false)
@@ -230,7 +242,9 @@ public class Enemy : Entity
         float speed = chase ? runSpeed : walkSpeed;
         if (distance > minDistance)
         {
-            rb.velocity = (targetPos - transform.position).normalized * speed;
+            aiAgent.enabled = true;
+            //rb.velocity = (targetPos - transform.position).normalized * speed;
+            destinationPoint.position = targetPos;
         }
         else
             Stop();
@@ -251,6 +265,11 @@ public class Enemy : Entity
     {
         base.Update();
         ManageHealthbars();
+        if (aiAgent)
+        {
+            destinationSetter.target = destinationPoint;
+        }
+
         if (Target)
             spr.flipX = transform.position.x > Target.transform.position.x;
 

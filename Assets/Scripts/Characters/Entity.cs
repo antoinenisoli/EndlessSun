@@ -26,10 +26,10 @@ public class Entity : MonoBehaviour
 
     public virtual void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponentInParent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         if (profile)
-            AttributeList = profile.AttributeList;
+            AttributeList = profile.AttributeList.Copy();
 
         AttributeList.Init();
         Health.Init();

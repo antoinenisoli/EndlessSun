@@ -31,7 +31,19 @@ public class Patrolling : EnemyBehaviour
                 myEnemy.Stop();
                 newPatrolTimer = 0;
                 newPatrolDelay = myEnemy.RandomDelay();
-                pos = myEnemy.RandomPatrolPosition();
+                Vector2 randomPos = myEnemy.RandomPatrolPosition();
+                pos = GridManager.Instance.SamplePosition(randomPos);
+                /*if (GridManager.Instance)
+                {
+                    if (GridManager.Instance.SamplePosition(randomPos, 2, out Cell cell))
+                    {
+                        pos = cell.transform.position;
+                    }
+
+                    pos = GridManager.Instance.SamplePosition(randomPos);
+                }
+                else
+                    pos = randomPos;*/
             }
 
             myEnemy.Move(pos);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,11 @@ public class AttributeList
     public CharacterAttribute Speed => GetAttribute(AttributeType.Speed);
     #endregion
 
+    public AttributeList(CharacterAttribute[] attributeList)
+    {
+        this.attributeList = attributeList;
+    }
+
     public void Init()
     {
         foreach (var item in attributeList)
@@ -51,5 +57,10 @@ public class AttributeList
         int draw = rdm.Next(0, 50);
         int computeResistance = target.AttributeList.Strength.value + Durability.value;
         return draw > computeResistance;
+    }
+
+    public AttributeList Copy()
+    {
+        return new AttributeList(attributeList);
     }
 }
