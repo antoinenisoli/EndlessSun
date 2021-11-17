@@ -47,7 +47,6 @@ public class Entity : MonoBehaviour
 
     public virtual void ManageAnimations()
     {
-        anim.SetFloat("Speed", rb.velocity.sqrMagnitude);
         anim.SetBool("Dead", Health.isDead);
     }
 

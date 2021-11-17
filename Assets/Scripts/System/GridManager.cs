@@ -12,7 +12,6 @@ public class GridManager : MonoBehaviour
 	[SerializeField] RuleTile beachTile, waterTile;
 	[SerializeField] Tilemap groundTilemap, propsTilemap;
 	GridLayout gridLayout;
-	AstarPath astarManager;
 
 	[Header("Generate Map")]
 	[SerializeField] CellularAutomata cellularAutomata;
@@ -31,7 +30,6 @@ public class GridManager : MonoBehaviour
 
     private void Awake()
     {
-		astarManager = FindObjectOfType<AstarPath>();
 		Singleton();
 		gridLayout = FindObjectOfType<GridLayout>();
 		cellularAutomata.Init(gridSize, gridLayout, this);
@@ -43,7 +41,7 @@ public class GridManager : MonoBehaviour
 		yield return new WaitForSeconds(0.01f);
 		AssignTypes();
 		GenerateProps();
-		astarManager.Scan();
+		AstarPath.active.Scan();
 	}
 
 	void Singleton()
@@ -96,41 +94,20 @@ public class GridManager : MonoBehaviour
 		return groundCell;
 	}
 
-	public bool SamplePosition(Vector2 targetPos, int maxDistance, out Cell groundCell)
-    {
-		float dist = Mathf.Infinity;
-		groundCell = null;
-		Cell closestCell = ClosestCell(targetPos);
-
-        for (int x = -maxDistance; x < maxDistance + 1; x++)
-        {
-			for (int y = -maxDistance; y < maxDistance + 1; y++)
-			{
-				Cell cell = GetCell(closestCell.coordinates + new Vector2Int(x, y));
-				if (cell.myType == CellType.Water)
-					continue;
-
-				float currentDistance = Vector2.Distance(cell.transform.position, targetPos);
-				if (currentDistance < dist)
-                {
-					dist = currentDistance;
-					groundCell = cell;
-				}
-			}
-		}
-
-		return groundCell != null;
-    }
-
-	public Vector2 SamplePosition(Vector2 targetPos)
+	public bool SamplePosition(Vector2 targetPos, out Vector2 sampledPosition, float maxDistance = 20f)
 	{
-		var constraint = NNConstraint.None;
+		var constraint = NNConstraint.Default;
 		constraint.constrainWalkability = true;
 		constraint.walkable = true;
 		var info = AstarPath.active.GetNearest(targetPos, constraint);
-		var closestPoint = info.position;
-		print(info.node);
-		return closestPoint;
+		Vector2 closestPoint = info.position;
+		float distance = Vector2.Distance(targetPos, closestPoint);
+
+		sampledPosition = new Vector2();
+		if (distance < maxDistance)
+			sampledPosition = closestPoint;
+
+		return sampledPosition.sqrMagnitude > 0;
 	}
 
 	void AssignTypes()

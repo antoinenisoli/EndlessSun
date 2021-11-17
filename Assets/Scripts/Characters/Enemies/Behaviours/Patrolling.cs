@@ -10,12 +10,30 @@ public class Patrolling : EnemyBehaviour
     float newPatrolTimer;
     float newPatrolDelay;
     Vector3 pos;
-    float cooldownTimer;
 
     public Patrolling(Enemy myEnemy) : base(myEnemy)
     {
         newPatrolDelay = myEnemy.RandomDelay();
         pos = myEnemy.RandomPatrolPosition();
+    }
+
+    void NewDestination()
+    {
+        myEnemy.Stop();
+        newPatrolTimer = 0;
+        newPatrolDelay = myEnemy.RandomDelay();
+        Vector2 randomPos = myEnemy.RandomPatrolPosition();
+        Vector2 sampledPos;
+        if (GridManager.Instance)
+        {
+            bool isWalkable = GridManager.Instance.SamplePosition(randomPos, out sampledPos, 2f);
+            while (!isWalkable)
+                randomPos = myEnemy.RandomPatrolPosition();
+
+            pos = sampledPos;
+        }
+        else
+            pos = randomPos;
     }
 
     public override void Update()
@@ -27,24 +45,7 @@ public class Patrolling : EnemyBehaviour
         {
             newPatrolTimer += Time.deltaTime;
             if (newPatrolTimer > newPatrolDelay)
-            {
-                myEnemy.Stop();
-                newPatrolTimer = 0;
-                newPatrolDelay = myEnemy.RandomDelay();
-                Vector2 randomPos = myEnemy.RandomPatrolPosition();
-                pos = GridManager.Instance.SamplePosition(randomPos);
-                /*if (GridManager.Instance)
-                {
-                    if (GridManager.Instance.SamplePosition(randomPos, 2, out Cell cell))
-                    {
-                        pos = cell.transform.position;
-                    }
-
-                    pos = GridManager.Instance.SamplePosition(randomPos);
-                }
-                else
-                    pos = randomPos;*/
-            }
+                NewDestination();
 
             myEnemy.Move(pos);
         }

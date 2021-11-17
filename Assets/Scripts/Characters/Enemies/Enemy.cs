@@ -103,6 +103,12 @@ public class Enemy : Entity
         healthBarPivot.DOScaleX((float)Health.CurrentValue / (float)Health.MaxValue, 0.3f);
     }
 
+    public override void ManageAnimations()
+    {
+        base.ManageAnimations();
+        anim.SetFloat("Speed", aiAgent.velocity.sqrMagnitude);
+    }
+
     public override void Stun()
     {
         base.Stun();
@@ -235,15 +241,13 @@ public class Enemy : Entity
         aiAgent.enabled = false;
     }
 
-    public void Move(Vector3 targetPos, bool chase = false)
+    public void Move(Vector3 targetPos)
     {
         spr.flipX = transform.position.x > targetPos.x;
         float distance = Vector2.Distance(targetPos, transform.position);
-        float speed = chase ? runSpeed : walkSpeed;
         if (distance > minDistance)
         {
             aiAgent.enabled = true;
-            //rb.velocity = (targetPos - transform.position).normalized * speed;
             destinationPoint.position = targetPos;
         }
         else

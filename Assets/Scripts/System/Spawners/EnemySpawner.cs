@@ -45,9 +45,9 @@ public class EnemySpawner : MonoBehaviour
             Vector2 newPos = transform.position + (Vector3)RandomPosition();
             if (GridManager.Instance)
             {
-                bool sampled = GridManager.Instance.SamplePosition(newPos, 2, out Cell cell);
+                bool sampled = GridManager.Instance.SamplePosition(newPos, out Vector2 samplePos, 2);
                 if (sampled)
-                    Instantiate(enemyPrefab, cell.transform.position, Quaternion.identity, transform);
+                    Instantiate(enemyPrefab, samplePos, Quaternion.identity, transform);
             }
             else
                 Instantiate(enemyPrefab, newPos, Quaternion.identity, transform);

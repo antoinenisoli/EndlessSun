@@ -26,6 +26,6 @@ class Chasing : EnemyBehaviour
             myEnemy.SetBehaviour(new Wait(myEnemy, 2, EnemyState.Patrolling));
         }
         else
-            myEnemy.Move(myEnemy.Target.transform.position, true);
+            myEnemy.Move(myEnemy.Target.transform.position);
     }
 }
