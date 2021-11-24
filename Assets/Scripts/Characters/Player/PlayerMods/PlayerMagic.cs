@@ -13,6 +13,7 @@ public class PlayerMagic : PlayerMod
         base.Init();
         _Mana.Init();
         Mana = _Mana;
+        MonoBehaviour.print(Mana);
     }
 
     public override void Update()

@@ -11,7 +11,7 @@ public enum CellType
 public class Cell : MonoBehaviour
 {
     public CellType myType;
-    public Vector2Int coordinates;
+    public Coord coordinates;
     public List<Cell> neighbours;
 
     private void OnDrawGizmosSelected()
@@ -22,7 +22,7 @@ public class Cell : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector2Int coord)
+    public void Initialize(Coord coord)
     {
         coordinates = coord;
         gameObject.name += " " + coord;

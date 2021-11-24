@@ -9,11 +9,11 @@ public class CellularAutomata
 	[SerializeField] int smoothIterations = 5;
 	[SerializeField] bool useRandomSeed;
 	[SerializeField] [Range(0, 100)] float randomFillPercent = 50;
+	[SerializeField] int groundThresholdSize = 50;
 	Vector2Int gridSize;
 	GridLayout gridLayout;
 	GridManager gridManager;
 	int[,] map;
-
 
 	public void Init(Vector2Int gridSize, GridLayout gridLayout, GridManager gridManager)
     {
@@ -22,7 +22,15 @@ public class CellularAutomata
         this.gridManager = gridManager;
     }
 
-    public int[,] SmoothMap()
+	public int[,] NewMap()
+    {
+		map = RandomFillMap();
+		SmoothMap();
+		CleanSmallIslands();
+		return map;
+	}
+
+    public void SmoothMap()
 	{
 		for (int i = 0; i < smoothIterations; i++)
         {
@@ -40,8 +48,6 @@ public class CellularAutomata
 					gridManager.SetCellType(map[x, y], worldToCell);
 				}
 		}
-
-		return map;
 	}
 
 	int GetSurroundingWallCount(int gridX, int gridY)
@@ -49,7 +55,7 @@ public class CellularAutomata
 		int wallCount = 0;
 		for (int neighbourX = gridX - 1; neighbourX <= gridX + 1; neighbourX++)
 			for (int neighbourY = gridY - 1; neighbourY <= gridY + 1; neighbourY++)
-				if (neighbourX >= 0 && neighbourX < gridSize.x && neighbourY >= 0 && neighbourY < gridSize.y)
+				if (gridManager.InMapRange(neighbourX, neighbourY))
 				{
 					if (neighbourX != gridX || neighbourY != gridY)
 						wallCount += map[neighbourX, neighbourY];
@@ -62,7 +68,7 @@ public class CellularAutomata
 
 	public int[,] RandomFillMap()
 	{
-		map = new int[gridSize.x, gridSize.y];
+		int[,] map = new int[gridSize.x, gridSize.y];
 		int _seed;
 		if (useRandomSeed)
 			_seed = Random.Range(-5000, 5000);
@@ -94,5 +100,24 @@ public class CellularAutomata
 			}
 
 		return map;
+	}
+
+	public void CleanSmallIslands()
+	{
+		List<Region> waterRegions = gridManager.GetRegions(1);
+
+		int waterThresholdSize = 50;
+		foreach (var wallRegion in waterRegions)
+			if (wallRegion.CoordinateList.Count < waterThresholdSize)
+				foreach (var tile in wallRegion.CoordinateList)
+                    map[tile.tileX, tile.tileY] = 0;
+
+		List<Region> groundRegions = gridManager.GetRegions(0);
+		foreach (Region roomRegion in groundRegions)
+			if (roomRegion.CoordinateList.Count < groundThresholdSize)
+				foreach (Coord tile in roomRegion.CoordinateList)
+					map[tile.tileX, tile.tileY] = 1;
+
+		MonoBehaviour.print(groundRegions.Count);
 	}
 }

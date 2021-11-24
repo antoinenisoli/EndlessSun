@@ -256,7 +256,6 @@ public class PlayerController2D : Entity
         ManageStates();
         Survival.Update();
         playerHealth.Update();
-
         foreach (var item in mods)
             item.Update();
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: WaterRuleTile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -6575296516087931731, guid: 0118ad02cca4bbe40bd543a63eba89a4,
+  m_DefaultSprite: {fileID: -6877019987312771490, guid: c133a5ddb4395bc45acaa45b0cf009f0,
     type: 3}
   m_DefaultGameObject: {fileID: 7483044120027432093, guid: e264fed921266494e9691c63c71dae4a,
     type: 3}
@@ -20,12 +20,10 @@ MonoBehaviour:
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: -6575296516087931731, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
-    - {fileID: 2057523044005472988, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
-    - {fileID: -7614419727779973085, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
-    - {fileID: 2061712930962757158, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
-    - {fileID: 5078097009748882764, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
-    - {fileID: -3876388201722254491, guid: 0118ad02cca4bbe40bd543a63eba89a4, type: 3}
+    - {fileID: -6877019987312771490, guid: c133a5ddb4395bc45acaa45b0cf009f0, type: 3}
+    - {fileID: -3120126271930068168, guid: c133a5ddb4395bc45acaa45b0cf009f0, type: 3}
+    - {fileID: -3876388201722254491, guid: c133a5ddb4395bc45acaa45b0cf009f0, type: 3}
+    - {fileID: 2061712930962757158, guid: c133a5ddb4395bc45acaa45b0cf009f0, type: 3}
     m_GameObject: {fileID: 7483044120027432093, guid: e264fed921266494e9691c63c71dae4a,
       type: 3}
     m_MinAnimationSpeed: 1

@@ -215,14 +215,16 @@ MonoBehaviour:
       value: 5
   health:
     currentValue: 0
-    maxValue: 5000
+    maxValue: 0
     thisStat: 0
+    isDead: 0
   walkSpeed: 5
   runSpeed: 10
   playerHealth:
     currentValue: 0
-    maxValue: 50
+    maxValue: 10
     thisStat: 0
+    isDead: 0
   myXP:
     currentLevel:
       index: 0
@@ -272,7 +274,7 @@ MonoBehaviour:
   Magic:
     _Mana:
       currentValue: 0
-      maxValue: 50
+      maxValue: 1000
       thisStat: 0
   currentState: 0
   sprintCost: 15
@@ -368,17 +370,17 @@ MonoBehaviour:
     currentValue: 0
     maxValue: 1000
     thisStat: 3
-    changeAmount: 0.0169
+    changeAmount: 1
   thirsty:
     currentValue: 0
     maxValue: 1000
     thisStat: 4
-    changeAmount: 0.0224
+    changeAmount: 1
   energy:
     currentValue: 0
     maxValue: 1000
     thisStat: 5
-    changeAmount: 0.0219
+    changeAmount: 1
 --- !u!1 &4071406047616465356
 GameObject:
   m_ObjectHideFlags: 0
