@@ -10,12 +10,12 @@ public class CellularAutomata
 	[SerializeField] bool useRandomSeed;
 	[SerializeField] [Range(0, 100)] float randomFillPercent = 50;
 	[SerializeField] int groundThresholdSize = 50;
-	Vector2Int gridSize;
+    UnityEngine.Vector2Int gridSize;
 	GridLayout gridLayout;
 	GridManager gridManager;
 	int[,] map;
 
-	public void Init(Vector2Int gridSize, GridLayout gridLayout, GridManager gridManager)
+	public void Init(UnityEngine.Vector2Int gridSize, GridLayout gridLayout, GridManager gridManager)
     {
         this.gridSize = gridSize;
         this.gridLayout = gridLayout;
@@ -110,14 +110,25 @@ public class CellularAutomata
 		foreach (var wallRegion in waterRegions)
 			if (wallRegion.CoordinateList.Count < waterThresholdSize)
 				foreach (var tile in wallRegion.CoordinateList)
-                    map[tile.tileX, tile.tileY] = 0;
+                    map[tile.x, tile.y] = 0;
 
 		List<Region> groundRegions = gridManager.GetRegions(0);
 		foreach (Region roomRegion in groundRegions)
 			if (roomRegion.CoordinateList.Count < groundThresholdSize)
-				foreach (Coord tile in roomRegion.CoordinateList)
-					map[tile.tileX, tile.tileY] = 1;
+				foreach (Vector2Int tile in roomRegion.CoordinateList)
+					map[tile.x, tile.y] = 1;
 
 		MonoBehaviour.print(groundRegions.Count);
+	}
+
+	public void AssignRegions()
+    {
+		List<Region> groundRegions = gridManager.GetRegions(0);
+		foreach (var item in groundRegions)
+			item.FillCells(0);
+
+		List<Region> waterRegions = gridManager.GetRegions(1);
+		foreach (var item in waterRegions)
+			item.FillCells(1);
 	}
 }
