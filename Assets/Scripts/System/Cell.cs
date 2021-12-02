@@ -38,11 +38,17 @@ public class Cell : MonoBehaviour
         myType = type;
     }
 
-    public void SetRegion(int index)
+    public void SetRegion(int index, Color newColor = default)
     {
-        //print("fill " + index);
         regionIndex = index;
-        regionDebugVisual.color = colors[regionIndex % colors.Length];
+        if (regionDebugVisual)
+        {
+            regionDebugVisual.gameObject.SetActive(true);
+            if (newColor == default)
+                regionDebugVisual.color = colors[regionIndex % colors.Length];
+            else
+                regionDebugVisual.color = newColor;
+        }
     }
 
     public override string ToString()

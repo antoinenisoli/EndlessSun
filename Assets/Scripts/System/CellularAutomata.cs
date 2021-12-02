@@ -10,24 +10,20 @@ public class CellularAutomata
 	[SerializeField] bool useRandomSeed;
 	[SerializeField] [Range(0, 100)] float randomFillPercent = 50;
 	[SerializeField] int groundThresholdSize = 50;
-    UnityEngine.Vector2Int gridSize;
-	GridLayout gridLayout;
+    Vector2Int gridSize;
 	GridManager gridManager;
-	int[,] map;
 
-	public void Init(UnityEngine.Vector2Int gridSize, GridLayout gridLayout, GridManager gridManager)
+	public void Init(Vector2Int gridSize, GridManager gridManager)
     {
         this.gridSize = gridSize;
-        this.gridLayout = gridLayout;
         this.gridManager = gridManager;
     }
 
-	public int[,] NewMap()
+	public void NewMap()
     {
-		map = RandomFillMap();
+		gridManager.map = RandomFillMap();
 		SmoothMap();
 		CleanSmallIslands();
-		return map;
 	}
 
     public void SmoothMap()
@@ -38,14 +34,11 @@ public class CellularAutomata
 				for (int y = 0; y < gridSize.y; y++)
 				{
 					Vector2 pos = new Vector2(x, y);
-					Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int((int)pos.x, (int)pos.y, 0));
 					int neighbourWallTiles = GetSurroundingWallCount(x, y);
 					if (neighbourWallTiles > 4)
-						map[x, y] = 1;
+						gridManager.map[x, y] = 1;
 					else if (neighbourWallTiles < 4)
-						map[x, y] = 0;
-
-					gridManager.SetCellType(map[x, y], worldToCell);
+						gridManager.map[x, y] = 0;
 				}
 		}
 	}
@@ -58,7 +51,7 @@ public class CellularAutomata
 				if (gridManager.InMapRange(neighbourX, neighbourY))
 				{
 					if (neighbourX != gridX || neighbourY != gridY)
-						wallCount += map[neighbourX, neighbourY];
+						wallCount += gridManager.map[neighbourX, neighbourY];
 				}
 				else
 					wallCount++;
@@ -69,23 +62,16 @@ public class CellularAutomata
 	public int[,] RandomFillMap()
 	{
 		int[,] map = new int[gridSize.x, gridSize.y];
-		int _seed;
 		if (useRandomSeed)
-			_seed = Random.Range(-5000, 5000);
-		else
-			_seed = seed; 
+			seed = Random.Range(-5000, 5000);
 
-		System.Random pseudoRandom = new System.Random(_seed);
+		System.Random pseudoRandom = new System.Random(seed);
 		for (int x = 0; x < gridSize.x; x++)
 			for (int y = 0; y < gridSize.y; y++)
 			{
-				Vector2 pos = new Vector2(x, y);
-				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int((int)pos.x, (int)pos.y, 0));
-
 				if (x == 0 || x == gridSize.x - 1 || y == 0 || y == gridSize.y - 1)
 				{
 					map[x, y] = 1;
-					gridManager.SetCellType(1, worldToCell);
 				}
 				else
 				{
@@ -94,8 +80,6 @@ public class CellularAutomata
 						map[x, y] = 1;
 					else
 						map[x, y] = 0;
-
-					gridManager.SetCellType(map[x, y], worldToCell);
 				}
 			}
 
@@ -110,13 +94,13 @@ public class CellularAutomata
 		foreach (var wallRegion in waterRegions)
 			if (wallRegion.CoordinateList.Count < waterThresholdSize)
 				foreach (var tile in wallRegion.CoordinateList)
-                    map[tile.x, tile.y] = 0;
+					gridManager.map[tile.x, tile.y] = 0;
 
 		List<Region> groundRegions = gridManager.GetRegions(0);
 		foreach (Region roomRegion in groundRegions)
 			if (roomRegion.CoordinateList.Count < groundThresholdSize)
 				foreach (Vector2Int tile in roomRegion.CoordinateList)
-					map[tile.x, tile.y] = 1;
+					gridManager.map[tile.x, tile.y] = 1;
 
 		MonoBehaviour.print(groundRegions.Count);
 	}
@@ -124,11 +108,20 @@ public class CellularAutomata
 	public void AssignRegions()
     {
 		List<Region> groundRegions = gridManager.GetRegions(0);
-		foreach (var item in groundRegions)
+		/*foreach (var item in groundRegions)
 			item.FillCells(0);
 
 		List<Region> waterRegions = gridManager.GetRegions(1);
 		foreach (var item in waterRegions)
-			item.FillCells(1);
+			item.FillCells(1);*/
+
+        for (int i = 0; i < groundRegions.Count; i++)
+        {
+			Color randomColor = Random.ColorHSV();
+			foreach (var cell in groundRegions[i].GetCellList())
+			{
+				cell.SetRegion(i, randomColor);
+			}
+		}
 	}
 }

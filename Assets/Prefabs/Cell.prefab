@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4146959954704445929
 Transform:
   m_ObjectHideFlags: 0
@@ -128,12 +128,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myType: 0
+  coordinates: {x: 0, y: 0}
   neighbours: []
   regionIndex: 0
   regionDebugVisual: {fileID: 3366049456194986234}
   colors:
-  - {r: 1, g: 0.5458693, b: 0, a: 0.5176471}
-  - {r: 0, g: 0.9155476, b: 1, a: 0.5019608}
-  - {r: 1, g: 0, b: 0.62136126, a: 0.5019608}
-  - {r: 0, g: 1, b: 0.21683073, a: 0.5019608}
-  - {r: 0, g: 0.19907331, b: 1, a: 0.5019608}
+  - {r: 1, g: 0.5458693, b: 0, a: 0.7882353}
+  - {r: 0, g: 0.9155476, b: 1, a: 0.7647059}
+  - {r: 1, g: 0, b: 0.62136126, a: 0.7647059}
+  - {r: 0, g: 1, b: 0.21683073, a: 0.8156863}
+  - {r: 0, g: 0.19907331, b: 1, a: 0.7882353}

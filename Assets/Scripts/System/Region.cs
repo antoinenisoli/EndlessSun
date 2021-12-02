@@ -13,16 +13,6 @@ public struct Region
 		this.index = index;
 	}
 
-	public void FillCells(int index)
-	{
-		foreach (var item in CoordinateList)
-		{
-			Cell foundCell = GridManager.Instance.GetCell(item);
-			if (foundCell)
-				foundCell.SetRegion(index);
-		}
-	}
-
 	public void Print()
     {
         foreach (var item in GetCellList())
