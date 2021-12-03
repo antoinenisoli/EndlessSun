@@ -13,6 +13,7 @@ public class Cell : MonoBehaviour
     public CellType myType;
     public Vector2Int coordinates;
     public List<Cell> neighbours;
+    public Vector3Int tilePosition;
 
     [Header("Region")]
     public int regionIndex = 0;
@@ -27,9 +28,10 @@ public class Cell : MonoBehaviour
         }
     }
 
-    public void Initialize(Vector2Int coord)
+    public void Initialize(Vector2Int coord, Vector3Int worldPosition)
     {
         coordinates = coord;
+        tilePosition = worldPosition;
         gameObject.name += " " + coord.ToString();
     }
 

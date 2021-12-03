@@ -41,24 +41,36 @@ public class PlayerHUD : HUD
 
     void UpdateMana()
     {
-        float hunger = PlayerSurvival.Instance.Hunger.MaxValue - PlayerSurvival.Instance.Hunger.CurrentValue;
-        hungerSlider.value = hunger;
-        manaSlider.value = PlayerMagic.Mana.CurrentValue;
+        float compute = PlayerSurvival.Instance.Hunger.MaxValue - PlayerSurvival.Instance.Hunger.CurrentValue;
+        if (float.IsNaN(compute) || float.IsInfinity(compute))
+            return;
+
+        hungerSlider.value = compute;
+        if (PlayerMagic.Mana != null)
+            manaSlider.value = PlayerMagic.Mana.CurrentValue;
     }
 
     void UpdateStamina()
     {
-        float stamina = PlayerSurvival.Instance.Energy.MaxValue - PlayerSurvival.Instance.Energy.CurrentValue;
-        energySlider.value = stamina;
-        staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
+        float compute = PlayerSurvival.Instance.Energy.MaxValue - PlayerSurvival.Instance.Energy.CurrentValue;
+        if (float.IsNaN(compute) || float.IsInfinity(compute))
+            return;
+
+        energySlider.value = compute;
+        if (PlayerCombat.Stamina != null)
+            staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
     }
 
     void UpdateHealth()
     {
-        float computeHealth = GameManager.Player.Health.Coeff();
-        healthSlider.value = computeHealth;
-        thirstySlider.value = 1 - computeHealth;
-        colorAnimation.time = 0.3f + (heartPulse * computeHealth);
+        float compute = GameManager.Player.Health.Coeff();
+        if (float.IsNaN(compute) || float.IsInfinity(compute))
+            return;
+
+        //print(computeHealth);
+        healthSlider.value = compute;
+        thirstySlider.value = 1 - compute;
+        colorAnimation.time = 0.3f + (heartPulse * compute);
     }
 
     public override void UpdateUI()

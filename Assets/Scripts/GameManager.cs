@@ -23,6 +23,17 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    public static Color RandomColor()
+    {
+        Color randomColor = new Color(
+          Random.Range(0f, 1f),
+          Random.Range(0f, 1f),
+          Random.Range(0f, 1f)
+            );
+
+        return randomColor;
+    }
+
     public void FreezeFrame(float delay, float startScale = 0.1f)
     {
         StartCoroutine(IFreezeFrame(delay, startScale));

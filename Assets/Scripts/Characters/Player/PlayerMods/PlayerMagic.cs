@@ -6,13 +6,13 @@ using UnityEngine;
 public class PlayerMagic : PlayerMod
 {
     public static PlayerStat Mana;
-    [SerializeField] PlayerStat _Mana;
+    [SerializeField] PlayerStat mana;
 
     public override void Init()
     {
         base.Init();
-        _Mana.Init();
-        Mana = _Mana;
+        Mana = mana;
+        Mana.Init();
     }
 
     public override void Update()

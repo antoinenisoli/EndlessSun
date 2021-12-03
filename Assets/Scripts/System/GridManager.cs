@@ -11,9 +11,15 @@ public class GridManager : MonoBehaviour
 	public static GridManager Instance;
 	[SerializeField] bool debugMode;
 	[SerializeField] Vector2Int gridSize;
-	[SerializeField] RuleTile beachTile, waterTile;
 	[SerializeField] Tilemap groundTilemap, propsTilemap;
+	[SerializeField] RuleTile waterTile;
+	[SerializeField] RuleTile[] beachTiles;
+	[SerializeField] Color[] regionColors = new Color[] { Color.white };
 	GridLayout gridLayout;
+
+	[Header("Generate Props")]
+	[SerializeField] RuleTile propsTiles;
+	[SerializeField] float propsProb = 30f;
 
 	[Header("Generate Map")]
 	[SerializeField] CellularAutomata cellularAutomata;
@@ -22,10 +28,6 @@ public class GridManager : MonoBehaviour
 
 	int regionSize;
 	Dictionary<int, Region> regions = new Dictionary<int, Region>();
-
-	[Header("Generate Props")]
-	[SerializeField] RuleTile propsTiles;
-	[SerializeField] float propsProb = 30f;
 
     private void OnDrawGizmos()
     {
@@ -52,7 +54,7 @@ public class GridManager : MonoBehaviour
 		else
 			DebugMap();
 
-		cellularAutomata.AssignRegions();
+		AssignRegions();
 		AssignTypes();
 		yield return new WaitForSeconds(0.01f);
 		GenerateProps();
@@ -100,7 +102,7 @@ public class GridManager : MonoBehaviour
 			if (item.myType == CellType.Ground)
 			{
 				map[newCoord.x, newCoord.y] = 0;
-				groundTilemap.SetTile(new Vector3Int(newCoord.x, newCoord.y, 0), beachTile);
+				groundTilemap.SetTile(new Vector3Int(newCoord.x, newCoord.y, 0), beachTiles[0]);
 			}
 			else if (item.myType == CellType.Water)
 			{
@@ -221,12 +223,12 @@ public class GridManager : MonoBehaviour
 			{
 				Vector2 pos = new Vector2(x, y);
 				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int((int)pos.x, (int)pos.y, 0));
-				groundTilemap.SetTile(worldToCell, beachTile);
+				groundTilemap.SetTile(worldToCell, beachTiles[0]);
 
 				GameObject newCell = groundTilemap.GetInstantiatedObject(worldToCell);
 				Cell cellScript = newCell.GetComponent<Cell>();
 				Vector2Int coords = new Vector2Int(x, y);
-				cellScript.Initialize(coords);
+				cellScript.Initialize(coords, worldToCell);
 				allCells.Add(coords, cellScript);
 			}
 	}
@@ -246,7 +248,7 @@ public class GridManager : MonoBehaviour
                 {
                     case 0:
 						cellScript.SetType(CellType.Ground);
-						groundTilemap.SetTile(worldToCell, beachTile);
+						groundTilemap.SetTile(worldToCell, beachTiles[0]);
 						break;
 
 					case 1:
@@ -255,6 +257,30 @@ public class GridManager : MonoBehaviour
 						break;
                 }
             }
+	}
+
+	[ContextMenu("Region random colors")]
+	public void NewRegionsColors()
+    {
+        for (int i = 0; i < regionColors.Length; i++)
+			regionColors[i] = GameManager.RandomColor();
+    }
+
+	public void AssignRegions()
+	{
+		List<Region> groundRegions = GetRegions(0);
+		print(groundRegions.Count);
+		for (int i = 0; i < groundRegions.Count; i++)
+		{
+			Color color = regionColors[i];
+			color.a = 0.5f;
+			foreach (var cell in groundRegions[i].GetCellList())
+            {
+				cell.SetRegion(i, color);
+				if (i != 0 && i < beachTiles.Length)
+					groundTilemap.SetTile(cell.tilePosition, beachTiles[i]);
+			}
+		}
 	}
 
 	bool IsBorder(Cell cell)

@@ -74,7 +74,7 @@ public class PlayerCombat : PlayerMod
 
         foreach (var item in colls)
         {
-            Enemy enemy = item.transform.GetComponent<Enemy>();
+            Enemy enemy = item.transform.GetComponentInChildren<Enemy>();
             if (enemy)
             {
                 enemy.Hit(player.ComputeDamages());

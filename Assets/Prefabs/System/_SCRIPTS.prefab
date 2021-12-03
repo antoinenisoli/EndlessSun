@@ -43,18 +43,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7d177afffda9d43bb9425da9057772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: 0
   gridSize: {x: 120, y: 120}
-  beachTile: {fileID: 11400000, guid: 6512f89029d3c894eafb4c448190baf4, type: 2}
-  waterTile: {fileID: 11400000, guid: 4631f0bdbdcafa04fb2311a773392eb9, type: 2}
   groundTilemap: {fileID: 0}
   propsTilemap: {fileID: 0}
+  waterTile: {fileID: 11400000, guid: 4631f0bdbdcafa04fb2311a773392eb9, type: 2}
+  beachTiles: []
+  regionColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  propsTiles: {fileID: 11400000, guid: e8e34ecc8dbe9fe47931303c8e279afb, type: 2}
+  propsProb: 10
   cellularAutomata:
     seed: 0
     smoothIterations: 5
     useRandomSeed: 1
     randomFillPercent: 50
-  propsTiles: {fileID: 11400000, guid: e8e34ecc8dbe9fe47931303c8e279afb, type: 2}
-  propsProb: 10
+    groundThresholdSize: 50
+    waterThresholdSize: 50
 --- !u!1 &7590599331295741341
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7590599332484156896}
   m_Layer: 0
-  m_Name: Scripts
+  m_Name: _SCRIPTS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

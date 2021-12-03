@@ -21,21 +21,26 @@ public class PlayerController2D : Entity
 
     [Header("PLAYER")]
     public PlayerHealth playerHealth;
+    [Space(10)]
     public PlayerXP myXP;
+    [Space(10)]
     public PlayerCombat Combat;
+    [Space(10)]
     public PlayerMagic Magic;
+    [Space(10)]
     PlayerMod[] mods;
 
+    [Header("__Sprint")]
     public PlayerState currentState;
     [SerializeField] float sprintCost = 15f;
     [SerializeField] float movementSmoothing = 0.05f;
     bool sprinting;
 
-    [Header("Attack")]
+    [Header("__Attack")]
     [SerializeField] int attackAnimCount = 3;
     public bool idleSword;
 
-    [Header("Items")]
+    [Header("__Items")]
     [SerializeField] float interactionRadius = 2f;
     [SerializeField] LayerMask interactLayer;
     public Interactable lastDetectedInteractable;
@@ -108,6 +113,7 @@ public class PlayerController2D : Entity
             idleSword = false;
 
         anim.SetBool("IdleSword", idleSword);
+        anim.SetFloat("Speed", rb.velocity.sqrMagnitude);
         anim.speed = Mathf.Lerp(anim.speed, sprinting ? 2 : 1, Time.deltaTime * 10f);
     }
 

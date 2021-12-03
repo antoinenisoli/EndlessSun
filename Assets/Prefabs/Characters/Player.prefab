@@ -275,7 +275,7 @@ MonoBehaviour:
     _Mana:
       currentValue: 0
       maxValue: 1000
-      thisStat: 0
+      thisStat: 1
   currentState: 0
   sprintCost: 15
   movementSmoothing: 0.15
