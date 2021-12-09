@@ -20,6 +20,7 @@ public class PlayerController2D : Entity
     public override HealthStat Health => playerHealth;
 
     [Header("PLAYER")]
+    [SerializeField] LayerMask tilemapLayer;
     public PlayerHealth playerHealth;
     [Space(10)]
     public PlayerXP myXP;
@@ -71,6 +72,16 @@ public class PlayerController2D : Entity
     {
         base.Start();
         myXP.GenerateLevels();
+    }
+
+    public void CheckCollision()
+    {
+        Region r = GridManager.Instance.BiggestRegion();
+        Vector2 newPos = r.ClosestGroundPos(r.CenterPosition());
+        if (Physics2D.OverlapCircle(transform.position, 0.5f, tilemapLayer))
+        {
+            transform.position = newPos;
+        }
     }
 
     bool CanMove()

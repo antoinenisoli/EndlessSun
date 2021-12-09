@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Follow: {fileID: 613484984}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 3
+    OrthographicSize: 4
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -448,7 +448,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762915822}
   m_LocalRotation: {x: 0, y: -1e-45, z: 0, w: 1}
-  m_LocalPosition: {x: 59.71, y: 62.836, z: -10}
+  m_LocalPosition: {x: 52.7, y: 51.3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 180264233}
@@ -481,6 +481,87 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unZoomValue: 4
   cinemachineCam: {fileID: 0}
+--- !u!1 &800998246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 800998250}
+  - component: {fileID: 800998249}
+  - component: {fileID: 800998248}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!23 &800998248
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800998246}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &800998249
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800998246}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &800998250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800998246}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 46.8, y: 51.5, z: 0}
+  m_LocalScale: {x: 0.72066313, y: 0.72066313, z: 0.72066313}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &915381889
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +699,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -642,7 +723,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: -1e-45, z: 0, w: 1}
-  m_LocalPosition: {x: 59.71, y: 62.836, z: -10}
+  m_LocalPosition: {x: 52.7, y: 51.3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1302,7 +1383,7 @@ GameObject:
   - component: {fileID: 1721729681}
   - component: {fileID: 1721729680}
   - component: {fileID: 1721729682}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PropsTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1757,7 +1838,7 @@ GameObject:
   - component: {fileID: 2033001925}
   - component: {fileID: 2033001924}
   - component: {fileID: 2033001926}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GroundTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1934,11 +2015,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 822972060138402177, guid: c1ec0bc398df03a4481b74c86a620929,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 822972060138402190, guid: c1ec0bc398df03a4481b74c86a620929,
         type: 3}
       propertyPath: m_RootOrder
@@ -1947,12 +2023,12 @@ PrefabInstance:
     - target: {fileID: 822972060138402190, guid: c1ec0bc398df03a4481b74c86a620929,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 59.71
+      value: 52.7
       objectReference: {fileID: 0}
     - target: {fileID: 822972060138402190, guid: c1ec0bc398df03a4481b74c86a620929,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 62.836
+      value: 51.3
       objectReference: {fileID: 0}
     - target: {fileID: 822972060138402190, guid: c1ec0bc398df03a4481b74c86a620929,
         type: 3}
@@ -1996,13 +2072,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
         type: 3}
-      propertyPath: movementSmoothing
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
-        type: 3}
-      propertyPath: Magic._Mana.thisStat
-      value: 1
+      propertyPath: tilemapLayer.m_Bits
+      value: 2048
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1ec0bc398df03a4481b74c86a620929, type: 3}
@@ -2014,6 +2085,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 447498022, guid: eb69d25f69846cc4b97a48e2847bb336, type: 3}
+      propertyPath: debugCube
+      value: 
+      objectReference: {fileID: 800998250}
+    - target: {fileID: 447498022, guid: eb69d25f69846cc4b97a48e2847bb336, type: 3}
       propertyPath: propsTilemap
       value: 
       objectReference: {fileID: 1721729681}
@@ -2021,14 +2096,6 @@ PrefabInstance:
       propertyPath: groundTilemap
       value: 
       objectReference: {fileID: 2033001925}
-    - target: {fileID: 447498022, guid: eb69d25f69846cc4b97a48e2847bb336, type: 3}
-      propertyPath: cellularAutomata.randomFillPercent
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 447498022, guid: eb69d25f69846cc4b97a48e2847bb336, type: 3}
-      propertyPath: cellularAutomata.groundThresholdSize
-      value: 250
-      objectReference: {fileID: 0}
     - target: {fileID: 7590599332484156896, guid: eb69d25f69846cc4b97a48e2847bb336,
         type: 3}
       propertyPath: m_RootOrder

@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Pathfinding;
 using System.IO;
+using System.Linq;
 
 public class GridManager : MonoBehaviour
 {
@@ -13,9 +13,15 @@ public class GridManager : MonoBehaviour
 	[SerializeField] Vector2Int gridSize;
 	[SerializeField] Tilemap groundTilemap, propsTilemap;
 	[SerializeField] RuleTile waterTile;
-	[SerializeField] RuleTile[] beachTiles;
-	[SerializeField] Color[] regionColors = new Color[] { Color.white };
+	[SerializeField] RuleTile[] groundRuleTiles;
+	Dictionary<BiomeType, RuleTile> storedGroundTiles = new Dictionary<BiomeType, RuleTile>();
 	GridLayout gridLayout;
+
+	[Header("Regions")]
+	[SerializeField] Color[] regionColors = new Color[] { Color.white };
+	[SerializeField] List<Region> groundRegions = new List<Region>();
+	[SerializeField] Transform debugCube;
+	int regionSize;
 
 	[Header("Generate Props")]
 	[SerializeField] RuleTile propsTiles;
@@ -25,9 +31,6 @@ public class GridManager : MonoBehaviour
 	[SerializeField] CellularAutomata cellularAutomata;
     public int[,] map;
 	Dictionary<Vector2Int, Cell> allCells = new Dictionary<Vector2Int, Cell>();
-
-	int regionSize;
-	Dictionary<int, Region> regions = new Dictionary<int, Region>();
 
     private void OnDrawGizmos()
     {
@@ -41,6 +44,7 @@ public class GridManager : MonoBehaviour
 		Singleton();
 		map = new int[gridSize.x, gridSize.y];
 		cellularAutomata.Init(gridSize, this);
+		StoreRuleTiles();
     }
 
 	public IEnumerator Start()
@@ -61,6 +65,11 @@ public class GridManager : MonoBehaviour
 		MapText("mapText.txt");
 		if (AstarPath.active)
 			AstarPath.active.Scan();
+
+		Region r = GridManager.Instance.BiggestRegion();
+		Vector2 newPos = r.ClosestGroundPos(r.CenterPosition());
+		debugCube.position = newPos;
+		GameManager.Player.CheckCollision();
 	}
 
 	void Singleton()
@@ -68,6 +77,23 @@ public class GridManager : MonoBehaviour
 		if (Instance == null)
 			Instance = this;
 	}
+
+	void StoreRuleTiles()
+    {
+        foreach (var item in groundRuleTiles)
+        {
+			System.Array array = System.Enum.GetValues(typeof(BiomeType));
+			BiomeType randomBiome = (BiomeType)array.GetValue(Random.Range(0, array.Length));
+            for (int i = 0; i < array.Length; i++)
+            {
+				if (item.name.Contains(randomBiome.ToString()) && !storedGroundTiles.ContainsValue(item))
+                {
+					storedGroundTiles.Add(randomBiome, item);
+					break;
+                }
+            }
+		}
+    }
 
 	void MapText(string fileName)
     {
@@ -96,13 +122,13 @@ public class GridManager : MonoBehaviour
 		{
 			Vector2Int newCoord = new Vector2Int((int)item.transform.position.x, (int)item.transform.position.y);
 			item.coordinates = newCoord;
-			newCoord.x = Math.Abs(newCoord.x);
-			newCoord.y = Math.Abs(newCoord.y);
+			newCoord.x = System.Math.Abs(newCoord.x);
+			newCoord.y = System.Math.Abs(newCoord.y);
 
 			if (item.myType == CellType.Ground)
 			{
 				map[newCoord.x, newCoord.y] = 0;
-				groundTilemap.SetTile(new Vector3Int(newCoord.x, newCoord.y, 0), beachTiles[0]);
+				groundTilemap.SetTile(new Vector3Int(newCoord.x, newCoord.y, 0), groundRuleTiles[0]);
 			}
 			else if (item.myType == CellType.Water)
 			{
@@ -159,7 +185,6 @@ public class GridManager : MonoBehaviour
 
 		regionSize++;
 		Region newRegion = new Region(tiles, regionSize);
-		regions.Add(regionSize, newRegion);
 		return newRegion;
 	}
 
@@ -223,7 +248,7 @@ public class GridManager : MonoBehaviour
 			{
 				Vector2 pos = new Vector2(x, y);
 				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int((int)pos.x, (int)pos.y, 0));
-				groundTilemap.SetTile(worldToCell, beachTiles[0]);
+				groundTilemap.SetTile(worldToCell, groundRuleTiles[0]);
 
 				GameObject newCell = groundTilemap.GetInstantiatedObject(worldToCell);
 				Cell cellScript = newCell.GetComponent<Cell>();
@@ -240,6 +265,7 @@ public class GridManager : MonoBehaviour
 			{
 				Vector2Int coords = new Vector2Int(x, y);
 				Cell cellScript = GetCell(coords);
+				cellScript.GetNeighbours();
 
 				Vector2 pos = new Vector2(x, y);
 				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int((int)pos.x, (int)pos.y, 0));
@@ -248,7 +274,7 @@ public class GridManager : MonoBehaviour
                 {
                     case 0:
 						cellScript.SetType(CellType.Ground);
-						groundTilemap.SetTile(worldToCell, beachTiles[0]);
+						groundTilemap.SetTile(worldToCell, groundRuleTiles[0]);
 						break;
 
 					case 1:
@@ -266,36 +292,42 @@ public class GridManager : MonoBehaviour
 			regionColors[i] = GameManager.RandomColor();
     }
 
+	public Region BiggestRegion()
+    {
+		List<Region> sortedRegions = groundRegions.OrderBy(i => i.Cells.Count).Reverse().ToList();
+		return sortedRegions[0];
+    }
+
 	public void AssignRegions()
 	{
-		List<Region> groundRegions = GetRegions(0);
-		print(groundRegions.Count);
+		groundRegions = GetRegions(0);
+
 		for (int i = 0; i < groundRegions.Count; i++)
 		{
+			Region groundRegion = groundRegions[i];
 			Color color = regionColors[i];
+			groundRegion.color = color;
+			groundRegion.index = i;
 			color.a = 0.5f;
-			foreach (var cell in groundRegions[i].GetCellList())
+			
+			foreach (var cell in groundRegion.Cells)
             {
 				cell.SetRegion(i, color);
-				if (i != 0 && i < beachTiles.Length)
-					groundTilemap.SetTile(cell.tilePosition, beachTiles[i]);
+				if (storedGroundTiles.TryGetValue(groundRegion.myBiome, out RuleTile ruleTile))
+					groundTilemap.SetTile(cell.tilePosition, ruleTile);
+				else if (groundRuleTiles.Length > 0)
+					groundTilemap.SetTile(cell.tilePosition, groundRuleTiles[0]);
 			}
 		}
 	}
 
-	bool IsBorder(Cell cell)
+	public bool IsShore(Cell cell)
     {
-        for (int x = -2; x < 2; x++)
+        foreach (var item in cell.neighbours)
         {
-            for (int y = -2; y < 2; y++)
-            {
-				if ((x == 0 && y == 0) || !InMapRange(x, y))
-					continue;
-
-				if (map[cell.coordinates.x + x, cell.coordinates.y + y] == 1)
-					return true;
-            }
-        }
+			if (item.myType == CellType.Water)
+				return true;
+		}
 
 		return false;
 	}
@@ -309,8 +341,8 @@ public class GridManager : MonoBehaviour
 		{
 			if (item.myType == CellType.Ground)
 			{
-				float r = UnityEngine.Random.Range(0, 100);
-				if (r < propsProb && !IsBorder(item))
+				float r = Random.Range(0, 100);
+				if (r < propsProb && !IsShore(item))
                 {
 					Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(item.coordinates.x, item.coordinates.y, 0));
 					propsTilemap.SetTile(worldToCell, propsTiles);

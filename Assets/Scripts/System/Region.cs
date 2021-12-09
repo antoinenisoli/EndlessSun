@@ -2,33 +2,74 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Region
+public enum BiomeType
 {
-	public List<Vector2Int> CoordinateList;
-	public int index;
+	Beach,
+	Forest,
+	Mountain,
+	Jungle,
+	Volcano,
+}
 
-	public Region(List<Vector2Int> coords, int index)
+[System.Serializable]
+public class Region
+{
+	[HideInInspector] public List<Vector2Int> CoordinateList = new List<Vector2Int>();
+	public int index;
+	public Color color;
+	public BiomeType myBiome;
+	public List<Cell> Cells = new List<Cell>();
+
+	public Region(List<Vector2Int> coords, int index) 
 	{
 		CoordinateList = coords;
 		this.index = index;
+		GetCellList();
+		System.Array array = System.Enum.GetValues(typeof(BiomeType));
+		BiomeType randomBiome = (BiomeType)array.GetValue(Random.Range(0, array.Length));
+		myBiome = randomBiome;
 	}
 
-	public void Print()
+    public override string ToString()
     {
-        foreach (var item in GetCellList())
-			MonoBehaviour.print(item.name);
+		return "Region #" + index + ", biome type = " + myBiome;
     }
 
-	public List<Cell> GetCellList()
+	public Vector2 CenterPosition()
+    {
+		var bound = new Bounds(Cells[0].transform.position, Vector3.zero);
+		for (int i = 1; i < Cells.Count; i++)
+		{
+			bound.Encapsulate(Cells[i].transform.position);
+		}
+
+		return bound.center;
+	}
+
+	public Vector2 ClosestGroundPos(Vector2 pos)
 	{
-		List<Cell> cellList = new List<Cell>();
+		float maxDistance = Mathf.Infinity;
+		Vector2 newPos = new Vector2();
+		foreach (var item in Cells)
+		{
+			float currentDistance = Vector2.Distance(item.transform.position, pos);
+			if (currentDistance < maxDistance && !GridManager.Instance.IsShore(item))
+			{
+				maxDistance = currentDistance;
+				newPos = item.transform.position;
+			}
+		}
+
+		return newPos;
+	}
+
+	public void GetCellList()
+	{
 		foreach (var item in CoordinateList)
 		{
 			Cell foundCell = GridManager.Instance.GetCell(item);
 			if (foundCell)
-				cellList.Add(foundCell);
+				Cells.Add(foundCell);
 		}
-
-		return cellList;
 	}
 }

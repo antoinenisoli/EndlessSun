@@ -40,6 +40,23 @@ public class Cell : MonoBehaviour
         myType = type;
     }
 
+    public void GetNeighbours()
+    {
+        for (int x = -1; x < 2; x++)
+        {
+            for (int y = -1; y < 2; y++)
+            {
+                if ((x == 0 && y == 0) || !GridManager.Instance.InMapRange(coordinates.x + x, coordinates.y + y))
+                    continue;
+
+                Vector2Int coord = new Vector2Int(coordinates.x + x, coordinates.y + y);
+                Cell neighbour = GridManager.Instance.GetCell(coord);
+                if (neighbour && !neighbours.Contains(neighbour) && neighbour != this)
+                    neighbours.Add(neighbour);
+            }
+        }
+    }
+
     public void SetRegion(int index, Color newColor = default)
     {
         regionIndex = index;
