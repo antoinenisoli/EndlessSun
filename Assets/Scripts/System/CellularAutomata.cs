@@ -90,10 +90,78 @@ public class CellularAutomata
 				foreach (var tile in wallRegion.CoordinateList)
 					gridManager.map[tile.x, tile.y] = 0;
 
-		List<Region> groundRegions = gridManager.GetRegions(0);
-		foreach (Region roomRegion in groundRegions)
-			if (roomRegion.CoordinateList.Count < groundThresholdSize)
-				foreach (Vector2Int tile in roomRegion.CoordinateList)
+		List<Island> allIslands = gridManager.GetIslands();
+		List<Island> survivingIslands = new List<Island>();
+		foreach (Island island in allIslands)
+			if (island.CoordinateList.Count < groundThresholdSize)
+            {
+				foreach (Vector2Int tile in island.CoordinateList)
 					gridManager.map[tile.x, tile.y] = 1;
+			}
+			else
+				survivingIslands.Add(new Island(island.CoordinateList, island.index));
+
+        foreach (var item in allIslands) item.GetEdgeTiles();
+		foreach (var item in survivingIslands) item.GetEdgeTiles();
+		ConnectClosestIslands(survivingIslands);
 	}
+
+	void ConnectClosestIslands(List<Island> allIslands)
+    {
+		int bestDistance = 0;
+		Cell bestCellA = null;
+		Cell bestCellB = null;
+		Island bestIslandA = new Island();
+		Island bestIslandB = new Island();
+		bool possibleConnectionFound = false;
+
+		foreach (var islandA in allIslands)
+        {
+			possibleConnectionFound = false;
+            foreach (var islandB in allIslands)
+            {
+				if (islandA == islandB)
+					continue;
+				if (islandA.IsConnected(islandB))
+                {
+					possibleConnectionFound = false;
+					break;
+				}
+
+                for (int indexA = 0; indexA < islandA.edgeTiles.Count; indexA++)
+                {
+					for (int indexB = 0; indexB < islandB.edgeTiles.Count; indexB++)
+					{
+						Cell cellA = islandA.edgeTiles[indexA];
+						Cell cellB = islandB.edgeTiles[indexB];
+						float distanceX = Mathf.Pow(cellA.coordinates.x - cellB.coordinates.x, 2);
+						float distanceY = Mathf.Pow(cellA.coordinates.y - cellB.coordinates.y, 2);
+						int distanceBetweenIsland = (int)distanceX + (int)distanceY;
+
+						if (distanceBetweenIsland < bestDistance || !possibleConnectionFound)
+                        {
+							bestDistance = distanceBetweenIsland;
+							possibleConnectionFound = true;
+
+							bestCellA = cellA;
+							bestCellB = cellB;
+
+							bestIslandA = islandA;
+							bestIslandB = islandB;
+                        }
+					}
+				}
+            }
+        }
+
+		if (possibleConnectionFound)
+			CreatePassage(bestIslandA, bestIslandB, bestCellA, bestCellB);
+    }
+
+	void CreatePassage(Island islandA, Island islandB, Cell cellA, Cell cellB)
+    {
+		Debug.Log("make passage between " + islandA + " and " + islandB);
+		Island.ConnectIslands(islandA, islandB);
+		Debug.DrawLine(gridManager.CellToWorldPoint(cellA), gridManager.CellToWorldPoint(cellB), Color.green, 100f);
+    }
 }

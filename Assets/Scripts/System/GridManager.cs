@@ -14,12 +14,12 @@ public class GridManager : MonoBehaviour
 	[SerializeField] Tilemap groundTilemap, propsTilemap;
 	[SerializeField] RuleTile waterTile;
 	[SerializeField] RuleTile[] groundRuleTiles;
-	Dictionary<BiomeType, RuleTile> storedGroundTiles = new Dictionary<BiomeType, RuleTile>();
+	Dictionary<IslandBiome, RuleTile> storedGroundTiles = new Dictionary<IslandBiome, RuleTile>();
 	GridLayout gridLayout;
 
 	[Header("Regions")]
 	[SerializeField] Color[] regionColors = new Color[] { Color.white };
-	[SerializeField] List<Region> groundRegions = new List<Region>();
+	[SerializeField] List<Island> islands = new List<Island>();
 	[SerializeField] Transform debugCube;
 	int regionSize;
 
@@ -58,7 +58,7 @@ public class GridManager : MonoBehaviour
 		else
 			DebugMap();
 
-		AssignRegions();
+		AssignIslands();
 		AssignTypes();
 		yield return new WaitForSeconds(0.01f);
 		GenerateProps();
@@ -66,10 +66,16 @@ public class GridManager : MonoBehaviour
 		if (AstarPath.active)
 			AstarPath.active.Scan();
 
-		Region r = GridManager.Instance.BiggestRegion();
+		Region r = BiggestIsland();
 		Vector2 newPos = r.ClosestGroundPos(r.CenterPosition());
 		debugCube.position = newPos;
-		GameManager.Player.CheckCollision();
+		if (GameManager.Instance)
+			GameManager.Player.CheckCollision();
+
+        foreach (var item in islands)
+        {
+			//item.GetEdgeTiles();
+        }
 	}
 
 	void Singleton()
@@ -82,8 +88,8 @@ public class GridManager : MonoBehaviour
     {
         foreach (var item in groundRuleTiles)
         {
-			System.Array array = System.Enum.GetValues(typeof(BiomeType));
-			BiomeType randomBiome = (BiomeType)array.GetValue(Random.Range(0, array.Length));
+			System.Array array = System.Enum.GetValues(typeof(IslandBiome));
+			IslandBiome randomBiome = (IslandBiome)array.GetValue(Random.Range(0, array.Length));
             for (int i = 0; i < array.Length; i++)
             {
 				if (item.name.Contains(randomBiome.ToString()) && !storedGroundTiles.ContainsValue(item))
@@ -106,7 +112,10 @@ public class GridManager : MonoBehaviour
 		{
 			for (int y = 0; y < gridSize.y; y++)
 			{
-				sr.Write(map[x,y]);
+				if (map[x, y] == 1)
+					sr.Write("#");
+				else
+					sr.Write("&");
 			}
 
 			sr.WriteLine();
@@ -138,6 +147,18 @@ public class GridManager : MonoBehaviour
 
 			allCells.Add(newCoord, item);
 		}
+	}
+
+	public List<Island> GetIslands()
+	{
+		List<Island> convertedIslands = new List<Island>();
+        foreach (var item in GetRegions(0))
+        {
+			Island island = new Island(item.CoordinateList, item.index);
+			convertedIslands.Add(island);
+        }
+
+		return convertedIslands;
 	}
 
 	public List<Region> GetRegions(int tileType)
@@ -292,28 +313,28 @@ public class GridManager : MonoBehaviour
 			regionColors[i] = GameManager.RandomColor();
     }
 
-	public Region BiggestRegion()
+	public Island BiggestIsland()
     {
-		List<Region> sortedRegions = groundRegions.OrderBy(i => i.Cells.Count).Reverse().ToList();
-		return sortedRegions[0];
+		List<Island> sortedIslands = islands.OrderBy(i => i.Cells.Count).Reverse().ToList();
+		return sortedIslands[0];
     }
 
-	public void AssignRegions()
+	public void AssignIslands()
 	{
-		groundRegions = GetRegions(0);
+		islands = GetIslands();
 
-		for (int i = 0; i < groundRegions.Count; i++)
+		for (int i = 0; i < islands.Count; i++)
 		{
-			Region groundRegion = groundRegions[i];
+			Island island = islands[i];
 			Color color = regionColors[i];
-			groundRegion.color = color;
-			groundRegion.index = i;
+			island.color = color;
+			island.index = i;
 			color.a = 0.5f;
 			
-			foreach (var cell in groundRegion.Cells)
+			foreach (var cell in island.Cells)
             {
 				cell.SetRegion(i, color);
-				if (storedGroundTiles.TryGetValue(groundRegion.myBiome, out RuleTile ruleTile))
+				if (storedGroundTiles.TryGetValue(island.myBiome, out RuleTile ruleTile))
 					groundTilemap.SetTile(cell.tilePosition, ruleTile);
 				else if (groundRuleTiles.Length > 0)
 					groundTilemap.SetTile(cell.tilePosition, groundRuleTiles[0]);
@@ -325,7 +346,7 @@ public class GridManager : MonoBehaviour
     {
         foreach (var item in cell.neighbours)
         {
-			if (item.myType == CellType.Water)
+			if (map[item.coordinates.x, item.coordinates.y] == 1)
 				return true;
 		}
 
@@ -349,6 +370,11 @@ public class GridManager : MonoBehaviour
                 }
 			}
 		}
+	}
+
+	public Vector3 CellToWorldPoint(Cell cell)
+	{
+		return new Vector3(-gridSize.x / 2 + 0.5f + cell.coordinates.x, 2 - gridSize.y + 0.5f + cell.coordinates.y);
 	}
 
 	public Cell GetCell(Vector2Int coord)

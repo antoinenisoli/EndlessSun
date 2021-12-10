@@ -70,8 +70,8 @@ public class Cell : MonoBehaviour
         }
     }
 
-    public override string ToString()
+    public void SetColor(Color c)
     {
-        return base.ToString() + " " + coordinates.ToString();
+        regionDebugVisual.color = c;
     }
 }

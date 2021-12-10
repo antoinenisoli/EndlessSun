@@ -2,38 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BiomeType
-{
-	Beach,
-	Forest,
-	Mountain,
-	Jungle,
-	Volcano,
-}
-
 [System.Serializable]
 public class Region
 {
 	[HideInInspector] public List<Vector2Int> CoordinateList = new List<Vector2Int>();
 	public int index;
-	public Color color;
-	public BiomeType myBiome;
 	public List<Cell> Cells = new List<Cell>();
+
+	public Region()
+	{
+
+	}
 
 	public Region(List<Vector2Int> coords, int index) 
 	{
 		CoordinateList = coords;
 		this.index = index;
 		GetCellList();
-		System.Array array = System.Enum.GetValues(typeof(BiomeType));
-		BiomeType randomBiome = (BiomeType)array.GetValue(Random.Range(0, array.Length));
-		myBiome = randomBiome;
 	}
-
-    public override string ToString()
-    {
-		return "Region #" + index + ", biome type = " + myBiome;
-    }
 
 	public Vector2 CenterPosition()
     {
@@ -71,5 +57,10 @@ public class Region
 			if (foundCell)
 				Cells.Add(foundCell);
 		}
+	}
+
+	public override string ToString()
+	{
+		return "Region #" + index;
 	}
 }
