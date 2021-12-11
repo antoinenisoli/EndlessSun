@@ -12,7 +12,7 @@ public class Cell : MonoBehaviour
 {
     public CellType myType;
     public Vector2Int coordinates;
-    public List<Cell> neighbours;
+    public List<Vector2Int> neighbours;
     public Vector3Int tilePosition;
 
     [Header("Region")]
@@ -22,10 +22,8 @@ public class Cell : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        foreach (var item in neighbours)
-        {
-            Gizmos.DrawLine(transform.position, item.transform.position);
-        }
+        foreach (var coord in neighbours)
+            Gizmos.DrawLine(transform.position, new Vector2(coord.x, coord.y));
     }
 
     public void Initialize(Vector2Int coord, Vector3Int worldPosition)
@@ -50,9 +48,8 @@ public class Cell : MonoBehaviour
                     continue;
 
                 Vector2Int coord = new Vector2Int(coordinates.x + x, coordinates.y + y);
-                Cell neighbour = GridManager.Instance.GetCell(coord);
-                if (neighbour && !neighbours.Contains(neighbour) && neighbour != this)
-                    neighbours.Add(neighbour);
+                if (!neighbours.Contains(coord) && coord != coordinates)
+                    neighbours.Add(coord);
             }
         }
     }

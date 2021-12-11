@@ -23,7 +23,6 @@ public class CellularAutomata
     {
 		RandomFillMap();
 		SmoothMap();
-		CleanSmallIslands();
 	}
 
     public void SmoothMap()
@@ -84,36 +83,44 @@ public class CellularAutomata
 
 	public void CleanSmallIslands()
 	{
+		RemoveSmallSeas();
+		RemoveSmallIslands();
+	}
+
+	public void RemoveSmallSeas()
+	{
 		List<Region> waterRegions = gridManager.GetRegions(1);
 		foreach (var wallRegion in waterRegions)
 			if (wallRegion.CoordinateList.Count < waterThresholdSize)
 				foreach (var tile in wallRegion.CoordinateList)
 					gridManager.map[tile.x, tile.y] = 0;
-
-		List<Island> allIslands = gridManager.GetIslands();
-		List<Island> survivingIslands = new List<Island>();
-		foreach (Island island in allIslands)
-			if (island.CoordinateList.Count < groundThresholdSize)
-            {
-				foreach (Vector2Int tile in island.CoordinateList)
-					gridManager.map[tile.x, tile.y] = 1;
-			}
-			else
-				survivingIslands.Add(new Island(island.CoordinateList, island.index));
-
-        foreach (var item in allIslands) item.GetEdgeTiles();
-		foreach (var item in survivingIslands) item.GetEdgeTiles();
-		ConnectClosestIslands(survivingIslands);
 	}
 
-	void ConnectClosestIslands(List<Island> allIslands)
+	public void RemoveSmallIslands()
+    {
+		List<Island> smallIslands = new List<Island>();
+		foreach (Island island in gridManager.islands)
+			if (island.CoordinateList.Count < groundThresholdSize)
+				smallIslands.Add(island);
+
+        foreach (var smallIsland in smallIslands)
+        {
+			Debug.Log(smallIsland.Cells.Count);
+			foreach (var item in smallIsland.Cells)
+				gridManager.map[item.coordinates.x, item.coordinates.y] = 1;
+
+			gridManager.islands.Remove(smallIsland);
+        }
+	}
+
+	public void ConnectClosestIslands(List<Island> allIslands)
     {
 		int bestDistance = 0;
 		Cell bestCellA = null;
 		Cell bestCellB = null;
 		Island bestIslandA = new Island();
 		Island bestIslandB = new Island();
-		bool possibleConnectionFound = false;
+		bool possibleConnectionFound;
 
 		foreach (var islandA in allIslands)
         {
@@ -152,16 +159,16 @@ public class CellularAutomata
 					}
 				}
             }
-        }
 
-		if (possibleConnectionFound)
-			CreatePassage(bestIslandA, bestIslandB, bestCellA, bestCellB);
+			if (possibleConnectionFound)
+				CreatePassage(bestIslandA, bestIslandB, bestCellA, bestCellB);
+		}
     }
 
 	void CreatePassage(Island islandA, Island islandB, Cell cellA, Cell cellB)
     {
-		Debug.Log("make passage between " + islandA + " and " + islandB);
+		//Debug.Log("make passage between " + islandA + " (" + cellA + ")" + " and " + islandB + " (" + cellB + ")");
 		Island.ConnectIslands(islandA, islandB);
-		Debug.DrawLine(gridManager.CellToWorldPoint(cellA), gridManager.CellToWorldPoint(cellB), Color.green, 100f);
+		Debug.DrawLine(cellA.transform.position, cellB.transform.position, Color.red, 100f);
     }
 }

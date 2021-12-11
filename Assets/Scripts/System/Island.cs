@@ -54,7 +54,6 @@ public class Island : Region
 			}
         }
 
-		Debug.Log(ToString() + " get " + edgeTiles.Count + " edge tiles");
 		return edgeTiles;
     }
 
@@ -71,6 +70,6 @@ public class Island : Region
 
 	public override string ToString()
 	{
-		return "[Island #" + index + ", " + myBiome + "]";
+		return "[" + myBiome + " #" + index + "]";
 	}
 }
