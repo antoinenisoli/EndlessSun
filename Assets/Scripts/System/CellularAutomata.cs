@@ -103,9 +103,7 @@ public class CellularAutomata
 				gridManager.map[tile.x, tile.y] = 0;
 
 			if (gridManager.seas.Contains(sea))
-            {
 				gridManager.seas.Remove(sea);
-			}
 		}
 	}
 
@@ -213,10 +211,73 @@ public class CellularAutomata
 			ConnectClosestIslands(allIslands, true);
     }
 
+	List<Vector2Int> GetLine(Vector2Int from, Vector2Int to)
+    {
+		List<Vector2Int> line = new List<Vector2Int>();
+		int x = from.x;
+		int y = from.y;
+
+		int dx = to.x - from.x;
+		int dy = to.y - from.y;
+
+		bool inverted = false;
+		int step = System.Math.Sign(dx);
+		int gradientStep = System.Math.Sign(dy);
+		int longest = Mathf.Abs(dx);
+		int shortest = Mathf.Abs(dy);
+		if (longest < shortest)
+        {
+			inverted = true;
+			longest = Mathf.Abs(dy);
+			shortest = Mathf.Abs(dx);
+			step = System.Math.Sign(dy);
+			gradientStep = System.Math.Sign(dx);
+		}
+
+		int gradientAccumulation = longest / 2;
+        for (int i = 0; i < longest; i++)
+        {
+			line.Add(new Vector2Int(x, y));
+			if (inverted)
+				y += step;
+			else
+				x += step;
+
+			gradientAccumulation += shortest;
+			if (gradientAccumulation >= longest)
+            {
+				if (inverted)
+					x += gradientStep;
+				else
+					y += gradientStep;
+
+				gradientAccumulation -= longest;
+            }
+        }
+
+		return line;
+    }
+
 	void CreatePassage(Island islandA, Island islandB, Cell cellA, Cell cellB)
     {
 		Debug.Log("make passage between " + islandA + " (" + cellA + ")" + " and " + islandB + " (" + cellB + ")");
 		Island.ConnectIslands(islandA, islandB);
 		Debug.DrawLine(cellA.transform.position, cellB.transform.position, Color.red, 100f);
+		List<Vector2Int> lines = GetLine(cellA.coordinates, cellB.coordinates);
+        foreach (var line in lines)
+			DrawCircle(line, 1);
     }
+
+	void DrawCircle(Vector2Int coord, int radius)
+    {
+        for (int x = -radius; x <= radius; x++)
+			for (int y = -radius; y <= radius; y++)
+				if (x*x + y*y <= radius*radius)
+                {
+					int realX = coord.x + x;
+					int realY = coord.y + y;
+					if (gridManager.InMapRange(realX, realY))
+						gridManager.map[realX, realY] = 2;
+                }
+	}
 }

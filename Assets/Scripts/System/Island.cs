@@ -72,22 +72,16 @@ public class Island : Region, IComparable<Island>
 		{
 			isAccessibleFromMainIsland = true;
 			foreach (var connectedIsland in connectedIslands)
-			{
 				connectedIsland.SetAccessibleFromMainIsland();
-			}
 		}
 	}
 
 	public static void ConnectIslands(Island islandA, Island islandB)
     {
 		if (islandA.isAccessibleFromMainIsland)
-        {
 			islandB.SetAccessibleFromMainIsland();
-        }
 		else if (islandB.isAccessibleFromMainIsland)
-        {
 			islandA.SetAccessibleFromMainIsland();
-        }
 
 		islandA.connectedIslands.Add(islandB);
 		islandB.connectedIslands.Add(islandA);

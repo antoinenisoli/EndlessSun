@@ -203,9 +203,9 @@ public class GridManager : MonoBehaviour
 			for (int y = 0; y < gridSize.y; y++)
 			{
 				if (map[x, y] == 1)
-					sr.Write("#");
-				else
-					sr.Write("&");
+					sr.Write(" ");
+				else 
+					sr.Write(map[x, y]);
 			}
 
 			sr.WriteLine();
