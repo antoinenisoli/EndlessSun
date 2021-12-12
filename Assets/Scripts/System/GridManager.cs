@@ -374,7 +374,8 @@ public class GridManager : MonoBehaviour
 
 	public Island BiggestIsland(List<Island> islands)
 	{
-		List<Island> sortedIslands = islands.OrderBy(i => i.CoordinateList.Count).Reverse().ToList();
+		List<Island> sortedIslands = islands;
+		sortedIslands.Sort();
 		return sortedIslands[0];
 	}
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,11 +13,13 @@ public enum IslandBiome
 }
 
 [System.Serializable]
-public class Island : Region
+public class Island : Region, IComparable<Island>
 {
 	public List<Cell> edgeTiles = new List<Cell>();
 	public List<Island> connectedIslands = new List<Island>();
 	public int IslandSize;
+	public bool isAccessibleFromMainIsland;
+	public bool isMainIsland;
 
 	public Color color;
 	public IslandBiome myBiome;
@@ -36,7 +39,7 @@ public class Island : Region
 	public void NewBiome()
 	{
 		System.Array array = System.Enum.GetValues(typeof(IslandBiome));
-		IslandBiome randomBiome = (IslandBiome)array.GetValue(Random.Range(0, array.Length));
+		IslandBiome randomBiome = (IslandBiome)array.GetValue(UnityEngine.Random.Range(0, array.Length));
 		myBiome = randomBiome;
 	}
 
@@ -63,8 +66,29 @@ public class Island : Region
 		name = ToString() + " " + Cells.Count;
 	}
 
+	public void SetAccessibleFromMainIsland()
+	{
+		if (!isAccessibleFromMainIsland)
+		{
+			isAccessibleFromMainIsland = true;
+			foreach (var connectedIsland in connectedIslands)
+			{
+				connectedIsland.SetAccessibleFromMainIsland();
+			}
+		}
+	}
+
 	public static void ConnectIslands(Island islandA, Island islandB)
     {
+		if (islandA.isAccessibleFromMainIsland)
+        {
+			islandB.SetAccessibleFromMainIsland();
+        }
+		else if (islandB.isAccessibleFromMainIsland)
+        {
+			islandA.SetAccessibleFromMainIsland();
+        }
+
 		islandA.connectedIslands.Add(islandB);
 		islandB.connectedIslands.Add(islandA);
 	}
@@ -78,4 +102,9 @@ public class Island : Region
 	{
 		return "[" + myBiome + " #" + index + "]";
 	}
+
+    public int CompareTo(Island otherIsland)
+    {
+		return otherIsland.IslandSize.CompareTo(IslandSize);
+    }
 }

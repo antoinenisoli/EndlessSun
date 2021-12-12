@@ -127,29 +127,52 @@ public class CellularAutomata
 
 			gridManager.islands.Remove(smallIsland);
         }
+
+		gridManager.islands.Sort();
+		gridManager.islands[0].isMainIsland = true;
+		gridManager.islands[0].isAccessibleFromMainIsland = true;
 	}
 
-	public void ConnectClosestIslands(List<Island> allIslands)
+	public void ConnectClosestIslands(List<Island> allIslands, bool forceAccessibilityFromMainIsland = false)
     {
+		List<Island> islandListA = new List<Island>();
+		List<Island> islandListB = new List<Island>();
+		if (forceAccessibilityFromMainIsland)
+        {
+            foreach (var island in allIslands)
+            {
+				if (island.isAccessibleFromMainIsland)
+					islandListB.Add(island);
+				else
+					islandListA.Add(island);
+            }
+        }
+		else
+        {
+			islandListA = allIslands;
+			islandListB = allIslands;
+        }
+
 		int bestDistance = 0;
 		Cell bestCellA = null;
 		Cell bestCellB = null;
 		Island bestIslandA = new Island();
 		Island bestIslandB = new Island();
-		bool possibleConnectionFound;
+		bool possibleConnectionFound = false;
 
-		foreach (var islandA in allIslands)
+		foreach (var islandA in islandListA)
         {
-			possibleConnectionFound = false;
-            foreach (var islandB in allIslands)
+			if (!forceAccessibilityFromMainIsland)
             {
-				if (islandA == islandB)
+				possibleConnectionFound = false;
+				if (islandA.connectedIslands.Count > 0)
 					continue;
-				if (islandA.IsConnected(islandB))
-                {
-					possibleConnectionFound = false;
-					break;
-				}
+            }
+
+            foreach (var islandB in islandListB)
+            {
+				if (islandA == islandB || islandA.IsConnected(islandB))
+					continue;
 
                 for (int indexA = 0; indexA < islandA.edgeTiles.Count; indexA++)
                 {
@@ -176,14 +199,23 @@ public class CellularAutomata
 				}
             }
 
-			if (possibleConnectionFound)
+			if (possibleConnectionFound && !forceAccessibilityFromMainIsland)
 				CreatePassage(bestIslandA, bestIslandB, bestCellA, bestCellB);
 		}
+
+		if (possibleConnectionFound && forceAccessibilityFromMainIsland)
+        {
+			CreatePassage(bestIslandA, bestIslandB, bestCellA, bestCellB);
+			ConnectClosestIslands(allIslands, true);
+		}
+
+		if (!forceAccessibilityFromMainIsland)
+			ConnectClosestIslands(allIslands, true);
     }
 
 	void CreatePassage(Island islandA, Island islandB, Cell cellA, Cell cellB)
     {
-		//Debug.Log("make passage between " + islandA + " (" + cellA + ")" + " and " + islandB + " (" + cellB + ")");
+		Debug.Log("make passage between " + islandA + " (" + cellA + ")" + " and " + islandB + " (" + cellB + ")");
 		Island.ConnectIslands(islandA, islandB);
 		Debug.DrawLine(cellA.transform.position, cellB.transform.position, Color.red, 100f);
     }
