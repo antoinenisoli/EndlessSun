@@ -57,6 +57,12 @@ public class Island : Region
 		return edgeTiles;
     }
 
+    public override void GetCellList()
+    {
+        base.GetCellList();
+		name = ToString() + " " + Cells.Count;
+	}
+
 	public static void ConnectIslands(Island islandA, Island islandB)
     {
 		islandA.connectedIslands.Add(islandB);

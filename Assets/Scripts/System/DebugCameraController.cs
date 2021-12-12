@@ -2,11 +2,13 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DebugCameraController : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera movingCamera;
     [SerializeField] float speed = 20f;
+    [SerializeField] RectTransform minimapMarker;
 
     private void Update()
     {
@@ -21,5 +23,8 @@ public class DebugCameraController : MonoBehaviour
         movingCamera.transform.position += move.normalized * speed * Time.deltaTime;
         if (movingCamera.m_Lens.OrthographicSize <= 1)
             movingCamera.m_Lens.OrthographicSize = 1;
+
+        if (minimapMarker)
+            minimapMarker.position += move.normalized * (speed * 2) * Time.deltaTime;
     }
 }

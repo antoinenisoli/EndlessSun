@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Region
 {
+	public string name;
 	[HideInInspector] public List<Vector2Int> CoordinateList = new List<Vector2Int>();
 	public int index;
 	public List<Cell> Cells = new List<Cell>();
@@ -18,16 +19,34 @@ public class Region
 	{
 		CoordinateList = coords;
 		this.index = index;
-		GetCellList();
+		name = ToString();
+	}
+
+	public void Update()
+    {
+		name = ToString();
+	}
+
+	public bool IsInRegion(Vector2Int coordinates)
+    {
+        foreach (var item in CoordinateList)
+			if (item == coordinates)
+				return true;
+
+		return false;
+    }
+
+	public void AddCell(Cell newCell)
+    {
+		Cells.Add(newCell);
+		CoordinateList.Add(newCell.coordinates);
 	}
 
 	public Vector2 CenterPosition()
     {
 		var bound = new Bounds(Cells[0].transform.position, Vector3.zero);
 		for (int i = 1; i < Cells.Count; i++)
-		{
 			bound.Encapsulate(Cells[i].transform.position);
-		}
 
 		return bound.center;
 	}
@@ -49,7 +68,7 @@ public class Region
 		return newPos;
 	}
 
-	public void GetCellList()
+	public virtual void GetCellList()
 	{
 		foreach (var item in CoordinateList)
 		{

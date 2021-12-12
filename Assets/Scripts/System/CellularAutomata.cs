@@ -23,6 +23,7 @@ public class CellularAutomata
     {
 		RandomFillMap();
 		SmoothMap();
+		CleanMap();
 	}
 
     public void SmoothMap()
@@ -81,19 +82,31 @@ public class CellularAutomata
 			}
 	}
 
-	public void CleanSmallIslands()
+	public void CleanMap()
 	{
+		gridManager.seas = gridManager.GetRegions(1);
 		RemoveSmallSeas();
+		gridManager.islands = gridManager.GetIslands();
 		RemoveSmallIslands();
 	}
 
 	public void RemoveSmallSeas()
 	{
-		List<Region> waterRegions = gridManager.GetRegions(1);
-		foreach (var wallRegion in waterRegions)
-			if (wallRegion.CoordinateList.Count < waterThresholdSize)
-				foreach (var tile in wallRegion.CoordinateList)
-					gridManager.map[tile.x, tile.y] = 0;
+		List<Region> smallSeas = new List<Region>();
+		foreach (var sea in gridManager.seas)
+			if (sea.CoordinateList.Count < waterThresholdSize)
+				smallSeas.Add(sea);
+
+        foreach (var sea in smallSeas)
+        {
+			foreach (var tile in sea.CoordinateList)
+				gridManager.map[tile.x, tile.y] = 0;
+
+			if (gridManager.seas.Contains(sea))
+            {
+				gridManager.seas.Remove(sea);
+			}
+		}
 	}
 
 	public void RemoveSmallIslands()
@@ -105,9 +118,12 @@ public class CellularAutomata
 
         foreach (var smallIsland in smallIslands)
         {
-			Debug.Log(smallIsland.Cells.Count);
-			foreach (var item in smallIsland.Cells)
-				gridManager.map[item.coordinates.x, item.coordinates.y] = 1;
+			foreach (var coord in smallIsland.CoordinateList)
+            {
+				gridManager.map[coord.x, coord.y] = 1;
+				Region ocean = gridManager.BiggestRegion(gridManager.seas);
+				ocean.CoordinateList.Add(coord);
+			}
 
 			gridManager.islands.Remove(smallIsland);
         }

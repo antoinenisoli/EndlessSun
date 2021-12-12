@@ -7,28 +7,32 @@ using System.IO;
 using System.Linq;
 using Cinemachine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GridManager : MonoBehaviour
 {
 	public static GridManager Instance;
-	[SerializeField] bool debugMode;
 	[SerializeField] Vector2Int gridSize;
+	GridLayout gridLayout;
+
+	[Header("Draw tiles")]
 	[SerializeField] Tilemap groundTilemap, propsTilemap;
 	[SerializeField] RuleTile waterTile;
 	[SerializeField] RuleTile[] groundRuleTiles;
 	Dictionary<IslandBiome, RuleTile> storedGroundTiles = new Dictionary<IslandBiome, RuleTile>();
-	GridLayout gridLayout;
 
 	[Header("Regions")]
-	public Region ocean = new Region();
+	public List<Region> seas = new List<Region>();
 	[SerializeField] Color[] debugColors = new Color[] { Color.white };
 	public List<Island> islands = new List<Island>();
 	int regionSize;
 
 	[Header("_Debug")]
+	[SerializeField] bool debugMode;
 	[SerializeField] Text debugText;
 	[SerializeField] Transform debugCube;
-	int elapsedFrames;
+	[SerializeField] Image FadeImage;
+	float elapsedFrames;
 	bool stopFrameCount;
 
 	[Header("Generate Props")]
@@ -36,6 +40,8 @@ public class GridManager : MonoBehaviour
 	[SerializeField] float propsProb = 30f;
 
 	[Header("Generate Map")]
+	[SerializeField] GameObject cellPrefab;
+	[SerializeField] Transform cellParent;
 	[SerializeField] CellularAutomata cellularAutomata;
     public int[,] map;
 	Dictionary<Vector2Int, Cell> allCells = new Dictionary<Vector2Int, Cell>();
@@ -46,9 +52,10 @@ public class GridManager : MonoBehaviour
 		Gizmos.DrawWireCube(transform.position + new Vector3(gridSize.x/2, gridSize.y/2), new Vector3(gridSize.x, gridSize.y));
     }
 
-    private void Awake()
+	void Awake()
     {
-		Singleton();
+		if (Instance == null)
+			Instance = this;
 
 		gridLayout = FindObjectOfType<GridLayout>();
 		map = new int[gridSize.x, gridSize.y];
@@ -58,46 +65,45 @@ public class GridManager : MonoBehaviour
 
 	public IEnumerator Start()
 	{
+		float delay = 0.6f;
+		FadeImage.DOFade(1, delay);
+		yield return new WaitForSeconds(delay);
 		StartCoroutine(DebugCoroutine());
 		if (!debugMode)
-		{
 			GenerateMap();
-			yield return new WaitForSeconds(0.01f);
-			GenerateCells();
-			AssignIslands();
-		}
 		else
 			DebugMap();
 
-		yield return new WaitForSeconds(0.01f);
 		SetupMap();
+		yield return new WaitForSeconds(0.01f);
+		ProcessMap();
+		FadeImage.DOFade(0, 0.6f);
 	}
 
 	IEnumerator DebugCoroutine()
     {
+		stopFrameCount = false;
+		elapsedFrames = Time.unscaledTime;
 		while (!stopFrameCount)
-        {
 			yield return null;
-			elapsedFrames++;
-			debugText.text = "Time : " + elapsedFrames + " frames";
-		}
+
+		debugText.text = "Time : " + (Time.unscaledTime - elapsedFrames) + " frames";
 	}
 
 	void SetupMap()
     {
-		cellularAutomata.CleanSmallIslands();
-		foreach (var item in islands)
-			item.GetEdgeTiles();
-
+		CreateCells();
+		AssignIslands();
 		cellularAutomata.ConnectClosestIslands(islands);
-		ProcessMap();
 	}
 
 	void ProcessMap()
     {
+        foreach (var ocean in seas)
+			ocean.Update();
+
 		DrawGroundTiles();
 		DrawWaterTiles();
-		CleanUselessCells();
 
 		TeleportPlayer();
 		GenerateProps();
@@ -107,16 +113,63 @@ public class GridManager : MonoBehaviour
 			AstarPath.active.Scan();
 	}
 
-	void Singleton()
+	void GenerateMap()
 	{
-		if (Instance == null)
-			Instance = this;
+		groundTilemap.ClearAllTiles();
+		propsTilemap.ClearAllTiles();
+		map = new int[gridSize.x, gridSize.y];
+		foreach (var item in allCells.Values)
+		{
+			if (item)
+				Destroy(item.gameObject);
+		}
+
+		allCells.Clear();
+		cellularAutomata.NewMap();
+	}
+
+	void CreateCells()
+	{
+		foreach (var island in islands)
+			foreach (var coords in island.CoordinateList)
+			{
+				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coords.x, coords.y, 0));
+				GameObject cellGameobject = Instantiate(cellPrefab, worldToCell, Quaternion.identity, cellParent);
+				Cell cellScript = cellGameobject.GetComponent<Cell>();
+				cellScript.Initialize(coords, worldToCell);
+				allCells.Add(coords, cellScript);
+			}
+	}
+
+	public void AssignIslands()
+	{
+		foreach (var island in islands)
+			island.GetCellList();
+
+		for (int i = 0; i < islands.Count; i++)
+		{
+			Island island = islands[i];
+			Color color = GameManager.RandomColor();
+			if (i < debugColors.Length - 1)
+				color = debugColors[i];
+
+			island.color = color;
+			island.index = i;
+			color.a = 0.5f;
+			foreach (var cell in island.Cells)
+			{
+				cell.GetNeighbours();
+				cell.SetRegion(i, color);
+			}
+
+			island.GetEdgeTiles();
+		}
 	}
 
 	void TeleportPlayer()
     {
-		Region r = BiggestIsland();
-		Vector2 newPos = r.ClosestGroundPos(r.CenterPosition());
+		Island biggestIsland = BiggestIsland(islands);
+		Vector2 newPos = biggestIsland.ClosestGroundPos(biggestIsland.CenterPosition());
 		debugCube.position = newPos;
 		if (GameManager.Instance)
 			GameManager.Player.CheckCollision();
@@ -186,14 +239,41 @@ public class GridManager : MonoBehaviour
 		}
 	}
 
+	void DrawWaterTiles()
+    {
+        foreach (var ocean in seas)
+        {
+			foreach (var coord in ocean.CoordinateList)
+			{
+				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coord.x, coord.y, 0));
+				groundTilemap.SetTile(worldToCell, waterTile);
+			}
+		}
+	}
+
+	public void DrawGroundTiles()
+	{
+		foreach (var island in islands)
+		{
+			foreach (var coord in island.CoordinateList)
+			{
+				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coord.x, coord.y, 0));
+				if (storedGroundTiles.TryGetValue(island.myBiome, out RuleTile ruleTile))
+					groundTilemap.SetTile(worldToCell, ruleTile);
+				else if (groundRuleTiles.Length > 0)
+					groundTilemap.SetTile(worldToCell, groundRuleTiles[0]);
+			}
+		}
+	}
+
 	public List<Island> GetIslands()
 	{
 		List<Island> convertedIslands = new List<Island>();
-        foreach (var item in GetRegions(0))
-        {
+		foreach (var item in GetRegions(0))
+		{
 			Island island = new Island(item.CoordinateList, item.index);
 			convertedIslands.Add(island);
-        }
+		}
 
 		return convertedIslands;
 	}
@@ -217,17 +297,17 @@ public class GridManager : MonoBehaviour
 	}
 
 	public Region GetRegionTiles(int startX, int startY)
-    {
+	{
 		List<Vector2Int> tiles = new List<Vector2Int>();
 		int[,] mapFlags = new int[gridSize.x, gridSize.y];
 		int tileType = map[startX, startY];
 
 		Queue<Vector2Int> queue = new Queue<Vector2Int>();
 		queue.Enqueue(new Vector2Int(startX, startY));
-		mapFlags[startX, startY] = 1;   
-		
+		mapFlags[startX, startY] = 1;
+
 		while (queue.Count > 0)
-        {
+		{
 			Vector2Int tile = queue.Dequeue();
 			tiles.Add(tile);
 
@@ -247,31 +327,16 @@ public class GridManager : MonoBehaviour
 	}
 
 	public bool InMapRange(int x, int y)
-    {
-		return x >= 0 && x < gridSize.x && y >= 0 && y < gridSize.y;
-	}
-
-	void GenerateMap()
 	{
-		groundTilemap.ClearAllTiles();
-		propsTilemap.ClearAllTiles();
-		map = new int[gridSize.x, gridSize.y];
-		foreach (var item in allCells.Values)
-        {
-			if (item)
-				Destroy(item.gameObject);
-		}
-
-		allCells.Clear();
-		cellularAutomata.NewMap();
+		return x >= 0 && x < gridSize.x && y >= 0 && y < gridSize.y;
 	}
 
 	public Cell ClosestCell(Vector2 pos)
 	{
 		float maxDistance = Mathf.Infinity;
 		Cell groundCell = null;
-        foreach (var item in allCells.Values)
-        {
+		foreach (var item in allCells.Values)
+		{
 			float currentDistance = Vector2.Distance(item.transform.position, pos);
 			if (currentDistance < maxDistance)
 			{
@@ -299,67 +364,6 @@ public class GridManager : MonoBehaviour
 		return sampledPosition.sqrMagnitude > 0;
 	}
 
-	void CleanUselessCells()
-	{
-		for (int x = 0; x < gridSize.x; x++)
-			for (int y = 0; y < gridSize.y; y++)
-			{
-				Vector2Int coords = new Vector2Int(x, y);
-				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coords.x, coords.y, 0));
-				GameObject uselessCell = groundTilemap.GetInstantiatedObject(worldToCell);
-				if (map[coords.x, coords.y] == 1)
-                {
-					Destroy(uselessCell);
-					allCells.Remove(coords);
-				}
-			}
-	}
-
-	void GenerateCells()
-	{
-		for (int x = 0; x < gridSize.x; x++)
-			for (int y = 0; y < gridSize.y; y++)
-			{
-				Vector2Int coords = new Vector2Int(x, y);
-				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coords.x, coords.y, 0));
-				groundTilemap.SetTile(worldToCell, groundRuleTiles[0]);
-				GameObject newCell = groundTilemap.GetInstantiatedObject(worldToCell);
-
-				if (map[coords.x, coords.y] == 1)
-					Destroy(newCell);
-				else
-                {
-					Cell cellScript = newCell.GetComponent<Cell>();
-					cellScript.Initialize(coords, worldToCell);
-					allCells.Add(coords, cellScript);
-				}
-			}
-	}
-
-	void DrawWaterTiles()
-    {
-		ocean = GetRegions(1)[0];
-		foreach (var coord in ocean.CoordinateList)
-		{
-			Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coord.x, coord.y, 0));
-			groundTilemap.SetTile(worldToCell, waterTile);
-		}
-	}
-
-	public void DrawGroundTiles()
-	{
-		foreach (var island in islands)
-		{
-			foreach (var cell in island.Cells)
-			{
-				if (storedGroundTiles.TryGetValue(island.myBiome, out RuleTile ruleTile))
-					groundTilemap.SetTile(cell.tilePosition, ruleTile);
-				else if (groundRuleTiles.Length > 0)
-					groundTilemap.SetTile(cell.tilePosition, groundRuleTiles[0]);
-			}
-		}
-	}
-
 	[ContextMenu("Region random colors")]
 	public void NewRegionsColors()
     {
@@ -368,29 +372,17 @@ public class GridManager : MonoBehaviour
 			debugColors[i] = GameManager.RandomColor();
     }
 
-	public Island BiggestIsland()
-    {
-		List<Island> sortedIslands = islands.OrderBy(i => i.Cells.Count).Reverse().ToList();
-		return sortedIslands[0];
-    }
-
-	public void AssignIslands()
+	public Island BiggestIsland(List<Island> islands)
 	{
-		islands = GetIslands();
-		for (int i = 0; i < islands.Count; i++)
-		{
-			Island island = islands[i];
-			Color color = debugColors[i];
-			island.color = color;
-			island.index = i;
-			color.a = 0.5f;
-			foreach (var cell in island.Cells)
-            {
-				cell.GetNeighbours();
-				cell.SetRegion(i, color);
-			}
-		}
+		List<Island> sortedIslands = islands.OrderBy(i => i.CoordinateList.Count).Reverse().ToList();
+		return sortedIslands[0];
 	}
+
+	public Region BiggestRegion(List<Region> regions)
+    {
+		List<Region> sortedRegions = regions.OrderBy(i => i.CoordinateList.Count).Reverse().ToList();
+		return sortedRegions[0];
+    }
 
 	public bool IsShore(Cell cell)
     {
