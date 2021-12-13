@@ -131,7 +131,11 @@ MonoBehaviour:
   coordinates: {x: 0, y: 0}
   neighbours: []
   tilePosition: {x: 0, y: 0, z: 0}
-  regionIndex: 0
+  myRegion:
+    name: 
+    CoordinateList: []
+    index: 0
+    Cells: []
   regionDebugVisual: {fileID: 3366049456194986234}
   colors:
   - {r: 1, g: 0.5458693, b: 0, a: 0.7882353}

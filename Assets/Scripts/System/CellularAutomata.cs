@@ -9,7 +9,10 @@ public class CellularAutomata
 	[SerializeField] int smoothIterations = 5;
 	[SerializeField] bool useRandomSeed;
 	[SerializeField] [Range(0, 100)] float randomFillPercent = 50;
-	[SerializeField] int groundThresholdSize = 50, waterThresholdSize = 50;
+
+	[Header("Clean threshold")]
+	[SerializeField] int groundThresholdSize = 50;
+	[SerializeField] int waterThresholdSize = 50;
     Vector2Int gridSize;
 	GridManager gridManager;
 
@@ -260,6 +263,10 @@ public class CellularAutomata
 
 	void CreatePassage(Island islandA, Island islandB, Cell cellA, Cell cellB)
     {
+		int random = UnityEngine.Random.Range(0, 101);
+		/*if (random > gridManager.bridgeProb)
+			return;*/
+
 		Debug.Log("make passage between " + islandA + " (" + cellA + ")" + " and " + islandB + " (" + cellB + ")");
 		Island.ConnectIslands(islandA, islandB);
 		Debug.DrawLine(cellA.transform.position, cellB.transform.position, Color.red, 100f);
@@ -276,8 +283,15 @@ public class CellularAutomata
                 {
 					int realX = coord.x + x;
 					int realY = coord.y + y;
-					if (gridManager.InMapRange(realX, realY))
-						gridManager.map[realX, realY] = 2;
+
+					Vector2Int c = new Vector2Int(realX, realY);
+					if (gridManager.InMapRange(c.x, c.y))
+                    {
+						gridManager.map[c.x, c.y] = 2;
+                        foreach (var sea in gridManager.seas)
+							if (sea.CoordinateList.Contains(c))
+								sea.CoordinateList.Remove(c);
+					}
                 }
 	}
 }

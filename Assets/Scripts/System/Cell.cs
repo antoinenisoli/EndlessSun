@@ -16,7 +16,7 @@ public class Cell : MonoBehaviour
     public Vector3Int tilePosition;
 
     [Header("Region")]
-    public int regionIndex = 0;
+    public Region myRegion;
     [SerializeField] SpriteRenderer regionDebugVisual;
     [SerializeField] Color[] colors;
 
@@ -54,21 +54,15 @@ public class Cell : MonoBehaviour
         }
     }
 
-    public void SetRegion(int index, Color newColor = default)
+    public void SetRegion(Region region)
     {
-        regionIndex = index;
-        if (regionDebugVisual)
-        {
-            regionDebugVisual.gameObject.SetActive(true);
-            if (newColor == default)
-                regionDebugVisual.color = colors[regionIndex % colors.Length];
-            else
-                regionDebugVisual.color = newColor;
-        }
+        myRegion = region;
     }
 
     public void SetColor(Color c)
     {
         regionDebugVisual.color = c;
+        if (regionDebugVisual)
+            regionDebugVisual.gameObject.SetActive(true);
     }
 }

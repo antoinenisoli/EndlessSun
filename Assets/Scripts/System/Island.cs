@@ -47,15 +47,8 @@ public class Island : Region, IComparable<Island>
     {
 		edgeTiles = new List<Cell>();
         foreach (var item in Cells)
-        {
 			if (GridManager.Instance.IsShore(item) && item.myType != CellType.Water)
-            {
 				edgeTiles.Add(item);
-				Color c = color;
-				c.a = 100;
-				item.SetColor(c);
-			}
-        }
 
 		return edgeTiles;
     }

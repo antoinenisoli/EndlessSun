@@ -15,19 +15,13 @@ public class GridManager : MonoBehaviour
 	[SerializeField] Vector2Int gridSize;
 	GridLayout gridLayout;
 
-	[Header("Draw tiles")]
-	[SerializeField] Tilemap groundTilemap, propsTilemap;
-	[SerializeField] RuleTile waterTile;
-	[SerializeField] RuleTile[] groundRuleTiles;
-	Dictionary<IslandBiome, RuleTile> storedGroundTiles = new Dictionary<IslandBiome, RuleTile>();
-
 	[Header("Regions")]
-	public List<Region> seas = new List<Region>();
 	[SerializeField] Color[] debugColors = new Color[] { Color.white };
+	public List<Region> seas = new List<Region>();
 	public List<Island> islands = new List<Island>();
 	int regionSize;
 
-	[Header("_Debug")]
+	[Header("Debug")]
 	[SerializeField] bool debugMode;
 	[SerializeField] Text debugText;
 	[SerializeField] Transform debugCube;
@@ -35,18 +29,26 @@ public class GridManager : MonoBehaviour
 	float elapsedFrames;
 	bool stopFrameCount;
 
-	[Header("Generate Props")]
-	[SerializeField] RuleTile propsTiles;
-	[SerializeField] float propsProb = 30f;
-
-	[Header("Generate Map")]
+	[Header("Generate Map & bridges")]
 	[SerializeField] GameObject cellPrefab;
 	[SerializeField] Transform cellParent;
+	[SerializeField] bool generateBridges = true;
+	public int bridgeProb = 50;
 	[SerializeField] CellularAutomata cellularAutomata;
     public int[,] map;
 	Dictionary<Vector2Int, Cell> allCells = new Dictionary<Vector2Int, Cell>();
 
-    private void OnDrawGizmos()
+	[Header("Generate Props")]
+	[SerializeField] RuleTile propsTiles;
+	[SerializeField] float propsProb = 30f;
+
+	[Header("Draw tiles")]
+	[SerializeField] RuleTile waterTile;
+	[SerializeField] Tilemap groundTilemap, propsTilemap;
+	[SerializeField] RuleTile[] groundRuleTiles;
+	Dictionary<IslandBiome, RuleTile> storedGroundTiles = new Dictionary<IslandBiome, RuleTile>();
+
+	private void OnDrawGizmos()
     {
 		Gizmos.color = Color.green;
 		Gizmos.DrawWireCube(transform.position + new Vector3(gridSize.x/2, gridSize.y/2), new Vector3(gridSize.x, gridSize.y));
@@ -69,11 +71,7 @@ public class GridManager : MonoBehaviour
 		FadeImage.DOFade(1, delay);
 		yield return new WaitForSeconds(delay);
 		StartCoroutine(DebugCoroutine());
-		if (!debugMode)
-			GenerateMap();
-		else
-			DebugMap();
-
+		GenerateMap();
 		SetupMap();
 		yield return new WaitForSeconds(0.01f);
 		ProcessMap();
@@ -94,7 +92,10 @@ public class GridManager : MonoBehaviour
     {
 		CreateCells();
 		AssignIslands();
-		cellularAutomata.ConnectClosestIslands(islands);
+		if (generateBridges)
+			cellularAutomata.ConnectClosestIslands(islands);
+
+		CreateCells();
 	}
 
 	void ProcessMap()
@@ -130,14 +131,32 @@ public class GridManager : MonoBehaviour
 
 	void CreateCells()
 	{
-		foreach (var island in islands)
-			foreach (var coords in island.CoordinateList)
+		for (int x = 0; x < gridSize.x; x++)
+			for (int y = 0; y < gridSize.y; y++)
 			{
-				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coords.x, coords.y, 0));
-				GameObject cellGameobject = Instantiate(cellPrefab, worldToCell, Quaternion.identity, cellParent);
-				Cell cellScript = cellGameobject.GetComponent<Cell>();
-				cellScript.Initialize(coords, worldToCell);
-				allCells.Add(coords, cellScript);
+				Vector2Int coords = new Vector2Int(x, y);
+				if (!allCells.ContainsKey(coords) && map[x, y] != 1)
+				{
+					Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coords.x, coords.y, 0));
+					GameObject cellGameobject = Instantiate(cellPrefab, worldToCell, Quaternion.identity, cellParent);
+					Cell cellScript = cellGameobject.GetComponent<Cell>();
+					cellScript.Initialize(coords, worldToCell);
+					cellScript.GetNeighbours();
+
+					if (string.IsNullOrEmpty(cellScript.myRegion.name))
+                    {
+						print(coords);
+						cellScript.SetRegion(new Region(null, -1));
+						if (debugMode)
+                        {
+							Color c = GameManager.RandomColor();
+							c.a = 0.5f;
+							cellScript.SetColor(c);
+						}
+					}
+
+					allCells.Add(coords, cellScript);
+				}
 			}
 	}
 
@@ -155,14 +174,24 @@ public class GridManager : MonoBehaviour
 
 			island.color = color;
 			island.index = i;
-			color.a = 0.5f;
 			foreach (var cell in island.Cells)
 			{
 				cell.GetNeighbours();
-				cell.SetRegion(i, color);
+				cell.SetRegion(island);
+				if (debugMode)
+                {
+					color.a = 0.5f;
+					cell.SetColor(color);
+				}
 			}
 
 			island.GetEdgeTiles();
+			if (debugMode)
+                foreach (var item in island.edgeTiles)
+                {
+					color.a = 0.9f;
+					item.SetColor(color);
+				}
 		}
 	}
 
@@ -182,13 +211,11 @@ public class GridManager : MonoBehaviour
 			System.Array array = System.Enum.GetValues(typeof(IslandBiome));
 			IslandBiome randomBiome = (IslandBiome)array.GetValue(Random.Range(0, array.Length));
             for (int i = 0; i < array.Length; i++)
-            {
 				if (item.name.Contains(randomBiome.ToString()) && !storedGroundTiles.ContainsValue(item))
                 {
 					storedGroundTiles.Add(randomBiome, item);
 					break;
                 }
-            }
 		}
     }
 
@@ -214,47 +241,19 @@ public class GridManager : MonoBehaviour
 		sr.Close();
 	}
 
-	void DebugMap()
-    {
-		Cell[] cells = FindObjectsOfType<Cell>();
-		foreach (var item in cells)
-		{
-			Vector2Int newCoord = new Vector2Int((int)item.transform.position.x, (int)item.transform.position.y);
-			item.coordinates = newCoord;
-			newCoord.x = System.Math.Abs(newCoord.x);
-			newCoord.y = System.Math.Abs(newCoord.y);
-
-			if (item.myType == CellType.Ground)
-			{
-				map[newCoord.x, newCoord.y] = 0;
-				groundTilemap.SetTile(new Vector3Int(newCoord.x, newCoord.y, 0), groundRuleTiles[0]);
-			}
-			else if (item.myType == CellType.Water)
-			{
-				map[newCoord.x, newCoord.y] = 1;
-				groundTilemap.SetTile(new Vector3Int(newCoord.x, newCoord.y, 0), waterTile);
-			}
-
-			allCells.Add(newCoord, item);
-		}
-	}
-
 	void DrawWaterTiles()
     {
         foreach (var ocean in seas)
-        {
 			foreach (var coord in ocean.CoordinateList)
 			{
 				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coord.x, coord.y, 0));
 				groundTilemap.SetTile(worldToCell, waterTile);
 			}
-		}
 	}
 
 	public void DrawGroundTiles()
 	{
 		foreach (var island in islands)
-		{
 			foreach (var coord in island.CoordinateList)
 			{
 				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coord.x, coord.y, 0));
@@ -263,6 +262,13 @@ public class GridManager : MonoBehaviour
 				else if (groundRuleTiles.Length > 0)
 					groundTilemap.SetTile(worldToCell, groundRuleTiles[0]);
 			}
+
+
+        foreach (var item in allCells.Values)
+        {
+			Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(item.coordinates.x, item.coordinates.y, 0));
+			if (!groundTilemap.HasTile(worldToCell))
+				groundTilemap.SetTile(worldToCell, groundRuleTiles[0]);
 		}
 	}
 
@@ -388,10 +394,8 @@ public class GridManager : MonoBehaviour
 	public bool IsShore(Cell cell)
     {
         foreach (var neighbourCoordinates in cell.neighbours)
-        {
 			if (map[neighbourCoordinates.x, neighbourCoordinates.y] == 1)
 				return true;
-		}
 
 		return false;
 	}
@@ -403,7 +407,6 @@ public class GridManager : MonoBehaviour
 
 		foreach (Island island in islands)
             foreach (Cell cell in island.Cells)
-            {
 				if (!IsShore(cell))
 				{
 					float r = Random.Range(0, 100);
@@ -413,7 +416,6 @@ public class GridManager : MonoBehaviour
 						propsTilemap.SetTile(worldToCell, propsTiles);
 					}
 				}
-			}
 	}
 
 	public Vector3 CellToWorldPoint(Cell cell)
