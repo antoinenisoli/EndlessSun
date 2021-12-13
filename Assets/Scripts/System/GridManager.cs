@@ -43,9 +43,9 @@ public class GridManager : MonoBehaviour
 	[SerializeField] float propsProb = 30f;
 
 	[Header("Draw tiles")]
-	[SerializeField] RuleTile waterTile;
-	[SerializeField] Tilemap groundTilemap, propsTilemap;
 	[SerializeField] RuleTile[] groundRuleTiles;
+	[SerializeField] RuleTile waterTile, bridgeRuleTile;
+	[SerializeField] Tilemap groundTilemap, propsTilemap;
 	Dictionary<IslandBiome, RuleTile> storedGroundTiles = new Dictionary<IslandBiome, RuleTile>();
 
 	private void OnDrawGizmos()
@@ -103,6 +103,7 @@ public class GridManager : MonoBehaviour
         foreach (var ocean in seas)
 			ocean.Update();
 
+		DrawBridgeTiles();
 		DrawGroundTiles();
 		DrawWaterTiles();
 
@@ -145,7 +146,6 @@ public class GridManager : MonoBehaviour
 
 					if (string.IsNullOrEmpty(cellScript.myRegion.name))
                     {
-						print(coords);
 						cellScript.SetRegion(new Region(null, -1));
 						if (debugMode)
                         {
@@ -206,16 +206,18 @@ public class GridManager : MonoBehaviour
 
 	void StoreRuleTiles()
     {
-        foreach (var item in groundRuleTiles)
+		System.Array array = System.Enum.GetValues(typeof(IslandBiome));
+		foreach (var item in groundRuleTiles)
         {
-			System.Array array = System.Enum.GetValues(typeof(IslandBiome));
-			IslandBiome randomBiome = (IslandBiome)array.GetValue(Random.Range(0, array.Length));
             for (int i = 0; i < array.Length; i++)
-				if (item.name.Contains(randomBiome.ToString()) && !storedGroundTiles.ContainsValue(item))
-                {
-					storedGroundTiles.Add(randomBiome, item);
+            {
+				IslandBiome biome = (IslandBiome)array.GetValue(i);
+				if (item.name.Contains(biome.ToString()) && !storedGroundTiles.ContainsValue(item))
+				{
+					storedGroundTiles.Add(biome, item);
 					break;
-                }
+				}
+			}
 		}
     }
 
@@ -258,8 +260,11 @@ public class GridManager : MonoBehaviour
 			{
 				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coord.x, coord.y, 0));
 				if (storedGroundTiles.TryGetValue(island.myBiome, out RuleTile ruleTile))
+                {
+					print(storedGroundTiles[island.myBiome] + " " + island.myBiome);
 					groundTilemap.SetTile(worldToCell, ruleTile);
-				else if (groundRuleTiles.Length > 0)
+				}
+				else 
 					groundTilemap.SetTile(worldToCell, groundRuleTiles[0]);
 			}
 
@@ -270,6 +275,21 @@ public class GridManager : MonoBehaviour
 			if (!groundTilemap.HasTile(worldToCell))
 				groundTilemap.SetTile(worldToCell, groundRuleTiles[0]);
 		}
+	}
+
+	public void DrawBridgeTiles()
+	{
+		for (int x = 0; x < gridSize.x; x++)
+			for (int y = 0; y < gridSize.y; y++)
+            {
+				if (map[x,y] == 2)
+                {
+					Vector2Int item = new Vector2Int(x, y);
+					Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(item.x, item.y, 0));
+					groundTilemap.SetTile(worldToCell, bridgeRuleTile);
+				}
+				
+			}
 	}
 
 	public List<Island> GetIslands()
