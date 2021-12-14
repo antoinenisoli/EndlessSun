@@ -78,10 +78,9 @@ public class PlayerController2D : Entity
     {
         Region r = GridManager.Instance.BiggestIsland(GridManager.Instance.islands);
         Vector2 newPos = r.ClosestGroundPos(r.CenterPosition());
+
         if (Physics2D.OverlapCircle(transform.position, 0.5f, tilemapLayer))
-        {
             transform.position = newPos;
-        }
     }
 
     bool CanMove()

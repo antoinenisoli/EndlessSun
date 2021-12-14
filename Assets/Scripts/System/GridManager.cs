@@ -25,7 +25,6 @@ public class GridManager : MonoBehaviour
 	[SerializeField] bool debugMode;
 	[SerializeField] Text debugText;
 	[SerializeField] Transform debugCube;
-	[SerializeField] Image FadeImage;
 	float elapsedFrames;
 	bool stopFrameCount;
 
@@ -41,6 +40,9 @@ public class GridManager : MonoBehaviour
 	[Header("Generate Props")]
 	[SerializeField] RuleTile propsTiles;
 	[SerializeField] float propsProb = 30f;
+
+	[Header("generate enemy spawners")]
+	[SerializeField] float spawnerProb = 30f;
 
 	[Header("Draw tiles")]
 	[SerializeField] RuleTile[] groundRuleTiles;
@@ -67,15 +69,22 @@ public class GridManager : MonoBehaviour
 
 	public IEnumerator Start()
 	{
-		float delay = 0.6f;
-		FadeImage.DOFade(1, delay);
+		float delay = 1f;
+		if (UIManager.Instance)
+			UIManager.Instance.BlackScreen(1, delay);
 		yield return new WaitForSeconds(delay);
-		StartCoroutine(DebugCoroutine());
+		if (debugText)
+			StartCoroutine(DebugCoroutine());
+
 		GenerateMap();
 		SetupMap();
 		yield return new WaitForSeconds(0.01f);
 		ProcessMap();
-		FadeImage.DOFade(0, 0.6f);
+
+		yield return new WaitForSeconds(0.01f);
+		TeleportPlayer();
+		if (UIManager.Instance)
+			UIManager.Instance.BlackScreen(0, 0.5f);
 	}
 
 	IEnumerator DebugCoroutine()
@@ -107,7 +116,6 @@ public class GridManager : MonoBehaviour
 		DrawGroundTiles();
 		DrawWaterTiles();
 
-		TeleportPlayer();
 		GenerateProps();
 		MapText("mapText.txt");
 		stopFrameCount = true;
@@ -172,6 +180,7 @@ public class GridManager : MonoBehaviour
 			if (i < debugColors.Length - 1)
 				color = debugColors[i];
 
+			island.NewBiome();
 			island.color = color;
 			island.index = i;
 			foreach (var cell in island.Cells)
@@ -199,7 +208,8 @@ public class GridManager : MonoBehaviour
     {
 		Island biggestIsland = BiggestIsland(islands);
 		Vector2 newPos = biggestIsland.ClosestGroundPos(biggestIsland.CenterPosition());
-		debugCube.position = newPos;
+		if (debugMode && debugCube)
+			debugCube.position = newPos;
 		if (GameManager.Instance)
 			GameManager.Player.CheckCollision();
 	}
@@ -261,7 +271,6 @@ public class GridManager : MonoBehaviour
 				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coord.x, coord.y, 0));
 				if (storedGroundTiles.TryGetValue(island.myBiome, out RuleTile ruleTile))
                 {
-					print(storedGroundTiles[island.myBiome] + " " + island.myBiome);
 					groundTilemap.SetTile(worldToCell, ruleTile);
 				}
 				else 
@@ -436,6 +445,12 @@ public class GridManager : MonoBehaviour
 						propsTilemap.SetTile(worldToCell, propsTiles);
 					}
 				}
+	}
+
+	void GenerateEnemySpawners()
+	{
+		foreach (Island island in islands)
+			island.SpawnEnemies();
 	}
 
 	public Vector3 CellToWorldPoint(Cell cell)
