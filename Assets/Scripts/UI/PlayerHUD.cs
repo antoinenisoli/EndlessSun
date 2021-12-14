@@ -23,6 +23,9 @@ public class PlayerHUD : HUD
 
     private void Start()
     {
+        if (!GameManager.Player)
+            return;
+
         healthSlider.value = GameManager.Player.Health.Coeff();
         thirstySlider.value = PlayerSurvival.Instance.Thirsty.Coeff();
 

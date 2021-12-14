@@ -9,12 +9,13 @@ using Cinemachine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-[CreateAssetMenu(fileName = "IslandData", menuName = "Regions/Islands/NewIslandData")]
-public class IslandData : ScriptableObject
+[CreateAssetMenu(fileName = "IslandProfile", menuName = "Regions/Islands/NewIslandProfile")]
+public class IslandProfile : ScriptableObject
 {
     public IslandBiome biome;
     public RuleTile ruleTile;
     public GameObject enemySpawner;
+    public SpawnData spawnData;
     public Color islandColor = Color.white;
     public float spawnerProb = 30f;
 }

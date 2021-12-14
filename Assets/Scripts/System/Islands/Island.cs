@@ -15,14 +15,12 @@ public enum IslandBiome
 [System.Serializable]
 public class Island : Region, IComparable<Island>
 {
-	public List<Cell> edgeTiles = new List<Cell>();
+	[HideInInspector] public List<Cell> edgeTiles = new List<Cell>();
 	public List<Island> connectedIslands = new List<Island>();
 	public int IslandSize;
 	public bool isAccessibleFromMainIsland;
 	public bool isMainIsland;
-	public IslandData Data;
-
-	public Color color;
+	public IslandProfile profile;
 	public IslandBiome myBiome;
 
 	public Island()
@@ -33,15 +31,20 @@ public class Island : Region, IComparable<Island>
 	public Island(List<Vector2Int> coords, int index) : base(coords, index)
 	{
 		IslandSize = coords.Count;
-		//GetEdgeTiles();
+		myBiome = RandomBiome();
 	}
 
-	public IslandBiome NewBiome()
+	public void SetProfile(IslandProfile profile, IslandBiome biome, int index)
+    {
+		this.profile = profile;
+		myBiome = biome;
+		this.index = index;
+		name = ToString() + " " + Cells.Count;
+	}
+
+	public static IslandBiome RandomBiome()
 	{
-		System.Array array = System.Enum.GetValues(typeof(IslandBiome));
-		IslandBiome randomBiome = (IslandBiome)array.GetValue(UnityEngine.Random.Range(0, array.Length));
-		myBiome = randomBiome;
-		return randomBiome;
+		return GameManager.RandomEnum<IslandBiome>();
 	}
 
 	public List<Cell> GetEdgeTiles()
@@ -53,12 +56,6 @@ public class Island : Region, IComparable<Island>
 
 		return edgeTiles;
     }
-
-    public override void GetCellList()
-    {
-        base.GetCellList();
-		name = ToString() + " " + Cells.Count;
-	}
 
 	public void SetAccessibleFromMainIsland()
 	{
@@ -88,20 +85,17 @@ public class Island : Region, IComparable<Island>
 
 	public void SpawnEnemies()
     {
-		int step = 50;
-		for (int i = 0; i < Cells.Count; i++)
+		for (int i = 0; i < Cells.Count; i += 50)
 		{
-			step++;
 			Cell cell = Cells[i];
-			if (step > 50)
+			float r = UnityEngine.Random.Range(0, 100);
+			if (r < profile.spawnerProb)
 			{
-				float r = UnityEngine.Random.Range(0, 100);
-				if (r < Data.spawnerProb)
-				{
-					step = 0;
-					Vector3Int worldToCell = new Vector3Int(cell.coordinates.x, cell.coordinates.y, 0);
-					MonoBehaviour.Instantiate(Data.enemySpawner, worldToCell, Quaternion.identity);
-				}
+				//Debug.Log("spawn");
+				Vector3Int worldToCell = new Vector3Int(cell.coordinates.x, cell.coordinates.y, 0);
+				GameObject spawnerObject = UnityEngine.Object.Instantiate(profile.enemySpawner, worldToCell, Quaternion.identity);
+				EnemySpawner spawnerScript = spawnerObject.GetComponent<EnemySpawner>();
+				spawnerScript.Spawn(profile.spawnData);
 			}
 		}
 	}

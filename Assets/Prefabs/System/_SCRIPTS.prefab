@@ -29,6 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 248084443893901003}
+  - {fileID: 6099470801857770232}
   m_Father: {fileID: 7590599332484156896}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,37 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: {x: 100, y: 100}
-  debugColors:
-  - {r: 0.14493334, g: 0.89833486, b: 0.5305185, a: 1}
-  - {r: 0.81010246, g: 0.93513453, b: 0.16630685, a: 1}
-  - {r: 0.9298203, g: 0.067499876, b: 0.16081977, a: 1}
-  - {r: 0.6861079, g: 0.8386204, b: 0.9551724, a: 1}
-  - {r: 0.731385, g: 0.054767847, b: 0.50270313, a: 1}
-  - {r: 0.49105376, g: 0.3696683, b: 0.5880843, a: 1}
-  - {r: 0.12583601, g: 0.62461036, b: 0.85409725, a: 1}
-  - {r: 0.54420024, g: 0.70991945, b: 0.13060176, a: 1}
-  - {r: 0.83905125, g: 0.9067173, b: 0.8506875, a: 1}
-  - {r: 0.44200438, g: 0.5901585, b: 0.11263919, a: 1}
-  - {r: 0.5270758, g: 0.055647492, b: 0.61351687, a: 1}
-  - {r: 0.27359325, g: 0.48680383, b: 0.8012587, a: 1}
-  - {r: 0.35657316, g: 0.5503709, b: 0.8231063, a: 1}
-  - {r: 0.9840807, g: 0.2443378, b: 0.23080695, a: 1}
-  - {r: 0.8491967, g: 0.60828966, b: 0.9110205, a: 1}
-  - {r: 0.7725352, g: 0.027008772, b: 0.6796392, a: 1}
-  - {r: 0.78475606, g: 0.6370647, b: 0.34740776, a: 1}
-  - {r: 0.066043496, g: 0.5853781, b: 0.21715772, a: 1}
-  - {r: 0.8350816, g: 0.0028772354, b: 0.5067503, a: 1}
-  - {r: 0.38495427, g: 0.20958602, b: 0.2597415, a: 1}
-  - {r: 0.26790458, g: 0.38183898, b: 0.30866104, a: 1}
-  - {r: 0.95121455, g: 0.4526431, b: 0.44881493, a: 1}
-  - {r: 0.16387963, g: 0.07758272, b: 0.8133546, a: 1}
-  - {r: 0.33132702, g: 0.9126824, b: 0.13315606, a: 1}
-  - {r: 0.64097357, g: 0.08116937, b: 0.3937989, a: 1}
-  - {r: 0.13015652, g: 0.28122777, b: 0.96539974, a: 1}
-  - {r: 0.7469187, g: 0.26309532, b: 0.8881582, a: 1}
-  - {r: 0.2339704, g: 0.83481777, b: 0.092908144, a: 1}
-  - {r: 0.26580542, g: 0.8675908, b: 0.6492951, a: 1}
-  - {r: 0.67271554, g: 0.18963087, b: 0.8825947, a: 1}
   seas: []
   islands: []
   debugMode: 0
@@ -84,24 +54,70 @@ MonoBehaviour:
   cellPrefab: {fileID: 7483044120027432093, guid: e264fed921266494e9691c63c71dae4a,
     type: 3}
   cellParent: {fileID: 248084443893901003}
-  generateBridges: 1
-  bridgeProb: 50
-  cellularAutomata:
-    seed: 16
-    smoothIterations: 5
-    useRandomSeed: 1
-    randomFillPercent: 51
-    groundThresholdSize: 70
-    waterThresholdSize: 20
+  cellularAutomata: {fileID: 5417964670097577481}
   propsTiles: {fileID: 11400000, guid: e8e34ecc8dbe9fe47931303c8e279afb, type: 2}
   propsProb: 10
-  groundRuleTiles:
-  - {fileID: 11400000, guid: 6512f89029d3c894eafb4c448190baf4, type: 2}
-  - {fileID: 11400000, guid: bfe5071e51fbf044cb6e24512c7922b2, type: 2}
+  spawnerProb: 30
+  islandProfiles:
+  - {fileID: 11400000, guid: 085a078b762f4a24eb32e36a0765f7e4, type: 2}
+  - {fileID: 11400000, guid: 950f601f69b6c384cb9109be3f86c284, type: 2}
   waterTile: {fileID: 11400000, guid: 4631f0bdbdcafa04fb2311a773392eb9, type: 2}
   bridgeRuleTile: {fileID: 11400000, guid: 46d0f15d5bf419242861548e78e27ef2, type: 2}
   groundTilemap: {fileID: 0}
   propsTilemap: {fileID: 0}
+--- !u!1 &5117860772950051006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6099470801857770232}
+  - component: {fileID: 5417964670097577481}
+  m_Layer: 0
+  m_Name: CellularAutomata
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6099470801857770232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5117860772950051006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6006021911070986125}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5417964670097577481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5117860772950051006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb15016cb23b174a9e803de514e58f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seed: 0
+  smoothIterations: 5
+  useRandomSeed: 1
+  randomFillPercent: 51
+  groundThresholdSize: 70
+  waterThresholdSize: 20
+  generateBridges: 1
+  bridgeProb: 50
+  lineRadius: 1
+  bridges: []
 --- !u!1 &7590599331295741341
 GameObject:
   m_ObjectHideFlags: 0

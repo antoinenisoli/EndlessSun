@@ -58,6 +58,9 @@ public class UIManager : MonoBehaviour
 
     public void UpdateUI()
     {
+        if (!GameManager.Player)
+            return;
+
         currentLevelText.text = GameManager.Player.myXP.CurrentLevel.index + 1 + "";
         float computeXP = (float)GameManager.Player.myXP.CurrentLevel.CurrentXP / (float)GameManager.Player.myXP.CurrentLevel.xpStep;
         xpSlider.DOFillAmount(computeXP, 0.15f);

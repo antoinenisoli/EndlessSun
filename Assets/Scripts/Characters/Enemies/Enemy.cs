@@ -277,7 +277,7 @@ public class Enemy : Entity
         if (Target)
             spr.flipX = transform.position.x > Target.transform.position.x;
 
-        if (GameManager.Player && !Health.isDead)
+        if (!Health.isDead)
             behaviour.Update();
     }
 }

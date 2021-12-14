@@ -34,6 +34,13 @@ public class GameManager : MonoBehaviour
         return randomColor;
     }
 
+    public static T RandomEnum<T>()
+    {
+        System.Array array = System.Enum.GetValues(typeof(IslandBiome));
+        T randomBiome = (T)array.GetValue(Random.Range(0, array.Length));
+        return randomBiome;
+    }
+
     public void FreezeFrame(float delay, float startScale = 0.1f)
     {
         StartCoroutine(IFreezeFrame(delay, startScale));

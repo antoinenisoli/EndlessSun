@@ -140,7 +140,7 @@ public class PlayerController2D : Entity
         base.Hit(amount);
         GameManager.Instance.FreezeFrame(0.4f);
         StartCoroutine(Glow(0.1f, Color.white));
-        CameraManager.Instance.CameraShake(0.3f, 2);
+        if (CameraManager.Instance) CameraManager.Instance.CameraShake(0.3f, 2);
         if (Health.isDead)
             Death();
     }

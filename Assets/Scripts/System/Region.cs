@@ -8,7 +8,7 @@ public class Region
 	public string name;
 	[HideInInspector] public List<Vector2Int> CoordinateList = new List<Vector2Int>();
 	public int index;
-	public List<Cell> Cells = new List<Cell>();
+	[HideInInspector] public List<Cell> Cells = new List<Cell>();
 
 	public Region()
 	{

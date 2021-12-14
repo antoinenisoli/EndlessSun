@@ -16,8 +16,7 @@ public class GridManager : MonoBehaviour
 	GridLayout gridLayout;
 
 	[Header("Regions")]
-	[SerializeField] Color[] debugColors = new Color[] { Color.white };
-	public List<Region> seas = new List<Region>();
+	[HideInInspector] public List<Region> seas = new List<Region>();
 	public List<Island> islands = new List<Island>();
 	int regionSize;
 
@@ -28,11 +27,9 @@ public class GridManager : MonoBehaviour
 	float elapsedFrames;
 	bool stopFrameCount;
 
-	[Header("Generate Map & bridges")]
+	[Header("Generate Map")]
 	[SerializeField] GameObject cellPrefab;
 	[SerializeField] Transform cellParent;
-	[SerializeField] bool generateBridges = true;
-	public int bridgeProb = 50;
 	[SerializeField] CellularAutomata cellularAutomata;
     public int[,] map;
 	Dictionary<Vector2Int, Cell> allCells = new Dictionary<Vector2Int, Cell>();
@@ -41,14 +38,14 @@ public class GridManager : MonoBehaviour
 	[SerializeField] RuleTile propsTiles;
 	[SerializeField] float propsProb = 30f;
 
-	[Header("generate enemy spawners")]
+	[Header("Generate enemy spawners")]
 	[SerializeField] float spawnerProb = 30f;
 
 	[Header("Draw tiles")]
-	[SerializeField] RuleTile[] groundRuleTiles;
+	[SerializeField] IslandProfile[] islandProfiles;
 	[SerializeField] RuleTile waterTile, bridgeRuleTile;
 	[SerializeField] Tilemap groundTilemap, propsTilemap;
-	Dictionary<IslandBiome, RuleTile> storedGroundTiles = new Dictionary<IslandBiome, RuleTile>();
+	Dictionary<IslandBiome, IslandProfile> storedIslandProfiles = new Dictionary<IslandBiome, IslandProfile>();
 
 	private void OnDrawGizmos()
     {
@@ -63,8 +60,9 @@ public class GridManager : MonoBehaviour
 
 		gridLayout = FindObjectOfType<GridLayout>();
 		map = new int[gridSize.x, gridSize.y];
+		cellularAutomata = GetComponentInChildren<CellularAutomata>();
 		cellularAutomata.Init(gridSize, this);
-		StoreRuleTiles();
+		StoreProfiles();
     }
 
 	public IEnumerator Start()
@@ -101,9 +99,7 @@ public class GridManager : MonoBehaviour
     {
 		CreateCells();
 		AssignIslands();
-		if (generateBridges)
-			cellularAutomata.ConnectClosestIslands(islands);
-
+		cellularAutomata.ConnectClosestIslands(islands);
 		CreateCells();
 	}
 
@@ -112,12 +108,12 @@ public class GridManager : MonoBehaviour
         foreach (var ocean in seas)
 			ocean.Update();
 
-		DrawBridgeTiles();
+		DrawOtherTiles();
 		DrawGroundTiles();
-		DrawWaterTiles();
 
-		GenerateProps();
 		MapText("mapText.txt");
+		GenerateProps();
+		GenerateEnemySpawners();
 		stopFrameCount = true;
 		if (AstarPath.active)
 			AstarPath.active.Scan();
@@ -177,12 +173,18 @@ public class GridManager : MonoBehaviour
 		{
 			Island island = islands[i];
 			Color color = GameManager.RandomColor();
-			if (i < debugColors.Length - 1)
-				color = debugColors[i];
+			IslandBiome newBiome = Island.RandomBiome();
+			IslandProfile newProfile = null;
 
-			island.NewBiome();
-			island.color = color;
-			island.index = i;
+			if (storedIslandProfiles.TryGetValue(newBiome, out IslandProfile profile))
+            {
+				newProfile = profile;
+				color = profile.islandColor;
+			}
+			else
+				newProfile = islandProfiles[0];
+
+			island.SetProfile(newProfile, newBiome, i);
 			foreach (var cell in island.Cells)
 			{
 				cell.GetNeighbours();
@@ -214,22 +216,20 @@ public class GridManager : MonoBehaviour
 			GameManager.Player.CheckCollision();
 	}
 
-	void StoreRuleTiles()
+	void StoreProfiles()
     {
 		System.Array array = System.Enum.GetValues(typeof(IslandBiome));
-		foreach (var item in groundRuleTiles)
-        {
+		foreach (var islandProfile in islandProfiles)
             for (int i = 0; i < array.Length; i++)
             {
 				IslandBiome biome = (IslandBiome)array.GetValue(i);
-				if (item.name.Contains(biome.ToString()) && !storedGroundTiles.ContainsValue(item))
+				if (islandProfile.name.Contains(biome.ToString()) && !storedIslandProfiles.ContainsValue(islandProfile))
 				{
-					storedGroundTiles.Add(biome, item);
+					storedIslandProfiles.Add(biome, islandProfile);
 					break;
 				}
 			}
-		}
-    }
+	}
 
 	void MapText(string fileName)
     {
@@ -253,51 +253,29 @@ public class GridManager : MonoBehaviour
 		sr.Close();
 	}
 
-	void DrawWaterTiles()
-    {
-        foreach (var ocean in seas)
-			foreach (var coord in ocean.CoordinateList)
-			{
-				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coord.x, coord.y, 0));
-				groundTilemap.SetTile(worldToCell, waterTile);
-			}
-	}
-
 	public void DrawGroundTiles()
 	{
 		foreach (var island in islands)
-			foreach (var coord in island.CoordinateList)
-			{
-				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coord.x, coord.y, 0));
-				if (storedGroundTiles.TryGetValue(island.myBiome, out RuleTile ruleTile))
-                {
-					groundTilemap.SetTile(worldToCell, ruleTile);
+			if (island.profile)
+				foreach (var coord in island.CoordinateList)
+				{
+					Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coord.x, coord.y, 0));
+					groundTilemap.SetTile(worldToCell, island.profile.ruleTile);
 				}
-				else 
-					groundTilemap.SetTile(worldToCell, groundRuleTiles[0]);
-			}
-
-
-        foreach (var item in allCells.Values)
-        {
-			Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(item.coordinates.x, item.coordinates.y, 0));
-			if (!groundTilemap.HasTile(worldToCell))
-				groundTilemap.SetTile(worldToCell, groundRuleTiles[0]);
-		}
 	}
 
-	public void DrawBridgeTiles()
+	public void DrawOtherTiles()
 	{
 		for (int x = 0; x < gridSize.x; x++)
 			for (int y = 0; y < gridSize.y; y++)
             {
+				Vector2Int item = new Vector2Int(x, y);
+				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(item.x, item.y, 0));
+
 				if (map[x,y] == 2)
-                {
-					Vector2Int item = new Vector2Int(x, y);
-					Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(item.x, item.y, 0));
 					groundTilemap.SetTile(worldToCell, bridgeRuleTile);
-				}
-				
+				else if (map[x, y] == 1)
+					groundTilemap.SetTile(worldToCell, waterTile);
 			}
 	}
 
@@ -398,14 +376,6 @@ public class GridManager : MonoBehaviour
 
 		return sampledPosition.sqrMagnitude > 0;
 	}
-
-	[ContextMenu("Region random colors")]
-	public void NewRegionsColors()
-    {
-		debugColors = new Color[30];
-        for (int i = 0; i < debugColors.Length; i++)
-			debugColors[i] = GameManager.RandomColor();
-    }
 
 	public Island BiggestIsland(List<Island> islands)
 	{

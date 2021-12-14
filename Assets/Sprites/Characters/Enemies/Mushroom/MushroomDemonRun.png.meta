@@ -1,19 +1,55 @@
 fileFormatVersion: 2
-guid: 9c9e7b5a07264a944961039350db7c88
+guid: e2cc2282216cfd7439104c550f7407bb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6991849013916550155
-    second: Death_0
+      213: 4944230376442633554
+    second: Run_0
   - first:
-      213: -276728812324164698
-    second: Death_1
+      213: -2274363484027164459
+    second: Run_1
   - first:
-      213: 3156895337291164288
-    second: Death_2
+      213: 8284087734974297348
+    second: Run_2
   - first:
-      213: 1400002288684528572
-    second: Death_3
+      213: 5304202850863732263
+    second: Run_3
+  - first:
+      213: 2833043080597125133
+    second: Run_4
+  - first:
+      213: -2217414122262695004
+    second: Run_5
+  - first:
+      213: -4440497016933152808
+    second: Run_6
+  - first:
+      213: 8676454946275842879
+    second: Run_7
+  - first:
+      213: 3869777295808988421
+    second: MushroomDemonRun_0
+  - first:
+      213: 6696947538794290428
+    second: MushroomDemonRun_1
+  - first:
+      213: -8786508157140470250
+    second: MushroomDemonRun_2
+  - first:
+      213: -2232534331115370849
+    second: MushroomDemonRun_3
+  - first:
+      213: 3553865212632964900
+    second: MushroomDemonRun_4
+  - first:
+      213: 854050922357028817
+    second: MushroomDemonRun_5
+  - first:
+      213: 3599311107149574652
+    second: MushroomDemonRun_6
+  - first:
+      213: -4086575025705165484
+    second: MushroomDemonRun_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -58,7 +94,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 150
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,7 +175,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Death_0
+      name: MushroomDemonRun_0
       rect:
         serializedVersion: 2
         x: 0
@@ -153,14 +189,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0449ad32a9080160800000000000000
-      internalID: 6991849013916550155
+      spriteID: 505019492f534b530800000000000000
+      internalID: 3869777295808988421
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_1
+      name: MushroomDemonRun_1
       rect:
         serializedVersion: 2
         x: 150
@@ -174,14 +210,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ab6d428c9cd82cf0800000000000000
-      internalID: -276728812324164698
+      spriteID: cfc9249fd4650fc50800000000000000
+      internalID: 6696947538794290428
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_2
+      name: MushroomDemonRun_2
       rect:
         serializedVersion: 2
         x: 300
@@ -195,14 +231,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08aa354559b8fcb20800000000000000
-      internalID: 3156895337291164288
+      spriteID: 616f19d426d001680800000000000000
+      internalID: -8786508157140470250
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_3
+      name: MushroomDemonRun_3
       rect:
         serializedVersion: 2
         x: 450
@@ -216,8 +252,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb376cdf9aecd6310800000000000000
-      internalID: 1400002288684528572
+      spriteID: f960105bad17401e0800000000000000
+      internalID: -2232534331115370849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MushroomDemonRun_4
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42f1b9ae49dd15130800000000000000
+      internalID: 3553865212632964900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MushroomDemonRun_5
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d77f27f9c23adb00800000000000000
+      internalID: 854050922357028817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MushroomDemonRun_6
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf1b4c9c16253f130800000000000000
+      internalID: 3599311107149574652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MushroomDemonRun_7
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45d5cdc6aa19947c0800000000000000
+      internalID: -4086575025705165484
       vertices: []
       indices: 
       edges: []
@@ -225,7 +345,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2fe4412c8fa10f3409725560f8898871
+    spriteID: c7da23a62e5c0e94cb63e0aa7a1bd3e2
     internalID: 0
     vertices: []
     indices: 

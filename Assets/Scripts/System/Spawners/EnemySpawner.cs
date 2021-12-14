@@ -6,9 +6,8 @@ using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] int spawnCount = 3;
     [SerializeField] Vector2 positionRandomOffset;
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] SpawnData spawnerData;
 
     private void OnDrawGizmos()
     {
@@ -26,7 +25,8 @@ public class EnemySpawner : MonoBehaviour
     public IEnumerator Start()
     {
         yield return new WaitForSeconds(0.1f);
-        Spawn();
+        if (spawnerData)
+            Spawn(spawnerData);
     }
 
     public Vector2 RandomPosition()
@@ -38,19 +38,25 @@ public class EnemySpawner : MonoBehaviour
         return random;
     }
 
-    public void Spawn()
+    public void Spawn(SpawnData data)
     {
-        for (int i = 0; i < spawnCount; i++)
+        if (spawnerData != data)
+            spawnerData = data;
+
+        GameObject[] enemies = data.GetSpawnArray();
+        for (int i = 0; i < enemies.Length; i++)
         {
             Vector2 newPos = transform.position + (Vector3)RandomPosition();
             if (GridManager.Instance)
             {
                 bool sampled = GridManager.Instance.SamplePosition(newPos, out Vector2 samplePos, 2);
                 if (sampled)
-                    Instantiate(enemyPrefab, samplePos, Quaternion.identity, transform);
+                    Instantiate(enemies[i], samplePos, Quaternion.identity, transform);
             }
             else
-                Instantiate(enemyPrefab, newPos, Quaternion.identity, transform);
+                Instantiate(enemies[i], newPos, Quaternion.identity, transform);
         }
+
+        spawnerData = null;
     }
 }

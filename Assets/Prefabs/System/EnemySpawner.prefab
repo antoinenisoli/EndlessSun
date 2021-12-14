@@ -45,5 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnCount: 3
   positionRandomOffset: {x: 1.52, y: 2.48}
-  enemyPrefab: {fileID: 4349680769149131540, guid: fef65ca9331ada34e844b4d081d8d5af,
-    type: 3}
+  spawnerData: {fileID: 0}

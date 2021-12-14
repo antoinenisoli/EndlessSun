@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: -9206091644520726168
     second: Take Hit_3
+  - first:
+      213: 3511103854462333924
+    second: MushroomDemonTakeHit_0
+  - first:
+      213: -4239315151143873202
+    second: MushroomDemonTakeHit_1
+  - first:
+      213: 1734938697738790078
+    second: MushroomDemonTakeHit_2
+  - first:
+      213: -147692461755946419
+    second: MushroomDemonTakeHit_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -58,7 +70,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 150
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,7 +151,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Take Hit_0
+      name: MushroomDemonTakeHit_0
       rect:
         serializedVersion: 2
         x: 0
@@ -153,14 +165,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57eedf966c138e790800000000000000
-      internalID: -7500690451134026123
+      spriteID: 4e37bbe5a52f9b030800000000000000
+      internalID: 3511103854462333924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Take Hit_1
+      name: MushroomDemonTakeHit_1
       rect:
         serializedVersion: 2
         x: 150
@@ -174,14 +186,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e4c0dd4d9596a3f0800000000000000
-      internalID: -889859373511162655
+      spriteID: e455325b45dea25c0800000000000000
+      internalID: -4239315151143873202
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Take Hit_2
+      name: MushroomDemonTakeHit_2
       rect:
         serializedVersion: 2
         x: 300
@@ -195,14 +207,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b416439782e125d0800000000000000
-      internalID: -3088938797480143695
+      spriteID: eb4acc1bd8db31810800000000000000
+      internalID: 1734938697738790078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Take Hit_3
+      name: MushroomDemonTakeHit_3
       rect:
         serializedVersion: 2
         x: 450
@@ -216,8 +228,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86186aedc646d3080800000000000000
-      internalID: -9206091644520726168
+      spriteID: d4aa8011d7a43fdf0800000000000000
+      internalID: -147692461755946419
       vertices: []
       indices: 
       edges: []

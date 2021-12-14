@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class CellularAutomata
+public class CellularAutomata : MonoBehaviour
 {
 	[SerializeField] int seed;
 	[SerializeField] int smoothIterations = 5;
-	[SerializeField] bool useRandomSeed;
-	[SerializeField] [Range(0, 100)] float randomFillPercent = 50;
+	[SerializeField] bool useRandomSeed = true;
+	[SerializeField] [Range(0, 100)] float randomFillPercent = 51;
 
 	[Header("Clean threshold")]
-	[SerializeField] int groundThresholdSize = 50;
-	[SerializeField] int waterThresholdSize = 50;
+	[SerializeField] int groundThresholdSize = 70;
+	[SerializeField] int waterThresholdSize = 20;
     Vector2Int gridSize;
 	GridManager gridManager;
+
+	[Header("Bridges")]
+	public bool generateBridges = true;
+	public int bridgeProb = 50;
+	[SerializeField] int lineRadius = 1;
+	[SerializeField] List<Region> bridges = new List<Region>();
 
 	public void Init(Vector2Int gridSize, GridManager gridManager)
     {
@@ -134,8 +139,18 @@ public class CellularAutomata
 		gridManager.islands[0].isAccessibleFromMainIsland = true;
 	}
 
+	public bool CheckBridgeProb()
+    {
+		int random = Random.Range(0, 100);
+		bool result = random < bridgeProb;
+		return result;
+    }
+
 	public void ConnectClosestIslands(List<Island> allIslands, bool forceAccessibilityFromMainIsland = false)
     {
+		if (!generateBridges)
+			return;
+
 		List<Island> islandListA = new List<Island>();
 		List<Island> islandListB = new List<Island>();
 		if (forceAccessibilityFromMainIsland)
@@ -200,13 +215,15 @@ public class CellularAutomata
 				}
             }
 
-			if (possibleConnectionFound && !forceAccessibilityFromMainIsland)
+			if (possibleConnectionFound && !forceAccessibilityFromMainIsland && CheckBridgeProb())
 				CreatePassage(bestIslandA, bestIslandB, bestCellA, bestCellB);
 		}
 
 		if (possibleConnectionFound && forceAccessibilityFromMainIsland)
         {
-			CreatePassage(bestIslandA, bestIslandB, bestCellA, bestCellB);
+			if (CheckBridgeProb())
+				CreatePassage(bestIslandA, bestIslandB, bestCellA, bestCellB);
+
 			ConnectClosestIslands(allIslands, true);
 		}
 
@@ -263,19 +280,19 @@ public class CellularAutomata
 
 	void CreatePassage(Island islandA, Island islandB, Cell cellA, Cell cellB)
     {
-		int random = UnityEngine.Random.Range(0, 101);
-		/*if (random > gridManager.bridgeProb)
-			return;*/
-
-		Debug.Log("make passage between " + islandA + " (" + cellA + ")" + " and " + islandB + " (" + cellB + ")");
+		//Debug.Log("make passage between " + islandA + " (" + cellA + ")" + " and " + islandB + " (" + cellB + ")");
 		Island.ConnectIslands(islandA, islandB);
 		Debug.DrawLine(cellA.transform.position, cellB.transform.position, Color.red, 100f);
 		List<Vector2Int> lines = GetLine(cellA.coordinates, cellB.coordinates);
+
+		Region bridge = new Region();
+		bridge.CoordinateList.AddRange(lines);
+		bridges.Add(bridge);
         foreach (var line in lines)
-			DrawCircle(line, 1);
+			LineToCells(line, lineRadius);
     }
 
-	void DrawCircle(Vector2Int coord, int radius)
+	void LineToCells(Vector2Int coord, int radius)
     {
         for (int x = -radius; x <= radius; x++)
 			for (int y = -radius; y <= radius; y++)
