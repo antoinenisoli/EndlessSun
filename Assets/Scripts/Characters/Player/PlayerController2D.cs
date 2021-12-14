@@ -76,7 +76,7 @@ public class PlayerController2D : Entity
 
     public void CheckCollision()
     {
-        Region r = GridManager.Instance.BiggestIsland(GridManager.Instance.islands);
+        Region r = GridManager.Instance.BiggestIsland();
         Vector2 newPos = r.ClosestGroundPos(r.CenterPosition());
 
         if (Physics2D.OverlapCircle(transform.position, 0.5f, tilemapLayer))

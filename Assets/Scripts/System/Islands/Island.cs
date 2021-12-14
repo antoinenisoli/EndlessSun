@@ -17,6 +17,7 @@ public class Island : Region, IComparable<Island>
 {
 	[HideInInspector] public List<Cell> edgeTiles = new List<Cell>();
 	public List<Island> connectedIslands = new List<Island>();
+	List<EnemySpawner> spawners = new List<EnemySpawner>();
 	public int IslandSize;
 	public bool isAccessibleFromMainIsland;
 	public bool isMainIsland;
@@ -93,9 +94,10 @@ public class Island : Region, IComparable<Island>
 			{
 				//Debug.Log("spawn");
 				Vector3Int worldToCell = new Vector3Int(cell.coordinates.x, cell.coordinates.y, 0);
-				GameObject spawnerObject = UnityEngine.Object.Instantiate(profile.enemySpawner, worldToCell, Quaternion.identity);
+				GameObject spawnerObject = UnityEngine.Object.Instantiate(profile.enemySpawner, worldToCell, Quaternion.identity, cell.transform);
 				EnemySpawner spawnerScript = spawnerObject.GetComponent<EnemySpawner>();
 				spawnerScript.Spawn(profile.spawnData);
+				spawners.Add(spawnerScript);
 			}
 		}
 	}

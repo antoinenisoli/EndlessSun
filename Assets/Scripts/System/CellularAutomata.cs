@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CellularAutomata : MonoBehaviour
 {
+	MapInfo mainMap => gridManager.MainMap;
 	[SerializeField] int seed;
 	[SerializeField] int smoothIterations = 5;
 	[SerializeField] bool useRandomSeed = true;
@@ -43,9 +44,9 @@ public class CellularAutomata : MonoBehaviour
 				{
 					int neighbourWallTiles = GetSurroundingWallCount(x, y);
 					if (neighbourWallTiles > 4)
-						gridManager.map[x, y] = 1;
+						mainMap.map[x, y] = 1;
 					else if (neighbourWallTiles < 4)
-						gridManager.map[x, y] = 0;
+						mainMap.map[x, y] = 0;
 				}
 		}
 	}
@@ -58,7 +59,7 @@ public class CellularAutomata : MonoBehaviour
 				if (gridManager.InMapRange(neighbourX, neighbourY))
 				{
 					if (neighbourX != gridX || neighbourY != gridY)
-						wallCount += gridManager.map[neighbourX, neighbourY];
+						wallCount += mainMap.map[neighbourX, neighbourY];
 				}
 				else
 					wallCount++;
@@ -77,48 +78,48 @@ public class CellularAutomata : MonoBehaviour
 			{
 				if (x == 0 || x == gridSize.x - 1 || y == 0 || y == gridSize.y - 1)
 				{
-					gridManager.map[x, y] = 1;
+					mainMap.map[x, y] = 1;
 				}
 				else
 				{
 					int random = pseudoRandom.Next(0, 100);
 					if (random < randomFillPercent)
-						gridManager.map[x, y] = 1;
+						mainMap.map[x, y] = 1;
 					else
-						gridManager.map[x, y] = 0;
+						mainMap.map[x, y] = 0;
 				}
 			}
 	}
 
 	public void CleanMap()
 	{
-		gridManager.seas = gridManager.GetRegions(1);
+		mainMap.seas = gridManager.GetRegions(1);
 		RemoveSmallSeas();
-		gridManager.islands = gridManager.GetIslands();
+		mainMap.islands = gridManager.GetIslands();
 		RemoveSmallIslands();
 	}
 
 	public void RemoveSmallSeas()
 	{
 		List<Region> smallSeas = new List<Region>();
-		foreach (var sea in gridManager.seas)
+		foreach (var sea in mainMap.seas)
 			if (sea.CoordinateList.Count < waterThresholdSize)
 				smallSeas.Add(sea);
 
         foreach (var sea in smallSeas)
         {
 			foreach (var tile in sea.CoordinateList)
-				gridManager.map[tile.x, tile.y] = 0;
+				mainMap.map[tile.x, tile.y] = 0;
 
-			if (gridManager.seas.Contains(sea))
-				gridManager.seas.Remove(sea);
+			if (mainMap.seas.Contains(sea))
+				mainMap.seas.Remove(sea);
 		}
 	}
 
 	public void RemoveSmallIslands()
     {
 		List<Island> smallIslands = new List<Island>();
-		foreach (Island island in gridManager.islands)
+		foreach (Island island in mainMap.islands)
 			if (island.CoordinateList.Count < groundThresholdSize)
 				smallIslands.Add(island);
 
@@ -126,17 +127,17 @@ public class CellularAutomata : MonoBehaviour
         {
 			foreach (var coord in smallIsland.CoordinateList)
             {
-				gridManager.map[coord.x, coord.y] = 1;
-				Region ocean = gridManager.BiggestRegion(gridManager.seas);
+				mainMap.map[coord.x, coord.y] = 1;
+				Region ocean = gridManager.BiggestRegion(mainMap.seas);
 				ocean.CoordinateList.Add(coord);
 			}
 
-			gridManager.islands.Remove(smallIsland);
+			mainMap.islands.Remove(smallIsland);
         }
 
-		gridManager.islands.Sort();
-		gridManager.islands[0].isMainIsland = true;
-		gridManager.islands[0].isAccessibleFromMainIsland = true;
+		mainMap.islands.Sort();
+		mainMap.islands[0].isMainIsland = true;
+		mainMap.islands[0].isAccessibleFromMainIsland = true;
 	}
 
 	public bool CheckBridgeProb()
@@ -304,8 +305,8 @@ public class CellularAutomata : MonoBehaviour
 					Vector2Int c = new Vector2Int(realX, realY);
 					if (gridManager.InMapRange(c.x, c.y))
                     {
-						gridManager.map[c.x, c.y] = 2;
-                        foreach (var sea in gridManager.seas)
+						mainMap.map[c.x, c.y] = 2;
+                        foreach (var sea in mainMap.seas)
 							if (sea.CoordinateList.Contains(c))
 								sea.CoordinateList.Remove(c);
 					}

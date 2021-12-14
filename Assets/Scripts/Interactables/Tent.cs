@@ -22,7 +22,7 @@ public class Tent : Interactable
         GameManager.Player.transform.position = entrance.position;
         GameManager.Player.SetState(PlayerState.Idle);
         PlayerSurvival.Instance.Energy.Init();
-        GridManager.Instance.Start();
+        GridManager.Instance.GenerateMap();
     }
 
     public override string ToString()
