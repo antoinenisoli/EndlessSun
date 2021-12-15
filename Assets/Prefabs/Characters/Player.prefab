@@ -226,7 +226,7 @@ MonoBehaviour:
   runSpeed: 15
   tilemapLayer:
     serializedVersion: 2
-    m_Bits: 6144
+    m_Bits: 2048
   playerHealth:
     currentValue: 0
     maxValue: 10

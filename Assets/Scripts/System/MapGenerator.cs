@@ -51,7 +51,12 @@ public class MapGenerator : MonoBehaviour
 		StoreProfiles();
 	}
 
-	public void StartNewMap()
+    private void Start()
+    {
+		EventManager.Instance.onMapCreated.AddListener(FinishedMap);
+    }
+
+    public void StartNewMap()
     {
 		mainMap.map = new int[gridSize.x, gridSize.y];
 		mainMap.biomeFlags = new int[gridSize.x, gridSize.y];
@@ -69,30 +74,47 @@ public class MapGenerator : MonoBehaviour
 			UIManager.Instance.BlackScreen(1, delay);
 			yield return new WaitForSeconds(delay);
 		}
-
 		if (debugText)
 			StartCoroutine(DebugCoroutine());
 
 		GenerateMap();
 		SetupMap();
-		yield return new WaitForSeconds(0.01f);
+		yield return new WaitForSeconds(0.001f);
 		ProcessMap();
-		
-		yield return new WaitForSeconds(0.01f);
-		stopFrameCount = true;
-		gridManager.TeleportPlayer();
-		if (UIManager.Instance)
-			UIManager.Instance.BlackScreen(0, 0.5f);
+
+		yield return new WaitForSeconds(0.001f);
+		GenerateEnemies();
+
+		yield return new WaitForSeconds(0.001f);
+		EventManager.Instance.onMapCreated.Invoke();
 	}
 
 	IEnumerator DebugCoroutine()
     {
 		stopFrameCount = false;
 		elapsedFrames = Time.unscaledTime;
-		while (!stopFrameCount)
-			yield return null;
-
+		yield return new WaitUntil(() => stopFrameCount = true);
 		debugText.text = "Time : " + (Time.unscaledTime - elapsedFrames) + " frames";
+	}
+
+	void GenerateEnemies()
+    {
+		if (AstarPath.active)
+			AstarPath.active.Scan();
+
+		foreach (Island island in mainMap.islands)
+			island.SpawnEnemies();
+	}
+
+	void FinishedMap()
+    {
+		stopFrameCount = true;
+		gridManager.TeleportPlayer();
+		if (UIManager.Instance)
+			UIManager.Instance.BlackScreen(0, 0.5f);
+
+		Cell c = GridManager.Instance.MaxDensityCell(gridManager.BiggestIsland());
+		debugCube.transform.position = c.transform.position;
 	}
 
 	void SetupMap()
@@ -101,20 +123,15 @@ public class MapGenerator : MonoBehaviour
 		AssignIslands();
 		cellularAutomata.ConnectClosestIslands(mainMap.islands);
 		CreateCells();
+		foreach (var ocean in mainMap.seas)
+			ocean.Update();
 	}
 
 	void ProcessMap()
     {
-        foreach (var ocean in mainMap.seas)
-			ocean.Update();
-
 		DrawOtherTiles();
 		DrawGroundTiles();
 		GenerateProps();
-		if (AstarPath.active)
-			AstarPath.active.Scan();
-
-		GenerateEnemySpawners();
 		GridManager.MapText("mapText.txt", gridManager.GetMap());
 	}
 
@@ -267,11 +284,5 @@ public class MapGenerator : MonoBehaviour
 						propsTilemap.SetTile(worldToCell, propsTiles);
 					}
 				}
-	}
-
-	void GenerateEnemySpawners()
-	{
-		foreach (Island island in mainMap.islands)
-			island.SpawnEnemies();
 	}
 }
