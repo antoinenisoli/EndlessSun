@@ -92,7 +92,6 @@ public class Island : Region, IComparable<Island>
 			float r = UnityEngine.Random.Range(0, 100);
 			if (r < profile.spawnerProb)
 			{
-				//Debug.Log("spawn");
 				Vector3Int worldToCell = new Vector3Int(cell.coordinates.x, cell.coordinates.y, 0);
 				GameObject spawnerObject = UnityEngine.Object.Instantiate(profile.enemySpawner, worldToCell, Quaternion.identity, cell.transform);
 				EnemySpawner spawnerScript = spawnerObject.GetComponent<EnemySpawner>();

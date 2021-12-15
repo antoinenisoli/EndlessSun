@@ -37,7 +37,10 @@ public class GridManager : MonoBehaviour
 			sortedIslands = MainMap.islands;
 
 		sortedIslands.Sort();
-		return sortedIslands[0];
+		if (sortedIslands.Count > 0)
+			return sortedIslands[0];
+		else
+			return null;
 	}
 
 	public MapInfo GetMap()
@@ -62,8 +65,6 @@ public class GridManager : MonoBehaviour
 
 	public void TeleportPlayer()
 	{
-		Island biggestIsland = BiggestIsland();
-		Vector2 newPos = biggestIsland.ClosestGroundPos(biggestIsland.CenterPosition());
 		if (GameManager.Instance)
 			GameManager.Player.CheckCollision();
 	}
@@ -167,21 +168,16 @@ public class GridManager : MonoBehaviour
 		return null;
 	}
 
-	public bool SamplePosition(Vector2 targetPos, out Vector2 sampledPosition, float maxDistance = 20f)
+	public Vector2 ClosestWalkable(Vector2 targetPos)
 	{
 		var constraint = NNConstraint.Default;
 		constraint.constrainWalkability = true;
 		constraint.walkable = true;
 		var info = AstarPath.active.GetNearest(targetPos, constraint);
 		Vector2 closestPoint = info.position;
-		float distance = Vector2.Distance(targetPos, closestPoint);
-
-		sampledPosition = new Vector2();
-		if (distance < maxDistance)
-			sampledPosition = closestPoint;
-
-		return sampledPosition.sqrMagnitude > 0;
+		return closestPoint;
 	}
+
 
 	void Update()
 	{

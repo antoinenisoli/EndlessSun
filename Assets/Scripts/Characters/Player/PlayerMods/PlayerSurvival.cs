@@ -27,7 +27,9 @@ public class PlayerSurvival : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (!Instance)
+            Instance = this;
+
         Init();
     }
 

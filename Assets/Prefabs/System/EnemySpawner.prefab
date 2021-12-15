@@ -43,6 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b80b51b09edbb64a8cfa507bc072cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCount: 3
-  positionRandomOffset: {x: 1.52, y: 2.48}
+  positionRandomOffset: {x: 0.99, y: 1.79}
   spawnerData: {fileID: 0}

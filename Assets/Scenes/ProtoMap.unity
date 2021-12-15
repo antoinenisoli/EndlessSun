@@ -229,6 +229,16 @@ PrefabInstance:
       propertyPath: groundTilemap
       value: 
       objectReference: {fileID: 1092691120}
+    - target: {fileID: 7590599331545596558, guid: eb69d25f69846cc4b97a48e2847bb336,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590599332098823401, guid: eb69d25f69846cc4b97a48e2847bb336,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7590599332098823403, guid: eb69d25f69846cc4b97a48e2847bb336,
         type: 3}
       propertyPath: data.dataString
@@ -2067,6 +2077,11 @@ PrefabInstance:
         type: 3}
       propertyPath: orthographic size
       value: 7.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3202894746660060635, guid: 81433ef2d28fa6244a279521af556955,
+        type: 3}
+      propertyPath: m_AssetsPPU
+      value: 42
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81433ef2d28fa6244a279521af556955, type: 3}

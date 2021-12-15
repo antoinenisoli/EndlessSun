@@ -136,8 +136,11 @@ public class CellularAutomata : MonoBehaviour
         }
 
 		mainMap.islands.Sort();
-		mainMap.islands[0].isMainIsland = true;
-		mainMap.islands[0].isAccessibleFromMainIsland = true;
+		if (mainMap.islands.Count > 0)
+        {
+			mainMap.islands[0].isMainIsland = true;
+			mainMap.islands[0].isAccessibleFromMainIsland = true;
+		}
 	}
 
 	public bool CheckBridgeProb()

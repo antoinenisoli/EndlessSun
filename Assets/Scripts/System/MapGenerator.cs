@@ -32,9 +32,6 @@ public class MapGenerator : MonoBehaviour
 	[SerializeField] RuleTile propsTiles;
 	[SerializeField] float propsProb = 30f;
 
-	[Header("Generate enemy spawners")]
-	[SerializeField] float spawnerProb = 30f;
-
 	[Header("Draw tiles")]
 	[SerializeField] IslandProfile[] islandProfiles;
 	[SerializeField] RuleTile waterTile, bridgeRuleTile;
@@ -60,15 +57,19 @@ public class MapGenerator : MonoBehaviour
 		mainMap.biomeFlags = new int[gridSize.x, gridSize.y];
 
 		cellularAutomata.Init(gridSize, gridManager);
-		StartCoroutine(MainGeneration());
-    }
+		if (gridSize.sqrMagnitude != 0)
+			StartCoroutine(MainGeneration());
+	}
 
 	public IEnumerator MainGeneration()
 	{
 		float delay = 1f;
 		if (UIManager.Instance)
+        {
 			UIManager.Instance.BlackScreen(1, delay);
-		yield return new WaitForSeconds(delay);
+			yield return new WaitForSeconds(delay);
+		}
+
 		if (debugText)
 			StartCoroutine(DebugCoroutine());
 
@@ -79,9 +80,6 @@ public class MapGenerator : MonoBehaviour
 		
 		yield return new WaitForSeconds(0.01f);
 		stopFrameCount = true;
-		if (AstarPath.active)
-			AstarPath.active.Scan();
-
 		gridManager.TeleportPlayer();
 		if (UIManager.Instance)
 			UIManager.Instance.BlackScreen(0, 0.5f);
@@ -112,8 +110,10 @@ public class MapGenerator : MonoBehaviour
 
 		DrawOtherTiles();
 		DrawGroundTiles();
-
 		GenerateProps();
+		if (AstarPath.active)
+			AstarPath.active.Scan();
+
 		GenerateEnemySpawners();
 		GridManager.MapText("mapText.txt", gridManager.GetMap());
 	}

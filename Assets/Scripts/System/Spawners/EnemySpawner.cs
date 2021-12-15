@@ -22,11 +22,20 @@ public class EnemySpawner : MonoBehaviour
 #endif
     }
 
-    public IEnumerator Start()
+    public void Awake()
     {
-        yield return new WaitForSeconds(0.1f);
         if (spawnerData)
             Spawn(spawnerData);
+    }
+
+    private void Start()
+    {
+        Vector2 pos = transform.position;
+        if (GridManager.Instance)
+        {
+            Vector2 sampled = GridManager.Instance.ClosestWalkable(pos);
+            transform.position = sampled;
+        }
     }
 
     public Vector2 RandomPosition()
@@ -49,9 +58,8 @@ public class EnemySpawner : MonoBehaviour
             Vector2 newPos = transform.position + (Vector3)RandomPosition();
             if (GridManager.Instance)
             {
-                bool sampled = GridManager.Instance.SamplePosition(newPos, out Vector2 samplePos, 2);
-                if (sampled)
-                    Instantiate(enemies[i], samplePos, Quaternion.identity, transform);
+                //bool sampled = GridManager.Instance.SamplePosition(newPos, out Vector2 samplePos, 2);
+                Instantiate(enemies[i], newPos, Quaternion.identity, transform);
             }
             else
                 Instantiate(enemies[i], newPos, Quaternion.identity, transform);

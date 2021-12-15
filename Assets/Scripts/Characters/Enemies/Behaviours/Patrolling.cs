@@ -26,10 +26,8 @@ public class Patrolling : EnemyBehaviour
         Vector2 sampledPos;
         if (GridManager.Instance)
         {
-            bool isWalkable = GridManager.Instance.SamplePosition(randomPos, out sampledPos, 2f);
-            while (!isWalkable)
-                randomPos = myEnemy.RandomPatrolPosition();
-
+            randomPos = myEnemy.RandomPatrolPosition();
+            sampledPos = GridManager.Instance.ClosestWalkable(randomPos);
             pos = sampledPos;
         }
         else

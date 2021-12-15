@@ -54,7 +54,6 @@ MonoBehaviour:
   cellularAutomata: {fileID: 5417964670097577481}
   propsTiles: {fileID: 11400000, guid: e8e34ecc8dbe9fe47931303c8e279afb, type: 2}
   propsProb: 10
-  spawnerProb: 30
   islandProfiles:
   - {fileID: 11400000, guid: 085a078b762f4a24eb32e36a0765f7e4, type: 2}
   - {fileID: 11400000, guid: 950f601f69b6c384cb9109be3f86c284, type: 2}
@@ -277,7 +276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7590599331545596552
 Transform:
   m_ObjectHideFlags: 0

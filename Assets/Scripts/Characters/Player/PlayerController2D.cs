@@ -76,11 +76,15 @@ public class PlayerController2D : Entity
 
     public void CheckCollision()
     {
-        Region r = GridManager.Instance.BiggestIsland();
-        Vector2 newPos = r.ClosestGroundPos(r.CenterPosition());
-
         if (Physics2D.OverlapCircle(transform.position, 0.5f, tilemapLayer))
-            transform.position = newPos;
+        {
+            Region r = GridManager.Instance.BiggestIsland();
+            if (r != null)
+            {
+                Vector2 newPos = r.ClosestGroundPos(r.CenterPosition());
+                transform.position = newPos;
+            }
+        }
     }
 
     bool CanMove()
