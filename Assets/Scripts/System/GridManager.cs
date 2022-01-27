@@ -225,71 +225,14 @@ public class GridManager : MonoBehaviour
 		return null;
 	}
 
-	public Cell MaxDensityCell(Island island)
-    {
-		Cell maxDensity = null;
-		Dictionary<Cell, List<Vector2Int>> storedNeighbors = new Dictionary<Cell, List<Vector2Int>>();
-        foreach (var cell in island.Cells)
-        {
-			List<Vector2Int> neighbours = new List<Vector2Int>();
-			int step = 50;
-            for (int x = -step; x < step; x++)
-            {
-                for (int y = -step; y < step; y++)
-                {
-					Vector2Int neighbor = new Vector2Int(cell.coordinates.x + x, cell.coordinates.y + y);
-					if (x == 0 && y == 0)
-						continue;
-
-					Cell neighborCell = GetCell(neighbor);
-					if (neighborCell)
-                    {
-						if (!IsShore(cell) && !IsColliding(cell.coordinates, neighbor, tilemapMask))
-							neighbours.Add(neighbor);
-					}
-				}
-            }
-
-			if (neighbours.Count > 0)
-				storedNeighbors.Add(cell, neighbours);
-        }
-
-		if (storedNeighbors.Values.Count > 0)
-		{
-			int maxCount = 0;
-			foreach (var item in storedNeighbors)
-				if (item.Value.Count >= maxCount)
-				{
-					maxDensity = item.Key;
-					maxCount = item.Value.Count;
-				}
-
-			print(maxDensity + " " + maxCount);
-            for (int i = 1; i < storedNeighbors[maxDensity].Count; i++)
-            {
-				List<Vector2Int> coords = storedNeighbors[maxDensity];
-				//Debug.DrawLine(new Vector3(coords[i - 1].x, coords[i - 1].y), new Vector3(coords[i].x, coords[i].y), Color.green, 100f);
-            }
-		}
-
-		return maxDensity;
-	}
-
 	public Vector2 ClosestWalkable(Vector2 targetPos)
 	{
-		var constraint = NNConstraint.Default;
-		constraint.constrainWalkability = true;
-		constraint.walkable = true;
-		var info = AstarPath.active.GetNearest(targetPos, constraint);
-		Vector2 closestPoint = info.position;
-		return closestPoint;
+		return ClosestCell(targetPos).transform.position;
 	}
 
 	public bool SamplePosition(Vector2 targetPos, float minDistance, out Vector2 sampledPos)
 	{
 		sampledPos = ClosestWalkable(targetPos);
-		Vector2Int gridPos = GameDevHelper.ToVector2Int(sampledPos);
-		print(GetCell(gridPos));
 		float d = Vector2.Distance(sampledPos, targetPos);
 		return d < minDistance;
 	}

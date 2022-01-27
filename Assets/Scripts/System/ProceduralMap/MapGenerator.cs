@@ -110,9 +110,7 @@ public class MapGenerator : MonoBehaviour
 		if (UIManager.Instance)
 			UIManager.Instance.BlackScreen(0, 0.5f);
 
-		Cell c = GridManager.Instance.MaxDensityCell(gridManager.BiggestIsland());
-		if (debugCube)
-			debugCube.transform.position = c.transform.position;
+		//debugCube.transform.position = c.transform.position;
 	}
 
 	void SetupMap()

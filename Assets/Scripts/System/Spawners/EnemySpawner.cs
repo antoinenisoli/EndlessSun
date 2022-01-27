@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] SpawnData spawnerData;
     [SerializeField] bool active = true;
     [SerializeField] ShowRectangleGizmo gizmo;
+
+    [SerializeField] float sampleDistance = 2f;
     List<Vector2> sampledPositions = new List<Vector2>();
 
     private void OnDrawGizmos()
@@ -32,16 +34,6 @@ public class EnemySpawner : MonoBehaviour
     {
         if (spawnerData && active)
             Spawn(spawnerData);
-    }
-
-    private void Start()
-    {
-        Vector2 pos = transform.position;
-        if (GridManager.Instance)
-        {
-            Vector2 sampled = GridManager.Instance.ClosestWalkable(pos);
-            transform.position = sampled;
-        }
     }
 
     public Vector2 RandomPosition() => GameDevHelper.RandomVector(positionRandomOffset, transform.position);
@@ -82,7 +74,7 @@ public class EnemySpawner : MonoBehaviour
                 Vector2 newPos = RandomPosition();
                 if (GridManager.Instance)
                 {
-                    bool sampled = GridManager.Instance.SamplePosition(newPos, 2, out Vector2 sampledPos);
+                    bool sampled = GridManager.Instance.SamplePosition(newPos, sampleDistance, out Vector2 sampledPos);
                     if (sampled)
                         sampledPositions.Add(sampledPos);
                 }

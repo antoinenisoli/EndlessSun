@@ -808,11 +808,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alwaysShow: 0
-  color: {r: 1, g: 1, b: 1, a: 1}
+  color: {r: 0.58698326, g: 1, b: 0.4009434, a: 0.23921569}
   wire: 1
-  fill: 0
+  fill: 1
   localCenter: {x: 0, y: 0, z: 0}
-  size: {x: 11, y: 11}
+  size: {x: 6, y: 6}
 --- !u!114 &8717906347288197399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -866,12 +866,14 @@ MonoBehaviour:
     dropCount: 1
     prob: 0.179
   destinationPoint: {fileID: 1265247498874899277}
+  minNextWaypointDistance: 3
+  patrolStopDistance: 0.1
   randomDelayBounds: {x: 2, y: 5}
-  randomPatrolRange: {x: 11, y: 11}
+  randomPatrolRange: {x: 3, y: 3}
   reactTimer: 0.5
   detectIcon: {fileID: 5325253821722144983}
-  visionDistance: 4
-  minDistance: 1.5
+  visionDistance: 4.26
+  chaseMinDistance: 1.5
   attackRate: 1.5
   attackRange: 0.5
 --- !u!1 &8235724819717507599

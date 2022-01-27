@@ -26,6 +26,8 @@ public class Enemy : Entity
 
     [Header("Patrol")]
     [SerializeField] Transform destinationPoint;
+    public float minNextWaypointDistance = 3f;
+    [SerializeField] float patrolStopDistance = 0.1f;
     [SerializeField] Vector2 randomDelayBounds;
     [SerializeField] Vector2 randomPatrolRange;
     Vector2 startPosition;
@@ -37,7 +39,7 @@ public class Enemy : Entity
     [SerializeField] float visionDistance = 20f;
 
     [Header("Chase")]
-    [SerializeField] float minDistance = 1f;
+    [SerializeField] float chaseMinDistance = 1f;
 
     [Header("Attack")]
     public float attackRate = 1f;
@@ -45,8 +47,16 @@ public class Enemy : Entity
 
     private void OnDrawGizmosSelected()
     {
+        Color c = Color.red;
+        Gizmos.color = c;
+        Gizmos.DrawWireSphere(transform.position, visionDistance);
+
+        c.r -= 50f;
+        Gizmos.color = c;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
         if (gizmo)
-            gizmo.SetSize(randomPatrolRange);
+            gizmo.SetSize(randomPatrolRange * 2);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,9 +70,7 @@ public class Enemy : Entity
             Hit(5f);
         }
         else if (collision.CompareTag("GroundTilemap"))
-        {            
             Death();
-        }
     }
 
     public override void Start()
@@ -150,7 +158,18 @@ public class Enemy : Entity
         return delay;
     }
 
-    public Vector2 RandomPatrolPosition() => GameDevHelper.RandomVector(randomPatrolRange, transform.position);
+    public Vector2 RandomPatrolPosition()
+    {
+        Vector2 vector = GameDevHelper.RandomVector(randomPatrolRange, transform.position);
+        float dist = Vector2.Distance(vector, transform.position);
+        while (dist < minNextWaypointDistance)
+        {
+            vector = GameDevHelper.RandomVector(randomPatrolRange, transform.position);
+            dist = Vector2.Distance(vector, transform.position);
+        }
+
+        return vector;
+    }
 
     void SpawnXP()
     {
@@ -200,7 +219,7 @@ public class Enemy : Entity
             return false;
 
         float distance = Vector2.Distance(Target.transform.position, transform.position);
-        return distance < minDistance;
+        return distance < chaseMinDistance;
     }
 
     public void SetBehaviour(EnemyBehaviour newBehaviour)
@@ -223,7 +242,9 @@ public class Enemy : Entity
     {
         spr.flipX = transform.position.x > targetPos.x;
         float distance = Vector2.Distance(targetPos, transform.position);
-        if (distance > minDistance)
+        float stopDistance = behaviour.State == EnemyState.Patrolling ? patrolStopDistance : chaseMinDistance;
+
+        if (distance > stopDistance)
         {
             aiAgent.enabled = true;
             destinationPoint.position = targetPos;
@@ -248,9 +269,7 @@ public class Enemy : Entity
         base.Update();
         ManageHealthbars();
         if (aiAgent)
-        {
             destinationSetter.target = destinationPoint;
-        }
 
         if (Target)
             spr.flipX = transform.position.x > Target.transform.position.x;
