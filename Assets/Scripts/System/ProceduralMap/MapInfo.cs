@@ -13,12 +13,13 @@ public class MapInfo
     public int[,] biomeFlags;
     public Dictionary<Vector2Int, Cell> allCells = new Dictionary<Vector2Int, Cell>();
 
-    public MapInfo()
+    public MapInfo(int[,] map)
     {
-        this.allCells = new Dictionary<Vector2Int, Cell>();
+        this.map = map;
+        allCells = new Dictionary<Vector2Int, Cell>();
     }
 
-    public MapInfo(List<Region> seas, List<Island> islands, int regionSize, int[,] map, int[,] biomeFlags, Dictionary<Vector2Int, Cell> allCells)
+    public MapInfo(int[,] map, List<Region> seas, List<Island> islands, int regionSize, int[,] biomeFlags, Dictionary<Vector2Int, Cell> allCells)
     {
         this.seas = seas;
         this.islands = islands;

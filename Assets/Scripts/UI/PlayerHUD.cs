@@ -40,6 +40,8 @@ public class PlayerHUD : HUD
 
         energySlider.maxValue = PlayerSurvival.Instance.Energy.MaxValue;
         energySlider.value = PlayerSurvival.Instance.Energy.CurrentValue;
+
+        UpdateUI();
     }
 
     void UpdateMana()
@@ -78,8 +80,11 @@ public class PlayerHUD : HUD
 
     public override void UpdateUI()
     {
-        UpdateMana();
-        UpdateStamina();
-        UpdateHealth();
+        if (PlayerSurvival.Instance)
+        {
+            UpdateMana();
+            UpdateStamina();
+            UpdateHealth();
+        }
     }
 }

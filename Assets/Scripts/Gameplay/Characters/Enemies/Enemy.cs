@@ -14,6 +14,7 @@ public class Enemy : Entity
     AIDestinationSetter destinationSetter;
 
     [Header("ENEMY")]
+    [SerializeField] ShowRectangleGizmo gizmo;
     [SerializeField] Transform healthBarPivot;
     [SerializeField] Transform healthBar;
     SpriteRenderer[] healthBarSprites;
@@ -44,26 +45,8 @@ public class Enemy : Entity
 
     private void OnDrawGizmosSelected()
     {
-        Color c = Color.red;
-        Gizmos.color = c;
-        Gizmos.DrawWireSphere(transform.position, visionDistance);
-
-        c.r -= 50f;
-        Gizmos.color = c;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-
-        c = Color.green;
-        Gizmos.color = c;
-        if (startPosition == Vector2.zero)
-            Gizmos.DrawWireSphere(transform.position, randomPatrolRange.y);
-        else
-            Gizmos.DrawWireSphere(startPosition, randomPatrolRange.y);
-
-        c.g -= 25f;
-        if (startPosition == Vector2.zero)
-            Gizmos.DrawWireSphere(transform.position, randomPatrolRange.x);
-        else
-            Gizmos.DrawWireSphere(startPosition, randomPatrolRange.x);
+        if (gizmo)
+            gizmo.SetSize(randomPatrolRange);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -167,12 +150,7 @@ public class Enemy : Entity
         return delay;
     }
 
-    public Vector2 RandomPatrolPosition()
-    {
-        float randomRange = Random.Range(randomPatrolRange.x, randomPatrolRange.y);
-        Vector2 randomPos = Random.insideUnitCircle * randomRange;
-        return startPosition + randomPos;
-    }
+    public Vector2 RandomPatrolPosition() => GameDevHelper.RandomVector(randomPatrolRange, transform.position);
 
     void SpawnXP()
     {

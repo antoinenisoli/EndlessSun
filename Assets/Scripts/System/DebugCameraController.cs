@@ -50,5 +50,10 @@ public class DebugCameraController : MonoBehaviour
 
         Moving();
         Zoom();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            GridManager.Instance.GenerateMap();
+        else if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
     }
 }

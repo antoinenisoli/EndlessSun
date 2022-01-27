@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
 public enum CellType
@@ -13,7 +15,7 @@ public class Cell : MonoBehaviour
     public CellType myType;
     public Vector2Int coordinates;
     public List<Vector2Int> neighbours;
-    public Vector3Int tilePosition;
+    [SerializeField] LabelIcon idx;
 
     [Header("Region")]
     public Region myRegion;
@@ -29,13 +31,21 @@ public class Cell : MonoBehaviour
     public void Initialize(Vector2Int coord, Vector3Int worldPosition)
     {
         coordinates = coord;
-        tilePosition = worldPosition;
         gameObject.name += " " + coord.ToString();
     }
 
     public void SetType(CellType type)
     {
         myType = type;
+
+        Color c;
+        if (myType == CellType.Ground)
+            c = Color.yellow;
+        else
+            c = Color.blue;
+
+        c.a = 0.25f;
+        SetColor(c);
     }
 
     public void GetNeighbours()

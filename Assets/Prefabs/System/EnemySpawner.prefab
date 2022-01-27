@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1967108106158013774}
   - component: {fileID: 1967108106158013775}
+  - component: {fileID: 8001713946512102770}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -43,5 +44,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b80b51b09edbb64a8cfa507bc072cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionRandomOffset: {x: 0.99, y: 1.79}
+  positionRandomOffset: {x: 1.51, y: 1.79}
   spawnerData: {fileID: 0}
+  active: 1
+  gizmo: {fileID: 8001713946512102770}
+--- !u!114 &8001713946512102770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967108106158013768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a837e36ac3f4f4fadca2cfdcbda35f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysShow: 0
+  color: {r: 1, g: 0, b: 0, a: 0.20392157}
+  wire: 1
+  fill: 1
+  localCenter: {x: 0, y: 0, z: 0}
+  size: {x: 3.02, y: 3.58}

@@ -12,7 +12,7 @@ using DG.Tweening;
 public class MapGenerator : MonoBehaviour
 {
 	GridManager gridManager => GridManager.Instance;
-	MapInfo mainMap => gridManager.MainMap;
+	public MapInfo mainMap => gridManager.MainMap;
 	[SerializeField] Vector2Int gridSize;
 	GridLayout gridLayout;
 
@@ -24,8 +24,6 @@ public class MapGenerator : MonoBehaviour
 	bool stopFrameCount;
 
 	[Header("Generate Map")]
-	[SerializeField] GameObject cellPrefab;
-	[SerializeField] Transform cellParent;
 	[SerializeField] CellularAutomata cellularAutomata;
 
 	[Header("Generate Props")]
@@ -35,7 +33,6 @@ public class MapGenerator : MonoBehaviour
 	[Header("Draw tiles")]
 	[SerializeField] IslandProfile[] islandProfiles;
 	[SerializeField] RuleTile waterTile, bridgeRuleTile;
-	[SerializeField] Tilemap groundTilemap, propsTilemap;
 	Dictionary<IslandBiome, IslandProfile> storedIslandProfiles = new Dictionary<IslandBiome, IslandProfile>();
 
 	private void OnDrawGizmos()
@@ -114,7 +111,8 @@ public class MapGenerator : MonoBehaviour
 			UIManager.Instance.BlackScreen(0, 0.5f);
 
 		Cell c = GridManager.Instance.MaxDensityCell(gridManager.BiggestIsland());
-		debugCube.transform.position = c.transform.position;
+		if (debugCube)
+			debugCube.transform.position = c.transform.position;
 	}
 
 	void SetupMap()
@@ -137,8 +135,8 @@ public class MapGenerator : MonoBehaviour
 
 	void GenerateMap()
 	{
-		groundTilemap.ClearAllTiles();
-		propsTilemap.ClearAllTiles();
+		gridManager.groundTilemap.ClearAllTiles();
+		gridManager.propsTilemap.ClearAllTiles();
 		mainMap.map = new int[gridSize.x, gridSize.y];
 		mainMap.biomeFlags = new int[gridSize.x, gridSize.y];
 		foreach (var item in mainMap.allCells.Values)
@@ -160,7 +158,7 @@ public class MapGenerator : MonoBehaviour
 				if (!mainMap.allCells.ContainsKey(coords) && mainMap.map[x, y] != 1)
 				{
 					Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coords.x, coords.y, 0));
-					GameObject cellGameobject = Instantiate(cellPrefab, worldToCell, Quaternion.identity, cellParent);
+					GameObject cellGameobject = Instantiate(gridManager.cellPrefab, worldToCell, Quaternion.identity, gridManager.cellParent);
 					Cell cellScript = cellGameobject.GetComponent<Cell>();
 					cellScript.Initialize(coords, worldToCell);
 					cellScript.GetNeighbours();
@@ -170,7 +168,7 @@ public class MapGenerator : MonoBehaviour
 						cellScript.SetRegion(new Region(null, -1));
 						if (debugMode)
                         {
-							Color c = GameManager.RandomColor();
+							Color c = GameDevHelper.RandomColor();
 							c.a = 0.5f;
 							cellScript.SetColor(c);
 						}
@@ -189,7 +187,7 @@ public class MapGenerator : MonoBehaviour
 		for (int i = 0; i < mainMap.islands.Count; i++)
 		{
 			Island island = mainMap.islands[i];
-			Color color = GameManager.RandomColor();
+			Color color = GameDevHelper.RandomColor();
 			IslandBiome newBiome = Island.RandomBiome();
 			IslandProfile newProfile = null;
 
@@ -249,7 +247,7 @@ public class MapGenerator : MonoBehaviour
 				foreach (var coord in island.CoordinateList)
 				{
 					Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(coord.x, coord.y, 0));
-					groundTilemap.SetTile(worldToCell, island.profile.ruleTile);
+					gridManager.groundTilemap.SetTile(worldToCell, island.profile.ruleTile);
 				}
 	}
 
@@ -262,9 +260,9 @@ public class MapGenerator : MonoBehaviour
 				Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(item.x, item.y, 0));
 
 				if (mainMap.map[x,y] == 2)
-					groundTilemap.SetTile(worldToCell, bridgeRuleTile);
+					gridManager.groundTilemap.SetTile(worldToCell, bridgeRuleTile);
 				else if (mainMap.map[x, y] == 1)
-					groundTilemap.SetTile(worldToCell, waterTile);
+					gridManager.groundTilemap.SetTile(worldToCell, waterTile);
 			}
 	}
 
@@ -281,7 +279,7 @@ public class MapGenerator : MonoBehaviour
 					if (r < propsProb)
 					{
 						Vector3Int worldToCell = gridLayout.WorldToCell(new Vector3Int(cell.coordinates.x, cell.coordinates.y, 0));
-						propsTilemap.SetTile(worldToCell, propsTiles);
+						gridManager.propsTilemap.SetTile(worldToCell, propsTiles);
 					}
 				}
 	}

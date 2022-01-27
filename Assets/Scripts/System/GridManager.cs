@@ -7,14 +7,19 @@ using UnityEngine.UI;
 using System.IO;
 using Pathfinding;
 using System.Linq;
+using UnityEditor.Tilemaps;
 
 public class GridManager : MonoBehaviour 
 {
 	public static GridManager Instance;
+	public Tilemap groundTilemap, propsTilemap;
+	public BoundsInt mapBounds;
+	public GameObject cellPrefab;
+	public Transform cellParent;
 
 	[Header("Regions")]
 	[SerializeField] LayerMask tilemapMask;
-	public MapInfo MainMap = new MapInfo();
+	public MapInfo MainMap;
 	MapGenerator mapGenerator;
 	GridLayout gridLayout;
 
@@ -28,9 +33,53 @@ public class GridManager : MonoBehaviour
 		GenerateMap();
 	}
 
+	public Cell CreateCell(Vector2Int coords, Vector2 position)
+    {
+		if (!MainMap.allCells.ContainsKey(coords))
+		{
+			GameObject cellGameobject = Instantiate(cellPrefab, position, Quaternion.identity, cellParent);
+			Cell cellScript = cellGameobject.GetComponent<Cell>();
+			cellScript.Initialize(coords, default);
+			cellScript.GetNeighbours();
+			if (string.IsNullOrEmpty(cellScript.myRegion.name))
+				cellScript.SetRegion(new Region(null, -1));
+
+			MainMap.allCells.Add(coords, cellScript);
+			return cellScript;
+		}
+
+		return null;
+	}
+
+	void BuildMapFromTilemap()
+    {
+		BoundsInt bounds = groundTilemap.cellBounds;
+		MainMap = new MapInfo(new int[bounds.size.x, bounds.size.y]);
+		mapBounds = bounds;
+
+		foreach (var pos in bounds.allPositionsWithin)
+		{
+			Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
+			Vector2Int coords = new Vector2Int(localPlace.x, localPlace.y);
+			Vector3 place = groundTilemap.CellToWorld(localPlace);
+			if (groundTilemap.HasTile(localPlace))
+			{
+				if (groundTilemap.GetColliderType(localPlace) == Tile.ColliderType.None)
+                {
+					Cell cell = CreateCell(coords, place);
+					cell.SetType(CellType.Ground);
+				}
+			}
+		}
+	}
+
 	public void GenerateMap()
     {
-		mapGenerator.StartNewMap();
+		MainMap = new MapInfo(null);
+		if (mapGenerator && mapGenerator.gameObject.activeSelf)
+			mapGenerator.StartNewMap();		
+		else if (groundTilemap)
+			BuildMapFromTilemap();
 	}
 
 	public Island BiggestIsland(List<Island> specificIslands = null)
@@ -48,7 +97,7 @@ public class GridManager : MonoBehaviour
 
 	public MapInfo GetMap()
 	{
-		return new MapInfo(MainMap.seas, MainMap.islands, MainMap.regionSize, MainMap.map, MainMap.biomeFlags, MainMap.allCells);
+		return new MapInfo(MainMap.map, MainMap.seas, MainMap.islands, MainMap.regionSize, MainMap.biomeFlags, MainMap.allCells);
 	}
 
 	public Region BiggestRegion(List<Region> regions)
@@ -219,7 +268,7 @@ public class GridManager : MonoBehaviour
             for (int i = 1; i < storedNeighbors[maxDensity].Count; i++)
             {
 				List<Vector2Int> coords = storedNeighbors[maxDensity];
-				Debug.DrawLine(new Vector3(coords[i - 1].x, coords[i - 1].y), new Vector3(coords[i].x, coords[i].y), Color.green, 100f);
+				//Debug.DrawLine(new Vector3(coords[i - 1].x, coords[i - 1].y), new Vector3(coords[i].x, coords[i].y), Color.green, 100f);
             }
 		}
 
@@ -236,18 +285,18 @@ public class GridManager : MonoBehaviour
 		return closestPoint;
 	}
 
+	public bool SamplePosition(Vector2 targetPos, float minDistance, out Vector2 sampledPos)
+	{
+		sampledPos = ClosestWalkable(targetPos);
+		Vector2Int gridPos = GameDevHelper.ToVector2Int(sampledPos);
+		print(GetCell(gridPos));
+		float d = Vector2.Distance(sampledPos, targetPos);
+		return d < minDistance;
+	}
+
 	public bool IsColliding(Vector2Int cellA, Vector2Int cellB, LayerMask layerMask)
     {
 		bool ray = Physics2D.Linecast(cellA, cellB, layerMask);
 		return ray;
     }
-
-
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Space))
-			GenerateMap();
-		else if (Input.GetKeyDown(KeyCode.Escape))
-			Application.Quit();
-	}
 }

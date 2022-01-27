@@ -45,7 +45,7 @@ public class Island : Region, IComparable<Island>
 
 	public static IslandBiome RandomBiome()
 	{
-		return GameManager.RandomEnum<IslandBiome>();
+		return GameDevHelper.RandomEnum<IslandBiome>();
 	}
 
 	public List<Cell> GetEdgeTiles()

@@ -768,6 +768,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 421718245744523802}
+  - component: {fileID: 5634467945743686880}
   - component: {fileID: 8717906347288197399}
   m_Layer: 7
   m_Name: EnemyScript
@@ -794,6 +795,24 @@ Transform:
   m_Father: {fileID: 4349680769149131547}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5634467945743686880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7809685199563522170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a837e36ac3f4f4fadca2cfdcbda35f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysShow: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  wire: 1
+  fill: 0
+  localCenter: {x: 0, y: 0, z: 0}
+  size: {x: 11, y: 11}
 --- !u!114 &8717906347288197399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,6 +854,7 @@ MonoBehaviour:
     isDead: 0
   walkSpeed: 2
   runSpeed: 2.5
+  gizmo: {fileID: 5634467945743686880}
   healthBarPivot: {fileID: 200425811834617662}
   healthBar: {fileID: 9016790181846015363}
   xpPrefab: {fileID: 6746842895930322274, guid: da1eb68032f44f94b8a2b6b4c035afcf,
@@ -847,7 +867,7 @@ MonoBehaviour:
     prob: 0.179
   destinationPoint: {fileID: 1265247498874899277}
   randomDelayBounds: {x: 2, y: 5}
-  randomPatrolRange: {x: 2, y: 3}
+  randomPatrolRange: {x: 11, y: 11}
   reactTimer: 0.5
   detectIcon: {fileID: 5325253821722144983}
   visionDistance: 4

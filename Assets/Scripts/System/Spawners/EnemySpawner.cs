@@ -8,23 +8,29 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] Vector2 positionRandomOffset;
     [SerializeField] SpawnData spawnerData;
+    [SerializeField] bool active = true;
+    [SerializeField] ShowRectangleGizmo gizmo;
+    List<Vector2> sampledPositions = new List<Vector2>();
 
     private void OnDrawGizmos()
     {
-#if UNITY_EDITOR
-        Handles.color = Color.red;
-        Handles.DrawWireDisc(transform.position, Vector3.forward, positionRandomOffset.y);
+        if (gizmo)
+            gizmo.SetSize(positionRandomOffset * 2);
+    }
 
-        Color c = Color.red;
-        c.a = 0.2f;
-        Handles.color = c;
-        Handles.DrawSolidDisc(transform.position, Vector3.forward, positionRandomOffset.x);
-#endif
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.black;
+        foreach (var item in sampledPositions)
+        {
+            Gizmos.DrawLine(transform.position, item);
+            Gizmos.DrawWireSphere(item, 0.6f);
+        }
     }
 
     public void Awake()
     {
-        if (spawnerData)
+        if (spawnerData && active)
             Spawn(spawnerData);
     }
 
@@ -38,14 +44,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public Vector2 RandomPosition()
-    {
-        Vector2 circle = Random.insideUnitCircle;
-        Vector2 random;
-        random.x = circle.x * positionRandomOffset.x;
-        random.y = circle.y * positionRandomOffset.y;
-        return random;
-    }
+    public Vector2 RandomPosition() => GameDevHelper.RandomVector(positionRandomOffset, transform.position);
 
     public void Spawn(SpawnData data)
     {
@@ -53,18 +52,41 @@ public class EnemySpawner : MonoBehaviour
             spawnerData = data;
 
         GameObject[] enemies = data.GetSpawnArray();
+        sampledPositions.Clear();
         for (int i = 0; i < enemies.Length; i++)
         {
-            Vector2 newPos = transform.position + (Vector3)RandomPosition();
+            Vector2 newPos = RandomPosition();
             if (GridManager.Instance)
             {
-                //bool sampled = GridManager.Instance.SamplePosition(newPos, out Vector2 samplePos, 2);
-                Instantiate(enemies[i], newPos, Quaternion.identity, transform);
+                bool sampled = GridManager.Instance.SamplePosition(newPos, 2, out Vector2 sampledPos);
+                if (sampled)
+                {
+                    sampledPositions.Add(sampledPos);
+                    Instantiate(enemies[i], newPos, Quaternion.identity, transform);
+                }
             }
             else
                 Instantiate(enemies[i], newPos, Quaternion.identity, transform);
         }
 
         spawnerData = null;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            sampledPositions.Clear();
+            for (int i = 0; i < 10; i++)
+            {
+                Vector2 newPos = RandomPosition();
+                if (GridManager.Instance)
+                {
+                    bool sampled = GridManager.Instance.SamplePosition(newPos, 2, out Vector2 sampledPos);
+                    if (sampled)
+                        sampledPositions.Add(sampledPos);
+                }
+            }
+        }
     }
 }

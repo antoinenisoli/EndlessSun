@@ -27,8 +27,8 @@ public class Patrolling : EnemyBehaviour
         if (GridManager.Instance)
         {
             randomPos = myEnemy.RandomPatrolPosition();
-            sampledPos = GridManager.Instance.ClosestWalkable(randomPos);
-            pos = sampledPos;
+            if (GridManager.Instance.SamplePosition(randomPos, 2f, out sampledPos))
+                pos = sampledPos;
         }
         else
             pos = randomPos;
