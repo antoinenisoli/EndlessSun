@@ -77,7 +77,7 @@ public class PlayerCombat : PlayerMod
             Enemy enemy = item.transform.GetComponentInChildren<Enemy>();
             if (enemy)
             {
-                enemy.Hit(player.ComputeDamages());
+                enemy.Hit(player.ComputeDamages(), player);
                 if (player.BalanceDraw(enemy))
                     enemy.KnockBack(-item.normal * pushForce);
             }

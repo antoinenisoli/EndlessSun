@@ -806,6 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08464dc9772c8714eafe518da5d0358c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTeam: 1
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -846,14 +847,20 @@ MonoBehaviour:
     dropCount: 1
     prob: 0.179
   destinationPoint: {fileID: 1265247498874899277}
+  minNextWaypointDistance: 3
+  patrolStopDistance: 0.1
   randomDelayBounds: {x: 2, y: 5}
   randomPatrolRange: {x: 2, y: 3}
   reactTimer: 0.5
   detectIcon: {fileID: 5325253821722144983}
+  aggroDistance: 20
   visionDistance: 4
-  minDistance: 0.75
+  chaseMinDistance: 1
   attackRate: 1.5
   attackRange: 0.5
+  patrolGizmo: {fileID: 0}
+  aggroGizmo: {fileID: 0}
+  visionGizmo: {fileID: 0}
 --- !u!1 &8235724819717507599
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ class Attacking : EnemyBehaviour
         base.Update();
         if (myEnemy.Target.Health.isDead)
         {
-            myEnemy.Target = null;
+            myEnemy.SetTarget(null);
             myEnemy.SetBehaviour(new Wait(myEnemy, 2, EnemyState.Patrolling));
             return;
         }

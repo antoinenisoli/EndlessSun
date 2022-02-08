@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Experimental.Rendering.Universal;
 
-public class DebugCameraController : MonoBehaviour
+public class MapRoomCameraController : MonoBehaviour
 {
     [SerializeField] float speed = 20f;
     [SerializeField] int sensitivity = 200;

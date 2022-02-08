@@ -15,14 +15,22 @@ class Chasing : EnemyBehaviour
         
     }
 
+    public override void Gizmos()
+    {
+        base.Gizmos();
+        myEnemy.visionGizmo.gameObject.SetActive(true);
+        if (myEnemy.visionGizmo)
+            myEnemy.visionGizmo.SetSize(myEnemy.visionDistance);
+    }
+
     public override void Update()
     {
         base.Update();
         if (myEnemy.NearToTarget())
             myEnemy.SetBehaviour(new Attacking(myEnemy));
-        else if (!myEnemy.DetectTargets() || myEnemy.Target.Health.isDead)
+        else if (!myEnemy.KeepTargetInSight() || myEnemy.Target.Health.isDead)
         {
-            myEnemy.Target = null;
+            myEnemy.SetTarget(null);
             myEnemy.SetBehaviour(new Wait(myEnemy, 2, EnemyState.Patrolling));
         }
         else

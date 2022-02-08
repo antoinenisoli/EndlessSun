@@ -18,6 +18,6 @@ public class EnemyAnimManager : MonoBehaviour
 
     public void Death()
     {
-        //enemy.Death();
+        Destroy(enemy.transform.parent.gameObject);
     }
 }

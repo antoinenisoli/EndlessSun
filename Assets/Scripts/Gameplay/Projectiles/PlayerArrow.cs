@@ -16,9 +16,10 @@ public class PlayerArrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Enemy enemy) && rb.velocity.sqrMagnitude > minimumForce)
+        Enemy enemy = collision.GetComponentInChildren<Enemy>();
+        if (enemy && rb.velocity.sqrMagnitude > minimumForce)
         {
-            enemy.Hit(1);
+            enemy.Hit(1, GameManager.Player);
             if (GameManager.Player.BalanceDraw(enemy))
                 enemy.KnockBack(rb.velocity * 0.5f);
 

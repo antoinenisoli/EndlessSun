@@ -139,9 +139,9 @@ public class PlayerController2D : Entity
         anim.SetTrigger("Die");
     }
 
-    public override void Hit(float amount)
+    public override void Hit(float amount, Entity aggressor = null)
     {
-        base.Hit(amount);
+        base.Hit(amount, aggressor);
         GameManager.Instance.FreezeFrame(0.4f);
         StartCoroutine(Glow(0.1f, Color.white));
         if (CameraManager.Instance) CameraManager.Instance.CameraShake(0.3f, 2);
@@ -191,6 +191,11 @@ public class PlayerController2D : Entity
         }
     }
 
+    public override float ComputeSpeed()
+    {
+        return sprinting ? runSpeed : walkSpeed; 
+    }
+
     void Move()
     {
         Vector2 inputs = new Vector2(inputX, inputY);
@@ -198,7 +203,7 @@ public class PlayerController2D : Entity
         if (sprinting)
             PlayerCombat.Stamina.StaminaCost(sprintCost);
 
-        Vector2 targetVelocity = inputs.normalized * (sprinting ? runSpeed : walkSpeed);
+        Vector2 targetVelocity = inputs.normalized * ComputeSpeed();
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref m_Velocity, movementSmoothing);
     }
 

@@ -26,6 +26,8 @@ public abstract class EnemyBehaviour
         this.myEnemy = myEnemy;
     }
 
+    public virtual void Gizmos() { }
+
     public virtual void Update()
     {
         if (!myEnemy)

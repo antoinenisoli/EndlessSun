@@ -34,11 +34,25 @@ public class Patrolling : EnemyBehaviour
             pos = randomPos;
     }
 
+    public override void Gizmos()
+    {
+        base.Gizmos();
+        myEnemy.patrolGizmo.gameObject.SetActive(true);
+        myEnemy.aggroGizmo.gameObject.SetActive(true);
+
+        if (myEnemy.patrolGizmo)
+            myEnemy.patrolGizmo.SetSize(myEnemy.randomPatrolRange * 2);
+        if (myEnemy.aggroGizmo)
+            myEnemy.aggroGizmo.SetSize(myEnemy.aggroDistance);
+    }
+
     public override void Update()
     {
         base.Update();
-        if (myEnemy.DetectTargets())
-            myEnemy.SetBehaviour(new Reacting(myEnemy, myEnemy.reactTimer));
+        if (myEnemy.DetectTarget(out Entity target))
+        {
+            myEnemy.NewAgressor(target);
+        }
         else if (!myEnemy.isMoving())
         {
             newPatrolTimer += Time.deltaTime;

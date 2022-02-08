@@ -14,7 +14,7 @@ public class Enemy : Entity
     AIDestinationSetter destinationSetter;
 
     [Header("ENEMY")]
-    [SerializeField] ShowRectangleGizmo gizmo;
+    [SerializeField] EnemyState currentState;
     [SerializeField] Transform healthBarPivot;
     [SerializeField] Transform healthBar;
     SpriteRenderer[] healthBarSprites;
@@ -29,14 +29,15 @@ public class Enemy : Entity
     public float minNextWaypointDistance = 3f;
     [SerializeField] float patrolStopDistance = 0.1f;
     [SerializeField] Vector2 randomDelayBounds;
-    [SerializeField] Vector2 randomPatrolRange;
-    Vector2 startPosition;
+    public Vector2 randomPatrolRange;
+    public ShowRectangleGizmo patrolGizmo;
 
     [Header("Detection")]
     public float reactTimer = 0.3f;
     [SerializeField] SpriteRenderer detectIcon;
     Vector3 detectIconBaseScale;
-    [SerializeField] float visionDistance = 20f;
+    public float aggroDistance = 20f, visionDistance = 50f;
+    public ShowSphereGizmo aggroGizmo, visionGizmo;
 
     [Header("Chase")]
     [SerializeField] float chaseMinDistance = 1f;
@@ -47,16 +48,12 @@ public class Enemy : Entity
 
     private void OnDrawGizmosSelected()
     {
-        Color c = Color.red;
-        Gizmos.color = c;
-        Gizmos.DrawWireSphere(transform.position, visionDistance);
-
-        c.r -= 50f;
-        Gizmos.color = c;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-
-        if (gizmo)
-            gizmo.SetSize(randomPatrolRange * 2);
+        if (aggroGizmo)
+            aggroGizmo.SetSize(aggroDistance);
+        if (visionGizmo)
+            visionGizmo.SetSize(visionDistance);
+        if (patrolGizmo)
+            patrolGizmo.SetSize(randomPatrolRange * 2);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -82,16 +79,26 @@ public class Enemy : Entity
         rb.isKinematic = true;
         detectIconBaseScale = detectIcon.transform.localScale;
         detectIcon.gameObject.SetActive(false);
-        startPosition = transform.position;
-        behaviour = new Patrolling(this);
+        SetBehaviour(new Patrolling(this));
         healthBarSprites = healthBar.GetComponentsInChildren<SpriteRenderer>();
     }
 
-    public override void Hit(float amount)
+    public override void Hit(float amount, Entity aggressor = null)
     {
+        base.Hit(amount, aggressor);
         rb.isKinematic = false;
-        base.Hit(amount);
         healthBarPivot.DOScaleX((float)Health.CurrentValue / (float)Health.MaxValue, 0.3f);
+    }
+
+    public override void NewAgressor(Entity aggressor)
+    {
+        if (!aggressors.Contains(aggressor))
+        {
+            base.NewAgressor(aggressor);
+            Stop();
+            SetTarget(aggressor);
+            SetBehaviour(new Reacting(this, reactTimer));
+        }
     }
 
     public override void ManageAnimations()
@@ -133,7 +140,6 @@ public class Enemy : Entity
     {
         base.Death();
         SpawnXP();
-        Destroy(gameObject, 2f);
     }
 
     public void ReactToTarget()
@@ -188,27 +194,38 @@ public class Enemy : Entity
             Instantiate(xpPrefab, transform.position, Quaternion.identity);
     }
 
-    public bool DetectTargets()
+    public bool KeepTargetInSight()
     {
-        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, visionDistance, targetLayer);
+        if (Target)
+        {
+            float distance = Vector2.Distance(Target.transform.position, transform.position);
+            if (distance < visionDistance)
+                return true;
+        }
+
+        return false;
+    }
+
+    public bool DetectTarget(out Entity target)
+    {
+        target = null;
+        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, aggroDistance);
         if (colls.Length > 0)
         {
             foreach (var item in colls)
             {
                 Entity entity = item.GetComponent<Entity>();
-                if (entity)
+                if (entity && entity.myTeam != myTeam)
                 {
                     float distance = Vector2.Distance(entity.transform.position, transform.position);
-                    if (distance < visionDistance && !entity.Health.isDead)
+                    if (distance < aggroDistance && !entity.Health.isDead)
                     {
-                        Target = entity;
+                        target = entity;
                         return true;
                     }
                 }
             }
         }
-        else
-            Target = null;
 
         return false;
     }
@@ -235,18 +252,26 @@ public class Enemy : Entity
     public void Stop()
     {
         rb.velocity = Vector2.zero;
+        aiAgent.isStopped = true;
         aiAgent.enabled = false;
+    }
+
+    void Flip(float otherX)
+    {
+        bool flip = transform.parent.position.x < otherX;
+        transform.parent.rotation = flip ? Quaternion.identity : Quaternion.Euler(Vector2.up * -180);
     }
 
     public void Move(Vector3 targetPos)
     {
-        spr.flipX = transform.position.x > targetPos.x;
+        Flip(targetPos.x);
         float distance = Vector2.Distance(targetPos, transform.position);
         float stopDistance = behaviour.State == EnemyState.Patrolling ? patrolStopDistance : chaseMinDistance;
 
         if (distance > stopDistance)
         {
             aiAgent.enabled = true;
+            aiAgent.isStopped = false;
             destinationPoint.position = targetPos;
         }
         else
@@ -264,15 +289,30 @@ public class Enemy : Entity
         }
     }
 
+    public override float ComputeSpeed()
+    {
+        if (behaviour.State == EnemyState.Patrolling)
+            return walkSpeed;
+        else
+            return runSpeed;
+    }
+
     public override void Update()
     {
         base.Update();
         ManageHealthbars();
+        currentState = behaviour.State;
+
         if (aiAgent)
+        {
             destinationSetter.target = destinationPoint;
+            aiAgent.maxSpeed = ComputeSpeed();
+        }
 
         if (Target)
-            spr.flipX = transform.position.x > Target.transform.position.x;
+        {
+            Flip(Target.transform.position.x);
+        }
 
         if (!Health.isDead)
             behaviour.Update();

@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+public enum Team
+{
+    Player,
+    Enemy,
+}
+
 public class Entity : MonoBehaviour
 {
     public virtual HealthStat Health => health;
@@ -10,6 +16,7 @@ public class Entity : MonoBehaviour
     public Entity Target { get; set; }
 
     [Header("Entity")]
+    public Team myTeam;
     public LayerMask targetLayer;
     public SpriteRenderer spr;
     [SerializeField] CharacterProfile profile;
@@ -23,6 +30,7 @@ public class Entity : MonoBehaviour
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
     protected Animator anim;
+    protected List<Entity> aggressors = new List<Entity>();
 
     public virtual void Awake()
     {
@@ -38,6 +46,18 @@ public class Entity : MonoBehaviour
     public virtual void Start()
     {
         
+    }
+
+    public virtual void NewAgressor(Entity agressor) 
+    {
+        aggressors.Add(agressor);
+    }
+
+    public virtual float ComputeSpeed() { return walkSpeed; }
+
+    public void SetTarget(Entity target)
+    {
+        Target = target;
     }
 
     public int ComputeDamages()
@@ -77,14 +97,17 @@ public class Entity : MonoBehaviour
         
     }
 
-    public virtual void Hit(float amount)
+    public virtual void Hit(float amount, Entity aggressor = null)
     {
         if (Health.isDead)
             return;
 
         Health.ModifyValue(-amount);
         anim.SetTrigger("Hit");
-        //spr.transform.DOPunchScale(Vector3.one * 0.5f, 0.1f);
+        spr.transform.DOComplete();
+        spr.transform.DOPunchScale(Vector3.one * -0.2f, 0.1f);
+        NewAgressor(aggressor);
+
         if (Health.isDead)
             Death();
     }
