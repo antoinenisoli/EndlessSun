@@ -8,6 +8,7 @@ public enum Team
 {
     Player,
     Enemy,
+    Neutral,
 }
 
 public class Entity : MonoBehaviour
@@ -25,13 +26,12 @@ public class Entity : MonoBehaviour
     [SerializeField] HealthStat health;
 
     [Header("_Movements")]
-    [SerializeField] protected float walkSpeed = 5f;
-    [SerializeField] protected float runSpeed = 10f;
+    public float walkSpeed = 5f;
+    public float runSpeed = 10f;
 
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
     protected Animator anim;
-    protected List<Entity> aggressors = new List<Entity>();
     protected List<CharacterMod> myMods = new List<CharacterMod>();
 
     public virtual void Awake()
@@ -60,9 +60,9 @@ public class Entity : MonoBehaviour
         myMods.Add(mod);
     }
 
-    public virtual void NewAgressor(Entity agressor) 
+    public bool IsEnemyOf(NPC target)
     {
-        aggressors.Add(agressor);
+        return myTeam != target.myTeam;
     }
 
     public virtual float ComputeSpeed() { return walkSpeed; }
@@ -119,7 +119,6 @@ public class Entity : MonoBehaviour
         anim.SetTrigger("Hit");
         spr.transform.DOComplete();
         spr.transform.DOPunchScale(Vector3.one * -0.2f, 0.1f);
-        NewAgressor(aggressor);
 
         if (Health.isDead)
             Death();

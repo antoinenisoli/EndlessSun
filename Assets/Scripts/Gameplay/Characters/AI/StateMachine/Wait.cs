@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Wait : StateMachineBehavior
+public class Wait : SubBehavior
 {
     public override AIState State => AIState.React;
     float timer;
     float delay;
     AIState nextState;
     
-    public Wait(RegularBehavior behavior, float delay, AIState nextState) : base(behavior)
+    public Wait(AIStateMachineBehavior behavior, float delay, AIState nextState) : base(behavior)
     {
         this.delay = delay;
         this.nextState = nextState;
-        behavior.myEntity.Stop();
+        behavior.myNPC.Stop();
     }
 
     public override void Update()

@@ -6,32 +6,32 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
-class Attacking : StateMachineBehavior
+class Attacking : SubBehavior
 {
     public override AIState State => AIState.Attacking;
     float timer;
 
-    public Attacking(RegularBehavior behavior) : base(behavior)
+    public Attacking(AIStateMachineBehavior behavior) : base(behavior)
     {
-        behavior.myEntity.Stop();
+        behavior.myNPC.Stop();
     }
 
     public override void Update()
     {
         base.Update();
-        if (myEntity.Target.Health.isDead)
+        if (myNPC.Target.Health.isDead)
         {
-            myEntity.SetTarget(null);
+            myNPC.SetTarget(null);
             behavior.SetBehaviour(new Wait(behavior, 2, AIState.Patrolling));
             return;
         }
-        else if (!myEntity.NearToTarget())
+        else if (!behavior.NearToTarget())
             behavior.SetBehaviour(new Chasing(behavior));
 
-        if (timer >= myEntity.attackRate)
+        if (timer >= myNPC.attackRate)
         {
             timer = 0;
-            myEntity.LaunchAttack();
+            myNPC.LaunchAttack();
         }
         else
             timer += Time.deltaTime;

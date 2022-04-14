@@ -35,13 +35,4 @@ MonoBehaviour:
   Mana:
     currentValue: 0
     maxValue: 50
-  stats:
-  - currentValue: 0
-    maxValue: 50
-    thisStat: 0
-  - currentValue: 0
-    maxValue: 50
-    thisStat: 0
-  - currentValue: 0
-    maxValue: 50
-    thisStat: 0
+  stats: []

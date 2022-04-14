@@ -16,12 +16,12 @@ public class PlayerArrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponentInChildren<Enemy>();
-        if (enemy && rb.velocity.sqrMagnitude > minimumForce)
+        NPC npc = collision.GetComponentInChildren<NPC>();
+        if (npc && GameManager.Player.IsEnemyOf(npc) && rb.velocity.sqrMagnitude > minimumForce)
         {
-            enemy.Hit(1, GameManager.Player);
-            if (GameManager.Player.BalanceDraw(enemy))
-                enemy.KnockBack(rb.velocity * 0.5f);
+            npc.Hit(1, GameManager.Player);
+            if (GameManager.Player.BalanceDraw(npc))
+                npc.KnockBack(rb.velocity * 0.5f);
 
             Destroy(gameObject);
         }

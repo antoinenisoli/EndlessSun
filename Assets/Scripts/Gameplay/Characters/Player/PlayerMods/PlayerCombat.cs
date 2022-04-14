@@ -9,12 +9,13 @@ public class PlayerCombat : PlayerMod
     public static StaminaStat Stamina;
 
     [Header("Attack")]
-    [SerializeField] float staminaCost = 15f;
+    [SerializeField] float attackStaminaCost = 15f;
     [SerializeField] int attackAnimCount = 3;
     [Range(0, 1)] public float attackRadius = 0.5f, attackRange = 0.5f;
     [SerializeField] float pushForce = 5f;
 
     [Header("Bow")]
+    [SerializeField] float bowStaminaCost = 15f;
     [SerializeField] GameObject arrowPrefab;
     [SerializeField] float arrowForce = 15f;
     public Vector2 storedVelocity;
@@ -45,7 +46,7 @@ public class PlayerCombat : PlayerMod
 
     public void Attack()
     {
-        Stamina.StaminaCost(staminaCost);
+        Stamina.StaminaCost(attackStaminaCost);
         player.SetState(PlayerState.Idle);
         RaycastHit2D[] colls = Physics2D.CircleCastAll(player.transform.position, attackRadius, player.spr.transform.right, attackRange, player.targetLayer);
         player.idleSword = true;
@@ -56,19 +57,19 @@ public class PlayerCombat : PlayerMod
 
         foreach (var item in colls)
         {
-            Enemy enemy = item.transform.GetComponentInChildren<Enemy>();
-            if (enemy)
+            NPC npc = item.transform.GetComponentInChildren<NPC>();
+            if (npc && GameManager.Player.IsEnemyOf(npc))
             {
-                enemy.Hit(player.ComputeDamages(), player);
-                if (player.BalanceDraw(enemy))
-                    enemy.KnockBack(-item.normal * pushForce);
+                npc.Hit(player.ComputeDamages(), player);
+                if (player.BalanceDraw(npc))
+                    npc.KnockBack(-item.normal * pushForce);
             }
         }
     }
 
     public void FireArrow()
     {
-        Stamina.StaminaCost(staminaCost);
+        Stamina.StaminaCost(bowStaminaCost);
         player.SetState(PlayerState.Idle);
         GameObject arrow = Instantiate(arrowPrefab, player.transform.position, arrowPrefab.transform.rotation);
         Rigidbody2D arrowRB = arrow.GetComponent<Rigidbody2D>();

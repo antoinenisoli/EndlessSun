@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Reacting : StateMachineBehavior
+public class Reacting : SubBehavior
 {
     public override AIState State => AIState.React;
     float timer;
     float delay;
 
-    public Reacting(RegularBehavior behavior, float delay = 0f) : base(behavior)
+    public Reacting(AIStateMachineBehavior behavior, float delay = 0f) : base(behavior)
     {
         this.delay = delay;
-        behavior.React();
+        behavior.ReactToTarget();
     }
 
     public override void Update()

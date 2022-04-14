@@ -43,16 +43,16 @@ MonoBehaviour:
     recoveryAmount: 1
   baseHunger:
     currentValue: 0
-    maxValue: 50
+    maxValue: 1000
     changeAmount: 0.5
     thisStat: 0
   baseStamina:
     currentValue: 0
-    maxValue: 50
+    maxValue: 1000
     changeAmount: 0.5
     thisStat: 0
   baseThirst:
     currentValue: 0
-    maxValue: 50
+    maxValue: 1000
     changeAmount: 0.5
     thisStat: 0

@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class EnemyAnimManager : MonoBehaviour
 {
-    Enemy enemy;
+    NPC npc;
 
     private void Awake()
     {
-        enemy = GetComponentInParent<Enemy>();
+        npc = GetComponentInParent<NPC>();
     }
 
     public void Attack()
     {
-        enemy.Attack();
+        npc.Attack();
     }
 
     public void Death()
     {
-        Destroy(enemy.transform.parent.gameObject);
+        Destroy(npc.transform.parent.gameObject);
     }
 }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
-class Chasing : StateMachineBehavior
+class Chasing : SubBehavior
 {
     public override AIState State => AIState.Chasing;
 
-    public Chasing(RegularBehavior behavior) : base(behavior)
+    public Chasing(AIStateMachineBehavior behavior) : base(behavior)
     {
         
     }
@@ -28,12 +28,12 @@ class Chasing : StateMachineBehavior
         base.Update();
         if (behavior.NearToTarget())
             behavior.SetBehaviour(new Attacking(behavior));
-        else if (!behavior.KeepTargetInSight() || behavior.myEntity.Target.Health.isDead)
+        else if (!behavior.KeepTargetInSight() || behavior.myNPC.Target.Health.isDead)
         {
-            behavior.SetTarget(null);
-            behavior.SetBehaviour(new Wait(myEntity, 2, AIState.Patrolling));
+            myNPC.SetTarget(null);
+            behavior.SetBehaviour(new Wait(behavior, 2, AIState.Patrolling));
         }
         else
-            behavior.Move(behavior.myEntity.Target.transform.position);
+            behavior.Move(behavior.myNPC.Target.transform.position);
     }
 }

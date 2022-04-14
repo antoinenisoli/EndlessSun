@@ -21,27 +21,14 @@ public class PlayerHUD : HUD
     [SerializeField] Slider staminaSlider;
     [SerializeField] Slider energySlider;
 
-    void Start()
+    IEnumerator Start()
     {
-        if (!GameManager.Player)
-            return;
-
-        healthSlider.value = GameManager.Player.Health.Coeff();
-        thirstySlider.value = PlayerSurvival.Instance.Thirsty.Coeff();
-
-        manaSlider.maxValue = PlayerMagic.Mana.MaxValue;
-        manaSlider.value = PlayerMagic.Mana.CurrentValue;
-
-        staminaSlider.maxValue = PlayerCombat.Stamina.MaxValue;
-        staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
-
-        hungerSlider.maxValue = PlayerSurvival.Instance.Hunger.MaxValue;
-        hungerSlider.value = PlayerSurvival.Instance.Hunger.CurrentValue;
-
-        energySlider.maxValue = PlayerSurvival.Instance.Energy.MaxValue;
-        energySlider.value = PlayerSurvival.Instance.Energy.CurrentValue;
-
-        UpdateUI();
+        yield return null;
+        if (GameManager.Player)
+        {
+            yield return new WaitForEndOfFrame();
+            UpdateUI();
+        }
     }
 
     void UpdateMana()
@@ -50,9 +37,13 @@ public class PlayerHUD : HUD
         if (float.IsNaN(compute) || float.IsInfinity(compute))
             return;
 
+        hungerSlider.maxValue = PlayerSurvival.Instance.Hunger.MaxValue;
         hungerSlider.value = compute;
         if (PlayerMagic.Mana != null)
+        {
+            manaSlider.maxValue = PlayerMagic.Mana.MaxValue;
             manaSlider.value = PlayerMagic.Mana.CurrentValue;
+        }
     }
 
     void UpdateStamina()
@@ -61,9 +52,13 @@ public class PlayerHUD : HUD
         if (float.IsNaN(compute) || float.IsInfinity(compute))
             return;
 
+        energySlider.maxValue = PlayerSurvival.Instance.Energy.MaxValue;
         energySlider.value = compute;
         if (PlayerCombat.Stamina != null)
+        {
+            staminaSlider.maxValue = PlayerCombat.Stamina.MaxValue;
             staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
+        }
     }
 
     void UpdateHealth()
@@ -72,7 +67,6 @@ public class PlayerHUD : HUD
         if (float.IsNaN(compute) || float.IsInfinity(compute))
             return;
 
-        //print(computeHealth);
         healthSlider.value = compute;
         thirstySlider.value = 1 - compute;
         colorAnimation.time = 0.3f + (heartPulse * compute);

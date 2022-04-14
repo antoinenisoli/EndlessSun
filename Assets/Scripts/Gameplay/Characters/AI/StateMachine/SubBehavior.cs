@@ -14,17 +14,16 @@ public enum AIState
 }
 
 [Serializable]
-public abstract class StateMachineBehavior
+public abstract class SubBehavior
 {
     public abstract AIState State { get; }
-    public RegularBehavior behavior;
-    protected Entity myEntity;
+    public AIStateMachineBehavior behavior;
+    protected NPC myNPC => behavior.myNPC;
 
-    public StateMachineBehavior(RegularBehavior behavior)
+    public SubBehavior(AIStateMachineBehavior behavior)
     {
         this.behavior = behavior;
-        myEntity = behavior.myEntity;
-        myEntity.UnStun();
+        myNPC.UnStun();
     }
 
     public virtual void Gizmos() { }
