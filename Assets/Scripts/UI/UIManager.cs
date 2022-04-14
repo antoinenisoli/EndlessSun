@@ -26,13 +26,15 @@ public class UIManager : MonoBehaviour
         allMenus = FindObjectsOfType<HUD>();
         mainCam = Camera.main;
         inventoryUI = FindObjectOfType<PlayerInventoryUI>();
-    }
 
-    private void Start()
-    {
-        EventManager.Instance.onPlayerSleep.AddListener(Sleep);
         levelUpPanel.DOFade(0f, 0f);
         blackScreenImage.DOFade(0f, 0f);
+    }
+
+    private IEnumerator Start()
+    {
+        EventManager.Instance.onPlayerSleep.AddListener(Sleep);
+        yield return new WaitForEndOfFrame();     
         UpdateUI();
     }
 
@@ -61,8 +63,8 @@ public class UIManager : MonoBehaviour
         if (!GameManager.Player)
             return;
 
-        currentLevelText.text = GameManager.Player.myXP.CurrentLevel.index + 1 + "";
-        float computeXP = (float)GameManager.Player.myXP.CurrentLevel.CurrentXP / (float)GameManager.Player.myXP.CurrentLevel.xpStep;
+        currentLevelText.text = PlayerController2D.xpManager.CurrentLevel.index + 1 + "";
+        float computeXP = PlayerController2D.xpManager.ComputeXP();
         xpSlider.DOFillAmount(computeXP, 0.15f);
         foreach (var item in allMenus)
             item.UpdateUI();

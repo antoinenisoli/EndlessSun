@@ -297,9 +297,9 @@ public class Enemy : Entity
             return runSpeed;
     }
 
-    public override void Update()
+    public override void DoUpdate()
     {
-        base.Update();
+        base.DoUpdate();
         ManageHealthbars();
         currentState = behaviour.State;
 

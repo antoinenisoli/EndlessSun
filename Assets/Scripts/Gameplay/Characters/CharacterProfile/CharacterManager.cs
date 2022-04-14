@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class PlayerXP
+public enum CharacterStatName
+{
+    Health,
+    Mana,
+    Stamina,
+}
+
+public class CharacterManager : CharacterMod
 {
     [SerializeField] PlayerLevel currentLevel = new PlayerLevel();
     [SerializeField] int powerIncrement = 2;
@@ -14,6 +20,12 @@ public class PlayerXP
     public PlayerLevel NextLevel => levels[CurrentLevel.index + 1];
 
     public PlayerLevel CurrentLevel { get => currentLevel; set => currentLevel = value; }
+
+    public override void Init()
+    {
+        base.Init();
+        GenerateLevels();
+    }
 
     public void GenerateLevels()
     {
@@ -27,6 +39,12 @@ public class PlayerXP
                 levels[i].index = i;
             }
         }
+    }
+
+    public float ComputeXP()
+    {
+        float computeXP = (float)PlayerController2D.xpManager.CurrentLevel.CurrentXP / (float)PlayerController2D.xpManager.CurrentLevel.xpStep;
+        return computeXP;
     }
 
     public void ModifyValue(int amount)

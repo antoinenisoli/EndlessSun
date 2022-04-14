@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class Stat
+public class Stat
 {
     protected PlayerController2D player => GameManager.Player;
     [SerializeField] protected float currentValue;

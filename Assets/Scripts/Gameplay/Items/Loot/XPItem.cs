@@ -9,7 +9,7 @@ public class XPItem : AutoCollectItem
 
     public override void Effect(PlayerController2D player)
     {
-        player.myXP.ModifyValue(10);
+        PlayerController2D.xpManager.ModifyValue(10);
         player.StartCoroutine(player.Glow(0.1f, Color.white));
         VFXManager.Instance.PlayVFX("XPCoin", transform.position);
         Destroy(gameObject);

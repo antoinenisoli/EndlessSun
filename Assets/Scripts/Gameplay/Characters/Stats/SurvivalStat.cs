@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SurvivalStat : PlayerStat
+public class SurvivalStat : FullStat
 {
     [Range(0, 100f)] public float changeAmount = 0.5f;
     float timer;
+    public SurvivalStatName thisStat;
 
     public virtual void Update()
     {

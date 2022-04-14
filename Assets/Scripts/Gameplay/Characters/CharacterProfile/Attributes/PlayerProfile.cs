@@ -6,5 +6,5 @@ using UnityEngine;
 public class PlayerProfile : CharacterProfile
 {
     public SurvivalStat baseHunger, baseStamina, baseThirst;
-    public PlayerStat baseEnergy, baseMana, baseHealth;
+    public CharacterStat baseEnergy, baseMana, baseHealth;
 }

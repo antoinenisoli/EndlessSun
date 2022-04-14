@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class HealthStat : PlayerStat
+public class HealthStat : CharacterStat
 {
     public bool isDead;
 

@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum PlayerStatName
+public enum SurvivalStatName
 {
-    Health,
-    Mana,
-    Stamina,
     Hunger,
     Thirst,
     Energy,
@@ -19,7 +16,7 @@ public class PlayerSurvival : MonoBehaviour
     [SerializeField] SurvivalStat hunger;
     [SerializeField] SurvivalStat thirsty;
     [SerializeField] SurvivalStat energy;
-    Dictionary<PlayerStatName, SurvivalStat> d_stats = new Dictionary<PlayerStatName, SurvivalStat>();
+    Dictionary<SurvivalStatName, SurvivalStat> d_stats = new Dictionary<SurvivalStatName, SurvivalStat>();
 
     public SurvivalStat Hunger { get => hunger; set => hunger = value; }
     public SurvivalStat Thirsty { get => thirsty; set => thirsty = value; }
@@ -42,7 +39,7 @@ public class PlayerSurvival : MonoBehaviour
             item.Init();
     }
 
-    public SurvivalStat GetSurvivalStat(PlayerStatName statName)
+    public SurvivalStat GetSurvivalStat(SurvivalStatName statName)
     {
         if (d_stats.TryGetValue(statName, out SurvivalStat stat))
             return stat;

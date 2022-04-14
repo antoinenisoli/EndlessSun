@@ -21,7 +21,7 @@ public class PlayerHUD : HUD
     [SerializeField] Slider staminaSlider;
     [SerializeField] Slider energySlider;
 
-    private void Start()
+    void Start()
     {
         if (!GameManager.Player)
             return;

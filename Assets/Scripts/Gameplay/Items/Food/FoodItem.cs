@@ -5,7 +5,7 @@ using UnityEngine;
 public struct FeedEffect
 {
     public float feedAmount;
-    public PlayerStatName changeStat;
+    public SurvivalStatName changeStat;
 }
 
 [System.Serializable]

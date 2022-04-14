@@ -21,15 +21,6 @@ public class PlayerController2D : Entity
 
     [Header("PLAYER")]
     [SerializeField] LayerMask tilemapLayer;
-    public PlayerHealth playerHealth;
-    [Space(10)]
-    public PlayerXP myXP;
-    [Space(10)]
-    public PlayerCombat Combat;
-    [Space(10)]
-    public PlayerMagic Magic;
-    [Space(10)]
-    PlayerMod[] mods;
 
     [Header("__Sprint")]
     public PlayerState currentState;
@@ -46,32 +37,19 @@ public class PlayerController2D : Entity
     [SerializeField] LayerMask interactLayer;
     public Interactable lastDetectedInteractable;
 
+    #region "Mods"
+    public PlayerHealth playerHealth;
+    public static CharacterManager xpManager;
+    public static PlayerCombat Combat;
+    public static PlayerMagic Magic;
+    #endregion
+
     float inputX, inputY;
 
     private void OnDrawGizmos()
     {
-        Combat.Gizmo(this);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, interactionRadius);
-    }
-
-    public override void Awake()
-    {
-        base.Awake();
-        mods = new PlayerMod[] 
-        { 
-            Combat, 
-            Magic,
-        };
-
-        foreach (var item in mods)
-            item.Init();
-    }
-
-    public override void Start()
-    {
-        base.Start();
-        myXP.GenerateLevels();
     }
 
     public void CheckCollision()
@@ -272,16 +250,16 @@ public class PlayerController2D : Entity
         return currentInteractable;
     }
 
-    public override void Update()
+    public override void DoUpdate()
     {
-        base.Update();
+        base.DoUpdate();
         Inputs();
         Move();
         ManageAttacks();
         ManageStates();
         Survival.Update();
         playerHealth.Update();
-        foreach (var item in mods)
+        foreach (var item in myMods)
             item.Update();
 
         if (CanMove())

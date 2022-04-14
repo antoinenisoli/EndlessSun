@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq;
 
 public enum Team
 {
@@ -12,15 +13,15 @@ public enum Team
 public class Entity : MonoBehaviour
 {
     public virtual HealthStat Health => health;
-    public AttributeList AttributeList { get => attributeList; set => attributeList = value; }
+    public AttributeList AttributeList => CharacterProfile.AttributeList;
     public Entity Target { get; set; }
 
     [Header("Entity")]
     public Team myTeam;
     public LayerMask targetLayer;
     public SpriteRenderer spr;
-    [SerializeField] CharacterProfile profile;
-    [SerializeField] AttributeList attributeList;
+    [SerializeField] CharacterProfile profileToCopy;
+    CharacterProfile CharacterProfile;
     [SerializeField] HealthStat health;
 
     [Header("_Movements")]
@@ -31,21 +32,24 @@ public class Entity : MonoBehaviour
     protected Vector3 m_Velocity;
     protected Animator anim;
     protected List<Entity> aggressors = new List<Entity>();
+    protected List<CharacterMod> myMods = new List<CharacterMod>();
 
     public virtual void Awake()
-    {
-        rb = GetComponentInParent<Rigidbody2D>();
-        anim = GetComponentInChildren<Animator>();
-        if (profile)
-            AttributeList = profile.AttributeList.Copy();
+    {    
+        if (profileToCopy)
+            CharacterProfile = Instantiate(profileToCopy);
 
         AttributeList.Init();
         Health.Init();
+        rb = GetComponentInParent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
     }
 
-    public virtual void Start()
+    public virtual void Start() { }
+
+    public void AddMod(CharacterMod mod)
     {
-        
+        myMods.Add(mod);
     }
 
     public virtual void NewAgressor(Entity agressor) 
@@ -78,7 +82,7 @@ public class Entity : MonoBehaviour
 
     public bool BalanceDraw(Entity target)
     {
-        return attributeList.BalanceDraw(target);
+        return AttributeList.BalanceDraw(target);
     }
 
     public void KnockBack(Vector2 force)
@@ -92,10 +96,7 @@ public class Entity : MonoBehaviour
         Target.Hit(ComputeDamages());
     }
 
-    public virtual void Stun()
-    {
-        
-    }
+    public virtual void Stun() { }
 
     public virtual void Hit(float amount, Entity aggressor = null)
     {
@@ -112,8 +113,13 @@ public class Entity : MonoBehaviour
             Death();
     }
 
-    public virtual void Update()
+    public virtual void DoUpdate()
     {
         ManageAnimations();
+    }
+
+    public void Update()
+    {
+        DoUpdate();
     }
 }

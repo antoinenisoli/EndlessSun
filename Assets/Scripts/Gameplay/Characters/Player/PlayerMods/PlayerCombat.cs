@@ -9,8 +9,8 @@ public class PlayerCombat : PlayerMod
     public static StaminaStat Stamina;
 
     [SerializeField] StaminaStat stamina;
-    public PlayerStat[] stats = new PlayerStat[3];
-    Dictionary<PlayerStatName, PlayerStat> dico = new Dictionary<PlayerStatName, PlayerStat>();
+    public CharacterStat[] stats = new CharacterStat[3];
+    Dictionary<CharacterStatName, CharacterStat> dico = new Dictionary<CharacterStatName, CharacterStat>();
 
     [Header("Attack")]
     [SerializeField] float staminaCost = 15f;
@@ -26,6 +26,7 @@ public class PlayerCombat : PlayerMod
     public override void Init()
     {
         base.Init();
+        PlayerController2D.Combat = this;
         foreach (var item in stats)
         {
             dico.Add(item.thisStat, item);
@@ -37,7 +38,7 @@ public class PlayerCombat : PlayerMod
         dico.Add(Stamina.thisStat, Stamina);
     }
 
-    public void Gizmo(PlayerController2D player)
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawRay(player.transform.position, player.spr.transform.right * attackRange);
@@ -48,9 +49,9 @@ public class PlayerCombat : PlayerMod
         Gizmos.DrawSphere(player.transform.position + player.spr.transform.right * attackRange, attackRadius);
     }
 
-    public PlayerStat GetCombatStat(PlayerStatName statName)
+    public CharacterStat GetCombatStat(CharacterStatName statName)
     {
-        if (dico.TryGetValue(statName, out PlayerStat stat))
+        if (dico.TryGetValue(statName, out CharacterStat stat))
             return stat;
 
         return null;
@@ -95,7 +96,7 @@ public class PlayerCombat : PlayerMod
         arrowRB.AddForce(storedVelocity * arrowForce, ForceMode2D.Impulse);
     }
 
-    public override void Update()
+    public override void DoUpdate()
     {
         float computeEnergy = PlayerSurvival.Instance.Energy.MaxValue - PlayerSurvival.Instance.Energy.CurrentValue;
         Stamina.MaxValue = Stamina.BaseMaxValue - computeEnergy;

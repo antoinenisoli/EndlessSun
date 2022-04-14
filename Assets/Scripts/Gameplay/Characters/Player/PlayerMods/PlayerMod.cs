@@ -2,14 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayerMod
+public abstract class PlayerMod : CharacterMod
 {
-    protected PlayerController2D player => GameManager.Player;
-
-    public virtual void Init()
-    {
-        
-    }
-
-    public abstract void Update();
+    protected PlayerController2D player => entity as PlayerController2D;
 }

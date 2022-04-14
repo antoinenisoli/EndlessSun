@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayerStat : Stat
+public class FullStat : Stat
 {
     public float BaseMaxValue { get; set; }
 
@@ -33,7 +33,6 @@ public class PlayerStat : Stat
         }
     }
 
-    public PlayerStatName thisStat;
 
     public virtual void Init()
     {
