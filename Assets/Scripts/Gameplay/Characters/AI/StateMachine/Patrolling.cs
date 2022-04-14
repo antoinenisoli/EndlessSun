@@ -11,7 +11,7 @@ public class Patrolling : StateMachineBehavior
     float newPatrolDelay;
     Vector3 pos;
 
-    public Patrolling(Enemy myEnemy) : base(myEnemy)
+    public Patrolling(RegularBehavior behavior) : base(behavior)
     {
         newPatrolDelay = myEnemy.RandomDelay();
         pos = myEnemy.RandomPatrolPosition();
@@ -19,14 +19,14 @@ public class Patrolling : StateMachineBehavior
 
     void NewDestination()
     {
-        myEnemy.Stop();
+        myEntity.Stop();
         newPatrolTimer = 0;
-        newPatrolDelay = myEnemy.RandomDelay();
-        Vector2 randomPos = myEnemy.RandomPatrolPosition();
+        newPatrolDelay = myEntity.RandomDelay();
+        Vector2 randomPos = myEntity.RandomPatrolPosition();
         Vector2 sampledPos;
         if (GridManager.Instance)
         {
-            randomPos = myEnemy.RandomPatrolPosition();
+            randomPos = myEntity.RandomPatrolPosition();
             if (GridManager.Instance.SamplePosition(randomPos, 2f, out sampledPos))
                 pos = sampledPos;
         }
@@ -37,29 +37,29 @@ public class Patrolling : StateMachineBehavior
     public override void Gizmos()
     {
         base.Gizmos();
-        myEnemy.patrolGizmo.gameObject.SetActive(true);
-        myEnemy.aggroGizmo.gameObject.SetActive(true);
+        behavior.patrolGizmo.gameObject.SetActive(true);
+        behavior.aggroGizmo.gameObject.SetActive(true);
 
-        if (myEnemy.patrolGizmo)
-            myEnemy.patrolGizmo.SetSize(myEnemy.randomPatrolRange * 2);
-        if (myEnemy.aggroGizmo)
-            myEnemy.aggroGizmo.SetSize(myEnemy.aggroDistance);
+        if (behavior.patrolGizmo)
+            behavior.patrolGizmo.SetSize(behavior.randomPatrolRange * 2);
+        if (behavior.aggroGizmo)
+            behavior.aggroGizmo.SetSize(behavior.aggroDistance);
     }
 
     public override void Update()
     {
         base.Update();
-        if (myEnemy.DetectTarget(out Entity target))
+        if (myEntity.DetectTarget(out Entity target))
         {
-            myEnemy.NewAgressor(target);
+            myEntity.NewAgressor(target);
         }
-        else if (!myEnemy.isMoving())
+        else if (!myEntity.isMoving())
         {
             newPatrolTimer += Time.deltaTime;
             if (newPatrolTimer > newPatrolDelay)
                 NewDestination();
 
-            myEnemy.Move(pos);
+            myEntity.Move(pos);
         }
     }
 }

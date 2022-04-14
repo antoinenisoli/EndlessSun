@@ -17,20 +17,17 @@ public enum AIState
 public abstract class StateMachineBehavior
 {
     public abstract AIState State { get; }
+    public RegularBehavior behavior;
+    protected Entity myEntity;
 
-    protected Enemy myEnemy;
-
-    protected StateMachineBehavior(Enemy myEnemy)
+    public StateMachineBehavior(RegularBehavior behavior)
     {
-        myEnemy.UnStun();
-        this.myEnemy = myEnemy;
+        this.behavior = behavior;
+        myEntity = behavior.myEntity;
+        myEntity.UnStun();
     }
 
     public virtual void Gizmos() { }
 
-    public virtual void Update()
-    {
-        if (!myEnemy)
-            return;
-    }
+    public virtual void Update() { }
 }

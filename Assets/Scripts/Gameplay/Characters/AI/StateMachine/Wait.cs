@@ -10,12 +10,12 @@ public class Wait : StateMachineBehavior
     float timer;
     float delay;
     AIState nextState;
-
-    public Wait(Enemy myEnemy, float delay, AIState nextState) : base(myEnemy)
+    
+    public Wait(RegularBehavior behavior, float delay, AIState nextState) : base(behavior)
     {
         this.delay = delay;
         this.nextState = nextState;
-        myEnemy.Stop();
+        behavior.myEntity.Stop();
     }
 
     public override void Update()
@@ -27,16 +27,16 @@ public class Wait : StateMachineBehavior
             switch (nextState)
             {
                 case AIState.Patrolling:
-                    myEnemy.SetBehaviour(new Patrolling(myEnemy));
+                    behavior.SetBehaviour(new Patrolling(behavior));
                     break;
                 case AIState.React:
-                    myEnemy.SetBehaviour(new Reacting(myEnemy));
+                    behavior.SetBehaviour(new Reacting(behavior));
                     break;
                 case AIState.Chasing:
-                    myEnemy.SetBehaviour(new Chasing(myEnemy));
+                    behavior.SetBehaviour(new Chasing(behavior));
                     break;
                 case AIState.Attacking:
-                    myEnemy.SetBehaviour(new Attacking(myEnemy));
+                    behavior.SetBehaviour(new Attacking(behavior));
                     break;
             }
         }

@@ -32,6 +32,52 @@ public class RegularBehavior : AIBehavior
     public float attackRate = 1f;
     [SerializeField] float attackRange = 5f;
 
+    private void Start()
+    {
+        SetBehaviour(new Patrolling(this));
+    }
+
+    public void SetBehaviour(StateMachineBehavior newBehaviour)
+    {
+        behaviour = newBehaviour;
+    }
+
+    public override void Stun()
+    {
+        base.Stun();
+        SetBehaviour(new Wait(this, 0.4f, AIState.Chasing));
+    }
+
+    public override void React()
+    {
+        base.React();
+        SetBehaviour(new Reacting(this, reactTimer));
+    }
+
+    public void Move(Vector3 targetPos)
+    {
+        float distance = Vector2.Distance(targetPos, transform.position);
+        float stopDistance = behaviour.State == AIState.Patrolling ? patrolStopDistance : chaseMinDistance;
+
+        if (distance > stopDistance)
+        {
+            aiAgent.enabled = true;
+            aiAgent.isStopped = false;
+            destinationPoint.position = targetPos;
+        }
+        else
+            myEntity.Stop();
+    }
+
+    public bool NearToTarget()
+    {
+        if (!myEntity.Target)
+            return false;
+
+        float distance = Vector2.Distance(myEntity.Target.transform.position, transform.position);
+        return distance < chaseMinDistance;
+    }
+
     public override void DoUpdate()
     {
         currentState = behaviour.State;

@@ -11,27 +11,27 @@ class Attacking : StateMachineBehavior
     public override AIState State => AIState.Attacking;
     float timer;
 
-    public Attacking(Enemy myEnemy) : base(myEnemy)
+    public Attacking(RegularBehavior behavior) : base(behavior)
     {
-        myEnemy.Stop();
+        behavior.myEntity.Stop();
     }
 
     public override void Update()
     {
         base.Update();
-        if (myEnemy.Target.Health.isDead)
+        if (myEntity.Target.Health.isDead)
         {
-            myEnemy.SetTarget(null);
-            myEnemy.SetBehaviour(new Wait(myEnemy, 2, AIState.Patrolling));
+            myEntity.SetTarget(null);
+            behavior.SetBehaviour(new Wait(behavior, 2, AIState.Patrolling));
             return;
         }
-        else if (!myEnemy.NearToTarget())
-            myEnemy.SetBehaviour(new Chasing(myEnemy));
+        else if (!myEntity.NearToTarget())
+            behavior.SetBehaviour(new Chasing(behavior));
 
-        if (timer >= myEnemy.attackRate)
+        if (timer >= myEntity.attackRate)
         {
             timer = 0;
-            myEnemy.LaunchAttack();
+            myEntity.LaunchAttack();
         }
         else
             timer += Time.deltaTime;

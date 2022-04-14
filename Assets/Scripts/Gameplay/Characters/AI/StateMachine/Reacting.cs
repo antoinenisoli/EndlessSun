@@ -10,10 +10,10 @@ public class Reacting : StateMachineBehavior
     float timer;
     float delay;
 
-    public Reacting(Enemy myEnemy, float delay = 0) : base(myEnemy)
+    public Reacting(RegularBehavior behavior, float delay = 0f) : base(behavior)
     {
         this.delay = delay;
-        myEnemy.ReactToTarget();
+        behavior.React();
     }
 
     public override void Update()
@@ -21,6 +21,6 @@ public class Reacting : StateMachineBehavior
         base.Update();
         timer += Time.deltaTime;
         if (timer > delay)
-            myEnemy.SetBehaviour(new Chasing(myEnemy));
+            behavior.SetBehaviour(new Chasing(behavior));
     }
 }

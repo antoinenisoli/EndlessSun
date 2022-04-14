@@ -4,7 +4,11 @@ using UnityEngine;
 
 public abstract class AIBehavior : MonoBehaviour
 {
-    protected Entity myEntity;
+    public Entity myEntity;
 
     public abstract void DoUpdate();
+
+    public virtual void Stun() { }
+
+    public virtual void React() { }
 }

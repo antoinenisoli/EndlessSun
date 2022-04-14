@@ -77,6 +77,8 @@ public class Entity : MonoBehaviour
         return AttributeList.ComputeDamages();
     }
 
+    public virtual void Stop() { }
+
     public virtual void ManageAnimations()
     {
         anim.SetBool("Dead", Health.isDead);
@@ -105,6 +107,8 @@ public class Entity : MonoBehaviour
     }
 
     public virtual void Stun() { }
+
+    public virtual void UnStun() { }
 
     public virtual void Hit(float amount, Entity aggressor = null)
     {

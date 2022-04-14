@@ -12,6 +12,8 @@ public class Enemy : Entity
 
     AIPath aiAgent;
     AIDestinationSetter destinationSetter;
+    AIBehavior myBehavior;
+    Vector2 targetPos;
 
     [Header("ENEMY")]
     [SerializeField] AIState currentState;
@@ -79,7 +81,6 @@ public class Enemy : Entity
         rb.isKinematic = true;
         detectIconBaseScale = detectIcon.transform.localScale;
         detectIcon.gameObject.SetActive(false);
-        SetBehaviour(new Patrolling(this));
         healthBarSprites = healthBar.GetComponentsInChildren<SpriteRenderer>();
     }
 
@@ -97,7 +98,7 @@ public class Enemy : Entity
             base.NewAgressor(aggressor);
             Stop();
             SetTarget(aggressor);
-            SetBehaviour(new Reacting(this, reactTimer));
+            myBehavior.React();
         }
     }
 
@@ -110,12 +111,13 @@ public class Enemy : Entity
     public override void Stun()
     {
         base.Stun();
-        SetBehaviour(new Wait(this, 0.4f, AIState.Chasing));
+        myBehavior.Stun();
         pushed = true;
     }
 
-    public void UnStun()
+    public override void UnStun()
     {
+        base.UnStun();
         pushed = false;
         rb.isKinematic = true;
     }
@@ -230,6 +232,14 @@ public class Enemy : Entity
         return false;
     }
 
+    Vector2 TargetPosition()
+    {
+        if (Target)
+            return Target.transform.position;
+        else
+            return targetPos;
+    }
+
     public bool NearToTarget()
     {
         if (!Target)
@@ -239,18 +249,14 @@ public class Enemy : Entity
         return distance < chaseMinDistance;
     }
 
-    public void SetBehaviour(StateMachineBehavior newBehaviour)
-    {
-        behaviour = newBehaviour;
-    }
-
     public bool isMoving()
     {
         return rb.velocity.sqrMagnitude > 1.5f;
     }
 
-    public void Stop()
+    public override void Stop()
     {
+        base.Stop();
         rb.velocity = Vector2.zero;
         aiAgent.isStopped = true;
         aiAgent.enabled = false;
@@ -264,6 +270,7 @@ public class Enemy : Entity
 
     public void Move(Vector3 targetPos)
     {
+        this.targetPos = targetPos;
         Flip(targetPos.x);
         float distance = Vector2.Distance(targetPos, transform.position);
         float stopDistance = behaviour.State == AIState.Patrolling ? patrolStopDistance : chaseMinDistance;
@@ -302,16 +309,12 @@ public class Enemy : Entity
         base.DoUpdate();
         ManageHealthbars();
         currentState = behaviour.State;
+        Flip(TargetPosition().x);
 
         if (aiAgent)
         {
             destinationSetter.target = destinationPoint;
             aiAgent.maxSpeed = ComputeSpeed();
-        }
-
-        if (Target)
-        {
-            Flip(Target.transform.position.x);
         }
 
         if (!Health.isDead)

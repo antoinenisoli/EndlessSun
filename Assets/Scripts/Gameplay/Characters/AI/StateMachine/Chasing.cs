@@ -10,7 +10,7 @@ class Chasing : StateMachineBehavior
 {
     public override AIState State => AIState.Chasing;
 
-    public Chasing(Enemy myEnemy) : base(myEnemy)
+    public Chasing(RegularBehavior behavior) : base(behavior)
     {
         
     }
@@ -18,22 +18,22 @@ class Chasing : StateMachineBehavior
     public override void Gizmos()
     {
         base.Gizmos();
-        myEnemy.visionGizmo.gameObject.SetActive(true);
-        if (myEnemy.visionGizmo)
-            myEnemy.visionGizmo.SetSize(myEnemy.visionDistance);
+        behavior.visionGizmo.gameObject.SetActive(true);
+        if (behavior.visionGizmo)
+            behavior.visionGizmo.SetSize(behavior.visionDistance);
     }
 
     public override void Update()
     {
         base.Update();
-        if (myEnemy.NearToTarget())
-            myEnemy.SetBehaviour(new Attacking(myEnemy));
-        else if (!myEnemy.KeepTargetInSight() || myEnemy.Target.Health.isDead)
+        if (behavior.NearToTarget())
+            behavior.SetBehaviour(new Attacking(behavior));
+        else if (!behavior.KeepTargetInSight() || behavior.myEntity.Target.Health.isDead)
         {
-            myEnemy.SetTarget(null);
-            myEnemy.SetBehaviour(new Wait(myEnemy, 2, AIState.Patrolling));
+            behavior.SetTarget(null);
+            behavior.SetBehaviour(new Wait(myEntity, 2, AIState.Patrolling));
         }
         else
-            myEnemy.Move(myEnemy.Target.transform.position);
+            behavior.Move(behavior.myEntity.Target.transform.position);
     }
 }
