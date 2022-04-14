@@ -46,9 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf8e4480be5bed4ea35233092f1665b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 6746842897313595882}
+  itemTransform: {fileID: 6746842897313595882}
   animDuration: 1
   spawnRadius: 0.5
+  itemProfile: {fileID: 0}
   pickupRadius: 1
   xpAmount: 5
 --- !u!61 &6746842895930322276

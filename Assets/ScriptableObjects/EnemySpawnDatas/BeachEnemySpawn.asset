@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a3f268b761dac4408ca6f5749bb10a3, type: 3}
+  m_Name: BeachEnemySpawn
+  m_EditorClassIdentifier: 
+  spawnCount: 3
+  spawnInfos:
+  - name: EnemySkeleton
+    prefab: {fileID: 4349680769149131540, guid: fef65ca9331ada34e844b4d081d8d5af,
+      type: 3}
+    probability: 10
+    weight: 10
+  accumulatedWeights: 10

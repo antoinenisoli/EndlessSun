@@ -1,0 +1,5019 @@
+fileFormatVersion: 2
+guid: 16a23ae2bbcc4f746a46ec346a4dd92d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1526312913022545013
+    second: ZRPGBeach_0
+  - first:
+      213: 4254370694266372453
+    second: ZRPGBeach_1
+  - first:
+      213: 3412352780926261032
+    second: ZRPGBeach_2
+  - first:
+      213: 1758584995180632582
+    second: ZRPGBeach_3
+  - first:
+      213: -3442767121046437647
+    second: ZRPGBeach_4
+  - first:
+      213: 5916450432416937741
+    second: ZRPGBeach_5
+  - first:
+      213: 6646074306167019740
+    second: ZRPGBeach_6
+  - first:
+      213: 2602453035037441185
+    second: ZRPGBeach_7
+  - first:
+      213: -7714772355709565382
+    second: ZRPGBeach_8
+  - first:
+      213: 4626505014765933423
+    second: ZRPGBeach_9
+  - first:
+      213: -4488602106378776038
+    second: ZRPGBeach_10
+  - first:
+      213: 6734645126353274468
+    second: ZRPGBeach_11
+  - first:
+      213: 7367526026568664333
+    second: ZRPGBeach_12
+  - first:
+      213: 6317806468023311951
+    second: ZRPGBeach_13
+  - first:
+      213: 8340414285192700458
+    second: ZRPGBeach_14
+  - first:
+      213: 6051901244101373537
+    second: ZRPGBeach_15
+  - first:
+      213: -3797051012741583604
+    second: ZRPGBeach_16
+  - first:
+      213: 1217271677233656031
+    second: ZRPGBeach_17
+  - first:
+      213: -2092719326299064381
+    second: ZRPGBeach_18
+  - first:
+      213: 2642204665577679918
+    second: ZRPGBeach_19
+  - first:
+      213: 6301200636144880654
+    second: ZRPGBeach_20
+  - first:
+      213: -3404647305686081250
+    second: ZRPGBeach_21
+  - first:
+      213: -256060039167397085
+    second: ZRPGBeach_22
+  - first:
+      213: -7788055629889842403
+    second: ZRPGBeach_23
+  - first:
+      213: 4039316537724105716
+    second: ZRPGBeach_24
+  - first:
+      213: 1800796747176485279
+    second: ZRPGBeach_25
+  - first:
+      213: 6618010670206870472
+    second: ZRPGBeach_26
+  - first:
+      213: 6376614389987456569
+    second: ZRPGBeach_27
+  - first:
+      213: 4921389202462033247
+    second: ZRPGBeach_28
+  - first:
+      213: 4955449856182345220
+    second: ZRPGBeach_29
+  - first:
+      213: -605456559067454176
+    second: ZRPGBeach_30
+  - first:
+      213: 1027665770821687240
+    second: ZRPGBeach_31
+  - first:
+      213: -7555856114234267411
+    second: ZRPGBeach_32
+  - first:
+      213: -1281791054175339845
+    second: ZRPGBeach_33
+  - first:
+      213: 8064590047250642477
+    second: ZRPGBeach_34
+  - first:
+      213: -1265121069979502813
+    second: ZRPGBeach_35
+  - first:
+      213: -2642159707077896152
+    second: ZRPGBeach_36
+  - first:
+      213: 4567305018110021963
+    second: ZRPGBeach_37
+  - first:
+      213: -914886704768096195
+    second: ZRPGBeach_38
+  - first:
+      213: 2702499839650258034
+    second: ZRPGBeach_39
+  - first:
+      213: -6697409586693794356
+    second: ZRPGBeach_40
+  - first:
+      213: -4333056986352714276
+    second: ZRPGBeach_41
+  - first:
+      213: 6733424978412671570
+    second: ZRPGBeach_42
+  - first:
+      213: -4936413707381887330
+    second: ZRPGBeach_43
+  - first:
+      213: 9026110762331344650
+    second: ZRPGBeach_44
+  - first:
+      213: 1216051745212606554
+    second: ZRPGBeach_45
+  - first:
+      213: -3017835053471773580
+    second: ZRPGBeach_46
+  - first:
+      213: -5152994881200362159
+    second: ZRPGBeach_47
+  - first:
+      213: -4760514646877658325
+    second: ZRPGBeach_48
+  - first:
+      213: -3331626533989168797
+    second: ZRPGBeach_49
+  - first:
+      213: 5320038941697646812
+    second: ZRPGBeach_50
+  - first:
+      213: 5893848429800136680
+    second: ZRPGBeach_51
+  - first:
+      213: -7059468158322536737
+    second: ZRPGBeach_52
+  - first:
+      213: 2425534178250626181
+    second: ZRPGBeach_53
+  - first:
+      213: -4700339566897942536
+    second: ZRPGBeach_54
+  - first:
+      213: -7075054232087300538
+    second: ZRPGBeach_55
+  - first:
+      213: -609592616482629085
+    second: ZRPGBeach_56
+  - first:
+      213: 3972026754322401261
+    second: ZRPGBeach_57
+  - first:
+      213: -4810155599942052273
+    second: ZRPGBeach_58
+  - first:
+      213: -5515096407570473416
+    second: ZRPGBeach_59
+  - first:
+      213: 7464461064390518689
+    second: ZRPGBeach_60
+  - first:
+      213: 4213123479215546039
+    second: ZRPGBeach_61
+  - first:
+      213: 8101941541460887710
+    second: ZRPGBeach_62
+  - first:
+      213: -2422874190203168599
+    second: ZRPGBeach_63
+  - first:
+      213: 6920427718130224835
+    second: ZRPGBeach_64
+  - first:
+      213: 955687289746173592
+    second: ZRPGBeach_65
+  - first:
+      213: -5182410991993608323
+    second: ZRPGBeach_66
+  - first:
+      213: -6097249726739651050
+    second: ZRPGBeach_67
+  - first:
+      213: -172985388036850343
+    second: ZRPGBeach_68
+  - first:
+      213: 5169330611208857230
+    second: ZRPGBeach_69
+  - first:
+      213: 3554017534029947426
+    second: ZRPGBeach_70
+  - first:
+      213: 8983782809039850633
+    second: ZRPGBeach_71
+  - first:
+      213: 1670874505326055019
+    second: ZRPGBeach_72
+  - first:
+      213: -1377468665187774169
+    second: ZRPGBeach_73
+  - first:
+      213: -225596221071290912
+    second: ZRPGBeach_74
+  - first:
+      213: 2749272820796636879
+    second: ZRPGBeach_75
+  - first:
+      213: 4535191392767911301
+    second: ZRPGBeach_76
+  - first:
+      213: -2490257415444294707
+    second: ZRPGBeach_77
+  - first:
+      213: -8085529700233351669
+    second: ZRPGBeach_78
+  - first:
+      213: 2906156085359593226
+    second: ZRPGBeach_79
+  - first:
+      213: -4220474723212376665
+    second: ZRPGBeach_80
+  - first:
+      213: -6855357385074795518
+    second: ZRPGBeach_81
+  - first:
+      213: 6922147070986474470
+    second: ZRPGBeach_82
+  - first:
+      213: -1204808007408539072
+    second: ZRPGBeach_83
+  - first:
+      213: -8673641465351745188
+    second: ZRPGBeach_84
+  - first:
+      213: 6541440836441382340
+    second: ZRPGBeach_85
+  - first:
+      213: -3929561475429407599
+    second: ZRPGBeach_86
+  - first:
+      213: -5268904440252583398
+    second: ZRPGBeach_87
+  - first:
+      213: -2827166077241874608
+    second: ZRPGBeach_88
+  - first:
+      213: -7866412783556931606
+    second: ZRPGBeach_89
+  - first:
+      213: -7954027381825134617
+    second: ZRPGBeach_90
+  - first:
+      213: -5098141039573173241
+    second: ZRPGBeach_91
+  - first:
+      213: 4463665839761740912
+    second: ZRPGBeach_92
+  - first:
+      213: -8374211116399714373
+    second: ZRPGBeach_93
+  - first:
+      213: -8285617089255293819
+    second: ZRPGBeach_94
+  - first:
+      213: 6299719437378830684
+    second: ZRPGBeach_95
+  - first:
+      213: 8598659204726039021
+    second: ZRPGBeach_96
+  - first:
+      213: -1955477771820089646
+    second: ZRPGBeach_97
+  - first:
+      213: 7840931664599717272
+    second: ZRPGBeach_98
+  - first:
+      213: -3188572066339660066
+    second: ZRPGBeach_99
+  - first:
+      213: 7423970851615341881
+    second: ZRPGBeach_100
+  - first:
+      213: -3409338825617292030
+    second: ZRPGBeach_101
+  - first:
+      213: 5387258231717315900
+    second: ZRPGBeach_102
+  - first:
+      213: -3426665774239930655
+    second: ZRPGBeach_103
+  - first:
+      213: 6707150450009919389
+    second: ZRPGBeach_104
+  - first:
+      213: 2061685776299193590
+    second: ZRPGBeach_105
+  - first:
+      213: -6187349846919557851
+    second: ZRPGBeach_106
+  - first:
+      213: -8334187137195236137
+    second: ZRPGBeach_107
+  - first:
+      213: -692937825125400346
+    second: ZRPGBeach_108
+  - first:
+      213: 486608928264403884
+    second: ZRPGBeach_109
+  - first:
+      213: 6640212711927452091
+    second: ZRPGBeach_110
+  - first:
+      213: -1416761284166964877
+    second: ZRPGBeach_111
+  - first:
+      213: -8653589578398290212
+    second: ZRPGBeach_112
+  - first:
+      213: 2653168731006487212
+    second: ZRPGBeach_113
+  - first:
+      213: 6585600931797968113
+    second: ZRPGBeach_114
+  - first:
+      213: 3613437766660280452
+    second: ZRPGBeach_115
+  - first:
+      213: 5793612898848231805
+    second: ZRPGBeach_116
+  - first:
+      213: -3415845648450538890
+    second: ZRPGBeach_117
+  - first:
+      213: 5311346433470199032
+    second: ZRPGBeach_118
+  - first:
+      213: 6561572566899921472
+    second: ZRPGBeach_119
+  - first:
+      213: 6903306147607900837
+    second: ZRPGBeach_120
+  - first:
+      213: 5768321098287183295
+    second: ZRPGBeach_121
+  - first:
+      213: 6967106333049718085
+    second: ZRPGBeach_122
+  - first:
+      213: 7609493649920795555
+    second: ZRPGBeach_123
+  - first:
+      213: -5511930265697262884
+    second: ZRPGBeach_124
+  - first:
+      213: -27054636754808099
+    second: ZRPGBeach_125
+  - first:
+      213: 5651405261025214457
+    second: ZRPGBeach_126
+  - first:
+      213: 4974648693412272174
+    second: ZRPGBeach_127
+  - first:
+      213: -1559557986670111117
+    second: ZRPGBeach_128
+  - first:
+      213: -6655010702477199568
+    second: ZRPGBeach_129
+  - first:
+      213: 9169742348027160441
+    second: ZRPGBeach_130
+  - first:
+      213: -3613412205991874634
+    second: ZRPGBeach_131
+  - first:
+      213: -5943055878232587121
+    second: ZRPGBeach_132
+  - first:
+      213: 1030225324203433795
+    second: ZRPGBeach_133
+  - first:
+      213: -7410778790519737979
+    second: ZRPGBeach_134
+  - first:
+      213: 5973683621641466270
+    second: ZRPGBeach_135
+  - first:
+      213: 2086895060087524438
+    second: ZRPGBeach_136
+  - first:
+      213: 7993519405501746742
+    second: ZRPGBeach_137
+  - first:
+      213: 4189286713914736630
+    second: ZRPGBeach_138
+  - first:
+      213: 4214730700633871523
+    second: ZRPGBeach_139
+  - first:
+      213: 800533577127326654
+    second: ZRPGBeach_140
+  - first:
+      213: 4405213979560958408
+    second: ZRPGBeach_141
+  - first:
+      213: -6290529209510874386
+    second: ZRPGBeach_142
+  - first:
+      213: 3755288091788849956
+    second: ZRPGBeach_143
+  - first:
+      213: 9078562677394759112
+    second: ZRPGBeach_144
+  - first:
+      213: 5762865947504621039
+    second: ZRPGBeach_145
+  - first:
+      213: 9200510938291546808
+    second: ZRPGBeach_146
+  - first:
+      213: 2983954635646452170
+    second: ZRPGBeach_147
+  - first:
+      213: 8313296425330274261
+    second: ZRPGBeach_148
+  - first:
+      213: -5905617248133937233
+    second: ZRPGBeach_149
+  - first:
+      213: 4755585219851090527
+    second: ZRPGBeach_150
+  - first:
+      213: -7857696212045643914
+    second: ZRPGBeach_151
+  - first:
+      213: 6060412272363528733
+    second: ZRPGBeach_152
+  - first:
+      213: 7964541747524376642
+    second: ZRPGBeach_153
+  - first:
+      213: -7551134366795857652
+    second: ZRPGBeach_154
+  - first:
+      213: -3003228375596709185
+    second: ZRPGBeach_155
+  - first:
+      213: 6375446987562100576
+    second: ZRPGBeach_156
+  - first:
+      213: -5703106967013490973
+    second: ZRPGBeach_157
+  - first:
+      213: -4093470400575273149
+    second: ZRPGBeach_158
+  - first:
+      213: -3453066890673846304
+    second: ZRPGBeach_159
+  - first:
+      213: 4151582574591774732
+    second: ZRPGBeach_160
+  - first:
+      213: 641554682222805017
+    second: ZRPGBeach_161
+  - first:
+      213: -825990921621988557
+    second: ZRPGBeach_162
+  - first:
+      213: 8849701681225261917
+    second: ZRPGBeach_163
+  - first:
+      213: -5265651568576694244
+    second: ZRPGBeach_164
+  - first:
+      213: 7444907307065618726
+    second: ZRPGBeach_165
+  - first:
+      213: -453212691083324604
+    second: ZRPGBeach_166
+  - first:
+      213: 6024547453817849617
+    second: ZRPGBeach_167
+  - first:
+      213: -1849366657830360531
+    second: ZRPGBeach_168
+  - first:
+      213: -8130229970824802829
+    second: ZRPGBeach_169
+  - first:
+      213: 313853725641900006
+    second: ZRPGBeach_170
+  - first:
+      213: -7637471445930318411
+    second: ZRPGBeach_171
+  - first:
+      213: -3969240978654868133
+    second: ZRPGBeach_172
+  - first:
+      213: 4753970979512847706
+    second: ZRPGBeach_173
+  - first:
+      213: 3612111359550178062
+    second: ZRPGBeach_174
+  - first:
+      213: -5054937391352450326
+    second: ZRPGBeach_175
+  - first:
+      213: -4306160011597777586
+    second: ZRPGBeach_176
+  - first:
+      213: 3138327563028275329
+    second: ZRPGBeach_177
+  - first:
+      213: -6387990434809849438
+    second: ZRPGBeach_178
+  - first:
+      213: -7340621497690837216
+    second: ZRPGBeach_179
+  - first:
+      213: -8305938375366892804
+    second: ZRPGBeach_180
+  - first:
+      213: 5256749715153285641
+    second: ZRPGBeach_181
+  - first:
+      213: 4623794088548579798
+    second: ZRPGBeach_182
+  - first:
+      213: -613134807914068979
+    second: ZRPGBeach_183
+  - first:
+      213: 7824839047318874583
+    second: ZRPGBeach_184
+  - first:
+      213: 6914669803138837130
+    second: ZRPGBeach_185
+  - first:
+      213: -4139039681933413060
+    second: ZRPGBeach_186
+  - first:
+      213: 311764237788764448
+    second: ZRPGBeach_187
+  - first:
+      213: 6232849844482901622
+    second: ZRPGBeach_188
+  - first:
+      213: 7133964853908252177
+    second: ZRPGBeach_189
+  - first:
+      213: -2464506435845732871
+    second: ZRPGBeach_190
+  - first:
+      213: 1102599359422953123
+    second: ZRPGBeach_191
+  - first:
+      213: -7647612206959925124
+    second: ZRPGBeach_192
+  - first:
+      213: 8419394952940032460
+    second: ZRPGBeach_193
+  - first:
+      213: 34992989996629598
+    second: ZRPGBeach_194
+  - first:
+      213: -5261326287421704536
+    second: ZRPGBeach_195
+  - first:
+      213: 3508971322666051796
+    second: ZRPGBeach_196
+  - first:
+      213: -2556322801886384945
+    second: ZRPGBeach_197
+  - first:
+      213: 2418100338568482974
+    second: ZRPGBeach_198
+  - first:
+      213: -3666826303971828703
+    second: ZRPGBeach_199
+  - first:
+      213: -6538450019634644243
+    second: ZRPGBeach_200
+  - first:
+      213: -7002429721266684629
+    second: ZRPGBeach_201
+  - first:
+      213: 3937160376218394437
+    second: ZRPGBeach_202
+  - first:
+      213: -6368655767537748225
+    second: ZRPGBeach_203
+  - first:
+      213: 2053851500771719737
+    second: ZRPGBeach_204
+  - first:
+      213: -7991346426589075785
+    second: ZRPGBeach_205
+  - first:
+      213: -2475631907294898031
+    second: ZRPGBeach_206
+  - first:
+      213: -3242842599370802341
+    second: ZRPGBeach_207
+  - first:
+      213: 4364432653737192059
+    second: ZRPGBeach_208
+  - first:
+      213: -2090261940330889964
+    second: ZRPGBeach_209
+  - first:
+      213: -3284921569623092840
+    second: ZRPGBeach_210
+  - first:
+      213: 4488899984996796822
+    second: ZRPGBeach_211
+  - first:
+      213: 1436775101352755805
+    second: ZRPGBeach_212
+  - first:
+      213: -9099315425695432045
+    second: ZRPGBeach_213
+  - first:
+      213: 5147448797034238133
+    second: ZRPGBeach_214
+  - first:
+      213: -1656701178428462015
+    second: ZRPGBeach_215
+  - first:
+      213: -3108549385187375146
+    second: ZRPGBeach_216
+  - first:
+      213: 245297987177433726
+    second: ZRPGBeach_217
+  - first:
+      213: 4262672811104010345
+    second: ZRPGBeach_218
+  - first:
+      213: -3860988091639707216
+    second: ZRPGBeach_219
+  - first:
+      213: 2799529668163973924
+    second: ZRPGBeach_220
+  - first:
+      213: 6898886681176558212
+    second: ZRPGBeach_221
+  - first:
+      213: -4660014982253810340
+    second: ZRPGBeach_222
+  - first:
+      213: 2983954580313023298
+    second: ZRPGBeach_223
+  - first:
+      213: 1800934593681657911
+    second: ZRPGBeach_224
+  - first:
+      213: -2850267617040774725
+    second: ZRPGBeach_225
+  - first:
+      213: 127569979279131982
+    second: ZRPGBeach_226
+  - first:
+      213: -644278703359046776
+    second: ZRPGBeach_227
+  - first:
+      213: 1985244082911305886
+    second: ZRPGBeach_228
+  - first:
+      213: -3290874960054020436
+    second: ZRPGBeach_229
+  - first:
+      213: 1397307987314108821
+    second: ZRPGBeach_230
+  - first:
+      213: -108614164319174717
+    second: ZRPGBeach_231
+  - first:
+      213: 2028823711694058156
+    second: ZRPGBeach_232
+  - first:
+      213: -7951304202096078164
+    second: ZRPGBeach_233
+  - first:
+      213: -5493330937930688970
+    second: ZRPGBeach_234
+  - first:
+      213: -3056084827194836018
+    second: ZRPGBeach_235
+  - first:
+      213: -8807562272217638527
+    second: ZRPGBeach_236
+  - first:
+      213: 2972674320700749129
+    second: ZRPGBeach_237
+  - first:
+      213: 7379253968682067429
+    second: ZRPGBeach_238
+  - first:
+      213: 7287906074605586082
+    second: ZRPGBeach_239
+  - first:
+      213: 702058092708580275
+    second: ZRPGBeach_240
+  - first:
+      213: -4344046670890661548
+    second: ZRPGBeach_241
+  - first:
+      213: 6160095565272433226
+    second: ZRPGBeach_242
+  - first:
+      213: 1591570122547989494
+    second: ZRPGBeach_243
+  - first:
+      213: -4749525981092809213
+    second: ZRPGBeach_244
+  - first:
+      213: -1083645511973021367
+    second: ZRPGBeach_245
+  - first:
+      213: 479165979386655735
+    second: ZRPGBeach_246
+  - first:
+      213: 2485411597081908934
+    second: ZRPGBeach_247
+  - first:
+      213: -3313002519412848705
+    second: ZRPGBeach_248
+  - first:
+      213: 4687258934315206406
+    second: ZRPGBeach_249
+  - first:
+      213: 3206795653925583833
+    second: ZRPGBeach_250
+  - first:
+      213: -2727945536237989765
+    second: ZRPGBeach_251
+  - first:
+      213: 532710756625588635
+    second: ZRPGBeach_252
+  - first:
+      213: 870978506415871385
+    second: ZRPGBeach_253
+  - first:
+      213: -182800073421181376
+    second: ZRPGBeach_254
+  - first:
+      213: 398709151991767627
+    second: ZRPGBeach_255
+  - first:
+      213: 7696865777669625397
+    second: ZRPGBeach_256
+  - first:
+      213: -6428677550821079391
+    second: ZRPGBeach_257
+  - first:
+      213: -1796295438398737080
+    second: ZRPGBeach_258
+  - first:
+      213: 2580394247755984759
+    second: ZRPGBeach_259
+  - first:
+      213: -5680590285901155801
+    second: ZRPGBeach_260
+  - first:
+      213: 7518650299259777853
+    second: ZRPGBeach_261
+  - first:
+      213: -3265721320016959693
+    second: ZRPGBeach_262
+  - first:
+      213: -6234695039934775887
+    second: ZRPGBeach_263
+  - first:
+      213: 4945765087203112793
+    second: ZRPGBeach_264
+  - first:
+      213: 6135999335174462636
+    second: ZRPGBeach_265
+  - first:
+      213: -6680693965477860231
+    second: ZRPGBeach_266
+  - first:
+      213: -3305294710518193830
+    second: ZRPGBeach_267
+  - first:
+      213: -7858642002671958240
+    second: ZRPGBeach_268
+  - first:
+      213: -1100947782430184567
+    second: ZRPGBeach_269
+  - first:
+      213: -6542015167238730922
+    second: ZRPGBeach_270
+  - first:
+      213: 7432965887298184351
+    second: ZRPGBeach_271
+  - first:
+      213: -7432791387158876026
+    second: ZRPGBeach_272
+  - first:
+      213: -8828203828402330777
+    second: ZRPGBeach_273
+  - first:
+      213: -1965935788543827299
+    second: ZRPGBeach_274
+  - first:
+      213: 7497815396443857471
+    second: ZRPGBeach_275
+  - first:
+      213: -5848975919485402196
+    second: ZRPGBeach_276
+  - first:
+      213: 1708808786052632155
+    second: ZRPGBeach_277
+  - first:
+      213: 1788444892369692930
+    second: ZRPGBeach_278
+  - first:
+      213: -2323927069777953806
+    second: ZRPGBeach_279
+  - first:
+      213: 7871389437147311488
+    second: ZRPGBeach_280
+  - first:
+      213: -7319553838135264687
+    second: ZRPGBeach_281
+  - first:
+      213: 3586444740815185750
+    second: ZRPGBeach_282
+  - first:
+      213: -4589785883738822221
+    second: ZRPGBeach_283
+  - first:
+      213: -5985036639909809684
+    second: ZRPGBeach_284
+  - first:
+      213: 3429604974757762424
+    second: ZRPGBeach_285
+  - first:
+      213: -8042634866279434313
+    second: ZRPGBeach_286
+  - first:
+      213: -818575730280749192
+    second: ZRPGBeach_287
+  - first:
+      213: -87709474176946199
+    second: ZRPGBeach_288
+  - first:
+      213: 4710490137701052074
+    second: ZRPGBeach_289
+  - first:
+      213: 6824303642001400160
+    second: ZRPGBeach_290
+  - first:
+      213: 3055258438129010419
+    second: ZRPGBeach_291
+  - first:
+      213: -6963842897387660685
+    second: ZRPGBeach_292
+  - first:
+      213: 6816974780751752579
+    second: ZRPGBeach_293
+  - first:
+      213: 4703247009380346236
+    second: ZRPGBeach_294
+  - first:
+      213: -7447858287555015249
+    second: ZRPGBeach_295
+  - first:
+      213: -4786110507491077493
+    second: ZRPGBeach_296
+  - first:
+      213: -7918395725673454483
+    second: ZRPGBeach_297
+  - first:
+      213: -642268410134925824
+    second: ZRPGBeach_298
+  - first:
+      213: -3596913252746032878
+    second: ZRPGBeach_299
+  - first:
+      213: 3108654766486283783
+    second: ZRPGBeach_300
+  - first:
+      213: 7115936052528613471
+    second: ZRPGBeach_301
+  - first:
+      213: 5997934947808651681
+    second: ZRPGBeach_302
+  - first:
+      213: -4390344025107531567
+    second: ZRPGBeach_303
+  - first:
+      213: -1442423352965717319
+    second: ZRPGBeach_304
+  - first:
+      213: 7711728321948928325
+    second: ZRPGBeach_305
+  - first:
+      213: 2900381547196951144
+    second: ZRPGBeach_306
+  - first:
+      213: -3552115702190525177
+    second: ZRPGBeach_307
+  - first:
+      213: 6505503463400468304
+    second: ZRPGBeach_308
+  - first:
+      213: 4137950052175017987
+    second: ZRPGBeach_309
+  - first:
+      213: -35199297047401444
+    second: ZRPGBeach_310
+  - first:
+      213: 7769150168792437594
+    second: ZRPGBeach_311
+  - first:
+      213: 1981808406406178096
+    second: ZRPGBeach_312
+  - first:
+      213: -556344574424964900
+    second: ZRPGBeach_313
+  - first:
+      213: -4713959130094446443
+    second: ZRPGBeach_314
+  - first:
+      213: -6108300916779347409
+    second: ZRPGBeach_315
+  - first:
+      213: -5493654196657064010
+    second: ZRPGBeach_316
+  - first:
+      213: 3276107774297145483
+    second: ZRPGBeach_317
+  - first:
+      213: 1139534691212118920
+    second: ZRPGBeach_318
+  - first:
+      213: -7897840958376357695
+    second: ZRPGBeach_319
+  - first:
+      213: -6152714353054270028
+    second: ZRPGBeach_320
+  - first:
+      213: -2511743585305506055
+    second: ZRPGBeach_321
+  - first:
+      213: 1318162841524678597
+    second: ZRPGBeach_322
+  - first:
+      213: 7358303251593754075
+    second: ZRPGBeach_323
+  - first:
+      213: -4418151585152873125
+    second: ZRPGBeach_324
+  - first:
+      213: -8697824166481071814
+    second: ZRPGBeach_325
+  - first:
+      213: -7770447670361798065
+    second: ZRPGBeach_326
+  - first:
+      213: 2266929010065913448
+    second: ZRPGBeach_327
+  - first:
+      213: -6805844083386075769
+    second: ZRPGBeach_328
+  - first:
+      213: 2155621865169116874
+    second: ZRPGBeach_329
+  - first:
+      213: -7799993646440024673
+    second: ZRPGBeach_330
+  - first:
+      213: -4517804151141695672
+    second: ZRPGBeach_331
+  - first:
+      213: -6128685763919655195
+    second: ZRPGBeach_332
+  - first:
+      213: 799677664864075596
+    second: ZRPGBeach_333
+  - first:
+      213: 2461336261360052488
+    second: ZRPGBeach_334
+  - first:
+      213: -419515780888475607
+    second: ZRPGBeach_335
+  - first:
+      213: 5751145542202867675
+    second: ZRPGBeach_336
+  - first:
+      213: -7956741173517135130
+    second: ZRPGBeach_337
+  - first:
+      213: 5505796597631855052
+    second: ZRPGBeach_338
+  - first:
+      213: 5224300684849765755
+    second: ZRPGBeach_339
+  - first:
+      213: -5296660741851015207
+    second: ZRPGBeach_340
+  - first:
+      213: 352065991639231150
+    second: ZRPGBeach_341
+  - first:
+      213: -8053561493117828302
+    second: ZRPGBeach_342
+  - first:
+      213: 8274827782323030291
+    second: ZRPGBeach_343
+  - first:
+      213: -2353703172045915584
+    second: ZRPGBeach_344
+  - first:
+      213: -8672249040037881941
+    second: ZRPGBeach_345
+  - first:
+      213: -4020172243821893781
+    second: ZRPGBeach_346
+  - first:
+      213: -4999481302852490649
+    second: ZRPGBeach_347
+  - first:
+      213: -4315839378293982405
+    second: ZRPGBeach_348
+  - first:
+      213: 1087346451677139337
+    second: ZRPGBeach_349
+  - first:
+      213: -8930787675128745032
+    second: ZRPGBeach_350
+  - first:
+      213: 5419212919170479058
+    second: ZRPGBeach_351
+  - first:
+      213: 6942913570484712624
+    second: ZRPGBeach_352
+  - first:
+      213: 5245778071314732736
+    second: ZRPGBeach_353
+  - first:
+      213: -1244070509488242874
+    second: ZRPGBeach_354
+  - first:
+      213: -2308357415187357895
+    second: ZRPGBeach_355
+  - first:
+      213: -4866645569870478826
+    second: ZRPGBeach_356
+  - first:
+      213: -2434388025677244206
+    second: ZRPGBeach_357
+  - first:
+      213: 5012876750443576369
+    second: ZRPGBeach_358
+  - first:
+      213: -4320317719624901899
+    second: ZRPGBeach_359
+  - first:
+      213: 6333482310853644063
+    second: ZRPGBeach_360
+  - first:
+      213: 8458417685374525060
+    second: ZRPGBeach_361
+  - first:
+      213: -1666026030337100421
+    second: ZRPGBeach_362
+  - first:
+      213: -2506482733840458358
+    second: ZRPGBeach_363
+  - first:
+      213: -656381504394816844
+    second: ZRPGBeach_364
+  - first:
+      213: -8339168734099910527
+    second: ZRPGBeach_365
+  - first:
+      213: -4430282554982868942
+    second: ZRPGBeach_366
+  - first:
+      213: -9094754464025847329
+    second: ZRPGBeach_367
+  - first:
+      213: -5029603957761951876
+    second: ZRPGBeach_368
+  - first:
+      213: -1782198371358600223
+    second: ZRPGBeach_369
+  - first:
+      213: 5692269101046695963
+    second: ZRPGBeach_370
+  - first:
+      213: -7440602651840203175
+    second: ZRPGBeach_371
+  - first:
+      213: -7439548112842028621
+    second: ZRPGBeach_372
+  - first:
+      213: 6352811921867141464
+    second: ZRPGBeach_373
+  - first:
+      213: 8008480830629021975
+    second: ZRPGBeach_374
+  - first:
+      213: -7110809141178629701
+    second: ZRPGBeach_375
+  - first:
+      213: -3273665689249869956
+    second: ZRPGBeach_376
+  - first:
+      213: -6772284926353528815
+    second: ZRPGBeach_377
+  - first:
+      213: 3798528587361867759
+    second: ZRPGBeach_378
+  - first:
+      213: 8849173903031787461
+    second: ZRPGBeach_379
+  - first:
+      213: 2288652290053187597
+    second: ZRPGBeach_380
+  - first:
+      213: -1441141630115038873
+    second: ZRPGBeach_381
+  - first:
+      213: -2012693766111985460
+    second: ZRPGBeach_382
+  - first:
+      213: -4631806439178902353
+    second: ZRPGBeach_383
+  - first:
+      213: 8769395336971063875
+    second: ZRPGBeach_384
+  - first:
+      213: -3577594327867304599
+    second: ZRPGBeach_385
+  - first:
+      213: -6817845256541531091
+    second: ZRPGBeach_386
+  - first:
+      213: -6065977231057835976
+    second: ZRPGBeach_387
+  - first:
+      213: -1478803143041267252
+    second: ZRPGBeach_388
+  - first:
+      213: 7122175622288774191
+    second: ZRPGBeach_389
+  - first:
+      213: -2772895034438950585
+    second: ZRPGBeach_390
+  - first:
+      213: -8649619629540142210
+    second: ZRPGBeach_391
+  - first:
+      213: 3219525918569758552
+    second: ZRPGBeach_392
+  - first:
+      213: -5101582819720406008
+    second: ZRPGBeach_393
+  - first:
+      213: -7020314995274024444
+    second: ZRPGBeach_394
+  - first:
+      213: 8772687574397514048
+    second: ZRPGBeach_395
+  - first:
+      213: 8719511353614859849
+    second: ZRPGBeach_396
+  - first:
+      213: -694842073843932480
+    second: ZRPGBeach_397
+  - first:
+      213: 3868562408383702254
+    second: ZRPGBeach_398
+  - first:
+      213: -1127516613956189280
+    second: ZRPGBeach_399
+  - first:
+      213: -6991592101437409638
+    second: ZRPGBeach_400
+  - first:
+      213: 1186550721866409713
+    second: ZRPGBeach_401
+  - first:
+      213: -9081779128878315772
+    second: ZRPGBeach_402
+  - first:
+      213: -4525937946336721440
+    second: ZRPGBeach_403
+  - first:
+      213: 92415826542963869
+    second: ZRPGBeach_404
+  - first:
+      213: 8591915962311519272
+    second: ZRPGBeach_405
+  - first:
+      213: -5983172390942946753
+    second: ZRPGBeach_406
+  - first:
+      213: -5191694906298893738
+    second: ZRPGBeach_407
+  - first:
+      213: 1442708608338891568
+    second: ZRPGBeach_408
+  - first:
+      213: 945706222103680277
+    second: ZRPGBeach_409
+  - first:
+      213: 1319518795416320510
+    second: ZRPGBeach_410
+  - first:
+      213: -1818445217267596581
+    second: ZRPGBeach_411
+  - first:
+      213: 6196976098284690302
+    second: ZRPGBeach_412
+  - first:
+      213: 8855543272056735089
+    second: ZRPGBeach_413
+  - first:
+      213: -5966017916251205798
+    second: ZRPGBeach_414
+  - first:
+      213: -8614816240779512114
+    second: ZRPGBeach_415
+  - first:
+      213: 562607277024247857
+    second: ZRPGBeach_416
+  - first:
+      213: -5624739989936699694
+    second: ZRPGBeach_417
+  - first:
+      213: -9110966990283095502
+    second: ZRPGBeach_418
+  - first:
+      213: 513866726138402189
+    second: ZRPGBeach_419
+  - first:
+      213: 848081264626212582
+    second: ZRPGBeach_420
+  - first:
+      213: 8907652173205830423
+    second: ZRPGBeach_421
+  - first:
+      213: 8725746337777705836
+    second: ZRPGBeach_422
+  - first:
+      213: -1798060813530198702
+    second: ZRPGBeach_423
+  - first:
+      213: 6850133172344238309
+    second: ZRPGBeach_424
+  - first:
+      213: 8219746109257032842
+    second: ZRPGBeach_425
+  - first:
+      213: 3277913523375586948
+    second: ZRPGBeach_426
+  - first:
+      213: -1766478006675869925
+    second: ZRPGBeach_427
+  - first:
+      213: 5773150679919262611
+    second: ZRPGBeach_428
+  - first:
+      213: -7115884473018858451
+    second: ZRPGBeach_429
+  - first:
+      213: 2031167253243993004
+    second: ZRPGBeach_430
+  - first:
+      213: -4809939072714279481
+    second: ZRPGBeach_431
+  - first:
+      213: 5596445612075840405
+    second: ZRPGBeach_432
+  - first:
+      213: -2832249386825037394
+    second: ZRPGBeach_433
+  - first:
+      213: 6545257937422797480
+    second: ZRPGBeach_434
+  - first:
+      213: 6797336820848542082
+    second: ZRPGBeach_435
+  - first:
+      213: 4580166268135800464
+    second: ZRPGBeach_436
+  - first:
+      213: 1338615168830727286
+    second: ZRPGBeach_437
+  - first:
+      213: -1278579048599338744
+    second: ZRPGBeach_438
+  - first:
+      213: -1409362272589701722
+    second: ZRPGBeach_439
+  - first:
+      213: 5831481766698631027
+    second: ZRPGBeach_440
+  - first:
+      213: -9138477141265529151
+    second: ZRPGBeach_441
+  - first:
+      213: 1389243602219424646
+    second: ZRPGBeach_442
+  - first:
+      213: 6020319767631143145
+    second: ZRPGBeach_443
+  - first:
+      213: -7638445592032411465
+    second: ZRPGBeach_444
+  - first:
+      213: -215061933526976769
+    second: ZRPGBeach_445
+  - first:
+      213: 3450846187471321364
+    second: ZRPGBeach_446
+  - first:
+      213: 3635073986730255964
+    second: ZRPGBeach_447
+  - first:
+      213: 1708211098663688790
+    second: ZRPGBeach_448
+  - first:
+      213: 8533925319786846688
+    second: ZRPGBeach_449
+  - first:
+      213: -7382530327130074483
+    second: ZRPGBeach_450
+  - first:
+      213: -5154735347714399779
+    second: ZRPGBeach_451
+  - first:
+      213: -6472104471126452329
+    second: ZRPGBeach_452
+  - first:
+      213: 4916532515298968371
+    second: ZRPGBeach_453
+  - first:
+      213: 9198160207468446005
+    second: ZRPGBeach_454
+  - first:
+      213: 9042113229625908498
+    second: ZRPGBeach_455
+  - first:
+      213: -5690133231186834973
+    second: ZRPGBeach_456
+  - first:
+      213: 2896567867981717060
+    second: ZRPGBeach_457
+  - first:
+      213: 5775829937724850767
+    second: ZRPGBeach_458
+  - first:
+      213: 2033188399237414351
+    second: ZRPGBeach_459
+  - first:
+      213: 7658975111726874022
+    second: ZRPGBeach_460
+  - first:
+      213: 7021834145600629668
+    second: ZRPGBeach_461
+  - first:
+      213: -6945829632841686310
+    second: ZRPGBeach_462
+  - first:
+      213: -3807941664460766578
+    second: ZRPGBeach_463
+  - first:
+      213: -4272714540225275046
+    second: ZRPGBeach_464
+  - first:
+      213: -7612123597402787216
+    second: ZRPGBeach_465
+  - first:
+      213: -8659890102421351732
+    second: ZRPGBeach_466
+  - first:
+      213: 5187507739702350370
+    second: ZRPGBeach_467
+  - first:
+      213: 1996473784257788104
+    second: ZRPGBeach_468
+  - first:
+      213: 6517206290318057455
+    second: ZRPGBeach_469
+  - first:
+      213: 8785639841479054027
+    second: ZRPGBeach_470
+  - first:
+      213: -1225587624657694261
+    second: ZRPGBeach_471
+  - first:
+      213: -8192805302494556264
+    second: ZRPGBeach_472
+  - first:
+      213: -6740084083113699746
+    second: ZRPGBeach_473
+  - first:
+      213: 4046475538609193892
+    second: ZRPGBeach_474
+  - first:
+      213: -7973064658422201363
+    second: ZRPGBeach_475
+  - first:
+      213: 3158251939585201807
+    second: ZRPGBeach_476
+  - first:
+      213: 7782900326496753794
+    second: ZRPGBeach_477
+  - first:
+      213: 5259839393945536785
+    second: ZRPGBeach_478
+  - first:
+      213: -8141931554037664793
+    second: ZRPGBeach_479
+  - first:
+      213: -663967944322507458
+    second: ZRPGBeach_480
+  - first:
+      213: 5935718432102427873
+    second: ZRPGBeach_481
+  - first:
+      213: -3108196363698245179
+    second: ZRPGBeach_482
+  - first:
+      213: -7671943510746707756
+    second: ZRPGBeach_483
+  - first:
+      213: 2397911257026450135
+    second: ZRPGBeach_484
+  - first:
+      213: -612698801590298827
+    second: ZRPGBeach_485
+  - first:
+      213: 404888482413590338
+    second: ZRPGBeach_486
+  - first:
+      213: -1558616813364120897
+    second: ZRPGBeach_487
+  - first:
+      213: -3418344669581099255
+    second: ZRPGBeach_488
+  - first:
+      213: 7316622228098408878
+    second: ZRPGBeach_489
+  - first:
+      213: -2668122934498222960
+    second: ZRPGBeach_490
+  - first:
+      213: 4216438501578205092
+    second: ZRPGBeach_491
+  - first:
+      213: 1303870852638821685
+    second: ZRPGBeach_492
+  - first:
+      213: 4256812771068463742
+    second: ZRPGBeach_493
+  - first:
+      213: -8516240508694228347
+    second: ZRPGBeach_494
+  - first:
+      213: 1235854550501645846
+    second: ZRPGBeach_495
+  - first:
+      213: 3392483107709674215
+    second: ZRPGBeach_496
+  - first:
+      213: 711654211832445414
+    second: ZRPGBeach_497
+  - first:
+      213: -157287253602580296
+    second: ZRPGBeach_498
+  - first:
+      213: -1558314464796095692
+    second: ZRPGBeach_499
+  - first:
+      213: -749414049972284338
+    second: ZRPGBeach_500
+  - first:
+      213: 5613472789978534091
+    second: ZRPGBeach_501
+  - first:
+      213: -1038876940152634729
+    second: ZRPGBeach_502
+  - first:
+      213: -6436402144545725885
+    second: ZRPGBeach_503
+  - first:
+      213: -2773952562427870770
+    second: ZRPGBeach_504
+  - first:
+      213: 1564839928485303623
+    second: ZRPGBeach_505
+  - first:
+      213: 4975664134990563845
+    second: ZRPGBeach_506
+  - first:
+      213: -2461679581051024967
+    second: ZRPGBeach_507
+  - first:
+      213: -4609097117467400531
+    second: ZRPGBeach_508
+  - first:
+      213: 2602624750340831100
+    second: ZRPGBeach_509
+  - first:
+      213: -5009177826618049706
+    second: ZRPGBeach_510
+  - first:
+      213: -1099723112874507441
+    second: ZRPGBeach_511
+  - first:
+      213: -4117136183114044037
+    second: ZRPGBeach_512
+  - first:
+      213: -8057571721224401166
+    second: ZRPGBeach_513
+  - first:
+      213: 6508098382887653926
+    second: ZRPGBeach_514
+  - first:
+      213: 6125373795862357519
+    second: ZRPGBeach_515
+  - first:
+      213: 698082670799135662
+    second: ZRPGBeach_516
+  - first:
+      213: 1061780350763367097
+    second: ZRPGBeach_517
+  - first:
+      213: 1149815832511904950
+    second: ZRPGBeach_518
+  - first:
+      213: 9094720713091114019
+    second: ZRPGBeach_519
+  - first:
+      213: -2848350801974210308
+    second: ZRPGBeach_520
+  - first:
+      213: -1920764740090906538
+    second: ZRPGBeach_521
+  - first:
+      213: 1053977600759218661
+    second: ZRPGBeach_522
+  - first:
+      213: -8068228223441804352
+    second: ZRPGBeach_523
+  - first:
+      213: 5027542288775870770
+    second: ZRPGBeach_524
+  - first:
+      213: 2073590227995764177
+    second: ZRPGBeach_525
+  - first:
+      213: -6026293178502389820
+    second: ZRPGBeach_526
+  - first:
+      213: 956873146717751608
+    second: ZRPGBeach_527
+  - first:
+      213: -2011888665371137177
+    second: ZRPGBeach_528
+  - first:
+      213: 8610324960429512123
+    second: ZRPGBeach_529
+  - first:
+      213: -1651333388366629763
+    second: ZRPGBeach_530
+  - first:
+      213: 7492467966854444131
+    second: ZRPGBeach_531
+  - first:
+      213: -3913400565714152770
+    second: ZRPGBeach_532
+  - first:
+      213: 595425976268310604
+    second: ZRPGBeach_533
+  - first:
+      213: -8212649704802886726
+    second: ZRPGBeach_534
+  - first:
+      213: -2362046844471603562
+    second: ZRPGBeach_535
+  - first:
+      213: -1198231006946094462
+    second: ZRPGBeach_536
+  - first:
+      213: 8784340472197615890
+    second: ZRPGBeach_537
+  - first:
+      213: -4861162870700446233
+    second: ZRPGBeach_538
+  - first:
+      213: 2696159901461983831
+    second: ZRPGBeach_539
+  - first:
+      213: -1314915905837329004
+    second: ZRPGBeach_540
+  - first:
+      213: 7938917295269800425
+    second: ZRPGBeach_541
+  - first:
+      213: -4676412818570551851
+    second: ZRPGBeach_542
+  - first:
+      213: -446513067373310801
+    second: ZRPGBeach_543
+  - first:
+      213: 2425756395156631529
+    second: ZRPGBeach_544
+  - first:
+      213: 9028939227705043329
+    second: ZRPGBeach_545
+  - first:
+      213: -379683341421584007
+    second: ZRPGBeach_546
+  - first:
+      213: -6967038259440797225
+    second: ZRPGBeach_547
+  - first:
+      213: 2290936699165218588
+    second: ZRPGBeach_548
+  - first:
+      213: -5690100397606994021
+    second: ZRPGBeach_549
+  - first:
+      213: 1247815770518285484
+    second: ZRPGBeach_550
+  - first:
+      213: 6829439214911817351
+    second: ZRPGBeach_551
+  - first:
+      213: -297207534447147561
+    second: ZRPGBeach_552
+  - first:
+      213: 8428447330176573924
+    second: ZRPGBeach_553
+  - first:
+      213: -8067470784699262766
+    second: ZRPGBeach_554
+  - first:
+      213: 2065057309322459928
+    second: ZRPGBeach_555
+  - first:
+      213: 8470705480916528939
+    second: ZRPGBeach_556
+  - first:
+      213: 8805740673851638636
+    second: ZRPGBeach_557
+  - first:
+      213: -6034890668784202072
+    second: ZRPGBeach_558
+  - first:
+      213: -273853729173512420
+    second: ZRPGBeach_559
+  - first:
+      213: -6811322378528201568
+    second: ZRPGBeach_560
+  - first:
+      213: 8817115200191574340
+    second: ZRPGBeach_561
+  - first:
+      213: 6171818635266293532
+    second: ZRPGBeach_562
+  - first:
+      213: 3415956750027007652
+    second: ZRPGBeach_563
+  - first:
+      213: -5967465477047361229
+    second: ZRPGBeach_564
+  - first:
+      213: -1572656269001063214
+    second: ZRPGBeach_565
+  - first:
+      213: 7916239599833614922
+    second: ZRPGBeach_566
+  - first:
+      213: 9098974703455506760
+    second: ZRPGBeach_567
+  - first:
+      213: 2371342549213115576
+    second: ZRPGBeach_568
+  - first:
+      213: -8875132769305663569
+    second: ZRPGBeach_569
+  - first:
+      213: 6510472954091799550
+    second: ZRPGBeach_570
+  - first:
+      213: -2901583639982482204
+    second: ZRPGBeach_571
+  - first:
+      213: -8208466731590820885
+    second: ZRPGBeach_572
+  - first:
+      213: -1494932934235004653
+    second: ZRPGBeach_573
+  - first:
+      213: -129765622669317346
+    second: ZRPGBeach_574
+  - first:
+      213: 8904735239015723969
+    second: ZRPGBeach_575
+  - first:
+      213: -8242345253121419312
+    second: ZRPGBeach_576
+  - first:
+      213: -3666813780233097503
+    second: ZRPGBeach_577
+  - first:
+      213: -3655704888764615254
+    second: ZRPGBeach_578
+  - first:
+      213: -8774139249049047726
+    second: ZRPGBeach_579
+  - first:
+      213: 3484404302228635805
+    second: ZRPGBeach_580
+  - first:
+      213: -3802811337634793196
+    second: ZRPGBeach_581
+  - first:
+      213: 1471945957498915444
+    second: ZRPGBeach_582
+  - first:
+      213: -2218473004758918100
+    second: ZRPGBeach_583
+  - first:
+      213: 6500188887148074165
+    second: ZRPGBeach_584
+  - first:
+      213: 5849545803383255865
+    second: ZRPGBeach_585
+  - first:
+      213: -7227747982579155559
+    second: ZRPGBeach_586
+  - first:
+      213: -5201891212312891261
+    second: ZRPGBeach_587
+  - first:
+      213: -1250416727362106937
+    second: ZRPGBeach_588
+  - first:
+      213: 4159146599775481465
+    second: ZRPGBeach_589
+  - first:
+      213: 7618693421280647407
+    second: ZRPGBeach_590
+  - first:
+      213: -116770914872242720
+    second: ZRPGBeach_591
+  - first:
+      213: 3339403366087712492
+    second: ZRPGBeach_592
+  - first:
+      213: 4481211156547865831
+    second: ZRPGBeach_593
+  - first:
+      213: -861966594902655234
+    second: ZRPGBeach_594
+  - first:
+      213: -8896693767949024526
+    second: ZRPGBeach_595
+  - first:
+      213: -519612660876962331
+    second: ZRPGBeach_596
+  - first:
+      213: 3985529742369388021
+    second: ZRPGBeach_597
+  - first:
+      213: 6839068134313145308
+    second: ZRPGBeach_598
+  - first:
+      213: -6703042023187047545
+    second: ZRPGBeach_599
+  - first:
+      213: -4141304059542990951
+    second: ZRPGBeach_600
+  - first:
+      213: 7470515684980186039
+    second: ZRPGBeach_601
+  - first:
+      213: 8095581134543852872
+    second: ZRPGBeach_602
+  - first:
+      213: 628431247444743194
+    second: ZRPGBeach_603
+  - first:
+      213: -646347197888120674
+    second: ZRPGBeach_604
+  - first:
+      213: -7862613767251361605
+    second: ZRPGBeach_605
+  - first:
+      213: 8043208030118532534
+    second: ZRPGBeach_606
+  - first:
+      213: 4059325016344184344
+    second: ZRPGBeach_607
+  - first:
+      213: -7201300378166350194
+    second: ZRPGBeach_608
+  - first:
+      213: -5060173640291769399
+    second: ZRPGBeach_609
+  - first:
+      213: 5586058263677822306
+    second: ZRPGBeach_610
+  - first:
+      213: 8941142059327216945
+    second: ZRPGBeach_611
+  - first:
+      213: -8940369356814408206
+    second: ZRPGBeach_612
+  - first:
+      213: -5123708722447923609
+    second: ZRPGBeach_613
+  - first:
+      213: -5911323079858839499
+    second: ZRPGBeach_614
+  - first:
+      213: -6294550426065014094
+    second: ZRPGBeach_615
+  - first:
+      213: -7779110502125663909
+    second: ZRPGBeach_616
+  - first:
+      213: 8000725597241211401
+    second: ZRPGBeach_617
+  - first:
+      213: 4274063722347051850
+    second: ZRPGBeach_618
+  - first:
+      213: 2504571883620608256
+    second: ZRPGBeach_619
+  - first:
+      213: 698899554285288038
+    second: ZRPGBeach_620
+  - first:
+      213: -7368667543897333271
+    second: ZRPGBeach_621
+  - first:
+      213: -2589259146829372823
+    second: ZRPGBeach_622
+  - first:
+      213: 9120789001939323568
+    second: ZRPGBeach_623
+  - first:
+      213: -2525262392209494392
+    second: ZRPGBeach_624
+  - first:
+      213: -8944222366553613498
+    second: ZRPGBeach_625
+  - first:
+      213: 8582567682352501115
+    second: ZRPGBeach_626
+  - first:
+      213: 1101897337460554578
+    second: ZRPGBeach_627
+  - first:
+      213: -1471467024220808413
+    second: ZRPGBeach_628
+  - first:
+      213: 7607280346456086855
+    second: ZRPGBeach_629
+  - first:
+      213: 2530659366228876782
+    second: ZRPGBeach_630
+  - first:
+      213: -5906358746573810731
+    second: ZRPGBeach_631
+  - first:
+      213: -8953676245384899727
+    second: ZRPGBeach_632
+  - first:
+      213: -5796674263654032305
+    second: ZRPGBeach_633
+  - first:
+      213: -2222017322877318232
+    second: ZRPGBeach_634
+  - first:
+      213: 3807141048575493889
+    second: ZRPGBeach_635
+  - first:
+      213: -8647734577632519612
+    second: ZRPGBeach_636
+  - first:
+      213: 1509235140882464248
+    second: ZRPGBeach_637
+  - first:
+      213: 4023385528710299314
+    second: ZRPGBeach_638
+  - first:
+      213: -3328724387279466260
+    second: ZRPGBeach_639
+  - first:
+      213: 1428034345022008115
+    second: ZRPGBeach_640
+  - first:
+      213: -2757362426826113791
+    second: ZRPGBeach_641
+  - first:
+      213: 1487902310061836736
+    second: ZRPGBeach_642
+  - first:
+      213: -255551760724583334
+    second: ZRPGBeach_643
+  - first:
+      213: 1610566369564939333
+    second: ZRPGBeach_644
+  - first:
+      213: -1652745957474068599
+    second: ZRPGBeach_645
+  - first:
+      213: 3668390854823082745
+    second: ZRPGBeach_646
+  - first:
+      213: 99396582526303784
+    second: ZRPGBeach_647
+  - first:
+      213: 6356414050718059996
+    second: ZRPGBeach_648
+  - first:
+      213: -951089544372362319
+    second: ZRPGBeach_649
+  - first:
+      213: -5690291761495911592
+    second: ZRPGBeach_650
+  - first:
+      213: -135596423148494104
+    second: ZRPGBeach_651
+  - first:
+      213: 6846249906255270602
+    second: ZRPGBeach_652
+  - first:
+      213: 5819502493207711210
+    second: ZRPGBeach_653
+  - first:
+      213: 6757209030553297873
+    second: ZRPGBeach_654
+  - first:
+      213: -6077932326605001222
+    second: ZRPGBeach_655
+  - first:
+      213: -5909114037507627806
+    second: ZRPGBeach_656
+  - first:
+      213: 312790239116056429
+    second: ZRPGBeach_657
+  - first:
+      213: 7930023208498848790
+    second: ZRPGBeach_658
+  - first:
+      213: -2631624052163440470
+    second: ZRPGBeach_659
+  - first:
+      213: -758327592846968479
+    second: ZRPGBeach_660
+  - first:
+      213: -194781611846700315
+    second: ZRPGBeach_661
+  - first:
+      213: 7519705144961930284
+    second: ZRPGBeach_662
+  - first:
+      213: 2071592414183000935
+    second: ZRPGBeach_663
+  - first:
+      213: -4749114014587871484
+    second: ZRPGBeach_664
+  - first:
+      213: -2569343403321293319
+    second: ZRPGBeach_665
+  - first:
+      213: -1123498780835566465
+    second: ZRPGBeach_666
+  - first:
+      213: -292252062090353306
+    second: ZRPGBeach_667
+  - first:
+      213: 6789096636482360117
+    second: ZRPGBeach_668
+  - first:
+      213: -3120702827836539198
+    second: ZRPGBeach_669
+  - first:
+      213: 4311054976477029655
+    second: ZRPGBeach_670
+  - first:
+      213: 6637550322562463955
+    second: ZRPGBeach_671
+  - first:
+      213: 3426693180809639910
+    second: ZRPGBeach_672
+  - first:
+      213: 190916073441300210
+    second: ZRPGBeach_673
+  - first:
+      213: -1725773100581915087
+    second: ZRPGBeach_674
+  - first:
+      213: -4434255805558265723
+    second: ZRPGBeach_675
+  - first:
+      213: 27123723074970081
+    second: ZRPGBeach_676
+  - first:
+      213: 2257256041396753559
+    second: ZRPGBeach_677
+  - first:
+      213: -3029778462020145156
+    second: ZRPGBeach_678
+  - first:
+      213: -5240268817400036672
+    second: ZRPGBeach_679
+  - first:
+      213: -5918323144032508373
+    second: ZRPGBeach_680
+  - first:
+      213: 6253155288662229952
+    second: ZRPGBeach_681
+  - first:
+      213: -3875462834795003757
+    second: ZRPGBeach_682
+  - first:
+      213: -500699237451445714
+    second: ZRPGBeach_683
+  - first:
+      213: 766755274393374068
+    second: ZRPGBeach_684
+  - first:
+      213: 6681472020842378926
+    second: ZRPGBeach_685
+  - first:
+      213: -591491664407277628
+    second: ZRPGBeach_686
+  - first:
+      213: 8037422436183073957
+    second: ZRPGBeach_687
+  - first:
+      213: 7209770173261287048
+    second: ZRPGBeach_688
+  - first:
+      213: 4609641955910411720
+    second: ZRPGBeach_689
+  - first:
+      213: 6609763344599312776
+    second: ZRPGBeach_690
+  - first:
+      213: -9083732897153358129
+    second: ZRPGBeach_691
+  - first:
+      213: 1820094760568570568
+    second: ZRPGBeach_692
+  - first:
+      213: -6454521934692949212
+    second: ZRPGBeach_693
+  - first:
+      213: -2730359072095106192
+    second: ZRPGBeach_694
+  - first:
+      213: -4746203312838180424
+    second: ZRPGBeach_695
+  - first:
+      213: 202630791728978862
+    second: ZRPGBeach_696
+  - first:
+      213: 1101878222970692620
+    second: ZRPGBeach_697
+  - first:
+      213: -4160213376416476922
+    second: ZRPGBeach_698
+  - first:
+      213: 5746623604817541717
+    second: ZRPGBeach_699
+  - first:
+      213: 7618709450528698120
+    second: ZRPGBeach_700
+  - first:
+      213: 4217054295517300272
+    second: ZRPGBeach_701
+  - first:
+      213: 8853785979325330083
+    second: ZRPGBeach_702
+  - first:
+      213: -4572585182632064608
+    second: ZRPGBeach_703
+  - first:
+      213: -6435077851238438513
+    second: ZRPGBeach_704
+  - first:
+      213: -1240965009613909713
+    second: ZRPGBeach_705
+  - first:
+      213: -3338135323404756717
+    second: ZRPGBeach_706
+  - first:
+      213: 6648683521976072382
+    second: ZRPGBeach_707
+  - first:
+      213: -1086581104840635333
+    second: ZRPGBeach_708
+  - first:
+      213: 4696220815652015511
+    second: ZRPGBeach_709
+  - first:
+      213: 3382806811147153139
+    second: ZRPGBeach_710
+  - first:
+      213: 921940739711512683
+    second: ZRPGBeach_711
+  - first:
+      213: -3477823989521176007
+    second: ZRPGBeach_712
+  - first:
+      213: -4712954639169984756
+    second: ZRPGBeach_713
+  - first:
+      213: -8146809187001593846
+    second: ZRPGBeach_714
+  - first:
+      213: -8978833340232163485
+    second: ZRPGBeach_715
+  - first:
+      213: 1111614069619724421
+    second: ZRPGBeach_716
+  - first:
+      213: 997943616878207625
+    second: ZRPGBeach_717
+  - first:
+      213: 5187270283725806029
+    second: ZRPGBeach_718
+  - first:
+      213: -2143427092726733929
+    second: ZRPGBeach_719
+  - first:
+      213: -412696363816302375
+    second: ZRPGBeach_720
+  - first:
+      213: -4262791939757997670
+    second: ZRPGBeach_721
+  - first:
+      213: 7396996638336686517
+    second: ZRPGBeach_722
+  - first:
+      213: -7400349235495198657
+    second: ZRPGBeach_723
+  - first:
+      213: 6353560233212393260
+    second: ZRPGBeach_724
+  - first:
+      213: 3262790620310293462
+    second: ZRPGBeach_725
+  - first:
+      213: 8571584182268664715
+    second: ZRPGBeach_726
+  - first:
+      213: -5708448927021851051
+    second: ZRPGBeach_727
+  - first:
+      213: 1045737971968751818
+    second: ZRPGBeach_728
+  - first:
+      213: 2260342821746313003
+    second: ZRPGBeach_729
+  - first:
+      213: -5858724453765736924
+    second: ZRPGBeach_730
+  - first:
+      213: -2423988033749100524
+    second: ZRPGBeach_731
+  - first:
+      213: -5388899480883990164
+    second: ZRPGBeach_732
+  - first:
+      213: -7730124643139971999
+    second: ZRPGBeach_733
+  - first:
+      213: 6000857865990043433
+    second: ZRPGBeach_734
+  - first:
+      213: -4638561439881939388
+    second: ZRPGBeach_735
+  - first:
+      213: -1097062945133480334
+    second: ZRPGBeach_736
+  - first:
+      213: -6311927505874870725
+    second: ZRPGBeach_737
+  - first:
+      213: 2526408681740101845
+    second: ZRPGBeach_738
+  - first:
+      213: 3107632003938875681
+    second: ZRPGBeach_739
+  - first:
+      213: -8981392589366328119
+    second: ZRPGBeach_740
+  - first:
+      213: -8412333156551057173
+    second: ZRPGBeach_741
+  - first:
+      213: 4410129623336168314
+    second: ZRPGBeach_742
+  - first:
+      213: 7614479318528030616
+    second: ZRPGBeach_743
+  - first:
+      213: 5302046979631940405
+    second: ZRPGBeach_744
+  - first:
+      213: 4594321967304533639
+    second: ZRPGBeach_745
+  - first:
+      213: -8667325125146212315
+    second: ZRPGBeach_746
+  - first:
+      213: -8085460660250831023
+    second: ZRPGBeach_747
+  - first:
+      213: -5227785238653041011
+    second: ZRPGBeach_748
+  - first:
+      213: 944201965301774414
+    second: ZRPGBeach_749
+  - first:
+      213: 887468690285747999
+    second: ZRPGBeach_750
+  - first:
+      213: 5885655644318613289
+    second: ZRPGBeach_751
+  - first:
+      213: 3325409663289014771
+    second: ZRPGBeach_752
+  - first:
+      213: -5966068757071170834
+    second: ZRPGBeach_753
+  - first:
+      213: 3975929586889291257
+    second: ZRPGBeach_754
+  - first:
+      213: 1381369299368362387
+    second: ZRPGBeach_755
+  - first:
+      213: -4755822075257222490
+    second: ZRPGBeach_756
+  - first:
+      213: 242860234417774660
+    second: ZRPGBeach_757
+  - first:
+      213: -4955101884390916277
+    second: ZRPGBeach_758
+  - first:
+      213: -6547414050450118695
+    second: ZRPGBeach_759
+  - first:
+      213: 9102944808386459244
+    second: ZRPGBeach_760
+  - first:
+      213: -4434443549184719108
+    second: ZRPGBeach_761
+  - first:
+      213: 1257517938292463423
+    second: ZRPGBeach_762
+  - first:
+      213: -1943564972965504470
+    second: ZRPGBeach_763
+  - first:
+      213: 5382381643671092396
+    second: ZRPGBeach_764
+  - first:
+      213: 5718914165165750749
+    second: ZRPGBeach_765
+  - first:
+      213: 8420773591680091729
+    second: ZRPGBeach_766
+  - first:
+      213: 2774510748990265820
+    second: ZRPGBeach_767
+  - first:
+      213: -6014771668947468463
+    second: ZRPGBeach_768
+  - first:
+      213: -7303274782570444982
+    second: ZRPGBeach_769
+  - first:
+      213: 7708882390833826842
+    second: ZRPGBeach_770
+  - first:
+      213: -8379470868110819101
+    second: ZRPGBeach_771
+  - first:
+      213: -1667005989780691441
+    second: ZRPGBeach_772
+  - first:
+      213: 1558202137258116471
+    second: ZRPGBeach_773
+  - first:
+      213: 8172985555720595080
+    second: ZRPGBeach_774
+  - first:
+      213: -4876701669355711279
+    second: ZRPGBeach_775
+  - first:
+      213: -5347490047315033789
+    second: ZRPGBeach_776
+  - first:
+      213: 5323382124598398784
+    second: ZRPGBeach_777
+  - first:
+      213: 5518662324158007272
+    second: ZRPGBeach_778
+  - first:
+      213: 2084900120428698326
+    second: ZRPGBeach_779
+  - first:
+      213: 8229595977133064104
+    second: ZRPGBeach_780
+  - first:
+      213: -1941833952353573924
+    second: ZRPGBeach_781
+  - first:
+      213: 1250706474427982268
+    second: ZRPGBeach_782
+  - first:
+      213: 2198187589735083725
+    second: ZRPGBeach_783
+  - first:
+      213: -1833785190382789052
+    second: ZRPGBeach_784
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ZRPGBeach_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 1001
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57cecc4f18d8e2510800000000000000
+      internalID: 1526312913022545013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 993
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56144961b9f8a0b30800000000000000
+      internalID: 4254370694266372453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 996
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8271d6b56cc1b5f20800000000000000
+      internalID: 3412352780926261032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_3
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 1008
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60ad2195cbfb76810800000000000000
+      internalID: 1758584995180632582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_4
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 1000
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f002a14b85d830d0800000000000000
+      internalID: -3442767121046437647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 992
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d07fa6352547b1250800000000000000
+      internalID: 5916450432416937741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_6
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 992
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd89fe97e599b3c50800000000000000
+      internalID: 6646074306167019740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_7
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 992
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ac3b0a3f35cd1420800000000000000
+      internalID: 2602453035037441185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_8
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 960
+        width: 31
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a368de6ca6f9fe490800000000000000
+      internalID: -7714772355709565382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_9
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 897
+        width: 104
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f63dfa47cc5a43040800000000000000
+      internalID: 4626505014765933423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_10
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 897
+        width: 104
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1219377a2845b1c0800000000000000
+      internalID: -4488602106378776038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_11
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 897
+        width: 104
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4664a9c8f04467d50800000000000000
+      internalID: 6734645126353274468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_12
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 867
+        width: 143
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d050217e2e5be3660800000000000000
+      internalID: 7367526026568664333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_13
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 867
+        width: 138
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4ed13e628b5da750800000000000000
+      internalID: 6317806468023311951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_15
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 968
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16e286efd1cacf350800000000000000
+      internalID: 6051901244101373537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_16
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 968
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0d2087b83a2e4bc0800000000000000
+      internalID: -3797051012741583604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_17
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 971
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd0f7ac142e94e010800000000000000
+      internalID: 1217271677233656031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_18
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 977
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c779554cda25f2e0800000000000000
+      internalID: -2092719326299064381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_19
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 965
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2c23a3f42ffaa420800000000000000
+      internalID: 2642204665577679918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_20
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 960
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0c81e7e79c527750800000000000000
+      internalID: 6301200636144880654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_21
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 960
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e112717605340c0d0800000000000000
+      internalID: -3404647305686081250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_22
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 962
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 323314440ca427cf0800000000000000
+      internalID: -256060039167397085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_23
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 933
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d135f61eaa44be390800000000000000
+      internalID: -7788055629889842403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_24
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 934
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f3f7666df88e0830800000000000000
+      internalID: 4039316537724105716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_25
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 934
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f91222cb917bdf810800000000000000
+      internalID: 1800796747176485279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_26
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 944
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c3ec6d04a5e7db50800000000000000
+      internalID: 6618010670206870472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_27
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 932
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 936b8d0c0094e7850800000000000000
+      internalID: 6376614389987456569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_28
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 937
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f55413ea7694c4440800000000000000
+      internalID: 4921389202462033247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_29
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 900
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40e520c936b45c440800000000000000
+      internalID: 4955449856182345220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_30
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 928
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 025aad5a77cf897f0800000000000000
+      internalID: -605456559067454176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_31
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 928
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c797a1e290034e00800000000000000
+      internalID: 1027665770821687240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_32
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 930
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de86a1195e4342790800000000000000
+      internalID: -7555856114234267411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_33
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 900
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbafa93d3d9263ee0800000000000000
+      internalID: -1281791054175339845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_34
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 902
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2676818bed2bef60800000000000000
+      internalID: 8064590047250642477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_35
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 899
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 327720af613617ee0800000000000000
+      internalID: -1265121069979502813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_36
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 898
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82895c3ceb9255bd0800000000000000
+      internalID: -2642159707077896152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_37
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 900
+        width: 25
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b419e4127b3526f30800000000000000
+      internalID: 4567305018110021963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_38
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 896
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d38e198a36bad43f0800000000000000
+      internalID: -914886704768096195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_39
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 896
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27c57e32945318520800000000000000
+      internalID: 2702499839650258034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_40
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 836
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc512dd17750e03a0800000000000000
+      internalID: -6697409586693794356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_41
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 836
+        width: 22
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cddfbe0e0a3edd3c0800000000000000
+      internalID: -4333056986352714276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_42
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 831
+        width: 30
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2529708b75ee17d50800000000000000
+      internalID: 6733424978412671570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_43
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 831
+        width: 30
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9e222b23e55e7bb0800000000000000
+      internalID: -4936413707381887330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_44
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 833
+        width: 48
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0f071c7aef234d70800000000000000
+      internalID: 9026110762331344650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_47
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 707
+        width: 143
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15d65a01572ec78b0800000000000000
+      internalID: -5152994881200362159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_48
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 707
+        width: 138
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2320d4a6214fedb0800000000000000
+      internalID: -4760514646877658325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_49
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 801
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3694f4da15fa3c1d0800000000000000
+      internalID: -3331626533989168797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_50
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 800
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd0222f0b3394d940800000000000000
+      internalID: 5320038941697646812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_51
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 769
+        width: 53
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ef1b328be72bc150800000000000000
+      internalID: 5893848429800136680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_52
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 709
+        width: 134
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fde0108dc1bb70e90800000000000000
+      internalID: -7059468158322536737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_53
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 768
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 584923deb7a39a120800000000000000
+      internalID: 2425534178250626181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_54
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 651
+        width: 101
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ffa55f311a05ceb0800000000000000
+      internalID: -4700339566897942536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_55
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 640
+        width: 96
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 646ffc149ab50dd90800000000000000
+      internalID: -7075054232087300538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_56
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 618
+        width: 94
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32a1adcbeba4a87f0800000000000000
+      internalID: -609592616482629085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_57
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 672
+        width: 128
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de70cb1d9497f1730800000000000000
+      internalID: 3972026754322401261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_58
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 581
+        width: 134
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f46191797f4ee3db0800000000000000
+      internalID: -4810155599942052273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_59
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 581
+        width: 119
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83e9abc99017673b0800000000000000
+      internalID: -5515096407570473416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_60
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 581
+        width: 119
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a72bb62ac7179760800000000000000
+      internalID: 7464461064390518689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_61
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 536
+        width: 89
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7be10857b75087a30800000000000000
+      internalID: 4213123479215546039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_63
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 535
+        width: 60
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a85a7dc2c8306ed0800000000000000
+      internalID: -2422874190203168599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_64
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 584
+        width: 80
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ce4be8f75c4a0060800000000000000
+      internalID: 6920427718130224835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_65
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 608
+        width: 47
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89e2dadc688434d00800000000000000
+      internalID: 955687289746173592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_66
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 581
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d77242e09a06418b0800000000000000
+      internalID: -5182410991993608323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_67
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 580
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 616e5da9da7326ba0800000000000000
+      internalID: -6097249726739651050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_68
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 581
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95dfab2c4be699df0800000000000000
+      internalID: -172985388036850343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_69
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 576
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8628a77dc62db740800000000000000
+      internalID: 5169330611208857230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_70
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 576
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2226d510e18625130800000000000000
+      internalID: 3554017534029947426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_71
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 513
+        width: 93
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98cc410eddeccac70800000000000000
+      internalID: 8983782809039850633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_72
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 531
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6e473a8283203710800000000000000
+      internalID: 1670874505326055019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_73
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 532
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72150421c8f32ece0800000000000000
+      internalID: -1377468665187774169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_74
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 528
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ed0064ae658edcf0800000000000000
+      internalID: -225596221071290912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_75
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 514
+        width: 60
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fce38327011672620800000000000000
+      internalID: 2749272820796636879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_77
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 512
+        width: 28
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc319291314d07dd0800000000000000
+      internalID: -2490257415444294707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_78
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 512
+        width: 27
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0e68bc939d6acf80800000000000000
+      internalID: -8085529700233351669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_79
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 355
+        width: 164
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a07c2b9ef8db45820800000000000000
+      internalID: 2906156085359593226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_81
+      rect:
+        serializedVersion: 2
+        x: 841
+        y: 355
+        width: 160
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20c144e87c0ecd0a0800000000000000
+      internalID: -6855357385074795518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_83
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 516
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04a2ed72089a74fe0800000000000000
+      internalID: -1204808007408539072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_84
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 522
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c515c9cca0901a780800000000000000
+      internalID: -8673641465351745188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_85
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 506
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cd925f58cdd7ca50800000000000000
+      internalID: 6541440836441382340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_86
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 499
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19468f568a46779c0800000000000000
+      internalID: -3929561475429407599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_87
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 495
+        width: 9
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a123443d35711e6b0800000000000000
+      internalID: -5268904440252583398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_88
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 492
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 057a6f48e63e3c8d0800000000000000
+      internalID: -2827166077241874608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_89
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 493
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aef4f7b5043e4d290800000000000000
+      internalID: -7866412783556931606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 483
+        width: 21
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ef159c0d3e9d9190800000000000000
+      internalID: -7954027381825134617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_91
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 487
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70c76615cb3cf39b0800000000000000
+      internalID: -5098141039573173241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_93
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 421
+        width: 48
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbf1edcab53d8cb80800000000000000
+      internalID: -8374211116399714373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_97
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 329
+        width: 78
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2debd7cb35fbcd4e0800000000000000
+      internalID: -1955477771820089646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_100
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 299
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93df269d72e370760800000000000000
+      internalID: 7423970851615341881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_101
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 205422cc6689fa0d0800000000000000
+      internalID: -3409338825617292030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_102
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 300
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c354fce91d263ca40800000000000000
+      internalID: 5387258231717315900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_104
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 200
+        width: 108
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9f41fb5cc5941d50800000000000000
+      internalID: 6707150450009919389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_105
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 260
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f4f9ce4a449c9c10800000000000000
+      internalID: 2061685776299193590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_107
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 199
+        width: 58
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d429d384f4075c80800000000000000
+      internalID: -8334187137195236137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_110
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 163
+        width: 93
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb11877b746c62c50800000000000000
+      internalID: 6640212711927452091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_111
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 171
+        width: 68
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 379a3bd4e17a65ce0800000000000000
+      internalID: -1416761284166964877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_112
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 197
+        width: 25
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cde2c8b802648e780800000000000000
+      internalID: -8653589578398290212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_113
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 231
+        width: 29
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caac0dc57e2f1d420800000000000000
+      internalID: 2653168731006487212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_114
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 196
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f4ac4cc721c46b50800000000000000
+      internalID: 6585600931797968113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_115
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 64
+        width: 156
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48054c30182852230800000000000000
+      internalID: 3613437766660280452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_116
+      rect:
+        serializedVersion: 2
+        x: 897
+        y: 64
+        width: 127
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7158f15c3c076050800000000000000
+      internalID: 5793612898848231805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_117
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 100
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 672ba8c0b7a7890d0800000000000000
+      internalID: -3415845648450538890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_118
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 175
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f47706c071b5b940800000000000000
+      internalID: 5311346433470199032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_119
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 175
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04294022c736f0b50800000000000000
+      internalID: 6561572566899921472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_120
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 73
+        width: 137
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a270ffad587dcf50800000000000000
+      internalID: 6903306147607900837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_121
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 163
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb57ccd1a713d0050800000000000000
+      internalID: 5768321098287183295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_122
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 163
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5458dcdeb4220b060800000000000000
+      internalID: 6967106333049718085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_127
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 142
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e28133d31a0890540800000000000000
+      internalID: 4974648693412272174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_128
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 142
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37697e526465b5ae0800000000000000
+      internalID: -1559557986670111117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_129
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 130
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0377c6e9607a4a3a0800000000000000
+      internalID: -6655010702477199568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_131
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 131
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bf2bca4eb49addc0800000000000000
+      internalID: -3613412205991874634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_134
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 0
+        width: 63
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 581721a34ff972990800000000000000
+      internalID: -7410778790519737979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_135
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 0
+        width: 63
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e91328c9a99c6e250800000000000000
+      internalID: 5973683621641466270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_136
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 47
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65cc804100426fc10800000000000000
+      internalID: 2086895060087524438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_137
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 47
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63e8f1e3c8faeee60800000000000000
+      internalID: 7993519405501746742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_138
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 35
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ffb62d0216532a30800000000000000
+      internalID: 4189286713914736630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_139
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 35
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a4173bdd3bbd7a30800000000000000
+      internalID: 4214730700633871523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_140
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 14
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb372770c011c1b00800000000000000
+      internalID: 800533577127326654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_141
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 14
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c9d05b46c6722d30800000000000000
+      internalID: 4405213979560958408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_142
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 3
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee2b2e9330d83b8a0800000000000000
+      internalID: -6290529209510874386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ZRPGBeach_143
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 2
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42334548f967d1430800000000000000
+      internalID: 3755288091788849956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: c0d3d466be3468348bf28dd4bb29d952
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

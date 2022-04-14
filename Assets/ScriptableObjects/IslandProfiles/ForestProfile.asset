@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c36096846e0f7b48bc9a23081f2f0ab, type: 3}
+  m_Name: ForestProfile
+  m_EditorClassIdentifier: 
+  biome: 1
+  ruleTile: {fileID: 11400000, guid: bfe5071e51fbf044cb6e24512c7922b2, type: 2}
+  enemySpawner: {fileID: 1967108106158013768, guid: 78e101f8decd1a2458dd6eb55058a091,
+    type: 3}
+  spawnData: {fileID: 11400000, guid: e871f7637efeac149a634ec3dcc0dd14, type: 2}
+  islandColor: {r: 0, g: 0.7647059, b: 0.18844149, a: 0.6039216}
+  spawnerProb: 0

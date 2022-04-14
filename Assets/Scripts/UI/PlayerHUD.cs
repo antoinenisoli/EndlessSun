@@ -23,56 +23,68 @@ public class PlayerHUD : HUD
 
     private void Start()
     {
-        healthSlider.maxValue = GameManager.Player.health.MaxValue;
-        healthSlider.value = GameManager.Player.health.CurrentValue;
+        if (!GameManager.Player)
+            return;
 
-        manaSlider.maxValue = PlayerCombat.Mana.MaxValue;
-        manaSlider.value = PlayerCombat.Mana.CurrentValue;
+        healthSlider.value = GameManager.Player.Health.Coeff();
+        thirstySlider.value = PlayerSurvival.Instance.Thirsty.Coeff();
+
+        manaSlider.maxValue = PlayerMagic.Mana.MaxValue;
+        manaSlider.value = PlayerMagic.Mana.CurrentValue;
 
         staminaSlider.maxValue = PlayerCombat.Stamina.MaxValue;
         staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
 
-        hungerSlider.maxValue = PlayerSurvival.Hunger.MaxValue;
-        hungerSlider.value = PlayerSurvival.Hunger.CurrentValue;
+        hungerSlider.maxValue = PlayerSurvival.Instance.Hunger.MaxValue;
+        hungerSlider.value = PlayerSurvival.Instance.Hunger.CurrentValue;
 
-        thirstySlider.maxValue = PlayerSurvival.Thirsty.MaxValue;
-        thirstySlider.value = PlayerSurvival.Thirsty.CurrentValue;
+        energySlider.maxValue = PlayerSurvival.Instance.Energy.MaxValue;
+        energySlider.value = PlayerSurvival.Instance.Energy.CurrentValue;
 
-        energySlider.maxValue = PlayerSurvival.Energy.MaxValue;
-        energySlider.value = PlayerSurvival.Energy.CurrentValue;
+        UpdateUI();
     }
 
     void UpdateMana()
     {
-        float hunger = PlayerSurvival.Hunger.MaxValue - PlayerSurvival.Hunger.CurrentValue;
-        hungerSlider.DOValue(hunger, 0.3f);
-        if ((hungerSlider.maxValue - hungerSlider.value) < manaSlider.value)
-            manaSlider.DOValue(PlayerCombat.Mana.CurrentValue - hunger, 0.3f);
-        else
-            manaSlider.DOValue(PlayerCombat.Mana.CurrentValue, 0.3f);
+        float compute = PlayerSurvival.Instance.Hunger.MaxValue - PlayerSurvival.Instance.Hunger.CurrentValue;
+        if (float.IsNaN(compute) || float.IsInfinity(compute))
+            return;
+
+        hungerSlider.value = compute;
+        if (PlayerMagic.Mana != null)
+            manaSlider.value = PlayerMagic.Mana.CurrentValue;
     }
 
     void UpdateStamina()
     {
-        float stamina = PlayerSurvival.Energy.MaxValue - PlayerSurvival.Energy.CurrentValue;
-        energySlider.value = stamina;
-        staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
+        float compute = PlayerSurvival.Instance.Energy.MaxValue - PlayerSurvival.Instance.Energy.CurrentValue;
+        if (float.IsNaN(compute) || float.IsInfinity(compute))
+            return;
+
+        energySlider.value = compute;
+        if (PlayerCombat.Stamina != null)
+            staminaSlider.value = PlayerCombat.Stamina.CurrentValue;
     }
 
-    void UpdateThirst()
+    void UpdateHealth()
     {
-        float computeThirst = PlayerSurvival.Thirsty.CurrentValue;
-        thirstySlider.DOValue(computeThirst, 0.5f);
+        float compute = GameManager.Player.Health.Coeff();
+        if (float.IsNaN(compute) || float.IsInfinity(compute))
+            return;
+
+        //print(computeHealth);
+        healthSlider.value = compute;
+        thirstySlider.value = 1 - compute;
+        colorAnimation.time = 0.3f + (heartPulse * compute);
     }
 
     public override void UpdateUI()
     {
-        float computeHealth = GameManager.Player.health.CurrentValue / GameManager.Player.health.MaxValue; 
-        healthSlider.DOValue(GameManager.Player.health.CurrentValue, 0.5f);
-        colorAnimation.time = 0.3f + (heartPulse * computeHealth);
-
-        UpdateMana();
-        UpdateStamina();
-        UpdateThirst();
+        if (PlayerSurvival.Instance)
+        {
+            UpdateMana();
+            UpdateStamina();
+            UpdateHealth();
+        }
     }
 }

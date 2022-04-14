@@ -8,16 +8,38 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public static PlayerController2D Player;
-    CinemachineVirtualCamera mainCam;
 
     private void Awake()
+    {
+        Singleton();
+        Player = FindObjectOfType<PlayerController2D>();
+    }
+
+    void Singleton()
     {
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
+    }
 
-        Player = FindObjectOfType<PlayerController2D>();
-        mainCam = FindObjectOfType<CinemachineVirtualCamera>();
+    public void FreezeFrame(float delay, float startScale = 0.1f)
+    {
+        StartCoroutine(IFreezeFrame(delay, startScale));
+    }
+
+    IEnumerator IFreezeFrame(float delay, float startScale = 0.1f)
+    {
+        float timer = 0;
+        Time.timeScale = startScale;
+
+        while (timer < delay)
+        {
+            yield return null;
+            timer += Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 1, timer / delay);
+        }
+
+        Time.timeScale = 1f;
     }
 }
