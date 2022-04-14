@@ -34,8 +34,9 @@ public class FullStat : Stat
     }
 
 
-    public virtual void Init()
+    public override void Init(Entity entity)
     {
+        base.Init(entity);
         CurrentValue = MaxValue;
         BaseMaxValue = MaxValue;
     }

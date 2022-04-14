@@ -13,7 +13,7 @@ public class PlayerMagic : PlayerMod
         base.Init();
         PlayerController2D.Magic = this;
         Mana = mana;
-        Mana.Init();
+        Mana.Init(player);
     }
 
     public override void DoUpdate()

@@ -63,9 +63,13 @@ public class UIManager : MonoBehaviour
         if (!GameManager.Player)
             return;
 
-        currentLevelText.text = PlayerController2D.xpManager.CurrentLevel.index + 1 + "";
-        float computeXP = PlayerController2D.xpManager.ComputeXP();
-        xpSlider.DOFillAmount(computeXP, 0.15f);
+        if (PlayerController2D.xpManager)
+        {
+            currentLevelText.text = PlayerController2D.xpManager.CurrentLevel.index + 1 + "";
+            float computeXP = PlayerController2D.xpManager.ComputeXP();
+            xpSlider.DOFillAmount(computeXP, 0.15f);
+        }
+
         foreach (var item in allMenus)
             item.UpdateUI();
     }

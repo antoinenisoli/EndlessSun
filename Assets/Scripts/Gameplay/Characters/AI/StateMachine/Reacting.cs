@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Reacting : EnemyBehaviour
+public class Reacting : StateMachineBehavior
 {
-    public override EnemyState State => EnemyState.React;
+    public override AIState State => AIState.React;
     float timer;
     float delay;
 

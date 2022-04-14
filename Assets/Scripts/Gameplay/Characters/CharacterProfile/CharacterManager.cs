@@ -14,6 +14,7 @@ public class CharacterManager : CharacterMod
     [SerializeField] PlayerLevel currentLevel = new PlayerLevel();
     [SerializeField] int powerIncrement = 2;
     [SerializeField] PlayerLevel[] levels = new PlayerLevel[1];
+    Dictionary<CharacterStatName, CharacterStat> dico = new Dictionary<CharacterStatName, CharacterStat>();
 
     public PlayerLevel MaxLevel => levels[levels.Length - 1];
 
@@ -24,7 +25,25 @@ public class CharacterManager : CharacterMod
     public override void Init()
     {
         base.Init();
+        GetStats();
         GenerateLevels();
+    }
+
+    public CharacterStat GetStat(CharacterStatName statName)
+    {
+        if (dico.TryGetValue(statName, out CharacterStat stat))
+            return stat;
+
+        return null;
+    }
+
+    void GetStats()
+    {
+        foreach (var item in myCharacter.CharacterProfile.stats)
+        {
+            dico.Add(item.thisStat, item);
+            item.Init(entity);
+        }
     }
 
     public void GenerateLevels()

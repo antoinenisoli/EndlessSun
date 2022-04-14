@@ -251,11 +251,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   spr: {fileID: 822972059179743088}
-  profileToCopy: {fileID: 0}
+  profileToCopy: {fileID: 11400000, guid: d06c5e40d37a7d544af5008b45ae3169, type: 2}
+  CharacterProfile: {fileID: 0}
   health:
     currentValue: 0
     maxValue: 0
-    thisStat: 0
     isDead: 0
   walkSpeed: 8
   runSpeed: 15
@@ -275,7 +275,6 @@ MonoBehaviour:
   playerHealth:
     currentValue: 0
     maxValue: 10
-    thisStat: 0
     isDead: 0
 --- !u!50 &822972060138402191
 Rigidbody2D:
@@ -522,28 +521,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 3437488683681455469}
-  stamina:
-    currentValue: 0
-    maxValue: 50
-    thisStat: 0
-    recoveryDelay: 2
-    recoveryAmount: 0.01
-  stats:
-  - currentValue: 0
-    maxValue: 50
-    thisStat: 0
-  - currentValue: 0
-    maxValue: 50
-    thisStat: 1
-  - currentValue: 0
-    maxValue: 50
-    thisStat: 2
   staminaCost: 15
   attackAnimCount: 3
   attackRadius: 0.5
   attackRange: 0.5
   pushForce: 5
-  arrowPrefab: {fileID: 0}
+  arrowPrefab: {fileID: 3389072804642720021, guid: 978e2c6fb1e21ab4aa6d1ff515447ca3,
+    type: 3}
   arrowForce: 15
   storedVelocity: {x: 0, y: 0}
 --- !u!1 &6122277800740663631

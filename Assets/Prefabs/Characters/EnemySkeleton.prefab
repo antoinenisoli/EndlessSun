@@ -945,28 +945,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   spr: {fileID: 4051184774526524842}
-  profile: {fileID: 11400000, guid: 5c7a085510773ef4296c377115ed26d0, type: 2}
-  attributeList:
-    attributeList:
-    - name: Strength
-      attributeType: 0
-      value: 5
-    - name: Durability
-      attributeType: 1
-      value: 6
-    - name: Endurance
-      attributeType: 2
-      value: 3
-    - name: Knowledge
-      attributeType: 3
-      value: 2
-    - name: Speed
-      attributeType: 4
-      value: 5
+  profileToCopy: {fileID: 11400000, guid: 5c7a085510773ef4296c377115ed26d0, type: 2}
+  CharacterProfile: {fileID: 0}
   health:
     currentValue: 0
     maxValue: 3
-    thisStat: 0
     isDead: 0
   walkSpeed: 2
   runSpeed: 3.5

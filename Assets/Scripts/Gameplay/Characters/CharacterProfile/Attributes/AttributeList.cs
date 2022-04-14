@@ -33,6 +33,7 @@ public class AttributeList
 
     public void Init()
     {
+        _attributes = new Dictionary<AttributeType, CharacterAttribute>();
         foreach (var item in attributeList)
             _attributes.Add(item.attributeType, item);
     }

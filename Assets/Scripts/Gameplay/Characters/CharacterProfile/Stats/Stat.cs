@@ -5,9 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class Stat
 {
-    protected PlayerController2D player => GameManager.Player;
+    protected Entity entity;
     [SerializeField] protected float currentValue;
     [SerializeField] protected float maxValue = 50; 
+
+    public virtual void Init(Entity entity)
+    {
+        this.entity = entity;
+    }
 
     public virtual float CurrentValue
     {

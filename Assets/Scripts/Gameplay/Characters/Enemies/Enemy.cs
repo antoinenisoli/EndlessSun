@@ -8,13 +8,13 @@ using Pathfinding;
 public class Enemy : Entity
 {
     protected PlayerController2D Player => GameManager.Player;
-    protected EnemyBehaviour behaviour = null;
+    protected StateMachineBehavior behaviour = null;
 
     AIPath aiAgent;
     AIDestinationSetter destinationSetter;
 
     [Header("ENEMY")]
-    [SerializeField] EnemyState currentState;
+    [SerializeField] AIState currentState;
     [SerializeField] Transform healthBarPivot;
     [SerializeField] Transform healthBar;
     SpriteRenderer[] healthBarSprites;
@@ -110,7 +110,7 @@ public class Enemy : Entity
     public override void Stun()
     {
         base.Stun();
-        SetBehaviour(new Wait(this, 0.4f, EnemyState.Chasing));
+        SetBehaviour(new Wait(this, 0.4f, AIState.Chasing));
         pushed = true;
     }
 
@@ -239,7 +239,7 @@ public class Enemy : Entity
         return distance < chaseMinDistance;
     }
 
-    public void SetBehaviour(EnemyBehaviour newBehaviour)
+    public void SetBehaviour(StateMachineBehavior newBehaviour)
     {
         behaviour = newBehaviour;
     }
@@ -266,7 +266,7 @@ public class Enemy : Entity
     {
         Flip(targetPos.x);
         float distance = Vector2.Distance(targetPos, transform.position);
-        float stopDistance = behaviour.State == EnemyState.Patrolling ? patrolStopDistance : chaseMinDistance;
+        float stopDistance = behaviour.State == AIState.Patrolling ? patrolStopDistance : chaseMinDistance;
 
         if (distance > stopDistance)
         {
@@ -291,7 +291,7 @@ public class Enemy : Entity
 
     public override float ComputeSpeed()
     {
-        if (behaviour.State == EnemyState.Patrolling)
+        if (behaviour.State == AIState.Patrolling)
             return walkSpeed;
         else
             return runSpeed;

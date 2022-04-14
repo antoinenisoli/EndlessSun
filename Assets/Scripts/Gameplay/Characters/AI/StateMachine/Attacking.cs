@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
-class Attacking : EnemyBehaviour
+class Attacking : StateMachineBehavior
 {
-    public override EnemyState State => EnemyState.Attacking;
+    public override AIState State => AIState.Attacking;
     float timer;
 
     public Attacking(Enemy myEnemy) : base(myEnemy)
@@ -22,7 +22,7 @@ class Attacking : EnemyBehaviour
         if (myEnemy.Target.Health.isDead)
         {
             myEnemy.SetTarget(null);
-            myEnemy.SetBehaviour(new Wait(myEnemy, 2, EnemyState.Patrolling));
+            myEnemy.SetBehaviour(new Wait(myEnemy, 2, AIState.Patrolling));
             return;
         }
         else if (!myEnemy.NearToTarget())

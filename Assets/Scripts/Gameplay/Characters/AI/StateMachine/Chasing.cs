@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
-class Chasing : EnemyBehaviour
+class Chasing : StateMachineBehavior
 {
-    public override EnemyState State => EnemyState.Chasing;
+    public override AIState State => AIState.Chasing;
 
     public Chasing(Enemy myEnemy) : base(myEnemy)
     {
@@ -31,7 +31,7 @@ class Chasing : EnemyBehaviour
         else if (!myEnemy.KeepTargetInSight() || myEnemy.Target.Health.isDead)
         {
             myEnemy.SetTarget(null);
-            myEnemy.SetBehaviour(new Wait(myEnemy, 2, EnemyState.Patrolling));
+            myEnemy.SetBehaviour(new Wait(myEnemy, 2, AIState.Patrolling));
         }
         else
             myEnemy.Move(myEnemy.Target.transform.position);

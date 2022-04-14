@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Patrolling : EnemyBehaviour
+public class Patrolling : StateMachineBehavior
 {
-    public override EnemyState State => EnemyState.Patrolling;
+    public override AIState State => AIState.Patrolling;
     float newPatrolTimer;
     float newPatrolDelay;
     Vector3 pos;

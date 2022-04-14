@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class SurvivalStat : FullStat
 {
+    PlayerController2D player => entity as PlayerController2D;
+
     [Range(0, 100f)] public float changeAmount = 0.5f;
     float timer;
     public SurvivalStatName thisStat;

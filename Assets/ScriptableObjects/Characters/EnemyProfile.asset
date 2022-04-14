@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb72b969915a2194d91027557e289e84, type: 3}
-  m_Name: PlayerProfile
+  m_Script: {fileID: 11500000, guid: c84593ed44f998f46a639d42c4818239, type: 3}
+  m_Name: EnemyProfile
   m_EditorClassIdentifier: 
   AttributeList:
     attributeList:
@@ -19,7 +19,7 @@ MonoBehaviour:
       value: 5
     - name: Durability
       attributeType: 1
-      value: 6
+      value: 2
     - name: Endurance
       attributeType: 2
       value: 3
@@ -29,30 +29,19 @@ MonoBehaviour:
     - name: Speed
       attributeType: 4
       value: 5
-  baseHunger:
+  Health:
+    currentValue: 0
+    maxValue: 10
+  Mana:
     currentValue: 0
     maxValue: 50
-    thisStat: 0
-    changeAmount: 0.5
-  baseStamina:
-    currentValue: 0
+  stats:
+  - currentValue: 0
     maxValue: 50
     thisStat: 0
-    changeAmount: 0.5
-  baseThirst:
-    currentValue: 0
+  - currentValue: 0
     maxValue: 50
     thisStat: 0
-    changeAmount: 0.5
-  baseEnergy:
-    currentValue: 0
-    maxValue: 50
-    thisStat: 0
-  baseMana:
-    currentValue: 0
-    maxValue: 50
-    thisStat: 0
-  baseHealth:
-    currentValue: 0
+  - currentValue: 0
     maxValue: 50
     thisStat: 0

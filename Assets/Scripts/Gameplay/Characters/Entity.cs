@@ -21,7 +21,7 @@ public class Entity : MonoBehaviour
     public LayerMask targetLayer;
     public SpriteRenderer spr;
     [SerializeField] CharacterProfile profileToCopy;
-    CharacterProfile CharacterProfile;
+    [HideInInspector] public CharacterProfile CharacterProfile;
     [SerializeField] HealthStat health;
 
     [Header("_Movements")]
@@ -39,13 +39,21 @@ public class Entity : MonoBehaviour
         if (profileToCopy)
             CharacterProfile = Instantiate(profileToCopy);
 
-        AttributeList.Init();
-        Health.Init();
         rb = GetComponentInParent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
+        InitStats();
     }
 
     public virtual void Start() { }
+
+    void InitStats()
+    {
+        AttributeList.Init();
+
+        Health.MaxValue = CharacterProfile.Health.MaxValue;
+        Health.BaseMaxValue = CharacterProfile.Health.BaseMaxValue;
+        Health.Init(this);
+    }
 
     public void AddMod(CharacterMod mod)
     {

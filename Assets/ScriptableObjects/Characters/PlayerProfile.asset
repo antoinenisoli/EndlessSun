@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c84593ed44f998f46a639d42c4818239, type: 3}
-  m_Name: EnemyProfile
+  m_Script: {fileID: 11500000, guid: fb72b969915a2194d91027557e289e84, type: 3}
+  m_Name: PlayerProfile
   m_EditorClassIdentifier: 
   AttributeList:
     attributeList:
@@ -29,3 +29,30 @@ MonoBehaviour:
     - name: Speed
       attributeType: 4
       value: 5
+  Health:
+    currentValue: 0
+    maxValue: 50
+  Mana:
+    currentValue: 0
+    maxValue: 50
+  stats: []
+  Stamina:
+    currentValue: 0
+    maxValue: 100
+    recoveryDelay: 2
+    recoveryAmount: 1
+  baseHunger:
+    currentValue: 0
+    maxValue: 50
+    changeAmount: 0.5
+    thisStat: 0
+  baseStamina:
+    currentValue: 0
+    maxValue: 50
+    changeAmount: 0.5
+    thisStat: 0
+  baseThirst:
+    currentValue: 0
+    maxValue: 50
+    changeAmount: 0.5
+    thisStat: 0

@@ -7,7 +7,7 @@ public abstract class CharacterMod : MonoBehaviour
     protected virtual Entity myCharacter => entity;
     [SerializeField] protected Entity entity;
 
-    void Awake()
+    void Start()
     {
         Init();
     }

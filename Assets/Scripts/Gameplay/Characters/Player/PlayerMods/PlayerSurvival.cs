@@ -36,7 +36,7 @@ public class PlayerSurvival : MonoBehaviour
         d_stats.Add(Thirsty.thisStat, Thirsty);
         d_stats.Add(Energy.thisStat, Energy);
         foreach (var item in d_stats.Values)
-            item.Init();
+            item.Init(GameManager.Player);
     }
 
     public SurvivalStat GetSurvivalStat(SurvivalStatName statName)

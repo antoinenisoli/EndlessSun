@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class StaminaStat : CharacterStat
+public class StaminaStat : FullStat
 {
     [SerializeField] float recoveryDelay = 2;
     [SerializeField] float recoveryAmount = 0.01f;

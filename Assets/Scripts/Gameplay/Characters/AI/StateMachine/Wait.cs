@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Wait : EnemyBehaviour
+public class Wait : StateMachineBehavior
 {
-    public override EnemyState State => EnemyState.React;
+    public override AIState State => AIState.React;
     float timer;
     float delay;
-    EnemyState nextState;
+    AIState nextState;
 
-    public Wait(Enemy myEnemy, float delay, EnemyState nextState) : base(myEnemy)
+    public Wait(Enemy myEnemy, float delay, AIState nextState) : base(myEnemy)
     {
         this.delay = delay;
         this.nextState = nextState;
@@ -26,16 +26,16 @@ public class Wait : EnemyBehaviour
         {
             switch (nextState)
             {
-                case EnemyState.Patrolling:
+                case AIState.Patrolling:
                     myEnemy.SetBehaviour(new Patrolling(myEnemy));
                     break;
-                case EnemyState.React:
+                case AIState.React:
                     myEnemy.SetBehaviour(new Reacting(myEnemy));
                     break;
-                case EnemyState.Chasing:
+                case AIState.Chasing:
                     myEnemy.SetBehaviour(new Chasing(myEnemy));
                     break;
-                case EnemyState.Attacking:
+                case AIState.Attacking:
                     myEnemy.SetBehaviour(new Attacking(myEnemy));
                     break;
             }

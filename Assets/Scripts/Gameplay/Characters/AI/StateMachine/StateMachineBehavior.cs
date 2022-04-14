@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public enum EnemyState
+public enum AIState
 {
     Patrolling,
     React,
@@ -14,13 +14,13 @@ public enum EnemyState
 }
 
 [Serializable]
-public abstract class EnemyBehaviour
+public abstract class StateMachineBehavior
 {
-    public abstract EnemyState State { get; }
+    public abstract AIState State { get; }
 
     protected Enemy myEnemy;
 
-    protected EnemyBehaviour(Enemy myEnemy)
+    protected StateMachineBehavior(Enemy myEnemy)
     {
         myEnemy.UnStun();
         this.myEnemy = myEnemy;

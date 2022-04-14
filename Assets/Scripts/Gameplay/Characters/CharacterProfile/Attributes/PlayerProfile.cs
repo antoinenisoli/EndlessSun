@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Characters/Profiles/Player")]
 public class PlayerProfile : CharacterProfile
 {
-    public SurvivalStat baseHunger, baseStamina, baseThirst;
-    public CharacterStat baseEnergy, baseMana, baseHealth;
+    [Header("_PLAYER")]
+    public StaminaStat Stamina;
+    public SurvivalStat baseHunger;
+    public SurvivalStat baseStamina;
+    public SurvivalStat baseThirst;
 }

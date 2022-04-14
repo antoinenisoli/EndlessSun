@@ -21,7 +21,7 @@ public class Tent : Interactable
     {
         GameManager.Player.transform.position = entrance.position;
         GameManager.Player.SetState(PlayerState.Idle);
-        PlayerSurvival.Instance.Energy.Init();
+        PlayerSurvival.Instance.Energy.Init(GameManager.Player);
         GridManager.Instance.GenerateMap();
     }
 
