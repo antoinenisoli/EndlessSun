@@ -13,12 +13,13 @@ class Attacking : SubBehavior
 
     public Attacking(AIStateMachineBehavior behavior) : base(behavior)
     {
-        behavior.myNPC.Stop();
+        behavior.Stop();
     }
 
     public override void Update()
     {
         base.Update();
+
         if (myNPC.Target.Health.isDead)
         {
             myNPC.SetTarget(null);

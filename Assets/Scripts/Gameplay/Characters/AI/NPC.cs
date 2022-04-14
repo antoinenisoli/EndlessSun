@@ -61,9 +61,7 @@ public class NPC : Entity
             aggressors.Add(aggressor);
             Stop();
             SetTarget(aggressor);
-
-            if (myBehavior)
-                myBehavior.ReactToTarget();
+            myBehavior.ReactToPlayer();
         }
     }
 
@@ -140,8 +138,7 @@ public class NPC : Entity
     public override void Stop()
     {
         base.Stop();
-        rb.velocity = Vector2.zero;
-        
+        rb.velocity = Vector2.zero;      
     }
 
     void Flip(float otherX)

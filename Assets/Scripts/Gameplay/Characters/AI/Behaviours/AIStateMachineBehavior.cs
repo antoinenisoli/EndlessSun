@@ -30,6 +30,7 @@ public class AIStateMachineBehavior : AIGlobalBehavior
     public void SetBehaviour(SubBehavior newBehaviour)
     {
         behaviour = newBehaviour;
+        State = newBehaviour.State;
     }
 
     public float RandomDelay()
@@ -84,18 +85,12 @@ public class AIStateMachineBehavior : AIGlobalBehavior
         SetBehaviour(new Wait(this, 0.4f, AIState.Chasing));
     }
 
-    public override void ReactToTarget()
-    {
-        base.ReactToTarget();
-        myNPC.ReactToTarget();
-    }
-
     public void Move(Vector3 targetPos)
     {
         myNPC.targetPos = targetPos;
         float distance = Vector2.Distance(targetPos, transform.position);
         float stopDistance = behaviour.State == AIState.Patrolling ? patrolStopDistance : chaseMinDistance;
-
+        
         if (distance > stopDistance)
         {
             aiAgent.enabled = true;
@@ -111,7 +106,7 @@ public class AIStateMachineBehavior : AIGlobalBehavior
         return Mathf.Clamp01(aiAgent.velocity.sqrMagnitude);
     }
 
-    void Stop()
+    public void Stop()
     {
         aiAgent.isStopped = true;
         aiAgent.enabled = false;
@@ -125,6 +120,12 @@ public class AIStateMachineBehavior : AIGlobalBehavior
 
         float distance = Vector2.Distance(myNPC.Target.transform.position, transform.position);
         return distance < chaseMinDistance;
+    }
+
+    public override void ReactToPlayer()
+    {
+        base.ReactToPlayer();
+        SetBehaviour(new Reacting(this, reactTimer));
     }
 
     public bool KeepTargetInSight()
@@ -156,9 +157,6 @@ public class AIStateMachineBehavior : AIGlobalBehavior
         }
 
         if (!myNPC.Health.isDead && behaviour != null)
-        {
-            State = behaviour.State;
             behaviour.Update();
-        }
     }
 }

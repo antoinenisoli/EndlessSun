@@ -13,7 +13,7 @@ public class Reacting : SubBehavior
     public Reacting(AIStateMachineBehavior behavior, float delay = 0f) : base(behavior)
     {
         this.delay = delay;
-        behavior.ReactToTarget();
+        myNPC.ReactToTarget();
     }
 
     public override void Update()
