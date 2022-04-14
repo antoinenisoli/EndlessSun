@@ -66,8 +66,11 @@ public class AIStateMachineBehavior : AIGlobalBehavior
     {
         Vector2 vector = GameDevHelper.RandomVector(randomPatrolRange, transform.position);
         float dist = Vector2.Distance(vector, transform.position);
-        while (dist < minNextWaypointDistance)
+        int emergencyBreak = 1000;
+
+        while (dist < minNextWaypointDistance && emergencyBreak > 0)
         {
+            emergencyBreak--;
             vector = GameDevHelper.RandomVector(randomPatrolRange, transform.position);
             dist = Vector2.Distance(vector, transform.position);
         }

@@ -7,7 +7,7 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MushroomDemonAnimator
-  m_Controller: {fileID: 9100000, guid: d251f126a499ed44ab7aec623555bca6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0802778ce52bbd94882ad660ad14a38e, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 8ff7a7d4f3a44ca4195d5b76b7923016, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: b580733124ecff34190105cbc3e27a12, type: 2}

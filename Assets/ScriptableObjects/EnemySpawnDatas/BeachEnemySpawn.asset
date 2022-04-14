@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnCount: 3
   spawnInfos:
-  - name: EnemySkeleton
-    prefab: {fileID: 4349680769149131540, guid: fef65ca9331ada34e844b4d081d8d5af,
+  - name: 'EnemySkeleton '
+    prefab: {fileID: 2153383651100463869, guid: 470a50fbec55b4649b54180c0654f4d8,
       type: 3}
     probability: 10
     weight: 10
