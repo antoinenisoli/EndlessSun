@@ -583,6 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTeam: 1
+  hitMat: {fileID: 2100000, guid: 574180534a5588443b8ccbac622ea54d, type: 2}
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -593,8 +594,8 @@ MonoBehaviour:
     currentValue: 0
     maxValue: 3
     isDead: 0
-  walkSpeed: 2
-  runSpeed: 3.5
+  walkSpeed: 1
+  runSpeed: 1.5
   myBehavior: {fileID: 5611172698578045333}
   attackRate: 1.5
   attackRange: 0.5

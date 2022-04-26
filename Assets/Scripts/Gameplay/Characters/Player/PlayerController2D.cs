@@ -23,6 +23,8 @@ public class PlayerController2D : Entity
     [SerializeField] LayerMask tilemapLayer;
 
     [Header("__Sprint")]
+    public float walkSpeed = 5f;
+    public float runSpeed = 10f;
     public PlayerState currentState;
     [SerializeField] float sprintCost = 15f;
     [SerializeField] float movementSmoothing = 0.05f;

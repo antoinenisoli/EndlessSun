@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[Serializable]
+[System.Serializable]
 class Chasing : SubBehavior
 {
     public override AIState State => AIState.Chasing;
+    Vector2 targetPos => behavior.myNPC.Target.transform.position;
+
     Attacking attackBehavior;
 
     public Chasing(AIStateMachineBehavior behavior) : base(behavior)
@@ -35,11 +36,17 @@ class Chasing : SubBehavior
         }
 
         if (behavior.NearToTarget())
-        {
-            //behavior.SetBehaviour(new Attacking(behavior));
             attackBehavior.Update();
-        }
         else
-            behavior.Move(behavior.myNPC.Target.transform.position);
+            behavior.Move(targetPos);
+    }
+
+    Vector2 Test()
+    {
+        Vector2 direction = (Vector2)behavior.myNPC.transform.position - targetPos;
+        float cross = Vector2.Dot(direction.normalized, targetPos.normalized);
+
+        Vector2 randomOffset = Random.insideUnitCircle * 3f;
+        return targetPos + randomOffset;
     }
 }

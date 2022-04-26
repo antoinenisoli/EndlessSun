@@ -19,15 +19,13 @@ public class Entity : MonoBehaviour
 
     [Header("Entity")]
     public Team myTeam;
+    [SerializeField] Material hitMat;
+    Material baseMat;
     public LayerMask targetLayer;
     public SpriteRenderer spr;
     [SerializeField] CharacterProfile profileToCopy;
     [HideInInspector] public CharacterProfile CharacterProfile;
     [SerializeField] HealthStat health;
-
-    [Header("_Movements")]
-    public float walkSpeed = 5f;
-    public float runSpeed = 10f;
 
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
@@ -42,6 +40,7 @@ public class Entity : MonoBehaviour
         rb = GetComponentInParent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         InitStats();
+        baseMat = spr.material;
     }
 
     public virtual void Start() { }
@@ -65,7 +64,7 @@ public class Entity : MonoBehaviour
         return myTeam != target.myTeam;
     }
 
-    public virtual float ComputeSpeed() { return walkSpeed; }
+    public virtual float ComputeSpeed() { return AttributeList.Speed.value; }
 
     public void SetTarget(Entity target)
     {
@@ -122,11 +121,19 @@ public class Entity : MonoBehaviour
 
         Health.ModifyValue(-amount);
         //anim.SetTrigger("Hit");
-        spr.transform.DOComplete();
-        spr.transform.DOPunchScale(Vector3.one * -0.2f, 0.1f);
+        StartCoroutine(Flash());
 
         if (Health.isDead)
             Death();
+    }
+
+    IEnumerator Flash()
+    {
+        spr.material = hitMat;
+        spr.transform.DOComplete();
+        spr.transform.DOPunchScale(Vector3.one * -0.2f, 0.1f);
+        yield return new WaitForEndOfFrame();
+        spr.material = baseMat;
     }
 
     public virtual void DoUpdate()

@@ -25,14 +25,9 @@ class Selector : AINode
                 case NodeState.Success:
                     nodeState = NodeState.Success;
                     return nodeState;
-                case NodeState.Failure:
-                    break;
-                default:
-                    break;
             }
         }
 
-        nodeState = NodeState.Failure;
-        return nodeState;
+        return NodeState.Failure;
     }
 }

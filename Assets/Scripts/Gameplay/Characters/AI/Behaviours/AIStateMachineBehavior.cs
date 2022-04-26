@@ -144,10 +144,11 @@ public class AIStateMachineBehavior : AIGlobalBehavior
 
     public override float ComputeSpeed()
     {
-        if (State == AIState.Patrolling)
-            return myNPC.walkSpeed;
-        else
-            return myNPC.runSpeed;
+        float speed = myNPC.AttributeList.Speed.value;
+        if (State != AIState.Patrolling)
+            return speed * 1.5f;
+
+        return speed;
     }
 
     public override void DoUpdate()

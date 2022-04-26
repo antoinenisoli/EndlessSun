@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTeam: 0
+  hitMat: {fileID: 2100000, guid: 574180534a5588443b8ccbac622ea54d, type: 2}
   targetLayer:
     serializedVersion: 2
     m_Bits: 1152
@@ -529,7 +530,7 @@ MonoBehaviour:
   bowStaminaCost: 45
   arrowPrefab: {fileID: 3389072804642720021, guid: 978e2c6fb1e21ab4aa6d1ff515447ca3,
     type: 3}
-  arrowForce: 15
+  arrowForce: 60
   storedVelocity: {x: 0, y: 0}
 --- !u!1 &6122277800740663631
 GameObject:
