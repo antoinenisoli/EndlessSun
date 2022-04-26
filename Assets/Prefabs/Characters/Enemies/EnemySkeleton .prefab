@@ -608,6 +608,7 @@ MonoBehaviour:
     dropCount: 1
     prob: 0.179
   targetPos: {x: 0, y: 0}
+  aggressors: []
 --- !u!114 &5611172698578045333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,7 +632,7 @@ MonoBehaviour:
   patrolGizmo: {fileID: 1722683887219647444}
   reactTimer: 0.5
   aggroDistance: 6
-  visionDistance: 20
+  visionDistance: 10
   aggroGizmo: {fileID: 9048460821500786394}
   visionGizmo: {fileID: 1831860678355593882}
 --- !u!50 &4134204046856915992
@@ -986,7 +987,7 @@ MonoBehaviour:
   wire: 1
   fill: 0
   localCenter: {x: 0, y: 0, z: 0}
-  radius: 20
+  radius: 10
 --- !u!1 &8840000907052753097
 GameObject:
   m_ObjectHideFlags: 0

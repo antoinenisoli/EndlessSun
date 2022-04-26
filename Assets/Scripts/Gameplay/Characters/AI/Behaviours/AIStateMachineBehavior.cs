@@ -106,13 +106,6 @@ public class AIStateMachineBehavior : AIGlobalBehavior
         return Mathf.Clamp01(aiAgent.velocity.sqrMagnitude);
     }
 
-    public void Stop()
-    {
-        aiAgent.isStopped = true;
-        aiAgent.enabled = false;
-        myNPC.Stop();
-    }
-
     public bool NearToTarget()
     {
         if (!myNPC.Target)

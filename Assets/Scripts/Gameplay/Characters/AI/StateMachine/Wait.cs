@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class Wait : SubBehavior
 {
-    public override AIState State => AIState.React;
+    public override AIState State => AIState.Waiting;
     float timer;
     float delay;
     AIState nextState;
@@ -15,7 +15,7 @@ public class Wait : SubBehavior
     {
         this.delay = delay;
         this.nextState = nextState;
-        behavior.myNPC.Stop();
+        myNPC.Stop();
     }
 
     public override void Update()

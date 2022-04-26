@@ -10,16 +10,10 @@ public class MoveToRandom : AIAction
     {
         base.Start(actor);
         Vector3 circle = Random.insideUnitCircle;
-        actor.MoveTo(actor.startposition + circle * rangeMaX);
     }
 
     protected override ActionState UpdateInterval(Actor actor)
     {
-        if (!actor.IsMoving)
-        {
-            return ActionState.Finished;
-        }
-
         return ActionState.InProgress;
     }
 }

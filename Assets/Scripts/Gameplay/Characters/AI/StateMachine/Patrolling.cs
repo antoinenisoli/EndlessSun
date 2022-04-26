@@ -15,6 +15,7 @@ public class Patrolling : SubBehavior
     {
         newPatrolDelay = behavior.RandomDelay();
         pos = behavior.RandomPatrolPosition();
+        myNPC.aggressors.Clear();
     }
 
     void NewDestination()

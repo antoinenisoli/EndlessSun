@@ -116,7 +116,7 @@ public class Entity : MonoBehaviour
             return;
 
         Health.ModifyValue(-amount);
-        anim.SetTrigger("Hit");
+        //anim.SetTrigger("Hit");
         spr.transform.DOComplete();
         spr.transform.DOPunchScale(Vector3.one * -0.2f, 0.1f);
 

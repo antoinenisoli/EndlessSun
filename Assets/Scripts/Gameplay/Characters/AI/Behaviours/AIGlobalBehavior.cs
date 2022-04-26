@@ -17,6 +17,12 @@ public abstract class AIGlobalBehavior : MonoBehaviour
         destinationSetter = GetComponentInParent<AIDestinationSetter>();
     }
 
+    public virtual void Stop()
+    {
+        aiAgent.isStopped = true;
+        aiAgent.enabled = false;
+    }
+
     public abstract void DoUpdate();
 
     public virtual void Stun() { }

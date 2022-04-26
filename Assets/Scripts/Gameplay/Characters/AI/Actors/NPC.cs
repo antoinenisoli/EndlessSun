@@ -4,10 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC : Entity
+public class NPC : Actor
 {
     [Header("_NPC")]
-    [SerializeField] AIGlobalBehavior myBehavior;
     public float attackRate = 1f;
     [SerializeField] float attackRange = 5f;
     [SerializeField] Transform destinationPoint;
@@ -21,7 +20,7 @@ public class NPC : Entity
     bool pushed;
     SpriteRenderer[] healthBarSprites;
     [HideInInspector] public Vector2 targetPos;
-    protected List<Entity> aggressors = new List<Entity>();
+    public List<Entity> aggressors = new List<Entity>();
 
     public override void Start()
     {
@@ -108,6 +107,7 @@ public class NPC : Entity
 
     public void ReactToTarget()
     {
+        Stop();
         anim.SetTrigger("React");
         detectIcon.gameObject.SetActive(true);
         detectIcon.transform.localScale = detectIconBaseScale;
@@ -138,6 +138,7 @@ public class NPC : Entity
     public override void Stop()
     {
         base.Stop();
+        myBehavior.Stop();
         rb.velocity = Vector2.zero;      
     }
 

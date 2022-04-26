@@ -11,6 +11,7 @@ public enum AIState
     React,
     Chasing,
     Attacking,
+    Waiting,
 }
 
 [Serializable]
