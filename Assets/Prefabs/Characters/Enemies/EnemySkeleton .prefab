@@ -627,6 +627,7 @@ MonoBehaviour:
   minNextWaypointDistance: 3
   patrolStopDistance: 0.1
   chaseMinDistance: 1.5
+  attackMinDistance: 3
   randomDelayBounds: {x: 2, y: 5}
   randomPatrolRange: {x: 3, y: 3}
   patrolGizmo: {fileID: 1722683887219647444}

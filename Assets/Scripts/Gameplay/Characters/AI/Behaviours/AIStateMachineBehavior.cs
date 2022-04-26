@@ -12,7 +12,7 @@ public class AIStateMachineBehavior : AIGlobalBehavior
     [Header("Patrol")]
     [SerializeField] Transform destinationPoint;
     public float minNextWaypointDistance = 3f;
-    public float patrolStopDistance = 0.1f, chaseMinDistance;
+    public float patrolStopDistance = 0.1f, chaseMinDistance = 2f, attackMinDistance = 2f;
     [SerializeField] Vector2 randomDelayBounds;
     public Vector2 randomPatrolRange;
     public ShowRectangleGizmo patrolGizmo;
@@ -48,7 +48,7 @@ public class AIStateMachineBehavior : AIGlobalBehavior
             foreach (var item in colls)
             {
                 Entity entity = item.GetComponent<Entity>();
-                if (entity && entity.myTeam != myNPC.myTeam)
+                if (entity && !myNPC.SameTeam(entity))
                 {
                     float distance = Vector2.Distance(entity.transform.position, transform.position);
                     if (distance < aggroDistance && !entity.Health.isDead)
@@ -113,6 +113,15 @@ public class AIStateMachineBehavior : AIGlobalBehavior
 
         float distance = Vector2.Distance(myNPC.Target.transform.position, transform.position);
         return distance < chaseMinDistance;
+    }
+
+    public bool CanAttack()
+    {
+        if (!myNPC.Target)
+            return false;
+
+        float distance = Vector2.Distance(myNPC.Target.transform.position, transform.position);
+        return distance < attackMinDistance;
     }
 
     public override void ReactToPlayer()

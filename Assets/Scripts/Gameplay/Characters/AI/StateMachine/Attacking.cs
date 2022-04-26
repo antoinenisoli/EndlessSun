@@ -1,37 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[Serializable]
+[System.Serializable]
 class Attacking : SubBehavior
 {
     public override AIState State => AIState.Attacking;
     float timer;
     Vector2 randomPosition;
     float randomTimer;
+    float randomRate;
+
+    Vector2 oppositeDirection => (currentPosition - targetPos).normalized;
+    Vector2 currentPosition => myNPC.transform.position;
+    Vector2 targetPos => myNPC.Target.transform.position;
 
     public Attacking(AIStateMachineBehavior behavior) : base(behavior)
     {
         myNPC.Stop();
-        randomTimer = UnityEngine.Random.Range(1f, 3f);
-        randomPosition = myNPC.Target.transform.position;
+        randomTimer = 0;
+        randomPosition = targetPos;
     }
 
     public override void Update()
     {
         base.Update();
+        Main();
+        MoveAroundPlayer();
+    }
 
+    void Main()
+    {
         if (myNPC.Target.Health.isDead)
         {
             myNPC.SetTarget(null);
             behavior.SetBehaviour(new Wait(behavior, 2, AIState.Patrolling));
             return;
         }
-        else if (!behavior.NearToTarget())
-            behavior.SetBehaviour(new Chasing(behavior));
 
         if (timer >= myNPC.attackRate)
         {
@@ -40,39 +47,23 @@ class Attacking : SubBehavior
         }
         else
             timer += Time.deltaTime;
+    }
 
-        float distance = Vector2.Distance(myNPC.transform.position, myNPC.Target.transform.position);
-        Vector2 diff = myNPC.transform.position - myNPC.Target.transform.position;
-        diff.Normalize();
-        if (distance < 1f)
-        {
-            Debug.Log(diff);
-            behavior.Move((Vector2)myNPC.transform.position + (diff * 6f));
-            randomTimer = UnityEngine.Random.Range(1f, 3f);
-            return;
-        }
-
-        randomTimer -= Time.deltaTime;
-        if (randomTimer <= 0)
+    void MoveAroundPlayer()
+    {
+        randomTimer += Time.deltaTime;
+        if (randomTimer > randomRate)
             NewPos();
+
+        behavior.Move(randomPosition);
     }
 
     void NewPos()
     {
-        randomTimer = UnityEngine.Random.Range(1f, 3f);
-        float radius = 2f;
-        Vector2 random = UnityEngine.Random.insideUnitCircle * radius;
-        randomPosition = (Vector2)myNPC.Target.transform.position + random;
-        float distance = Vector2.Distance(randomPosition, myNPC.Target.transform.position);
-
-        while (distance < 2f)
-        {
-            random = UnityEngine.Random.insideUnitCircle * radius;
-            randomPosition = (Vector2)myNPC.Target.transform.position + random;
-            distance = Vector2.Distance(randomPosition, myNPC.Target.transform.position);
-        }
-
-        Debug.Log("new pos " + randomPosition);
-        behavior.Move(randomPosition);
+        randomRate = Random.Range(1f, 3f);
+        randomTimer = 0;
+        Vector2 perpendicular = Vector2.Perpendicular(oppositeDirection);
+        int r = Mathf.RoundToInt(Random.Range(-1f, 1f));
+        randomPosition = targetPos + (oppositeDirection * behavior.chaseMinDistance) + (perpendicular * r * 3f);
     }
 }

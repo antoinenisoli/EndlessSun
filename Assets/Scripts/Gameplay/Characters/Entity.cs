@@ -101,6 +101,11 @@ public class Entity : MonoBehaviour
         rb.AddForce(force, ForceMode2D.Impulse);
     }
 
+    public bool SameTeam(Entity other)
+    {
+        return myTeam == other.myTeam;
+    }
+
     public virtual void Attack()
     {
         Target.Hit(ComputeDamages());
