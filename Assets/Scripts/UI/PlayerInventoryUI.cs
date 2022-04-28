@@ -36,13 +36,16 @@ public class PlayerInventoryUI : HUD
 
     public override void UpdateUI()
     {
-        for (int i = 0; i < itemSlots.Length; i++)
+        if (PlayerInventory.Instance)
         {
-            Item item = PlayerInventory.Instance.GetItem(i);
-            if (item != null)
-                itemSlots[i].Assign(item);
-            else
-                itemSlots[i].Assign(null);
+            for (int i = 0; i < itemSlots.Length; i++)
+            {
+                Item item = PlayerInventory.Instance.GetItem(i);
+                if (item != null)
+                    itemSlots[i].Assign(item);
+                else
+                    itemSlots[i].Assign(null);
+            }
         }
     }
 }

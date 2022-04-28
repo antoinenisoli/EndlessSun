@@ -66,7 +66,7 @@ public class Entity : MonoBehaviour
 
     public virtual float ComputeSpeed() { return AttributeList.Speed.value; }
 
-    public void SetTarget(Entity target)
+    public virtual void SetTarget(Entity target)
     {
         Target = target;
     }

@@ -24,7 +24,7 @@ namespace CustomAI
         public abstract void DoUpdate();
 
         public virtual void Stun() { }
-        public virtual void ReactToPlayer() { }
+        public virtual void ReactToTarget() { }
 
         public virtual float GetVelocity() { return 0; }
         public virtual float ComputeSpeed() { return 0; }

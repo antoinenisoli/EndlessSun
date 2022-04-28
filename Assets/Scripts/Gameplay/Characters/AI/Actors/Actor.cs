@@ -26,8 +26,14 @@ public abstract class Actor : Entity
             aggressors.Add(aggressor);
             Stop();
             SetTarget(aggressor);
-            myBehavior.ReactToPlayer();
+            myBehavior.ReactToTarget();
         }
+    }
+
+    public virtual void ReactToTarget()
+    {
+        Stop();
+        anim.SetTrigger("React");
     }
 
     public void Move(Vector2 targetPos)
@@ -44,5 +50,13 @@ public abstract class Actor : Entity
 
         float dist = Vector2.Distance(Target.transform.position, transform.position);
         return dist < minDistance;
+    }
+
+    public override void SetTarget(Entity target)
+    {
+        if (!target && Target && aggressors.Contains(Target))
+            aggressors.Remove(Target);
+
+        base.SetTarget(target);
     }
 }

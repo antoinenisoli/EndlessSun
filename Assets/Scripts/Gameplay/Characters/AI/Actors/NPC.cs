@@ -100,11 +100,13 @@ public class NPC : Actor
         base.Attack();
     }
 
-    public void ReactToTarget()
+    public override void ReactToTarget()
     {
-        Stop();
-        anim.SetTrigger("React");
+        base.ReactToTarget();
         detectIcon.gameObject.SetActive(true);
+        detectIcon.transform.DOKill();
+        detectIcon.DOKill();
+
         detectIcon.transform.localScale = detectIconBaseScale;
         detectIcon.DOFade(1, 0);
 

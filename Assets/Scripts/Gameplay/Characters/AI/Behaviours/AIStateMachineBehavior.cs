@@ -73,9 +73,9 @@ namespace CustomAI
             return Mathf.Clamp01(myActor.aiAgent.velocity.sqrMagnitude);
         }
 
-        public override void ReactToPlayer()
+        public override void ReactToTarget()
         {
-            base.ReactToPlayer();
+            base.ReactToTarget();
             SetBehaviour(new Reacting(this, reactTimer));
         }
 

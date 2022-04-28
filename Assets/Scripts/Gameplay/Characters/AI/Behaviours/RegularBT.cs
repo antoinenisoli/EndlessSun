@@ -57,6 +57,12 @@ namespace CustomAI.BehaviorTree
             patrol.Gizmos();
         }
 
+        public override void ReactToTarget()
+        {
+            base.ReactToTarget();
+            myActor.ReactToTarget();
+        }
+
         public Actor getActor() => GetComponent<Actor>();
 
         SequenceNode SetupChase()
@@ -93,7 +99,7 @@ namespace CustomAI.BehaviorTree
         {
             Selector topSelector = new Selector();
             //topSelector.Attach(SetupAttack());
-            //topSelector.Attach(SetupChase());
+            topSelector.Attach(SetupChase());
             topSelector.Attach(SetupPatrol());
             return topSelector;
         }
