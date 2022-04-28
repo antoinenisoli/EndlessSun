@@ -1,0 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace CustomAI.BehaviorTree
+{
+    public class NewAINode : AINode
+    {
+        public override NodeState Evaluate()
+        {
+            return default;
+        }
+    }
+}
