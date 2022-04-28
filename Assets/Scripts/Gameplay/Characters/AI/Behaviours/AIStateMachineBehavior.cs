@@ -38,7 +38,7 @@ namespace CustomAI
         public void Move(Vector3 targetPos)
         {
             float distance = Vector2.Distance(targetPos, transform.position);
-            float stopDistance = behaviour.State == AIState.Patrolling ? patrol.stopDistance : patrol.chaseMinDistance;
+            float stopDistance = behaviour.State == AIState.Patrolling ? actor.aiAgent.endReachedDistance : patrol.chaseMinDistance;
 
             if (distance > stopDistance)
                 actor.Move(targetPos);

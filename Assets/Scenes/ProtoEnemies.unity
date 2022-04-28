@@ -1586,7 +1586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1858022712953023501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1748,12 +1748,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a837e36ac3f4f4fadca2cfdcbda35f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alwaysShow: 0
+  alwaysShow: 1
   color: {r: 0.58698326, g: 1, b: 0.4009434, a: 0.15686275}
   wire: 1
   fill: 1
   localCenter: {x: 0, y: 0, z: 0}
-  size: {x: 6, y: 6}
+  size: {x: 10, y: 6}
 --- !u!114 &2989414921523937032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1832,7 +1832,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3310921539015247727}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 78.34, y: 55.28, z: 0}
+  m_LocalPosition: {x: 77.09, y: 51.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1474318128106038881}
@@ -92140,7 +92140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &5344084554969408403
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -93395,14 +93395,13 @@ MonoBehaviour:
   patrol:
     myNPC: {fileID: 9065316465402895366}
     minNextWaypointDistance: 3
-    stopDistance: 0.1
     chaseMinDistance: 2
     attackMinDistance: 2
     aggroDistance: 20
     visionDistance: 50
     randomDelayBounds: {x: 1, y: 3}
-    randomPatrolRange: {x: 2, y: 2}
-    patrolGizmo: {fileID: 0}
+    randomPatrolRange: {x: 5, y: 3}
+    patrolGizmo: {fileID: 2880238065971869254}
 --- !u!114 &9065316465402895366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93443,7 +93442,7 @@ MonoBehaviour:
     prob: 0.179
   attackRate: 1.5
   attackRange: 0.5
-  targetPos: {x: 0, y: 0}
+  startPosition: {x: 0, y: 0}
 --- !u!114 &9203484887432107082
 MonoBehaviour:
   m_ObjectHideFlags: 0

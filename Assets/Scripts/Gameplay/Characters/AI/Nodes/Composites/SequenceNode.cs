@@ -14,7 +14,6 @@ namespace CustomAI.BehaviorTree
             bool isAnyNodeRunning = false;
             foreach (var node in childrens)
             {
-                Debug.Log(node.name + " / " + node.nodeState);
                 switch (node.Evaluate())
                 {
                     case NodeState.Running:
@@ -30,6 +29,7 @@ namespace CustomAI.BehaviorTree
             }
 
             nodeState = isAnyNodeRunning ? NodeState.Running : NodeState.Success;
+            Debug.Log(nodeState);
             return nodeState;
         }
     }

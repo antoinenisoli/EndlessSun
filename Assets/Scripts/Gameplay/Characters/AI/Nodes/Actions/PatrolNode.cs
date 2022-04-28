@@ -18,14 +18,13 @@ namespace CustomAI.BehaviorTree
         public override NodeState Evaluate()
         {
             float distance = Vector2.Distance(patrol.myNPC.transform.position, pos);
-            if (distance <= patrol.stopDistance)
+            if (distance <= patrol.myNPC.aiAgent.endReachedDistance)
             {
-                patrol.myNPC.Stop();
                 nodeState = NodeState.Success;
                 return nodeState;
             }
 
-            patrol.Move(pos);
+            patrol.myNPC.Move(pos);
             nodeState = NodeState.Running;
             return nodeState;
         }

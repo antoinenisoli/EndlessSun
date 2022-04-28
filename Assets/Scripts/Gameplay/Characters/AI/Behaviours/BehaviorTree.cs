@@ -10,13 +10,17 @@ namespace CustomAI.BehaviorTree
 
         public void Start()
         {
+            Debug.Log("start new tree !");
             root = MakeTree();
         }
 
         public override void DoUpdate()
         {
             if (root != null)
-                root.Evaluate();
+            {
+                if (root.Evaluate() != NodeState.Running)
+                    Start();
+            }
         }
 
         public virtual AINode MakeTree() => null;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class Inverter : AINode
+    public class Inverter : AICompositeNode
     {
         protected AINode node;
 

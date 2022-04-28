@@ -8,14 +8,20 @@ namespace CustomAI.BehaviorTree
     {
         [SerializeField] PatrolData patrol;
 
+        private void OnDrawGizmos()
+        {
+            patrol.Gizmos();
+        }
+
         public override AINode MakeTree()
         {
             SequenceNode sequence = new SequenceNode();
             WaitNode wait = new WaitNode(patrol.randomDelayBounds);
             PatrolNode patrolNode = new PatrolNode(patrol);
 
-            sequence.Attach(wait);
             sequence.Attach(patrolNode);
+            sequence.Attach(wait);
+
             return sequence;
         }
     }

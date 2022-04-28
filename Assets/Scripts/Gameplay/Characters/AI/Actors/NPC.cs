@@ -18,18 +18,25 @@ public class NPC : Actor
     [SerializeField] float attackRange = 5f;
     
     Vector3 detectIconBaseScale;
+    [HideInInspector] public Vector2 startPosition;
     float alpha;
     bool pushed;
     SpriteRenderer[] healthBarSprites;
-    [HideInInspector] public Vector2 targetPos;
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         rb.isKinematic = true;
         detectIconBaseScale = detectIcon.transform.localScale;
         detectIcon.gameObject.SetActive(false);
         healthBarSprites = healthBar.GetComponentsInChildren<SpriteRenderer>();
+        startPosition = aiAgent.transform.position;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(startPosition, transform.position);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -57,10 +64,8 @@ public class NPC : Actor
     public override void ManageAnimations()
     {
         base.ManageAnimations();
-        if (myBehavior)
-            anim.SetFloat("Speed", myBehavior.GetVelocity());
-        else
-            anim.SetFloat("Speed", 0);
+        if (aiAgent)
+            anim.SetFloat("Speed", aiAgent.velocity.sqrMagnitude);
     }
 
     public override void Stun()
@@ -117,7 +122,7 @@ public class NPC : Actor
         if (Target)
             return Target.transform.position;
         else
-            return targetPos;
+            return destinationPoint.position;
     }
 
     public bool IsMoving()

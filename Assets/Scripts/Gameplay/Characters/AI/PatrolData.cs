@@ -9,7 +9,7 @@ namespace CustomAI
     {
         public NPC myNPC;
         public float minNextWaypointDistance = 3f;
-        public float stopDistance = 0.1f, chaseMinDistance = 2f, attackMinDistance = 2f;
+        public float chaseMinDistance = 2f, attackMinDistance = 2f;
         public float aggroDistance = 20f, visionDistance = 50f;
         public Vector2 randomDelayBounds;
         public Vector2 randomPatrolRange;
@@ -41,25 +41,14 @@ namespace CustomAI
 
         Vector2 RandomPatrolPosition()
         {
-            Vector2 vector = GameDevHelper.RandomVector(randomPatrolRange, myNPC.transform.position);
-            float dist = Vector2.Distance(vector, myNPC.transform.position);
-            int emergencyBreak = 1000;
-
-            while (dist < minNextWaypointDistance && emergencyBreak > 0)
-            {
-                emergencyBreak--;
-                vector = GameDevHelper.RandomVector(randomPatrolRange, myNPC.transform.position);
-                dist = Vector2.Distance(vector, myNPC.transform.position);
-            }
-
+            Vector2 vector = GameDevHelper.RandomVector(randomPatrolRange, myNPC.startPosition);
             return vector;
         }
 
         public void Move(Vector3 targetPos)
         {
-            myNPC.targetPos = targetPos;
             float distance = Vector2.Distance(targetPos, myNPC.transform.position);
-            float stopDistance = myNPC.State == AIState.Patrolling ? this.stopDistance : chaseMinDistance;
+            float stopDistance = myNPC.State == AIState.Patrolling ? myNPC.aiAgent.endReachedDistance : chaseMinDistance;
 
             if (distance > stopDistance)
             {
