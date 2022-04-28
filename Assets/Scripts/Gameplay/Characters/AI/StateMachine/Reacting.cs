@@ -3,24 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class Reacting : SubBehavior
+namespace CustomAI
 {
-    public override AIState State => AIState.React;
-    float timer;
-    float delay;
-
-    public Reacting(AIStateMachineBehavior behavior, float delay = 0f) : base(behavior)
+    [Serializable]
+    public class Reacting : SubBehavior
     {
-        this.delay = delay;
-        myNPC.ReactToTarget();
-    }
+        public override AIState State => AIState.React;
+        float timer;
+        float delay;
 
-    public override void Update()
-    {
-        base.Update();
-        timer += Time.deltaTime;
-        if (timer > delay)
-            behavior.SetBehaviour(new Chasing(behavior));
+        public Reacting(AIStateMachineBehavior behavior, float delay = 0f) : base(behavior)
+        {
+            this.delay = delay;
+            myNPC.ReactToTarget();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            timer += Time.deltaTime;
+            if (timer > delay)
+                behavior.SetBehaviour(new Chasing(behavior));
+        }
     }
 }

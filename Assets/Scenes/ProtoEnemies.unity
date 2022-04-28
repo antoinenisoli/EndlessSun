@@ -1853,7 +1853,7 @@ GameObject:
   - component: {fileID: 1557304434440412180}
   - component: {fileID: 1858022712953023501}
   m_Layer: 7
-  m_Name: EnemySkeleton  (1)
+  m_Name: 'EnemySkeleton '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93388,10 +93388,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 9065316465402895361}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de4a59ea6c6b4e3489bca3070f6e5c3a, type: 3}
+  m_Script: {fileID: 11500000, guid: 612533a204baa6343b52ac303b6d297a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myNPC: {fileID: 0}
+  actor: {fileID: 0}
+  patrol:
+    myNPC: {fileID: 9065316465402895366}
+    minNextWaypointDistance: 3
+    stopDistance: 0.1
+    chaseMinDistance: 2
+    attackMinDistance: 2
+    aggroDistance: 20
+    visionDistance: 50
+    randomDelayBounds: {x: 1, y: 3}
+    randomPatrolRange: {x: 2, y: 2}
+    patrolGizmo: {fileID: 0}
 --- !u!114 &9065316465402895366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93416,10 +93427,12 @@ MonoBehaviour:
     currentValue: 0
     maxValue: 3
     isDead: 0
-  myBehavior: {fileID: 9065316465402895362}
-  attackRate: 1.5
-  attackRange: 0.5
+  State: 0
+  aiAgent: {fileID: 1557304434440412180}
+  destinationSetter: {fileID: 1858022712953023501}
   destinationPoint: {fileID: 9259956539299638}
+  myBehavior: {fileID: 9065316465402895362}
+  aggressors: []
   detectIcon: {fileID: 6361598522910895276}
   healthBarPivot: {fileID: 1398337116637913925}
   healthBar: {fileID: 7822181775553298936}
@@ -93428,8 +93441,9 @@ MonoBehaviour:
       type: 3}
     dropCount: 1
     prob: 0.179
+  attackRate: 1.5
+  attackRange: 0.5
   targetPos: {x: 0, y: 0}
-  aggressors: []
 --- !u!114 &9203484887432107082
 MonoBehaviour:
   m_ObjectHideFlags: 0

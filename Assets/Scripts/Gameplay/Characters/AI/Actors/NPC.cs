@@ -1,3 +1,4 @@
+using CustomAI;
 using DG.Tweening;
 using Pathfinding;
 using System.Collections;
@@ -7,20 +8,20 @@ using UnityEngine;
 public class NPC : Actor
 {
     [Header("_NPC")]
-    public float attackRate = 1f;
-    [SerializeField] float attackRange = 5f;
-    [SerializeField] Transform destinationPoint;
     [SerializeField] SpriteRenderer detectIcon;
     [SerializeField] Transform healthBarPivot;
     [SerializeField] Transform healthBar;
     [SerializeField] ItemDrop[] loots;
 
+    [Header("Attack")]
+    public float attackRate = 1f;
+    [SerializeField] float attackRange = 5f;
+    
     Vector3 detectIconBaseScale;
     float alpha;
     bool pushed;
     SpriteRenderer[] healthBarSprites;
     [HideInInspector] public Vector2 targetPos;
-    public List<Entity> aggressors = new List<Entity>();
 
     public override void Start()
     {
@@ -51,17 +52,6 @@ public class NPC : Actor
         NewAgressor(aggressor);
         rb.isKinematic = false;
         healthBarPivot.DOScaleX((float)Health.CurrentValue / (float)Health.MaxValue, 0.3f);
-    }
-
-    public void NewAgressor(Entity aggressor)
-    {
-        if (!aggressors.Contains(aggressor))
-        {
-            aggressors.Add(aggressor);
-            Stop();
-            SetTarget(aggressor);
-            myBehavior.ReactToPlayer();
-        }
     }
 
     public override void ManageAnimations()
@@ -164,6 +154,7 @@ public class NPC : Actor
         base.DoUpdate();
         ManageHealthbars();
         Flip(TargetPosition().x);
+        destinationSetter.target = destinationPoint;
 
         if (!Health.isDead && myBehavior)
             myBehavior.DoUpdate();

@@ -3,41 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class Wait : SubBehavior
+namespace CustomAI
 {
-    public override AIState State => AIState.Waiting;
-    float timer;
-    float delay;
-    AIState nextState;
-    
-    public Wait(AIStateMachineBehavior behavior, float delay, AIState nextState) : base(behavior)
+    [Serializable]
+    public class Wait : SubBehavior
     {
-        this.delay = delay;
-        this.nextState = nextState;
-        myNPC.Stop();
-    }
+        public override AIState State => AIState.Waiting;
+        float timer;
+        float delay;
+        AIState nextState;
 
-    public override void Update()
-    {
-        base.Update();
-        timer += Time.deltaTime;
-        if (timer > delay)
+        public Wait(AIStateMachineBehavior behavior, float delay, AIState nextState) : base(behavior)
         {
-            switch (nextState)
+            this.delay = delay;
+            this.nextState = nextState;
+            myNPC.Stop();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            timer += Time.deltaTime;
+            if (timer > delay)
             {
-                case AIState.Patrolling:
-                    behavior.SetBehaviour(new Patrolling(behavior));
-                    break;
-                case AIState.React:
-                    behavior.SetBehaviour(new Reacting(behavior));
-                    break;
-                case AIState.Chasing:
-                    behavior.SetBehaviour(new Chasing(behavior));
-                    break;
-                case AIState.Attacking:
-                    behavior.SetBehaviour(new Attacking(behavior));
-                    break;
+                switch (nextState)
+                {
+                    case AIState.Patrolling:
+                        behavior.SetBehaviour(new Patrolling(behavior));
+                        break;
+                    case AIState.React:
+                        behavior.SetBehaviour(new Reacting(behavior));
+                        break;
+                    case AIState.Chasing:
+                        behavior.SetBehaviour(new Chasing(behavior));
+                        break;
+                    case AIState.Attacking:
+                        behavior.SetBehaviour(new Attacking(behavior));
+                        break;
+                }
             }
         }
     }

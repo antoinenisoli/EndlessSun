@@ -14,20 +14,23 @@ public enum AIState
     Waiting,
 }
 
-[Serializable]
-public abstract class SubBehavior
+namespace CustomAI
 {
-    public abstract AIState State { get; }
-    public AIStateMachineBehavior behavior;
-    protected NPC myNPC => behavior.myNPC;
-
-    public SubBehavior(AIStateMachineBehavior behavior)
+    [Serializable]
+    public abstract class SubBehavior
     {
-        this.behavior = behavior;
-        myNPC.UnStun();
+        public abstract AIState State { get; }
+        public AIStateMachineBehavior behavior;
+        protected NPC myNPC => behavior.actor as NPC;
+
+        public SubBehavior(AIStateMachineBehavior behavior)
+        {
+            this.behavior = behavior;
+            myNPC.UnStun();
+        }
+
+        public virtual void Gizmos() { }
+
+        public virtual void Update() { }
     }
-
-    public virtual void Gizmos() { }
-
-    public virtual void Update() { }
 }

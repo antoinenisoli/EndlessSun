@@ -4,49 +4,43 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[System.Serializable]
-class Chasing : SubBehavior
+namespace CustomAI
 {
-    public override AIState State => AIState.Chasing;
-    Vector2 targetPos => behavior.myNPC.Target.transform.position;
-
-    Attacking attackBehavior;
-
-    public Chasing(AIStateMachineBehavior behavior) : base(behavior)
+    [System.Serializable]
+    class Chasing : SubBehavior
     {
-        attackBehavior = new Attacking(behavior);
-    }
+        public override AIState State => AIState.Chasing;
+        Vector2 targetPos => behavior.actor.Target.transform.position;
 
-    public override void Gizmos()
-    {
-        base.Gizmos();
-        behavior.visionGizmo.gameObject.SetActive(true);
-        if (behavior.visionGizmo)
-            behavior.visionGizmo.SetSize(behavior.visionDistance);
-    }
+        Attacking attackBehavior;
 
-    public override void Update()
-    {
-        base.Update();
-        if (!behavior.KeepTargetInSight() || behavior.myNPC.Target.Health.isDead || myNPC.SameTeam(myNPC.Target))
+        public Chasing(AIStateMachineBehavior behavior) : base(behavior)
         {
-            myNPC.SetTarget(null);
-            behavior.SetBehaviour(new Wait(behavior, 2, AIState.Patrolling));
-            return;
+            attackBehavior = new Attacking(behavior);
         }
 
-        if (behavior.NearToTarget())
-            attackBehavior.Update();
-        else
-            behavior.Move(targetPos);
-    }
+        public override void Gizmos()
+        {
+            base.Gizmos();
+            behavior.visionGizmo.gameObject.SetActive(true);
+            if (behavior.visionGizmo)
+                behavior.visionGizmo.SetSize(behavior.visionDistance);
+        }
 
-    Vector2 Test()
-    {
-        Vector2 direction = (Vector2)behavior.myNPC.transform.position - targetPos;
-        float cross = Vector2.Dot(direction.normalized, targetPos.normalized);
+        public override void Update()
+        {
+            base.Update();
+            if (!behavior.KeepTargetInSight() || behavior.actor.Target.Health.isDead || myNPC.SameTeam(myNPC.Target))
+            {
+                myNPC.SetTarget(null);
+                behavior.SetBehaviour(new Wait(behavior, 2, AIState.Patrolling));
+                return;
+            }
 
-        Vector2 randomOffset = Random.insideUnitCircle * 3f;
-        return targetPos + randomOffset;
+            if (myNPC.CheckDistance(5))
+                attackBehavior.Update();
+            else
+                behavior.Move(targetPos);
+        }
     }
 }

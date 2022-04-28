@@ -14,6 +14,11 @@ public class GameDevHelper : MonoBehaviour
         return basePos + random;
     }
 
+    public static float RandomInRange(Vector2 range)
+    {
+        return Random.Range(range.x, range.y);
+    }
+
     public static Vector2Int ToVector2Int(Vector2 vector)
     {
         return new Vector2Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y));

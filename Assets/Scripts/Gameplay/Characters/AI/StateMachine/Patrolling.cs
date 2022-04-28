@@ -3,64 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class Patrolling : SubBehavior
+namespace CustomAI
 {
-    public override AIState State => AIState.Patrolling;
-    float newPatrolTimer;
-    float newPatrolDelay;
-    Vector3 pos;
-
-    public Patrolling(AIStateMachineBehavior behavior) : base(behavior)
+    [Serializable]
+    public class Patrolling : SubBehavior
     {
-        newPatrolDelay = behavior.RandomDelay();
-        pos = behavior.RandomPatrolPosition();
-        myNPC.aggressors.Clear();
-    }
+        public override AIState State => AIState.Patrolling;
+        PatrolData patrol => behavior.patrol;
 
-    void NewDestination()
-    {
-        myNPC.Stop();
-        newPatrolTimer = 0;
-        newPatrolDelay = behavior.RandomDelay();
-        Vector2 randomPos = behavior.RandomPatrolPosition();
-        Vector2 sampledPos;
-        if (GridManager.Instance)
+        float newPatrolTimer;
+        float newPatrolDelay;
+        Vector3 pos;
+
+        public Patrolling(AIStateMachineBehavior behavior) : base(behavior)
         {
-            randomPos = behavior.RandomPatrolPosition();
-            if (GridManager.Instance.SamplePosition(randomPos, 2f, out sampledPos))
-                pos = sampledPos;
+            newPatrolDelay = patrol.RandomDelay();
+            pos = patrol.NewDestination();
+            myNPC.aggressors.Clear();
         }
-        else
-            pos = randomPos;
-    }
 
-    public override void Gizmos()
-    {
-        base.Gizmos();
-        behavior.patrolGizmo.gameObject.SetActive(true);
-        behavior.aggroGizmo.gameObject.SetActive(true);
-
-        if (behavior.patrolGizmo)
-            behavior.patrolGizmo.SetSize(behavior.randomPatrolRange * 2);
-        if (behavior.aggroGizmo)
-            behavior.aggroGizmo.SetSize(behavior.aggroDistance);
-    }
-
-    public override void Update()
-    {
-        base.Update();
-        if (behavior.DetectTarget(out Entity target))
+        public override void Update()
         {
-            myNPC.NewAgressor(target);
-        }
-        else if (!myNPC.IsMoving())
-        {
-            newPatrolTimer += Time.deltaTime;
-            if (newPatrolTimer > newPatrolDelay)
-                NewDestination();
+            base.Update();
+            if (patrol.DetectTarget(out Entity target))
+            {
+                myNPC.NewAgressor(target);
+            }
+            else if (!myNPC.IsMoving())
+            {
+                newPatrolTimer += Time.deltaTime;
+                if (newPatrolTimer > newPatrolDelay)
+                {
+                    newPatrolTimer = 0;
+                    newPatrolDelay = patrol.RandomDelay();
+                    pos = patrol.NewDestination();
+                }
 
-            behavior.Move(pos);
+                patrol.Move(pos);
+            }
         }
     }
 }
