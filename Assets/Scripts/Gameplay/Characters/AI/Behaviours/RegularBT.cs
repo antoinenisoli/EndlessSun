@@ -50,6 +50,7 @@ namespace CustomAI.BehaviorTree
         public DistanceCheck aggroRange = new DistanceCheck(15f, Color.white);
         public DistanceCheck sightRange = new DistanceCheck(20f, Color.white);
         public DistanceCheck attackRange = new DistanceCheck(2f, Color.white);
+        [SerializeField] float reactDuration = 0.5f;
         public PatrolData patrol;
 
         private void OnDrawGizmos()
@@ -71,7 +72,10 @@ namespace CustomAI.BehaviorTree
             DetectTargetNode detectTarget = new DetectTargetNode(myActor, aggroRange.range);
             TargetInSightNode inSightNode = new TargetInSightNode(myActor, sightRange.range);
             ChaseNode chaseNode = new ChaseNode(myActor, chaseRange.range);
+            ReactionNode react = new ReactionNode(reactDuration, myActor);
+
             sequence.Attach(detectTarget);
+            sequence.Attach(react);
             sequence.Attach(inSightNode);
             sequence.Attach(chaseNode);
             return sequence;
@@ -80,11 +84,11 @@ namespace CustomAI.BehaviorTree
         SequenceNode SetupPatrol()
         {
             SequenceNode sequence = new SequenceNode();
-            //LogNode logNode = new LogNode("oui");
-            WaitNode wait = new WaitNode(patrol.randomDelayBounds);
+            float randomDelay = GameDevHelper.RandomInRange(patrol.randomDelayBounds);
+            WaitNode wait = new WaitNode(randomDelay);
             PatrolNode patrolNode = new PatrolNode(patrol);
-            sequence.Attach(patrolNode);
             sequence.Attach(wait);
+            sequence.Attach(patrolNode);
 
             return sequence;
         }

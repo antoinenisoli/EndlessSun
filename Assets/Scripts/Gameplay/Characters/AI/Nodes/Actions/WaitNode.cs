@@ -4,31 +4,27 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class WaitNode : AINode
+    public class WaitNode : AIActionNode
     {
-        float timer;
-        float randomDelay;
+        protected float timer;
+        protected float delay;
 
-        public WaitNode(Vector2 range)
+        public WaitNode(float delay)
         {
             timer = 0;
-            randomDelay = GameDevHelper.RandomInRange(range);
+            this.delay = delay;
         }
 
-        public override NodeState Evaluate()
+        public override void Execute()
+        {
+            //Debug.Log("wait end");
+        }
+
+        public override bool Step()
         {
             timer += Time.deltaTime;
-            //Debug.Log(timer);
-
-            if (timer >= randomDelay)
-            {
-                Debug.Log("wait end");
-                nodeState = NodeState.Success;
-                return nodeState;
-            }
-
-            nodeState = NodeState.Running;
-            return nodeState;
+            //Debug.Log(timer + " " + nodeState);
+            return timer >= delay;
         }
     }
 }

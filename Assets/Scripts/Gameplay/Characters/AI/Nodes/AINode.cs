@@ -15,6 +15,7 @@ namespace CustomAI.BehaviorTree
     {
         public NodeState nodeState;
         public AINode parent;
+        [HideInInspector] public bool started = false;
         public List<AINode> childrens = new List<AINode>();
         public virtual string name => GetType().Name;
         Dictionary<string, object> dataContext = new Dictionary<string, object>();
@@ -79,7 +80,32 @@ namespace CustomAI.BehaviorTree
                 node = node.parent;
             }
 
+            
+
             return false;
+        }
+
+        public virtual void OnStart() 
+        { 
+            Debug.Log(name + " started");
+            started = true;
+        }
+
+        public virtual void OnStop()
+        {
+            started = false;
+        }
+
+        public void StartCheck()
+        {
+            if (!started)
+                OnStart();
+        }
+
+        public void StopCheck()
+        {
+            if (nodeState != NodeState.Running)
+                OnStop();
         }
 
         public abstract NodeState Evaluate();

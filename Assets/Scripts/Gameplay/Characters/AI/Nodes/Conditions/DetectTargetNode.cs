@@ -17,7 +17,6 @@ namespace CustomAI.BehaviorTree
 
         public bool DetectTarget()
         {
-            Entity target = null;
             Collider2D[] colls = Physics2D.OverlapCircleAll(actor.transform.position, aggroDistance);
             if (colls.Length > 0)
             {
@@ -29,7 +28,7 @@ namespace CustomAI.BehaviorTree
                         float distance = Vector2.Distance(entity.transform.position, actor.transform.position);
                         if (distance < aggroDistance && !entity.Health.isDead)
                         {
-                            target = entity;
+                            Entity target = entity;
                             actor.NewAgressor(target);
                             return true;
                         }
@@ -43,7 +42,10 @@ namespace CustomAI.BehaviorTree
 
         public override bool Check()
         {
-            return DetectTarget();
+            if (actor.Target)
+                return true;
+            else
+                return DetectTarget();
         }
     }
 }

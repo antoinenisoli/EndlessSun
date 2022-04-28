@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class LogNode : AINode
+    public class LogNode : AIActionNode
     {
         string text;
 
@@ -13,11 +13,14 @@ namespace CustomAI.BehaviorTree
             this.text = text;
         }
 
-        public override NodeState Evaluate()
+        public override void Execute()
         {
             Debug.Log(text);
-            nodeState = NodeState.Success;
-            return nodeState;
+        }
+
+        public override bool Step()
+        {
+            return true;
         }
     }
 }

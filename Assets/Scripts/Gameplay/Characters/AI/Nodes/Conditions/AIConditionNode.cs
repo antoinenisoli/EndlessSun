@@ -12,6 +12,7 @@ namespace CustomAI.BehaviorTree
 
         public override NodeState Evaluate()
         {
+            StartCheck();
             if (Check())
             {
                 nodeState = NodeState.Success;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class AttackNode : AINode
+    public class AttackNode : AIActionNode
     {
         NPC myNpc;
 
@@ -13,10 +13,15 @@ namespace CustomAI.BehaviorTree
             this.myNpc = myNpc;
         }
 
-        public override NodeState Evaluate()
+        public override bool Step()
         {
             myNpc.Stop();
-            return NodeState.Running;
+            return true;
+        }
+
+        public override void Execute()
+        {
+            
         }
     }
 }

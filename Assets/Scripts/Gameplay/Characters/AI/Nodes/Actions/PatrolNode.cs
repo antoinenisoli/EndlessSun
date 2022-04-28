@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class PatrolNode : AINode
+    public class PatrolNode : AIActionNode
     {
         PatrolData patrol;
         Vector3 pos;
@@ -12,24 +12,20 @@ namespace CustomAI.BehaviorTree
         public PatrolNode(PatrolData patrol) 
         {
             this.patrol = patrol;
+            patrol.myNPC.Stop();
             pos = patrol.NewDestination();
         }
 
-        public override NodeState Evaluate()
+        public override void Execute()
+        {
+            patrol.myNPC.Stop();
+        }
+
+        public override bool Step()
         {
             float distance = Vector2.Distance(patrol.myNPC.transform.position, pos);
-            //Debug.Log(distance);
-
-            if (distance <= patrol.myNPC.aiAgent.endReachedDistance)
-            {
-                patrol.myNPC.Stop();
-                nodeState = NodeState.Success;
-                return nodeState;
-            }
-
             patrol.myNPC.Move(pos);
-            nodeState = NodeState.Running;
-            return nodeState;
+            return distance <= patrol.myNPC.aiAgent.endReachedDistance;
         }
     }
 }

@@ -26,7 +26,7 @@ public abstract class Actor : Entity
             aggressors.Add(aggressor);
             Stop();
             SetTarget(aggressor);
-            myBehavior.ReactToTarget();
+            //myBehavior.ReactToTarget();
         }
     }
 

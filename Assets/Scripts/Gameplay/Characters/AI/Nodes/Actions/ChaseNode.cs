@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class ChaseNode : AINode
+    public class ChaseNode : AIActionNode
     {
         Actor actor;
         float chaseMinDistance = 2f;
@@ -24,20 +24,15 @@ namespace CustomAI.BehaviorTree
             return distance < chaseMinDistance;
         }
 
-        public override NodeState Evaluate()
+        public override bool Step()
         {
-            if (!NearToTarget())
-            {
-                actor.Move(actor.Target.transform.position);
-                nodeState = NodeState.Running;
-                return nodeState;
-            }
-            else
-            {
-                actor.Stop();
-                nodeState = NodeState.Success;
-                return nodeState;
-            }
+            actor.Move(actor.Target.transform.position);
+            return NearToTarget();
+        }
+
+        public override void Execute()
+        {
+            actor.Stop();
         }
     }
 }
