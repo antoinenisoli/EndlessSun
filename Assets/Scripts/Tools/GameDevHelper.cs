@@ -24,6 +24,7 @@ public class GameDevHelper : MonoBehaviour
         return new Vector2Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y));
     }
 
+#if UNITY_EDITOR
     public static void DrawIcon(GameObject gameObject, int idx)
     {
         var largeIcons = GetTextures("sv_label_", string.Empty, 0, 8);
@@ -35,6 +36,7 @@ public class GameDevHelper : MonoBehaviour
         setIcon.Invoke(null, args);
     }
 
+
     public static GUIContent[] GetTextures(string baseName, string postFix, int startIndex, int count)
     {
         GUIContent[] array = new GUIContent[count];
@@ -45,6 +47,7 @@ public class GameDevHelper : MonoBehaviour
 
         return array;
     }
+#endif
 
     public static Color RandomColor()
     {

@@ -6,22 +6,21 @@ namespace CustomAI.BehaviorTree
 {
     public class ChaseNode : AINode
     {
-        Transform target;
-        NPC npc;
-        public float patrolStopDistance = 0.1f, chaseMinDistance = 2f, attackMinDistance = 2f;
+        Actor actor;
+        float chaseMinDistance = 2f;
 
-        public ChaseNode(Transform target, NPC npc)
+        public ChaseNode(Actor actor, float chaseMinDistance)
         {
-            this.target = target;
-            this.npc = npc;
+            this.actor = actor;
+            this.chaseMinDistance = chaseMinDistance;
         }
 
         public bool NearToTarget()
         {
-            if (!npc.Target)
+            if (!actor.Target)
                 return false;
 
-            float distance = Vector2.Distance(npc.Target.transform.position, npc.transform.position);
+            float distance = Vector2.Distance(actor.Target.transform.position, actor.transform.position);
             return distance < chaseMinDistance;
         }
 
@@ -29,12 +28,15 @@ namespace CustomAI.BehaviorTree
         {
             if (!NearToTarget())
             {
-                return NodeState.Running;
+                actor.Move(actor.Target.transform.position);
+                nodeState = NodeState.Running;
+                return nodeState;
             }
             else
             {
-                npc.Stop();
-                return NodeState.Failure;
+                actor.Stop();
+                nodeState = NodeState.Success;
+                return nodeState;
             }
         }
     }

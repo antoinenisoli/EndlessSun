@@ -8,17 +8,17 @@ namespace CustomAI
     [RequireComponent(typeof(Actor))]
     public abstract class AIGlobalBehavior : MonoBehaviour
     {
-        [HideInInspector] public Actor actor;
+        [HideInInspector] public Actor myActor;
 
         public virtual void Awake()
         {
-            actor = GetComponent<Actor>();
+            myActor = GetComponent<Actor>();
         }
 
         public virtual void Stop()
         {
-            actor.aiAgent.isStopped = true;
-            actor.aiAgent.enabled = false;
+            myActor.aiAgent.isStopped = true;
+            myActor.aiAgent.enabled = false;
         }
 
         public abstract void DoUpdate();

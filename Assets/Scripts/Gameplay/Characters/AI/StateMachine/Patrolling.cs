@@ -22,10 +22,19 @@ namespace CustomAI
             myNPC.aggressors.Clear();
         }
 
+        public void Move(Vector3 targetPos)
+        {
+            float distance = Vector2.Distance(targetPos, myNPC.transform.position);
+            if (distance > myNPC.aiAgent.endReachedDistance)
+                myNPC.Move(targetPos);
+            else
+                myNPC.Stop();
+        }
+
         public override void Update()
         {
             base.Update();
-            if (patrol.DetectTarget(out Entity target))
+            if (behavior.DetectTarget(out Entity target))
             {
                 myNPC.NewAgressor(target);
             }
@@ -39,7 +48,7 @@ namespace CustomAI
                     pos = patrol.NewDestination();
                 }
 
-                patrol.Move(pos);
+                Move(pos);
             }
         }
     }

@@ -18,9 +18,11 @@ namespace CustomAI.BehaviorTree
         public override NodeState Evaluate()
         {
             timer += Time.deltaTime;
+            //Debug.Log(timer);
+
             if (timer >= randomDelay)
             {
-                //Debug.Log("wait end");
+                Debug.Log("wait end");
                 nodeState = NodeState.Success;
                 return nodeState;
             }

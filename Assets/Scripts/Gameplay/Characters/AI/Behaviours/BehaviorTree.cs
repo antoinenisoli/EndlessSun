@@ -10,8 +10,8 @@ namespace CustomAI.BehaviorTree
 
         public void Start()
         {
-            Debug.Log("start new tree !");
             root = MakeTree();
+            Debug.Log("start new tree !");
         }
 
         public override void DoUpdate()

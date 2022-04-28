@@ -35,6 +35,7 @@ public enum Icon
     DiamondPurple
 }
 
+#if UNITY_EDITOR
 public class GameobjectIconManager
 {
     private static GUIContent[] labelIcons;
@@ -82,3 +83,4 @@ public class GameobjectIconManager
         return guiContentArray;
     }
 }
+#endif

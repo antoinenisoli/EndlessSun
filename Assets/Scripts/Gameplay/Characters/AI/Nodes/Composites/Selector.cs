@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
@@ -12,6 +13,7 @@ namespace CustomAI.BehaviorTree
         {
             foreach (var node in childrens)
             {
+                //Debug.Log(node.name + " " + node.nodeState);
                 switch (node.Evaluate())
                 {
                     case NodeState.Running:
@@ -24,7 +26,7 @@ namespace CustomAI.BehaviorTree
             }
 
             nodeState = NodeState.Failure;
-            return NodeState.Failure;
+            return nodeState;
         }
     }
 }

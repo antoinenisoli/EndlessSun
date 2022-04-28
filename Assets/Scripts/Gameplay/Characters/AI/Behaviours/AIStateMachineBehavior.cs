@@ -26,7 +26,31 @@ namespace CustomAI
         public void SetBehaviour(SubBehavior newBehaviour)
         {
             behaviour = newBehaviour;
-            actor.State = newBehaviour.State;
+            myActor.State = newBehaviour.State;
+        }
+
+        public bool DetectTarget(out Entity target)
+        {
+            target = null;
+            Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, aggroDistance);
+            if (colls.Length > 0)
+            {
+                foreach (var item in colls)
+                {
+                    Entity entity = item.GetComponent<Entity>();
+                    if (entity && !myActor.SameTeam(entity))
+                    {
+                        float distance = Vector2.Distance(entity.transform.position, transform.position);
+                        if (distance < aggroDistance && !entity.Health.isDead)
+                        {
+                            target = entity;
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
 
         public override void Stun()
@@ -38,17 +62,15 @@ namespace CustomAI
         public void Move(Vector3 targetPos)
         {
             float distance = Vector2.Distance(targetPos, transform.position);
-            float stopDistance = behaviour.State == AIState.Patrolling ? actor.aiAgent.endReachedDistance : patrol.chaseMinDistance;
-
-            if (distance > stopDistance)
-                actor.Move(targetPos);
+            if (distance > myActor.aiAgent.endReachedDistance)
+                myActor.Move(targetPos);
             else
                 Stop();
         }
 
         public override float GetVelocity()
         {
-            return Mathf.Clamp01(actor.aiAgent.velocity.sqrMagnitude);
+            return Mathf.Clamp01(myActor.aiAgent.velocity.sqrMagnitude);
         }
 
         public override void ReactToPlayer()
@@ -59,9 +81,9 @@ namespace CustomAI
 
         public bool KeepTargetInSight()
         {
-            if (actor.Target)
+            if (myActor.Target)
             {
-                float distance = Vector2.Distance(actor.Target.transform.position, transform.position);
+                float distance = Vector2.Distance(myActor.Target.transform.position, transform.position);
                 if (distance < visionDistance)
                     return true;
             }
@@ -71,8 +93,8 @@ namespace CustomAI
 
         public override float ComputeSpeed()
         {
-            float speed = actor.AttributeList.Speed.value;
-            if (actor.State != AIState.Patrolling)
+            float speed = myActor.AttributeList.Speed.value;
+            if (myActor.State != AIState.Patrolling)
                 return speed * 1.5f;
 
             return speed;
@@ -80,13 +102,13 @@ namespace CustomAI
 
         public override void DoUpdate()
         {
-            if (actor.aiAgent)
+            if (myActor.aiAgent)
             {
-                actor.destinationSetter.target = actor.destinationPoint;
-                actor.aiAgent.maxSpeed = actor.ComputeSpeed();
+                myActor.destinationSetter.target = myActor.destinationPoint;
+                myActor.aiAgent.maxSpeed = myActor.ComputeSpeed();
             }
 
-            if (!actor.Health.isDead && behaviour != null)
+            if (!myActor.Health.isDead && behaviour != null)
                 behaviour.Update();
         }
     }

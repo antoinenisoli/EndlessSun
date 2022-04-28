@@ -66,7 +66,7 @@ namespace CustomAI
             randomTimer = 0;
             Vector2 perpendicular = Vector2.Perpendicular(oppositeDirection);
             int r = Mathf.RoundToInt(Random.Range(-1f, 1f));
-            randomPosition = targetPos + oppositeDirection * behavior.patrol.chaseMinDistance + perpendicular * r * 3f;
+            randomPosition = targetPos + oppositeDirection + perpendicular * r * 3f;
         }
     }
 }

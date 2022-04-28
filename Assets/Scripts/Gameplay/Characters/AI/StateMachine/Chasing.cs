@@ -10,7 +10,7 @@ namespace CustomAI
     class Chasing : SubBehavior
     {
         public override AIState State => AIState.Chasing;
-        Vector2 targetPos => behavior.actor.Target.transform.position;
+        Vector2 targetPos => behavior.myActor.Target.transform.position;
 
         Attacking attackBehavior;
 
@@ -30,7 +30,7 @@ namespace CustomAI
         public override void Update()
         {
             base.Update();
-            if (!behavior.KeepTargetInSight() || behavior.actor.Target.Health.isDead || myNPC.SameTeam(myNPC.Target))
+            if (!behavior.KeepTargetInSight() || behavior.myActor.Target.Health.isDead || myNPC.SameTeam(myNPC.Target))
             {
                 myNPC.SetTarget(null);
                 behavior.SetBehaviour(new Wait(behavior, 2, AIState.Patrolling));

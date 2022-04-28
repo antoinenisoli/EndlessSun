@@ -21,7 +21,7 @@ namespace CustomAI
     {
         public abstract AIState State { get; }
         public AIStateMachineBehavior behavior;
-        protected NPC myNPC => behavior.actor as NPC;
+        protected NPC myNPC => behavior.myActor as NPC;
 
         public SubBehavior(AIStateMachineBehavior behavior)
         {

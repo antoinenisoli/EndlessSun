@@ -18,6 +18,7 @@ namespace Pathfinding {
 	public abstract class AIBase : VersionedMonoBehaviour {
 		/// <summary>\copydoc Pathfinding::IAstarAI::radius</summary>
 		public float radius = 0.5f;
+		public bool showRadiusGizmo = true;
 
 		/// <summary>\copydoc Pathfinding::IAstarAI::height</summary>
 		public float height = 2;
@@ -728,6 +729,9 @@ namespace Pathfinding {
 
 		protected virtual void OnDrawGizmos () {
 			if (!Application.isPlaying || !enabled) FindComponents();
+
+			/*if (!showRadiusGizmo)
+				return;*/
 
 			var color = ShapeGizmoColor;
 			if (orientation == OrientationMode.YAxisForward) {
