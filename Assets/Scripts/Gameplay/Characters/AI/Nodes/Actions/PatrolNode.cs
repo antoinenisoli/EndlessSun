@@ -16,6 +16,16 @@ namespace CustomAI.BehaviorTree
             pos = patrol.NewDestination();
         }
 
+        public override void OnStart()
+        {
+            base.OnStart();
+            if (patrol != null)
+            {
+                patrol.myNPC.Stop();
+                pos = patrol.NewDestination();
+            }
+        }
+
         public override void Execute()
         {
             patrol.myNPC.Stop();

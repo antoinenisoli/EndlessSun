@@ -87,7 +87,7 @@ namespace CustomAI.BehaviorTree
 
         public virtual void OnStart() 
         { 
-            Debug.Log(name + " started");
+            //Debug.Log(name + " started");
             started = true;
         }
 

@@ -11,13 +11,14 @@ namespace CustomAI.BehaviorTree
         public ReactionNode(float delay, Actor actor) : base(delay)
         {
             this.actor = actor;
-            timer = 0;
             this.delay = delay;
+            timer = 0;
         }
 
         public override void OnStart()
         {
             base.OnStart();
+            timer = 0;
             actor.ReactToTarget();
         }
     }

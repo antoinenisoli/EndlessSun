@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class TargetInSightNode : AIConditionNode
+    public class CheckDistanceNode : AIConditionNode
     {
         Actor actor;
-        float sightRange;
+        float range;
 
-        public TargetInSightNode(Actor actor, float sightRange)
+        public CheckDistanceNode(Actor actor, float range)
         {
             this.actor = actor;
-            this.sightRange = sightRange;
+            this.range = range;
         }
 
         public override bool Check()
@@ -20,7 +20,8 @@ namespace CustomAI.BehaviorTree
             if (actor.Target)
             {
                 float distance = Vector2.Distance(actor.Target.transform.position, actor.transform.position);
-                if (distance < sightRange)
+                Debug.Log(distance);
+                if (distance < range)
                     return true;
             }
 

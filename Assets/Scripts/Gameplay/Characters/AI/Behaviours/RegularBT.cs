@@ -1,49 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    [System.Serializable]
-    public struct DistanceCheck
-    {
-        public float range;
-        public Color color;
-
-        public DistanceCheck(float range, Color color)
-        {
-            this.range = range;
-            this.color = color;
-        }
-
-#if UNITY_EDITOR
-        public void Draw(Actor actor)
-        {
-            Handles.color = color;
-            GUI.color = color;
-
-            Vector3 pos = actor.transform.position;
-            range =
-                Handles.ScaleValueHandle(
-                    range,
-                    pos + actor.transform.right * range,
-                    actor.transform.rotation,
-                    5,
-                    Handles.ConeHandleCap,
-                    1
-                );
-
-            Handles.DrawWireDisc(pos, actor.transform.forward, range);
-            Handles.Label(
-              pos + (range + 0.5f) * Vector3.right,
-              range.ToString("0.0")
-            );
-        }
-#endif
-
-    }
-
     public class RegularBT : BehaviorTree
     {
         public DistanceCheck chaseRange = new DistanceCheck(2f, Color.white);
@@ -68,17 +28,23 @@ namespace CustomAI.BehaviorTree
 
         SequenceNode SetupChase()
         {
-            SequenceNode sequence = new SequenceNode();
+            SequenceNode mainSequence = new SequenceNode();
+            Selector getTarget = new Selector();
+            CheckTarget checkTarget = new CheckTarget(myActor);
             DetectTargetNode detectTarget = new DetectTargetNode(myActor, aggroRange.range);
-            TargetInSightNode inSightNode = new TargetInSightNode(myActor, sightRange.range);
+            CheckDistanceNode inSightNode = new CheckDistanceNode(myActor, sightRange.range);
             ChaseNode chaseNode = new ChaseNode(myActor, chaseRange.range);
             ReactionNode react = new ReactionNode(reactDuration, myActor);
 
-            sequence.Attach(detectTarget);
-            sequence.Attach(react);
-            sequence.Attach(inSightNode);
-            sequence.Attach(chaseNode);
-            return sequence;
+            getTarget.Attach(checkTarget);
+            getTarget.Attach(detectTarget);
+
+            mainSequence.Attach(getTarget);
+            mainSequence.Attach(react);
+            mainSequence.Attach(inSightNode);
+            mainSequence.Attach(chaseNode);
+
+            return mainSequence;
         }
 
         SequenceNode SetupPatrol()
@@ -96,13 +62,25 @@ namespace CustomAI.BehaviorTree
         SequenceNode SetupAttack()
         {
             SequenceNode sequence = new SequenceNode();
+            LogNode log = new LogNode("attack !!!!");
+            SequenceNode getTarget = new SequenceNode();
+            CheckTarget checkTarget = new CheckTarget(myActor);
+            CheckDistanceNode inRange = new CheckDistanceNode(myActor, attackRange.range);
+            AttackNode attackNode = new AttackNode(myActor as NPC);
+
+            getTarget.Attach(checkTarget);
+            getTarget.Attach(inRange);
+
+            sequence.Attach(getTarget);
+            //sequence.Attach(attackNode);
+
             return sequence;
         }
 
         public override AINode MakeTree()
         {
             Selector topSelector = new Selector();
-            //topSelector.Attach(SetupAttack());
+            topSelector.Attach(SetupAttack());
             topSelector.Attach(SetupChase());
             topSelector.Attach(SetupPatrol());
             return topSelector;

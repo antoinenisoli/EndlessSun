@@ -17,6 +17,9 @@ namespace CustomAI.BehaviorTree
                 switch (node.Evaluate())
                 {
                     case NodeState.Running:
+                        if (!node.GetType().IsSubclassOf(typeof(AICompositeNode)))
+                            currentNode = node;
+
                         nodeState = NodeState.Running;
                         return nodeState;
                     case NodeState.Failure:

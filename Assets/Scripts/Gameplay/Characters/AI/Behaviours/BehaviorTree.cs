@@ -7,6 +7,7 @@ namespace CustomAI.BehaviorTree
     public abstract class BehaviorTree : AIGlobalBehavior
     {
         AINode root;
+        [SerializeField] string currentNode;
 
         public void Start()
         {
@@ -20,6 +21,12 @@ namespace CustomAI.BehaviorTree
             {
                 if (root.Evaluate() != NodeState.Running)
                     Start();
+
+                AINode node = (root as AICompositeNode).currentNode;
+                if (node != null)
+                    currentNode = node.name;
+                else
+                    currentNode = "";
             }
         }
 

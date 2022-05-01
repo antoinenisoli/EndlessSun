@@ -8,6 +8,6 @@ namespace CustomAI.BehaviorTree
 {
     public abstract class AICompositeNode : AINode
     {
-        
+        public AINode currentNode;
     }
 }

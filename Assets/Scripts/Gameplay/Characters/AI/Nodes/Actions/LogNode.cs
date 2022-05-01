@@ -13,6 +13,12 @@ namespace CustomAI.BehaviorTree
             this.text = text;
         }
 
+        public override void OnStart()
+        {
+            base.OnStart();
+            Debug.Log(text);
+        }
+
         public override void Execute()
         {
             Debug.Log(text);

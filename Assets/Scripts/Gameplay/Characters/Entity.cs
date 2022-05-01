@@ -30,6 +30,7 @@ public class Entity : MonoBehaviour
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
     protected Animator anim;
+    protected Entity oldTarget;
     protected List<CharacterMod> myMods = new List<CharacterMod>();
 
     public virtual void Awake()
@@ -44,6 +45,11 @@ public class Entity : MonoBehaviour
     }
 
     public virtual void Start() { }
+
+    public bool TargetIsNew()
+    {
+        return oldTarget != Target;
+    }
 
     void InitStats()
     {
@@ -68,6 +74,9 @@ public class Entity : MonoBehaviour
 
     public virtual void SetTarget(Entity target)
     {
+        if (Target != null)
+            oldTarget = Target;
+
         Target = target;
     }
 

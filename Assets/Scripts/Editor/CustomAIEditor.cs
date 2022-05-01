@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Text;
+using CustomAI.BehaviorTree;
 
 public class CustomAIEditor : Editor
 {
@@ -23,13 +24,20 @@ public class CustomAIEditor : Editor
     public static void NewNode()
     {
         string filePath = "NewAINode";
-        string path = Application.dataPath + "/Scripts/Gameplay/Characters/AI" + $"{filePath}.cs";
+        string path = Application.dataPath + "/Scripts/Gameplay/Characters/AI/Nodes/" + $"{filePath}.cs";
         using (StreamWriter streamWriter = new StreamWriter(path))
             streamWriter.Write(CodeText());
 
         Debug.Log("Created node at " + path);
+        Ping(filePath);
+    }
+
+    public static void Ping(string filePath)
+    {
+        string path = $"Assets/Scripts/Gameplay/Characters/AI/Nodes/{filePath}.cs";
         AssetDatabase.Refresh();
-        AssetDatabase.LoadMainAssetAtPath(path);
+        Object other = AssetDatabase.LoadMainAssetAtPath(path);
+        EditorGUIUtility.PingObject(other);
     }
 
 #endif

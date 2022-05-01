@@ -40,12 +40,6 @@ namespace CustomAI.BehaviorTree
             return false;
         }
 
-        public override bool Check()
-        {
-            if (actor.Target)
-                return true;
-            else
-                return DetectTarget();
-        }
+        public override bool Check() => DetectTarget();
     }
 }
