@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAnimManager : MonoBehaviour
+public class NPCAnimManager : MonoBehaviour
 {
     NPC npc;
 
@@ -13,7 +13,7 @@ public class EnemyAnimManager : MonoBehaviour
 
     public void Attack()
     {
-        npc.Attack();
+        npc.myBehavior.Attack();
     }
 
     public void Death()

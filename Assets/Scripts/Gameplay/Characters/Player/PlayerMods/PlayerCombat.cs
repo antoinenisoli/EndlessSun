@@ -60,7 +60,7 @@ public class PlayerCombat : PlayerMod
             NPC npc = item.transform.GetComponentInChildren<NPC>();
             if (npc && GameManager.Player.IsEnemyOf(npc))
             {
-                npc.Hit(player.ComputeDamages(), player);
+                npc.TakeDamages(player.ComputeDamages(), player);
                 if (player.BalanceDraw(npc))
                     npc.KnockBack(-item.normal * pushForce);
             }

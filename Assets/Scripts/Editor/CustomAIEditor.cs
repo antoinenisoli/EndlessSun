@@ -10,6 +10,8 @@ public class CustomAIEditor : Editor
 {
 #if UNITY_EDITOR
 
+    static string assetPath = "/Scripts/Gameplay/AI/Nodes/";
+
     public static string CodeText()
     {
         StringBuilder builder = new StringBuilder();
@@ -24,7 +26,7 @@ public class CustomAIEditor : Editor
     public static void NewNode()
     {
         string filePath = "NewAINode";
-        string path = Application.dataPath + "/Scripts/Gameplay/Characters/AI/Nodes/" + $"{filePath}.cs";
+        string path = Application.dataPath + $"/Scripts/Gameplay/AI/Nodes/{filePath}.cs";
         using (StreamWriter streamWriter = new StreamWriter(path))
             streamWriter.Write(CodeText());
 
@@ -34,7 +36,7 @@ public class CustomAIEditor : Editor
 
     public static void Ping(string filePath)
     {
-        string path = $"Assets/Scripts/Gameplay/Characters/AI/Nodes/{filePath}.cs";
+        string path = $"Assets/Scripts/Gameplay/AI/Nodes/{filePath}.cs";
         AssetDatabase.Refresh();
         Object other = AssetDatabase.LoadMainAssetAtPath(path);
         EditorGUIUtility.PingObject(other);

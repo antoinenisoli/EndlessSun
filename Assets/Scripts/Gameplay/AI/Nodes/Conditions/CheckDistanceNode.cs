@@ -20,12 +20,10 @@ namespace CustomAI.BehaviorTree
             if (actor.Target)
             {
                 float distance = Vector2.Distance(actor.Target.transform.position, actor.transform.position);
-                Debug.Log(distance);
                 if (distance < range)
                     return true;
             }
 
-            actor.SetTarget(null);
             return false;
         }
     }

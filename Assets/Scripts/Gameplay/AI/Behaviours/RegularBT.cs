@@ -6,11 +6,14 @@ namespace CustomAI.BehaviorTree
 {
     public class RegularBT : BehaviorTree
     {
+        [SerializeField] Transform attackPoint;
+        [SerializeField] float reactDuration = 0.5f;
+
+        [Space()]
         public DistanceCheck chaseRange = new DistanceCheck(2f, Color.white);
         public DistanceCheck aggroRange = new DistanceCheck(15f, Color.white);
         public DistanceCheck sightRange = new DistanceCheck(20f, Color.white);
         public DistanceCheck attackRange = new DistanceCheck(2f, Color.white);
-        [SerializeField] float reactDuration = 0.5f;
         public PatrolData patrol;
 
         private void OnDrawGizmos()
@@ -18,13 +21,32 @@ namespace CustomAI.BehaviorTree
             patrol.Gizmos();
         }
 
-        public override void ReactToTarget()
+        public Actor getActor() => GetComponent<Actor>();
+
+        public override void Attack()
         {
-            base.ReactToTarget();
-            myActor.ReactToTarget();
+            base.Attack();
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRange.range/2);
+            foreach (var item in colliders)
+            {
+                Entity entity = item.GetComponentInParent<Entity>();
+                if (entity && !entity.SameTeam(myActor))
+                    entity.TakeDamages(myActor.ComputeDamages(), myActor);
+            }
         }
 
-        public Actor getActor() => GetComponent<Actor>();
+        SequenceNode SetupReaction()
+        {
+            SequenceNode mainSequence = new SequenceNode();
+            WaitNode wait = new WaitNode(reactDuration);
+            EnableReactionNode stopReaction = new EnableReactionNode(myActor, false);
+            IsReactingNode isReacting = new IsReactingNode(myActor);
+            mainSequence.Attach(isReacting);
+            mainSequence.Attach(wait);
+            mainSequence.Attach(stopReaction);
+
+            return mainSequence;
+        }
 
         SequenceNode SetupChase()
         {
@@ -34,13 +56,16 @@ namespace CustomAI.BehaviorTree
             DetectTargetNode detectTarget = new DetectTargetNode(myActor, aggroRange.range);
             CheckDistanceNode inSightNode = new CheckDistanceNode(myActor, sightRange.range);
             ChaseNode chaseNode = new ChaseNode(myActor, chaseRange.range);
-            ReactionNode react = new ReactionNode(reactDuration, myActor);
+            EnableReactionNode react = new EnableReactionNode(myActor, true);
+            SequenceNode scanSequence = new SequenceNode();
+
+            scanSequence.Attach(detectTarget);
+            scanSequence.Attach(react);
 
             getTarget.Attach(checkTarget);
-            getTarget.Attach(detectTarget);
+            getTarget.Attach(scanSequence);
 
             mainSequence.Attach(getTarget);
-            mainSequence.Attach(react);
             mainSequence.Attach(inSightNode);
             mainSequence.Attach(chaseNode);
 
@@ -49,20 +74,21 @@ namespace CustomAI.BehaviorTree
 
         SequenceNode SetupPatrol()
         {
-            SequenceNode sequence = new SequenceNode();
+            SequenceNode mainSequence = new SequenceNode();
             float randomDelay = GameDevHelper.RandomInRange(patrol.randomDelayBounds);
+            ResetActorNode resetActor = new ResetActorNode(myActor);
             WaitNode wait = new WaitNode(randomDelay);
             PatrolNode patrolNode = new PatrolNode(patrol);
-            sequence.Attach(wait);
-            sequence.Attach(patrolNode);
+            //mainSequence.Attach(resetActor);
+            mainSequence.Attach(wait);
+            mainSequence.Attach(patrolNode);
 
-            return sequence;
+            return mainSequence;
         }
 
         SequenceNode SetupAttack()
         {
-            SequenceNode sequence = new SequenceNode();
-            LogNode log = new LogNode("attack !!!!");
+            SequenceNode mainSequence = new SequenceNode();
             SequenceNode getTarget = new SequenceNode();
             CheckTarget checkTarget = new CheckTarget(myActor);
             CheckDistanceNode inRange = new CheckDistanceNode(myActor, attackRange.range);
@@ -71,15 +97,16 @@ namespace CustomAI.BehaviorTree
             getTarget.Attach(checkTarget);
             getTarget.Attach(inRange);
 
-            sequence.Attach(getTarget);
-            //sequence.Attach(attackNode);
+            mainSequence.Attach(getTarget);
+            mainSequence.Attach(attackNode);
 
-            return sequence;
+            return mainSequence;
         }
 
         public override AINode MakeTree()
         {
             Selector topSelector = new Selector();
+            topSelector.Attach(SetupReaction());
             topSelector.Attach(SetupAttack());
             topSelector.Attach(SetupChase());
             topSelector.Attach(SetupPatrol());

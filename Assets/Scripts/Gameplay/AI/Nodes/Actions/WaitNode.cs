@@ -11,8 +11,8 @@ namespace CustomAI.BehaviorTree
 
         public WaitNode(float delay)
         {
-            timer = 0;
             this.delay = delay;
+            timer = 0;
         }
 
         public override void Execute()
@@ -25,6 +25,12 @@ namespace CustomAI.BehaviorTree
             timer += Time.deltaTime;
             //Debug.Log(timer + " " + nodeState);
             return timer >= delay;
+        }
+
+        public override void OnStart()
+        {
+            base.OnStart();
+            timer = 0;
         }
     }
 }

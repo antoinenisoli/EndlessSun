@@ -23,8 +23,9 @@ namespace CustomAI
 
         public abstract void DoUpdate();
 
+        public virtual void Attack() { }
         public virtual void Stun() { }
-        public virtual void ReactToTarget() { }
+        public virtual void ReactToTarget() { myActor.ReactToTarget(); }
 
         public virtual float GetVelocity() { return 0; }
         public virtual float ComputeSpeed() { return 0; }

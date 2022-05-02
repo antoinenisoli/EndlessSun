@@ -7,6 +7,9 @@ namespace CustomAI.BehaviorTree
     public class AttackNode : AIActionNode
     {
         NPC myNPC;
+        Transform attackOrigin;
+        float attackRange;
+
         float timer;
         Vector2 randomPosition;
         float randomTimer;

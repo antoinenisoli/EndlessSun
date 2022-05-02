@@ -15,7 +15,6 @@ public class Entity : MonoBehaviour
 {
     public virtual HealthStat Health => health;
     public AttributeList AttributeList => CharacterProfile.AttributeList;
-    public Entity Target { get; set; }
 
     [Header("Entity")]
     public Team myTeam;
@@ -46,11 +45,6 @@ public class Entity : MonoBehaviour
 
     public virtual void Start() { }
 
-    public bool TargetIsNew()
-    {
-        return oldTarget != Target;
-    }
-
     void InitStats()
     {
         AttributeList.Init();
@@ -71,14 +65,6 @@ public class Entity : MonoBehaviour
     }
 
     public virtual float ComputeSpeed() { return AttributeList.Speed.value; }
-
-    public virtual void SetTarget(Entity target)
-    {
-        if (Target != null)
-            oldTarget = Target;
-
-        Target = target;
-    }
 
     public int ComputeDamages()
     {
@@ -114,16 +100,13 @@ public class Entity : MonoBehaviour
         return myTeam == other.myTeam;
     }
 
-    public virtual void Attack()
-    {
-        Target.Hit(ComputeDamages());
-    }
+    public virtual void Attack() { }
 
     public virtual void Stun() { }
 
     public virtual void UnStun() { }
 
-    public virtual void Hit(float amount, Entity aggressor = null)
+    public virtual void TakeDamages(float amount, Entity aggressor = null)
     {
         if (Health.isDead)
             return;

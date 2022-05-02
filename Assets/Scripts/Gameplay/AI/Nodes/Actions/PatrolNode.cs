@@ -12,7 +12,6 @@ namespace CustomAI.BehaviorTree
         public PatrolNode(PatrolData patrol) 
         {
             this.patrol = patrol;
-            patrol.myNPC.Stop();
             pos = patrol.NewDestination();
         }
 
@@ -20,10 +19,7 @@ namespace CustomAI.BehaviorTree
         {
             base.OnStart();
             if (patrol != null)
-            {
-                patrol.myNPC.Stop();
                 pos = patrol.NewDestination();
-            }
         }
 
         public override void Execute()

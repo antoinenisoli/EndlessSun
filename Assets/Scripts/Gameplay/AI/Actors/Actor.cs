@@ -7,16 +7,28 @@ using UnityEngine;
 public abstract class Actor : Entity
 {
     [Header("AI")]
+    public Entity Target;
     public AIState State;
     public AIPath aiAgent;
     public AIDestinationSetter destinationSetter;
     public Transform destinationPoint;
-    [SerializeField] protected AIGlobalBehavior myBehavior;
+    public AIGlobalBehavior myBehavior;
     public List<Entity> aggressors = new List<Entity>();
+    public bool isReacting;
 
     public override float ComputeSpeed()
     {
         return myBehavior.ComputeSpeed();
+    }
+
+    public virtual void SetTarget(Entity target)
+    {
+        if (Target != null)
+            oldTarget = Target;
+
+        Target = target;
+        if (!target && Target && aggressors.Contains(Target))
+            aggressors.Remove(Target);
     }
 
     public void NewAgressor(Entity aggressor)
@@ -32,6 +44,7 @@ public abstract class Actor : Entity
     public virtual void ReactToTarget()
     {
         Stop();
+        isReacting = true;
         anim.SetTrigger("React");
     }
 
@@ -49,13 +62,5 @@ public abstract class Actor : Entity
 
         float dist = Vector2.Distance(Target.transform.position, transform.position);
         return dist < minDistance;
-    }
-
-    public override void SetTarget(Entity target)
-    {
-        if (!target && Target && aggressors.Contains(Target))
-            aggressors.Remove(Target);
-
-        base.SetTarget(target);
     }
 }

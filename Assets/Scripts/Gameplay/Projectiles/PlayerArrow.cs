@@ -19,7 +19,7 @@ public class PlayerArrow : MonoBehaviour
         NPC npc = collision.GetComponentInChildren<NPC>();
         if (npc && GameManager.Player.IsEnemyOf(npc) && rb.velocity.sqrMagnitude > minimumForce)
         {
-            npc.Hit(1, GameManager.Player);
+            npc.TakeDamages(1, GameManager.Player);
             if (GameManager.Player.BalanceDraw(npc))
                 npc.KnockBack(rb.velocity * 0.5f);
 

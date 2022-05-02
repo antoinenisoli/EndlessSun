@@ -119,9 +119,9 @@ public class PlayerController2D : Entity
         anim.SetTrigger("Die");
     }
 
-    public override void Hit(float amount, Entity aggressor = null)
+    public override void TakeDamages(float amount, Entity aggressor = null)
     {
-        base.Hit(amount, aggressor);
+        base.TakeDamages(amount, aggressor);
         GameManager.Instance.FreezeFrame(0.4f);
         StartCoroutine(Glow(0.1f, Color.white));
         if (CameraManager.Instance) CameraManager.Instance.CameraShake(0.3f, 2);

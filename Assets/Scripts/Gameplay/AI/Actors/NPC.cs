@@ -47,15 +47,15 @@ public class NPC : Actor
         if (collision.CompareTag("ObstacleTilemap"))
         {
             Stop();
-            Hit(5f);
+            TakeDamages(5f);
         }
         else if (collision.CompareTag("GroundTilemap"))
             Death();
     }
 
-    public override void Hit(float amount, Entity aggressor = null)
+    public override void TakeDamages(float amount, Entity aggressor = null)
     {
-        base.Hit(amount, aggressor);
+        base.TakeDamages(amount, aggressor);
         NewAgressor(aggressor);
         rb.isKinematic = false;
         healthBarPivot.DOScaleX((float)Health.CurrentValue / (float)Health.MaxValue, 0.3f);
