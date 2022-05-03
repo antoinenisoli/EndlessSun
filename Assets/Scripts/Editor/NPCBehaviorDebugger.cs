@@ -19,7 +19,7 @@ public class NPCBehaviorDebugger : Editor
 
         tree.chaseRange.Draw(actor);
         tree.aggroRange.Draw(actor);
-        tree.attackRange.Draw(actor);
+        tree.attack.attackRange.Draw(actor);
         tree.sightRange.Draw(actor);
     }
 

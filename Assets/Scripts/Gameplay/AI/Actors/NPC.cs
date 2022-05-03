@@ -86,17 +86,11 @@ public class NPC : Actor
 
     public void LaunchAttack()
     {
-        if (pushed)
-            return;
-
         anim.SetTrigger("Attack");
     }
 
     public override void Attack()
     {
-        if (pushed)
-            return;
-
         base.Attack();
     }
 

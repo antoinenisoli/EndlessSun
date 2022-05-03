@@ -12,8 +12,8 @@ namespace CustomAI.BehaviorTree
         public DistanceCheck chaseRange = new DistanceCheck(2f, Color.white);
         public DistanceCheck aggroRange = new DistanceCheck(15f, Color.white);
         public DistanceCheck sightRange = new DistanceCheck(20f, Color.white);
-        public DistanceCheck attackRange = new DistanceCheck(2f, Color.white);
         public PatrolData patrol;
+        public AttackData attack;
 
         private void OnDrawGizmos()
         {
@@ -25,7 +25,7 @@ namespace CustomAI.BehaviorTree
         public override void Attack()
         {
             base.Attack();
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRange.range/2);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, attack.attackRange.range/2);
             foreach (var item in colliders)
             {
                 Entity entity = item.GetComponentInParent<Entity>();
@@ -39,10 +39,13 @@ namespace CustomAI.BehaviorTree
             SequenceNode mainSequence = new SequenceNode();
             CheckDistanceNode inSightNode = new CheckDistanceNode(myActor, sightRange.range, true);
             ChaseNode chaseNode = new ChaseNode(myActor, chaseRange.range);
+            Selector chaseSelector = new Selector();
+            chaseSelector.Attach(SetupAttack());
+            chaseSelector.Attach(chaseNode);
 
             mainSequence.Attach(SetupGetTarget());
             mainSequence.Attach(inSightNode);
-            mainSequence.Attach(chaseNode);
+            mainSequence.Attach(chaseSelector);
 
             return mainSequence;
         }
@@ -65,8 +68,8 @@ namespace CustomAI.BehaviorTree
         SequenceNode SetupAttack()
         {
             SequenceNode mainSequence = new SequenceNode();
-            CheckDistanceNode inRange = new CheckDistanceNode(myActor, attackRange.range);
-            AttackNode attackNode = new AttackNode(myActor as NPC);
+            CheckDistanceNode inRange = new CheckDistanceNode(myActor, attack.attackRange.range);
+            AttackNode attackNode = attack.GenerateNode();
 
             mainSequence.Attach(SetupGetTarget());
             mainSequence.Attach(inRange);
@@ -95,7 +98,6 @@ namespace CustomAI.BehaviorTree
         public override AINode MakeTree()
         {
             Selector topSelector = new Selector();
-            topSelector.Attach(SetupAttack());
             topSelector.Attach(SetupChase());
             topSelector.Attach(SetupPatrol());
             return topSelector;
