@@ -37,21 +37,10 @@ namespace CustomAI.BehaviorTree
         SequenceNode SetupChase()
         {
             SequenceNode mainSequence = new SequenceNode();
-            Selector getTarget = new Selector();
-            CheckTarget checkTarget = new CheckTarget(myActor);
-            DetectTargetNode detectTarget = new DetectTargetNode(myActor, aggroRange.range);
-            CheckDistanceNode inSightNode = new CheckDistanceNode(myActor, sightRange.range);
+            CheckDistanceNode inSightNode = new CheckDistanceNode(myActor, sightRange.range, true);
             ChaseNode chaseNode = new ChaseNode(myActor, chaseRange.range);
-            EnableReactionNode react = new EnableReactionNode(myActor, true);
-            SequenceNode scanSequence = new SequenceNode();
 
-            scanSequence.Attach(detectTarget);
-            scanSequence.Attach(react);
-
-            getTarget.Attach(checkTarget);
-            getTarget.Attach(scanSequence);
-
-            mainSequence.Attach(getTarget);
+            mainSequence.Attach(SetupGetTarget());
             mainSequence.Attach(inSightNode);
             mainSequence.Attach(chaseNode);
 
@@ -62,9 +51,10 @@ namespace CustomAI.BehaviorTree
         {
             SequenceNode mainSequence = new SequenceNode();
             float randomDelay = GameDevHelper.RandomInRange(patrol.randomDelayBounds);
-            ResetActorNode resetActor = new ResetActorNode(myActor);
             WaitNode wait = new WaitNode(randomDelay);
             PatrolNode patrolNode = new PatrolNode(patrol);
+            ResetActorNode resetActor = new ResetActorNode(myActor);
+
             mainSequence.Attach(resetActor);
             mainSequence.Attach(wait);
             mainSequence.Attach(patrolNode);
@@ -75,18 +65,31 @@ namespace CustomAI.BehaviorTree
         SequenceNode SetupAttack()
         {
             SequenceNode mainSequence = new SequenceNode();
-            SequenceNode getTarget = new SequenceNode();
-            CheckTarget checkTarget = new CheckTarget(myActor);
             CheckDistanceNode inRange = new CheckDistanceNode(myActor, attackRange.range);
             AttackNode attackNode = new AttackNode(myActor as NPC);
 
-            getTarget.Attach(checkTarget);
-            getTarget.Attach(inRange);
-
-            mainSequence.Attach(getTarget);
+            mainSequence.Attach(SetupGetTarget());
+            mainSequence.Attach(inRange);
             mainSequence.Attach(attackNode);
 
             return mainSequence;
+        }
+
+        Selector SetupGetTarget()
+        {
+            Selector selector = new Selector();
+            CheckTarget checkTarget = new CheckTarget(myActor);
+            DetectTargetNode detectTarget = new DetectTargetNode(myActor, aggroRange.range);
+            EnableReactionNode react = new EnableReactionNode(myActor, true);
+            SequenceNode scanSequence = new SequenceNode();
+
+            scanSequence.Attach(detectTarget);
+            scanSequence.Attach(react);
+
+            selector.Attach(checkTarget);
+            selector.Attach(scanSequence);
+
+            return selector;
         }
 
         public override AINode MakeTree()

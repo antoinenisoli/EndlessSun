@@ -27,9 +27,10 @@ public abstract class Actor : Entity
         if (Target != null)
             oldTarget = Target;
 
-        Target = target;
-        if (!target && Target && aggressors.Contains(Target))
+        if (!target && aggressors.Contains(Target))
             aggressors.Remove(Target);
+
+        Target = target;
     }
 
     public void NewAgressor(Entity aggressor)

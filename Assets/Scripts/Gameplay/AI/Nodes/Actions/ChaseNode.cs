@@ -17,9 +17,6 @@ namespace CustomAI.BehaviorTree
 
         public bool NearToTarget()
         {
-            if (!actor.Target)
-                return false;
-
             float distance = Vector2.Distance(actor.Target.transform.position, actor.transform.position);
             return distance < chaseMinDistance;
         }

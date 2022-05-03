@@ -18,7 +18,7 @@ namespace CustomAI.BehaviorTree
         public override void Execute()
         {
             actor.isReacting = enable;
-            Debug.Log(enable);
+            //Debug.Log(enable);
             actor.Stop();
             if (enable)
                 actor.ReactToTarget();

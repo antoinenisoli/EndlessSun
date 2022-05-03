@@ -8,11 +8,13 @@ namespace CustomAI.BehaviorTree
     {
         Actor actor;
         float range;
+        bool eraseTarget;
 
-        public CheckDistanceNode(Actor actor, float range)
+        public CheckDistanceNode(Actor actor, float range, bool eraseTarget = false)
         {
             this.actor = actor;
             this.range = range;
+            this.eraseTarget = eraseTarget;
         }
 
         public override bool Check()
