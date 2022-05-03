@@ -7,7 +7,6 @@ namespace CustomAI.BehaviorTree
     public class RegularBT : BehaviorTree
     {
         [SerializeField] Transform attackPoint;
-        [SerializeField] float reactDuration = 0.5f;
 
         [Space()]
         public DistanceCheck chaseRange = new DistanceCheck(2f, Color.white);
@@ -33,19 +32,6 @@ namespace CustomAI.BehaviorTree
                 if (entity && !entity.SameTeam(myActor))
                     entity.TakeDamages(myActor.ComputeDamages(), myActor);
             }
-        }
-
-        SequenceNode SetupReaction()
-        {
-            SequenceNode mainSequence = new SequenceNode();
-            WaitNode wait = new WaitNode(reactDuration);
-            EnableReactionNode stopReaction = new EnableReactionNode(myActor, false);
-            IsReactingNode isReacting = new IsReactingNode(myActor);
-            mainSequence.Attach(isReacting);
-            mainSequence.Attach(wait);
-            mainSequence.Attach(stopReaction);
-
-            return mainSequence;
         }
 
         SequenceNode SetupChase()
@@ -79,7 +65,7 @@ namespace CustomAI.BehaviorTree
             ResetActorNode resetActor = new ResetActorNode(myActor);
             WaitNode wait = new WaitNode(randomDelay);
             PatrolNode patrolNode = new PatrolNode(patrol);
-            //mainSequence.Attach(resetActor);
+            mainSequence.Attach(resetActor);
             mainSequence.Attach(wait);
             mainSequence.Attach(patrolNode);
 
@@ -106,7 +92,6 @@ namespace CustomAI.BehaviorTree
         public override AINode MakeTree()
         {
             Selector topSelector = new Selector();
-            topSelector.Attach(SetupReaction());
             topSelector.Attach(SetupAttack());
             topSelector.Attach(SetupChase());
             topSelector.Attach(SetupPatrol());

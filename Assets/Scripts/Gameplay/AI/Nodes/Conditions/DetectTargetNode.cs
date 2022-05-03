@@ -36,7 +36,6 @@ namespace CustomAI.BehaviorTree
                 }
             }
 
-            actor.SetTarget(null);
             return false;
         }
 

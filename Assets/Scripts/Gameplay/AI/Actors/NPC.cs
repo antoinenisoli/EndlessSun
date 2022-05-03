@@ -161,9 +161,5 @@ public class NPC : Actor
         base.DoUpdate();
         ManageHealthbars();
         Flip(TargetPosition().x);
-        destinationSetter.target = destinationPoint;
-
-        if (!Health.isDead && myBehavior)
-            myBehavior.DoUpdate();
     }
 }

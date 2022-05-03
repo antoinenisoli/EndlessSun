@@ -15,6 +15,7 @@ public abstract class Actor : Entity
     public AIGlobalBehavior myBehavior;
     public List<Entity> aggressors = new List<Entity>();
     public bool isReacting;
+    [SerializeField] protected float reactDuration = 0.5f;
 
     public override float ComputeSpeed()
     {
@@ -44,8 +45,15 @@ public abstract class Actor : Entity
     public virtual void ReactToTarget()
     {
         Stop();
-        isReacting = true;
+        StartCoroutine(Reaction());
+    }
+
+    IEnumerator Reaction()
+    {
         anim.SetTrigger("React");
+        isReacting = true;
+        yield return new WaitForSeconds(reactDuration);
+        isReacting = false;
     }
 
     public void Move(Vector2 targetPos)
@@ -62,5 +70,15 @@ public abstract class Actor : Entity
 
         float dist = Vector2.Distance(Target.transform.position, transform.position);
         return dist < minDistance;
+    }
+
+    public override void DoUpdate()
+    {
+        base.DoUpdate();
+        destinationSetter.target = destinationPoint;
+        if (!Health.isDead && myBehavior && !isReacting)
+            myBehavior.DoUpdate();
+        else
+            Stop();
     }
 }

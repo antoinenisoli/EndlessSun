@@ -16,10 +16,7 @@ namespace CustomAI.BehaviorTree
         public override bool Check()
         {
             if (!myActor.Target)
-            {
-                myActor.SetTarget(null);
                 return false;
-            }
 
             return true;
         }

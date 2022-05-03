@@ -15,6 +15,7 @@ namespace CustomAI.BehaviorTree
 
         public override bool Check()
         {
+            //Debug.Log(actor.isReacting);
             return actor.isReacting;
         }
     }

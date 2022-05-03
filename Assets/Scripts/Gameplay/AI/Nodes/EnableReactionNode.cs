@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class EnableReactionNode : AINode
+    public class EnableReactionNode : AIActionNode
     {
         Actor actor;
         bool enable;
@@ -15,21 +15,18 @@ namespace CustomAI.BehaviorTree
             this.enable = enable;
         }
 
-        public override void OnStart()
-        {
-            base.OnStart();
-            nodeState = NodeState.Running;
-        }
-
-        public override NodeState Evaluate()
+        public override void Execute()
         {
             actor.isReacting = enable;
+            Debug.Log(enable);
             actor.Stop();
             if (enable)
                 actor.ReactToTarget();
+        }
 
-            nodeState = NodeState.Success;
-            return nodeState;
+        public override bool Step()
+        {
+            return true;
         }
     }
 }

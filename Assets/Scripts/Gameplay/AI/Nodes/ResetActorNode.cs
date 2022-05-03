@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class ResetActorNode : AINode
+    public class ResetActorNode : AIActionNode
     {
         Actor actor;
 
@@ -13,12 +13,15 @@ namespace CustomAI.BehaviorTree
             this.actor = actor;
         }
 
-        public override NodeState Evaluate()
+        public override void Execute()
         {
+            Debug.Log("reset");
             actor.SetTarget(null);
-            actor.Stop();
-            nodeState = NodeState.Success;
-            return nodeState;
+        }
+
+        public override bool Step()
+        {
+            return actor.Target;
         }
     }
 }
