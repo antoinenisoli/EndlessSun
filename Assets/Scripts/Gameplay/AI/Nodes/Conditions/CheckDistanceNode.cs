@@ -26,6 +26,9 @@ namespace CustomAI.BehaviorTree
                     return true;
             }
 
+            if (eraseTarget)
+                actor.ResetActor();
+
             return false;
         }
     }

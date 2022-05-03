@@ -15,12 +15,6 @@ namespace CustomAI
             myActor = GetComponent<Actor>();
         }
 
-        public virtual void Stop()
-        {
-            myActor.aiAgent.isStopped = true;
-            myActor.aiAgent.enabled = false;
-        }
-
         public abstract void DoUpdate();
 
         public virtual void Attack() { }

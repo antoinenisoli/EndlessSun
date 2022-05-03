@@ -49,6 +49,12 @@ public abstract class Actor : Entity
         StartCoroutine(Reaction());
     }
 
+    public void ResetActor()
+    {
+        Stop();
+        SetTarget(null);
+    }
+
     IEnumerator Reaction()
     {
         anim.SetTrigger("React");
@@ -57,11 +63,30 @@ public abstract class Actor : Entity
         isReacting = false;
     }
 
+    public Vector2 TargetPosition()
+    {
+        if (Target)
+            return Target.transform.position;
+        else
+        {
+            return destinationPoint.position;
+        }
+    }
+
     public void Move(Vector2 targetPos)
     {
         aiAgent.enabled = true;
         aiAgent.isStopped = false;
         destinationPoint.position = targetPos;
+    }
+
+    public override void Stop()
+    {
+        base.Stop();
+        aiAgent.isStopped = true;
+        aiAgent.enabled = false;
+        destinationPoint.position = transform.position;
+        rb.velocity = Vector2.zero;
     }
 
     public bool CheckDistance(float minDistance)

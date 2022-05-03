@@ -65,7 +65,7 @@ namespace CustomAI
             if (distance > myActor.aiAgent.endReachedDistance)
                 myActor.Move(targetPos);
             else
-                Stop();
+                myActor.Stop();
         }
 
         public override float GetVelocity()

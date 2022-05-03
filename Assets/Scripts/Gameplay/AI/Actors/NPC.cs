@@ -119,28 +119,17 @@ public class NPC : Actor
         });
     }
 
-    Vector2 TargetPosition()
-    {
-        if (Target)
-            return Target.transform.position;
-        else
-            return destinationPoint.position;
-    }
-
     public bool IsMoving()
     {
         return rb.velocity.sqrMagnitude > 1.5f;
     }
 
-    public override void Stop()
-    {
-        base.Stop();
-        myBehavior.Stop();
-        rb.velocity = Vector2.zero;      
-    }
-
     void Flip(float otherX)
     {
+        float distance = Vector2.Distance(transform.position, destinationPoint.position);
+        if (distance < aiAgent.endReachedDistance)
+            return;
+
         bool flip = transform.parent.position.x < otherX;
         transform.parent.rotation = flip ? Quaternion.identity : Quaternion.Euler(Vector2.up * -180);
     }

@@ -93111,7 +93111,6 @@ MonoBehaviour:
   myActor: {fileID: 0}
   currentNode: 
   attackPoint: {fileID: 668935638}
-  reactDuration: 0.5
   chaseRange:
     range: 1.5
     color: {r: 1, g: 0, b: 0.9479666, a: 1}
@@ -93153,6 +93152,7 @@ MonoBehaviour:
     currentValue: 0
     maxValue: 3
     isDead: 0
+  Target: {fileID: 0}
   State: 0
   aiAgent: {fileID: 1557304434440412180}
   destinationSetter: {fileID: 1858022712953023501}
@@ -93160,6 +93160,7 @@ MonoBehaviour:
   myBehavior: {fileID: 9065316465402895362}
   aggressors: []
   isReacting: 0
+  reactDuration: 0.5
   detectIcon: {fileID: 6361598522910895276}
   healthBarPivot: {fileID: 1398337116637913925}
   healthBar: {fileID: 7822181775553298936}
