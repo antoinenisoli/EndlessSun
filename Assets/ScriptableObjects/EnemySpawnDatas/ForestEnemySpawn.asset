@@ -14,14 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnCount: 3
   spawnInfos:
-  - name: EnemyMushroomDemon
-    prefab: {fileID: 4349680769149131540, guid: 949c19aec36c2b24ea237e482c1f575e,
-      type: 3}
+  - name: 'EnemySkeleton '
+    prefab: {fileID: 10436279013365362, guid: 470a50fbec55b4649b54180c0654f4d8, type: 3}
     probability: 80
     weight: 80
   - name: 'EnemySkeleton '
-    prefab: {fileID: 2153383651100463869, guid: 470a50fbec55b4649b54180c0654f4d8,
-      type: 3}
+    prefab: {fileID: 10436279013365362, guid: 470a50fbec55b4649b54180c0654f4d8, type: 3}
     probability: 20
     weight: 100
   accumulatedWeights: 100

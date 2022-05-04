@@ -7,14 +7,12 @@ using UnityEngine;
 
 public class NPC : Actor
 {
-    [Header("_NPC")]
+    [Header(nameof(NPC))]
+    public float attackRate = 1f;
     [SerializeField] SpriteRenderer detectIcon;
     [SerializeField] Transform healthBarPivot;
     [SerializeField] Transform healthBar;
     [SerializeField] ItemDrop[] loots;
-
-    [Header("Attack")]
-    public float attackRate = 1f;
     
     Vector3 detectIconBaseScale;
     [HideInInspector] public Vector2 startPosition;

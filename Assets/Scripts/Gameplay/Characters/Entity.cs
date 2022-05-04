@@ -64,7 +64,7 @@ public class Entity : MonoBehaviour
         return myTeam != target.myTeam;
     }
 
-    public virtual float ComputeSpeed() { return AttributeList.Speed.value; }
+    public virtual float BaseSpeed() { return AttributeList.Speed.value; }
 
     public int ComputeDamages()
     {

@@ -6,21 +6,17 @@ using UnityEngine;
 
 public abstract class Actor : Entity
 {
-    [Header("AI")]
+    [Header(nameof(Actor))]
     public Entity Target;
     public AIState State;
     public AIPath aiAgent;
     public AIDestinationSetter destinationSetter;
     public Transform destinationPoint;
     public AIGlobalBehavior myBehavior;
-    public List<Entity> aggressors = new List<Entity>();
     public bool isReacting;
     [SerializeField] protected float reactDuration = 0.5f;
 
-    public override float ComputeSpeed()
-    {
-        return myBehavior.ComputeSpeed();
-    }
+    public List<Entity> aggressors = new List<Entity>();
 
     public virtual void SetTarget(Entity target)
     {
@@ -73,10 +69,12 @@ public abstract class Actor : Entity
         }
     }
 
-    public void Move(Vector2 targetPos)
+    public void Move(Vector2 targetPos, float speedMultiplier = 1)
     {
         aiAgent.enabled = true;
         aiAgent.isStopped = false;
+        aiAgent.maxSpeed = BaseSpeed() * speedMultiplier;
+
         destinationPoint.position = SampledPosition(targetPos);
     }
 

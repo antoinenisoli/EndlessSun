@@ -11,7 +11,12 @@ namespace CustomAI.BehaviorTree
         bool isContinuous;
         Vector2 randomRange;
 
-        public AttackInCircleNode(NPC myNPC, float stayDistantRange, bool isContinuous = true, Vector2 randomRange = default, float stepBackDelay = 0.15f) : base(myNPC, stayDistantRange, stepBackDelay)
+        public AttackInCircleNode(NPC myNPC, float stayDistantRange, float stepBackDelay = 0.15f, float speedMultiplier = 1) : base(myNPC, stayDistantRange, stepBackDelay, speedMultiplier)
+        {
+            
+        }
+
+        public void SetMovingBehavior(bool isContinuous, Vector2 randomRange = default)
         {
             this.isContinuous = isContinuous;
             this.randomRange = randomRange;
@@ -32,7 +37,7 @@ namespace CustomAI.BehaviorTree
                 }
             }
 
-            myNPC.Move(CircleAround());
+            myNPC.Move(CircleAround(), speedMultiplier);
         }
 
         Vector2 CircleAround()

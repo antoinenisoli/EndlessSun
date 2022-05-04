@@ -8,11 +8,13 @@ namespace CustomAI.BehaviorTree
     {
         Actor actor;
         float chaseMinDistance = 2f;
+        float speedMultiplier;
 
-        public ChaseNode(Actor actor, float chaseMinDistance)
+        public ChaseNode(Actor actor, float chaseMinDistance, float speedMultiplier = 1)
         {
             this.actor = actor;
             this.chaseMinDistance = chaseMinDistance;
+            this.speedMultiplier = speedMultiplier;
         }
 
         public bool NearToTarget()
@@ -23,7 +25,7 @@ namespace CustomAI.BehaviorTree
 
         public override bool Step()
         {
-            actor.Move(actor.Target.transform.position);
+            actor.Move(actor.Target.transform.position, speedMultiplier);
             return NearToTarget();
         }
 

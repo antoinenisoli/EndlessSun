@@ -5,6 +5,15 @@ using UnityEngine;
 
 namespace CustomAI
 {
+    public enum AIState
+    {
+        Patrolling,
+        React,
+        Chasing,
+        Attacking,
+        Waiting,
+    }
+
     [RequireComponent(typeof(NPC))]
     public abstract class AIGlobalBehavior : MonoBehaviour
     {
@@ -22,6 +31,5 @@ namespace CustomAI
         public virtual void ReactToTarget() { myActor.ReactToTarget(); }
 
         public virtual float GetVelocity() { return 0; }
-        public virtual float ComputeSpeed() { return 0; }
     }
 }

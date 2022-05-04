@@ -7,8 +7,9 @@ namespace CustomAI.BehaviorTree
     public class AttackNode : AIActionNode
     {
         protected NPC myNPC;
-        protected float attackTimer;
+        protected float speedMultiplier;
 
+        protected float attackTimer;
         protected float stayDistantRange;
         protected float stepBackTimer, stepBackDelay;
 
@@ -16,11 +17,12 @@ namespace CustomAI.BehaviorTree
         protected Vector2 currentPosition => myNPC.transform.position;
         protected Vector2 targetPos => myNPC.Target.transform.position;
 
-        public AttackNode(NPC myNPC, float stayDistantRange, float stepBackDelay = 0.15f)
+        public AttackNode(NPC myNPC, float stayDistantRange, float stepBackDelay = 0.15f, float speedMultiplier = 1)
         {
             this.myNPC = myNPC;
             this.stayDistantRange = stayDistantRange;
             this.stepBackDelay = stepBackDelay;
+            this.speedMultiplier = speedMultiplier;
         }
 
         public override bool Step()
@@ -36,7 +38,7 @@ namespace CustomAI.BehaviorTree
         void KeepDistance()
         {
             Vector2 awayVector = targetPos + oppositeDirection * stayDistantRange;
-            myNPC.Move(awayVector);
+            myNPC.Move(awayVector, speedMultiplier);
         }
 
         protected virtual void MovingBehavior()

@@ -171,7 +171,7 @@ public class PlayerController2D : Entity
         }
     }
 
-    public override float ComputeSpeed()
+    public override float BaseSpeed()
     {
         return sprinting ? runSpeed : walkSpeed; 
     }
@@ -183,7 +183,7 @@ public class PlayerController2D : Entity
         if (sprinting)
             PlayerCombat.Stamina.StaminaCost(sprintCost);
 
-        Vector2 targetVelocity = inputs.normalized * ComputeSpeed();
+        Vector2 targetVelocity = inputs.normalized * BaseSpeed();
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref m_Velocity, movementSmoothing);
     }
 

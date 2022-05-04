@@ -18,11 +18,19 @@ namespace CustomAI.BehaviorTree
         [SerializeField] Transform attackPoint;
 
         [Space()]
+        public PatrolData patrol;
+
+        [Space()]
+        public AttackData attack;
+
+        [Header("Speeds")]
+        [SerializeField] float chaseSpeed = 1.3f;
+        [SerializeField] float fleeSpeed = 1.3f;
+
+        [Header("Distance checks")]
         public DistanceCheck chaseRange = new DistanceCheck(2f, Color.white);
         public DistanceCheck aggroRange = new DistanceCheck(15f, Color.white);
-        public DistanceCheck sightRange = new DistanceCheck(20f, Color.white);
-        public PatrolData patrol;
-        public AttackData attack;
+        public DistanceCheck sightRange = new DistanceCheck(20f, Color.white);    
 
         private void OnDrawGizmos()
         {
@@ -48,19 +56,17 @@ namespace CustomAI.BehaviorTree
             SequenceNode fightSequence = new SequenceNode();
             CheckDistanceNode inSightNode = new CheckDistanceNode(myActor, sightRange.range, true);
 
-            fightSequence.Attach(SetupGetTarget());
-            fightSequence.Attach(inSightNode);
-            fightSequence.Attach(SetupChase());
+            fightSequence.Attach(SetupGetTarget(), inSightNode, SetupChase());
 
             return fightSequence;
         }
 
         Selector SetupChase()
         {
-            ChaseNode chaseNode = new ChaseNode(myActor, chaseRange.range);
+            ChaseNode chaseNode = new ChaseNode(myActor, chaseRange.range, chaseSpeed);
             Selector chaseSelector = new Selector();
-            chaseSelector.Attach(SetupAttack());
-            chaseSelector.Attach(chaseNode);
+
+            chaseSelector.Attach(SetupAttack(), chaseNode);
 
             return chaseSelector;
         }
@@ -73,9 +79,7 @@ namespace CustomAI.BehaviorTree
             PatrolNode patrolNode = new PatrolNode(patrol);
             ResetActorNode resetActor = new ResetActorNode(myActor);
 
-            mainSequence.Attach(resetActor);
-            mainSequence.Attach(wait);
-            mainSequence.Attach(patrolNode);
+            mainSequence.Attach(resetActor, wait, patrolNode);
 
             return mainSequence;
         }
@@ -86,9 +90,7 @@ namespace CustomAI.BehaviorTree
             CheckDistanceNode inRange = new CheckDistanceNode(myActor, attack.attackRange.range);
             AttackNode attackNode = attack.GenerateNode();
 
-            mainSequence.Attach(SetupGetTarget());
-            mainSequence.Attach(inRange);
-            mainSequence.Attach(attackNode);
+            mainSequence.Attach(SetupGetTarget(), inRange, attackNode);
 
             return mainSequence;
         }
@@ -101,23 +103,19 @@ namespace CustomAI.BehaviorTree
             ReactionNode react = new ReactionNode(myActor);
             SequenceNode scanSequence = new SequenceNode();
 
-            scanSequence.Attach(detectTarget);
-            scanSequence.Attach(react);
-
-            selector.Attach(checkTarget);
-            selector.Attach(scanSequence);
-
+            scanSequence.Attach(detectTarget, react);
+            selector.Attach(checkTarget, scanSequence);
             return selector;
         }
 
         SequenceNode SetupHealthCheck()
         {
             SequenceNode mainSequence = new SequenceNode();
+            CheckTarget checkTarget = new CheckTarget(myActor);
             CheckHealthNode checkHealth = new CheckHealthNode(myActor, healthThreshold);
-            RunAwayNode runAway = new RunAwayNode(myActor, sightRange.range);
+            RunAwayNode runAway = new RunAwayNode(myActor, sightRange.range, fleeSpeed);
 
-            mainSequence.Attach(checkHealth);
-            mainSequence.Attach(runAway);
+            mainSequence.Attach(checkTarget, checkHealth, runAway);
 
             return mainSequence;
         }
@@ -125,9 +123,7 @@ namespace CustomAI.BehaviorTree
         public override AINode MakeTree()
         {
             Selector topSelector = new Selector();
-            topSelector.Attach(SetupHealthCheck());
-            topSelector.Attach(SetupFight());
-            topSelector.Attach(SetupPatrol());
+            topSelector.Attach(SetupHealthCheck(), SetupFight(), SetupPatrol());
             return topSelector;
         }
     }

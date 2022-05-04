@@ -8,19 +8,18 @@ namespace CustomAI.BehaviorTree
     {
         Actor actor;
         float maxDistance = 2f;
+        float speedMultiplier;
 
-        public RunAwayNode(Actor actor, float maxDistance)
+        public RunAwayNode(Actor actor, float maxDistance, float speedMultiplier = 1)
         {
             this.actor = actor;
             this.maxDistance = maxDistance;
+            this.speedMultiplier = speedMultiplier;
         }
 
         public Vector2 TargetPosition()
         {
-            if (actor.Target)
-                return actor.Target.transform.position;
-            else
-                return new Vector2();
+            return actor.Target.transform.position;
         }
 
         public bool FarEnough()
@@ -32,7 +31,8 @@ namespace CustomAI.BehaviorTree
         public override bool Step()
         {
             Vector2 oppositeDirection = ((Vector2)actor.transform.position - TargetPosition()).normalized;
-            actor.Move(TargetPosition() + oppositeDirection * maxDistance);
+            Vector2 fleePosition = TargetPosition() + oppositeDirection * maxDistance;
+            actor.Move(fleePosition, speedMultiplier);
             return FarEnough();
         }
 

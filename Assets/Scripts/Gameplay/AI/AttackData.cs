@@ -16,7 +16,7 @@ namespace CustomAI.BehaviorTree
     {
         public NPC myNPC;
         public FightMovePattern pattern;
-        public float attackRate = 1f;
+        public float attackRate = 1f, movingAroundSpeed = 1f, stepBackDelay = 0.15f;
         public DistanceCheck attackRange = new DistanceCheck(2f, Color.white);
 
         public AttackNode GenerateNode()
@@ -24,11 +24,13 @@ namespace CustomAI.BehaviorTree
             switch (pattern)
             {
                 case FightMovePattern.Straight:
-                    return new AttackNode(myNPC, attackRange.range * 0.95f);
+                    return new AttackNode(myNPC, attackRange.range * 0.95f, stepBackDelay);
                 case FightMovePattern.Circle:
-                    return new AttackInCircleNode(myNPC, attackRange.range / 2, false, new Vector2(2f, 4f));
+                    AttackInCircleNode inCircle = new AttackInCircleNode(myNPC, attackRange.range/2, stepBackDelay, movingAroundSpeed);
+                    inCircle.SetMovingBehavior(false, new Vector2(2f, 4f));
+                    return inCircle;
                 case FightMovePattern.Charge:
-                    return new AttackNode(myNPC, attackRange.range * 0.95f);
+                    return null;
                 default:
                     return null; 
             }

@@ -31,10 +31,13 @@ namespace CustomAI.BehaviorTree
             parent = null;
         }
 
-        public void Attach(AINode node)
+        public void Attach(params AINode[] nodes)
         {
-            node.parent = this;
-            childrens.Add(node);
+            foreach (var node in nodes)
+            {
+                node.parent = this;
+                childrens.Add(node);
+            }
         }
 
         public void SetData(string key, object value)

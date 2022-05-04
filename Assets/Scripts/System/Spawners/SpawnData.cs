@@ -45,7 +45,8 @@ public class SpawnData : ScriptableObject
     private void OnValidate()
     {
         foreach (var info in spawnInfos)
-            info.name = info.prefab.name;
+            if (info.prefab)
+                info.name = info.prefab.name;
     }
 
     int GetRandomIndex()
