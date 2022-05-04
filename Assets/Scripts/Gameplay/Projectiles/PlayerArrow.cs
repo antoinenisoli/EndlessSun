@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerArrow : MonoBehaviour
 {
+    PlayerController2D player => GameManager.Player;
+
     [SerializeField] Transform arrowSprite;
     [SerializeField] float minimumForce = 10f;
     Rigidbody2D rb;
@@ -16,13 +18,13 @@ public class PlayerArrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        NPC npc = collision.GetComponentInChildren<NPC>();
-        if (npc && GameManager.Player.IsEnemyOf(npc) && rb.velocity.sqrMagnitude > minimumForce)
-        {
-            npc.TakeDamages(1, GameManager.Player);
-            if (GameManager.Player.BalanceDraw(npc))
-                npc.KnockBack(rb.velocity * 0.5f);
+        Entity entity = collision.GetComponentInChildren<Entity>();
+        if (entity == player)
+            return;
 
+        if (entity && rb.velocity.sqrMagnitude > minimumForce)
+        {
+            entity.TakeDamages(1, player, transform.position);
             Destroy(gameObject);
         }
     }

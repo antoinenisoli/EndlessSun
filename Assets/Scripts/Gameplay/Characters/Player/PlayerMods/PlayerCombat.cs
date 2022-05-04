@@ -57,13 +57,12 @@ public class PlayerCombat : PlayerMod
 
         foreach (var item in colls)
         {
-            NPC npc = item.transform.GetComponentInChildren<NPC>();
-            if (npc && GameManager.Player.IsEnemyOf(npc))
-            {
-                npc.TakeDamages(player.ComputeDamages(), player);
-                if (player.BalanceDraw(npc))
-                    npc.KnockBack(-item.normal * pushForce);
-            }
+            Entity entity = item.transform.GetComponentInChildren<Entity>();
+            if (entity == player)
+                return;
+
+            if (entity && player.IsHostile(entity))
+                entity.TakeDamages(player.ComputeDamages(), player, item.point);
         }
     }
 

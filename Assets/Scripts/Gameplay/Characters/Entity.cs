@@ -7,8 +7,10 @@ using System.Linq;
 public enum Team
 {
     Player,
-    Enemy,
-    Neutral,
+    NPCs,
+    Monsters,
+    Natives,
+    Animals,
 }
 
 public class Entity : MonoBehaviour
@@ -17,14 +19,15 @@ public class Entity : MonoBehaviour
     public AttributeList AttributeList => CharacterProfile.AttributeList;
 
     [Header("Entity")]
-    public Team myTeam;
-    [SerializeField] Material hitMat;
-    Material baseMat;
+    public RelationManager relationManager;
+    [SerializeField] protected Material hitMat;
+    [SerializeField] protected float pushForce = 0.5f;
+    protected Material baseMat;
     public LayerMask targetLayer;
     public SpriteRenderer spr;
-    [SerializeField] CharacterProfile profileToCopy;
+    [SerializeField] protected CharacterProfile profileToCopy;
     [HideInInspector] public CharacterProfile CharacterProfile;
-    [SerializeField] HealthStat health;
+    [SerializeField] protected HealthStat health;
 
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
@@ -37,6 +40,7 @@ public class Entity : MonoBehaviour
         if (profileToCopy)
             CharacterProfile = Instantiate(profileToCopy);
 
+        relationManager.Init();
         rb = GetComponentInParent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         InitStats();
@@ -57,11 +61,6 @@ public class Entity : MonoBehaviour
     public void AddMod(CharacterMod mod)
     {
         myMods.Add(mod);
-    }
-
-    public bool IsEnemyOf(NPC target)
-    {
-        return myTeam != target.myTeam;
     }
 
     public virtual float BaseSpeed() { return AttributeList.Speed.value; }
@@ -89,35 +88,32 @@ public class Entity : MonoBehaviour
         return AttributeList.BalanceDraw(target);
     }
 
-    public void KnockBack(Vector2 force)
+    public void Push(Vector2 force)
     {
         Stun();
         rb.AddForce(force, ForceMode2D.Impulse);
     }
 
-    public bool SameTeam(Entity other)
+    public virtual void TakeDamages(float amount, Entity aggressor = null, Vector2 impactPoint = default)
     {
-        return myTeam == other.myTeam;
-    }
-
-    public virtual void Attack() { }
-
-    public virtual void Stun() { }
-
-    public virtual void UnStun() { }
-
-    public virtual void TakeDamages(float amount, Entity aggressor = null)
-    {
-        if (Health.isDead)
-            return;
-
         Health.ModifyValue(-amount);
-        //anim.SetTrigger("Hit");
         StartCoroutine(Flash());
-
         if (Health.isDead)
             Death();
     }
+
+    #region "ToOverride"
+    public virtual void Attack() { }
+    public virtual void Stun() { }
+    public virtual void UnStun() { }
+    #endregion
+
+    #region "Relations"
+    public bool SameTeam(Entity other) => relationManager.myTeam == other.relationManager.myTeam;
+    public bool IsHostile(Entity other) => !SameTeam(other) && relationManager.CheckRelation(RelationType.Hostile, other);
+    public bool IsFriendly(Entity other) => SameTeam(other) || relationManager.CheckRelation(RelationType.Friendly, other);
+    public bool IsNeutral(Entity other) => !SameTeam(other) && relationManager.CheckRelation(RelationType.Neutral, other);
+    #endregion
 
     IEnumerator Flash()
     {

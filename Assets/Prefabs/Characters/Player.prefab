@@ -246,11 +246,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27405d5957d44b44d9b28b33a25a6564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myTeam: 0
+  relationManager:
+    myTeam: 0
+    myEntity: {fileID: 3437488683681455469}
+    mainRelations:
+    - relationType: 2
+      targetTeam: 2
   hitMat: {fileID: 2100000, guid: 574180534a5588443b8ccbac622ea54d, type: 2}
+  pushForce: 0.5
   targetLayer:
     serializedVersion: 2
-    m_Bits: 1152
+    m_Bits: 1024
   spr: {fileID: 822972059179743088}
   profileToCopy: {fileID: 11400000, guid: d06c5e40d37a7d544af5008b45ae3169, type: 2}
   CharacterProfile: {fileID: 0}
@@ -258,13 +264,13 @@ MonoBehaviour:
     currentValue: 0
     maxValue: 0
     isDead: 0
-  walkSpeed: 8
-  runSpeed: 15
   tilemapLayer:
     serializedVersion: 2
     m_Bits: 2048
+  walkSpeed: 8
+  runSpeed: 15
   currentState: 0
-  sprintCost: 0.1
+  sprintCost: 0.5
   movementSmoothing: 0.15
   attackAnimCount: 3
   idleSword: 0

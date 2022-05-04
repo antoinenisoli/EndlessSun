@@ -50,11 +50,9 @@ public class NPC : Actor
             Death();
     }
 
-    public override void TakeDamages(float amount, Entity aggressor = null)
+    public override void TakeDamages(float amount, Entity aggressor = null, Vector2 impactPoint = default)
     {
         base.TakeDamages(amount, aggressor);
-        NewAgressor(aggressor);
-        rb.isKinematic = false;
         healthBarPivot.DOScaleX((float)Health.CurrentValue / (float)Health.MaxValue, 0.3f);
     }
 

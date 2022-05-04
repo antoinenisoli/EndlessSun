@@ -23,7 +23,7 @@ namespace CustomAI.BehaviorTree
                 foreach (var item in colls)
                 {
                     Entity entity = item.GetComponent<Entity>();
-                    if (entity && !actor.SameTeam(entity))
+                    if (entity && actor.IsHostile(entity))
                     {
                         float distance = Vector2.Distance(entity.transform.position, actor.transform.position);
                         if (distance < aggroDistance && !entity.Health.isDead)

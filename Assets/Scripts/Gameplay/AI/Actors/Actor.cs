@@ -105,6 +105,22 @@ public abstract class Actor : Entity
         return dist < minDistance;
     }
 
+    public override void TakeDamages(float amount, Entity aggressor = null, Vector2 impactPoint = default)
+    {
+        rb.isKinematic = false;
+        if (aggressor)
+        {
+            NewAgressor(aggressor);
+            if (aggressor.BalanceDraw(this))
+            {
+                Vector2 direction = (impactPoint - (Vector2)transform.position).normalized;
+                Push(direction * pushForce);
+            }
+        }
+
+        base.TakeDamages(amount, aggressor);
+    }
+
     public override void DoUpdate()
     {
         base.DoUpdate();

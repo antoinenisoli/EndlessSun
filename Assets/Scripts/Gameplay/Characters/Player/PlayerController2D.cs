@@ -119,14 +119,15 @@ public class PlayerController2D : Entity
         anim.SetTrigger("Die");
     }
 
-    public override void TakeDamages(float amount, Entity aggressor = null)
+    public override void TakeDamages(float amount, Entity aggressor = null, Vector2 impactPoint = default)
     {
+        anim.SetTrigger("Hit");
+        if (GameManager.Instance)
+            GameManager.Instance.FreezeFrame(0.4f, 0f);
+        if (CameraManager.Instance) 
+            CameraManager.Instance.CameraShake(0.15f, 10);
+
         base.TakeDamages(amount, aggressor);
-        GameManager.Instance.FreezeFrame(0.4f);
-        StartCoroutine(Glow(0.1f, Color.white));
-        if (CameraManager.Instance) CameraManager.Instance.CameraShake(0.3f, 2);
-        if (Health.isDead)
-            Death();
     }
 
     public void LevelUp()

@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/ProtoMap.unity
     guid: 140825dbf17bbdf49b8254e74dd031bf
   - enabled: 1
-    path: Assets/Scenes/ProtoEnemies.unity
+    path: Assets/Scenes/ProtoFight.unity
     guid: 922802d7c7b413049be71e5a4e0f9712
   m_configObjects: {}

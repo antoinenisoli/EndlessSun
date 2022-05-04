@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5939837355673175383}
   - component: {fileID: 4056470052857826569}
   - component: {fileID: 3755676585018260752}
-  m_Layer: 7
-  m_Name: 'EnemySkeleton '
+  m_Layer: 10
+  m_Name: SkeletonActor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 10436279013365362}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -152,7 +152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4709123386487099621}
   - component: {fileID: 761701358792505181}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8114084609924861631}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Helpers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 719022492994127864}
   - component: {fileID: 733940943603918683}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PatrolPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2221445506071758729}
   - component: {fileID: 7493377017630798478}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3303339906657481931}
   - component: {fileID: 3303339906657481930}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -440,7 +440,7 @@ MonoBehaviour:
   wire: 1
   fill: 1
   localCenter: {x: 0, y: 0, z: 0}
-  radius: 1.2
+  radius: 1.3
 --- !u!1 &4495621694907851523
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4517169896015901272}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -481,7 +481,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3312177370995541547}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: TargetPoint
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -514,8 +514,8 @@ GameObject:
   - component: {fileID: 5771832891146833179}
   - component: {fileID: 5771832891146833183}
   - component: {fileID: 8909509448351586772}
-  m_Layer: 7
-  m_Name: EnemyScript
+  m_Layer: 10
+  m_Name: Actor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -529,7 +529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5771832891146833180}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.08999634, y: -0.11000061, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4709123386487099621}
@@ -550,8 +550,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76218e0b1b326bc45bd129076d0cf33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myTeam: 1
+  relationManager:
+    myTeam: 2
+    myEntity: {fileID: 5771832891146833179}
+    mainRelations:
+    - relationType: 2
+      targetTeam: 0
+    - relationType: 1
+      targetTeam: 2
   hitMat: {fileID: 2100000, guid: 574180534a5588443b8ccbac622ea54d, type: 2}
+  pushForce: 0.5
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -663,7 +671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4640195577080112918}
   - component: {fileID: 7596860636273780914}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,7 +754,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7344259874050853726}
   - component: {fileID: 8475530416972840369}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DetectPlayerIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -830,7 +838,7 @@ GameObject:
   - component: {fileID: 3079254887693860035}
   - component: {fileID: 826166618940906725}
   - component: {fileID: 3866091139199334441}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -941,7 +949,7 @@ GameObject:
   - component: {fileID: 6734934228741099749}
   - component: {fileID: 306397839665844428}
   - component: {fileID: 4279797868835514335}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

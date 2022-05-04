@@ -73,9 +73,8 @@ namespace CustomAI.BehaviorTree
             float randomDelay = GameDevHelper.RandomInRange(patrol.randomDelayBounds);
             WaitNode wait = new WaitNode(randomDelay);
             PatrolNode patrolNode = new PatrolNode(patrol);
-            ResetActorNode resetActor = new ResetActorNode(myActor);
 
-            mainSequence.Attach(resetActor, wait, patrolNode);
+            mainSequence.Attach(wait, patrolNode);
 
             return mainSequence;
         }
