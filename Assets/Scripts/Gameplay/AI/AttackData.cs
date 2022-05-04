@@ -16,18 +16,31 @@ namespace CustomAI.BehaviorTree
     {
         public NPC myNPC;
         public FightMovePattern pattern;
-        public float attackRate = 1f, movingAroundSpeed = 1f, stepBackDelay = 0.15f;
+        [SerializeField] Transform attackPoint;
+        public float attackRadius = 1.5f;
+        public float attackRate = 1f, stayAwaySpeed = 1f, movingAroundSpeed = 1f, stepBackDelay = 0.15f;
         public DistanceCheck attackRange = new DistanceCheck(2f, Color.white);
+
+        public void Attack()
+        {
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRadius);
+            foreach (var item in colliders)
+            {
+                Entity entity = item.GetComponentInParent<Entity>();
+                if (entity && !entity.SameTeam(myNPC))
+                    entity.TakeDamages(myNPC.ComputeDamages(), myNPC);
+            }
+        }
 
         public AttackNode GenerateNode()
         {
             switch (pattern)
             {
                 case FightMovePattern.Straight:
-                    return new AttackNode(myNPC, attackRange.range * 0.95f, stepBackDelay);
+                    return new AttackNode(myNPC, attackRange.range * 0.95f, stepBackDelay, stayAwaySpeed);
                 case FightMovePattern.Circle:
-                    AttackInCircleNode inCircle = new AttackInCircleNode(myNPC, attackRange.range/2, stepBackDelay, movingAroundSpeed);
-                    inCircle.SetMovingBehavior(false, new Vector2(2f, 4f));
+                    AttackInCircleNode inCircle = new AttackInCircleNode(myNPC, attackRange.range/2, stepBackDelay, stayAwaySpeed);
+                    inCircle.SetMovingBehavior(false, movingAroundSpeed, new Vector2(2f, 4f));
                     return inCircle;
                 case FightMovePattern.Charge:
                     return null;

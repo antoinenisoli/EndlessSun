@@ -86,11 +86,6 @@ public class NPC : Actor
         anim.SetTrigger("Attack");
     }
 
-    public override void Attack()
-    {
-        base.Attack();
-    }
-
     public override void ReactToTarget()
     {
         base.ReactToTarget();

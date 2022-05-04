@@ -15,7 +15,7 @@ namespace CustomAI.BehaviorTree
         [Header(nameof(RegularBT))]
         [SerializeField] NPCPersonnality personnality;
         public int healthThreshold = 0;
-        [SerializeField] Transform attackPoint;
+        [SerializeField] ShowSphereGizmo attackPointGizmo;
 
         [Space()]
         public PatrolData patrol;
@@ -35,6 +35,8 @@ namespace CustomAI.BehaviorTree
         private void OnDrawGizmos()
         {
             patrol.Gizmos();
+            if (attackPointGizmo)
+                attackPointGizmo.radius = attack.attackRadius;
         }
 
         public Actor getActor() => GetComponent<Actor>();
@@ -42,13 +44,7 @@ namespace CustomAI.BehaviorTree
         public override void Attack()
         {
             base.Attack();
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, attack.attackRange.range/2);
-            foreach (var item in colliders)
-            {
-                Entity entity = item.GetComponentInParent<Entity>();
-                if (entity && !entity.SameTeam(myActor))
-                    entity.TakeDamages(myActor.ComputeDamages(), myActor);
-            }
+            attack.Attack();
         }
 
         SequenceNode SetupFight()

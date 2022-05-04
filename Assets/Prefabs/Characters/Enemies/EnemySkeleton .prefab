@@ -440,7 +440,7 @@ MonoBehaviour:
   wire: 1
   fill: 1
   localCenter: {x: 0, y: 0, z: 0}
-  radius: 0.9
+  radius: 1.2
 --- !u!1 &4495621694907851523
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,10 +594,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myActor: {fileID: 0}
-  currentNode: 
+  currentNodeName: 
   personnality: 0
   healthThreshold: 20
-  attackPoint: {fileID: 3303339906657481931}
+  attackPointGizmo: {fileID: 3303339906657481930}
+  patrol:
+    myNPC: {fileID: 5771832891146833179}
+    minDistance: 1
+    randomDelayBounds: {x: 1, y: 3}
+    randomPatrolRange: {x: 5, y: 3}
+    patrolGizmo: {fileID: 733940943603918683}
+  attack:
+    myNPC: {fileID: 5771832891146833179}
+    pattern: 1
+    attackPoint: {fileID: 3303339906657481931}
+    attackRadius: 1.3
+    attackRate: 1
+    stayAwaySpeed: 2
+    movingAroundSpeed: 1
+    stepBackDelay: 0.15
+    attackRange:
+      range: 2.5
+      color: {r: 1, g: 0, b: 0, a: 1}
   chaseSpeed: 1.3
   fleeSpeed: 2
   chaseRange:
@@ -609,21 +627,6 @@ MonoBehaviour:
   sightRange:
     range: 15
     color: {r: 0, g: 0, b: 0, a: 1}
-  patrol:
-    myNPC: {fileID: 5771832891146833179}
-    minDistance: 1
-    randomDelayBounds: {x: 1, y: 3}
-    randomPatrolRange: {x: 5, y: 3}
-    patrolGizmo: {fileID: 733940943603918683}
-  attack:
-    myNPC: {fileID: 5771832891146833179}
-    pattern: 1
-    attackRate: 1
-    movingAroundSpeed: 0.5
-    stepBackDelay: 0.15
-    attackRange:
-      range: 1.5
-      color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!61 &8909509448351586772
 BoxCollider2D:
   m_ObjectHideFlags: 0

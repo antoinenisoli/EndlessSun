@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShowSphereGizmo : ShowGizmo
 {
-    [SerializeField] float radius = 0.1f;
+    public float radius = 0.1f;
 
     public override void Wire()
     {
