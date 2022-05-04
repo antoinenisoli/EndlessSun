@@ -8,15 +8,10 @@ namespace CustomAI
     public class PatrolData
     {
         public NPC myNPC;
+        public float minDistance = 1f;
         public Vector2 randomDelayBounds;
         public Vector2 randomPatrolRange;
         public ShowRectangleGizmo patrolGizmo;
-
-        Vector2 RandomPatrolPosition()
-        {
-            Vector2 vector = GameDevHelper.RandomVector(randomPatrolRange, myNPC.startPosition);
-            return vector;
-        }
 
         public float RandomDelay()
         {
@@ -25,12 +20,17 @@ namespace CustomAI
 
         public Vector2 NewDestination()
         {
-            myNPC.Stop();
-            Vector2 randomPos = RandomPatrolPosition();
-            if (GridManager.Instance)
+            Vector2 randomPos = GameDevHelper.RandomVector(randomPatrolRange, myNPC.startPosition);
+            int i = 100;
+
+            while (i > 0)
             {
-                if (GridManager.Instance.SamplePosition(randomPos, 2f, out Vector2 sampledPos))
-                    return sampledPos;
+                randomPos = GameDevHelper.RandomVector(randomPatrolRange, myNPC.startPosition);
+                float distance = Vector2.Distance(randomPos, myNPC.transform.position);
+                if (distance > minDistance)
+                    break;
+
+                i--;
             }
 
             return randomPos;

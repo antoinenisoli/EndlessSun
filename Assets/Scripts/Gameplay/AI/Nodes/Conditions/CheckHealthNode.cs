@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class HealthNode : AIConditionNode
+    public class CheckHealthNode : AIConditionNode
     {
         Actor actor;
         float threshold;
 
-        public HealthNode(Actor actor, float threshold)
+        public CheckHealthNode(Actor actor, float threshold)
         {
             this.actor = actor;
             this.threshold = threshold;
@@ -17,7 +17,8 @@ namespace CustomAI.BehaviorTree
 
         public override bool Check()
         {
-            return actor.Health.CurrentValue <= threshold;
+            float compute = actor.Health.CurrentValue / actor.Health.MaxValue;
+            return compute <= (float)threshold/100;
         }
     }
 }

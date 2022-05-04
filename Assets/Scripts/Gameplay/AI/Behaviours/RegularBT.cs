@@ -4,8 +4,17 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
+    public enum NPCPersonnality
+    {
+        Normal,
+        Coward,
+    }
+
     public class RegularBT : BehaviorTree
     {
+        [Header(nameof(RegularBT))]
+        [SerializeField] NPCPersonnality personnality;
+        public int healthThreshold = 0;
         [SerializeField] Transform attackPoint;
 
         [Space()]
@@ -34,20 +43,26 @@ namespace CustomAI.BehaviorTree
             }
         }
 
-        SequenceNode SetupChase()
+        SequenceNode SetupFight()
         {
-            SequenceNode mainSequence = new SequenceNode();
+            SequenceNode fightSequence = new SequenceNode();
             CheckDistanceNode inSightNode = new CheckDistanceNode(myActor, sightRange.range, true);
+
+            fightSequence.Attach(SetupGetTarget());
+            fightSequence.Attach(inSightNode);
+            fightSequence.Attach(SetupChase());
+
+            return fightSequence;
+        }
+
+        Selector SetupChase()
+        {
             ChaseNode chaseNode = new ChaseNode(myActor, chaseRange.range);
             Selector chaseSelector = new Selector();
             chaseSelector.Attach(SetupAttack());
             chaseSelector.Attach(chaseNode);
 
-            mainSequence.Attach(SetupGetTarget());
-            mainSequence.Attach(inSightNode);
-            mainSequence.Attach(chaseSelector);
-
-            return mainSequence;
+            return chaseSelector;
         }
 
         SequenceNode SetupPatrol()
@@ -95,10 +110,23 @@ namespace CustomAI.BehaviorTree
             return selector;
         }
 
+        SequenceNode SetupHealthCheck()
+        {
+            SequenceNode mainSequence = new SequenceNode();
+            CheckHealthNode checkHealth = new CheckHealthNode(myActor, healthThreshold);
+            RunAwayNode runAway = new RunAwayNode(myActor, sightRange.range);
+
+            mainSequence.Attach(checkHealth);
+            mainSequence.Attach(runAway);
+
+            return mainSequence;
+        }
+
         public override AINode MakeTree()
         {
             Selector topSelector = new Selector();
-            topSelector.Attach(SetupChase());
+            topSelector.Attach(SetupHealthCheck());
+            topSelector.Attach(SetupFight());
             topSelector.Attach(SetupPatrol());
             return topSelector;
         }

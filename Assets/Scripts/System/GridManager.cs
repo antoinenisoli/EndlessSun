@@ -233,7 +233,7 @@ public class GridManager : MonoBehaviour
 	{
 		sampledPos = ClosestWalkable(targetPos);
 		float d = Vector2.Distance(sampledPos, targetPos);
-		return d < minDistance;
+		return d > minDistance;
 	}
 
 	public bool IsColliding(Vector2Int cellA, Vector2Int cellB, LayerMask layerMask)

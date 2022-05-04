@@ -77,7 +77,16 @@ public abstract class Actor : Entity
     {
         aiAgent.enabled = true;
         aiAgent.isStopped = false;
-        destinationPoint.position = targetPos;
+        destinationPoint.position = SampledPosition(targetPos);
+    }
+
+    Vector2 SampledPosition(Vector2 pos)
+    {
+        if (GridManager.Instance)
+            if (GridManager.Instance.SamplePosition(pos, 2f, out Vector2 sampledPos))
+                return sampledPos;
+
+        return pos;
     }
 
     public override void Stop()
