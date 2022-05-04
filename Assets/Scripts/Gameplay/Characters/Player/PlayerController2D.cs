@@ -10,6 +10,7 @@ public enum PlayerState
     Moving,
     Sprinting,
     Attacking,
+    InFight,
     Dead,
     Deactivated,
 }
@@ -19,20 +20,19 @@ public class PlayerController2D : Entity
     public PlayerSurvival Survival => PlayerSurvival.Instance;
     public override HealthStat Health => playerHealth;
 
-    [Header("PLAYER")]
+    [Header(nameof(PlayerController2D))]
+    public PlayerState currentState;
     [SerializeField] LayerMask tilemapLayer;
 
     [Header("__Sprint")]
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
-    public PlayerState currentState;
     [SerializeField] float sprintCost = 15f;
     [SerializeField] float movementSmoothing = 0.05f;
     bool sprinting;
 
     [Header("__Attack")]
     [SerializeField] int attackAnimCount = 3;
-    public bool idleSword;
 
     [Header("__Items")]
     [SerializeField] float interactionRadius = 2f;
@@ -103,10 +103,7 @@ public class PlayerController2D : Entity
     public override void ManageAnimations()
     {
         base.ManageAnimations();
-        if (idleSword && rb.velocity.sqrMagnitude > 0.1f)
-            idleSword = false;
-
-        anim.SetBool("IdleSword", idleSword);
+        anim.SetBool("IdleSword", currentState == PlayerState.InFight);
         anim.SetFloat("Speed", rb.velocity.sqrMagnitude);
         anim.speed = Mathf.Lerp(anim.speed, sprinting ? 2 : 1, Time.deltaTime * 10f);
     }
@@ -193,43 +190,57 @@ public class PlayerController2D : Entity
         if (CanMove() && !EventSystem.current.IsPointerOverGameObject())
         {
             if (Input.GetButtonDown("MainAttack"))
-                LaunchAttack(true);
+                LaunchPrimaryAttack();
             else if (Input.GetButtonDown("SecondaryAttack"))
-                LaunchAttack(false);
+                LaunchSecondaryAttack();
         }
     }
 
-    void LaunchAttack(bool sword)
+    void LaunchPrimaryAttack()
     {
-        if (Combat.EnoughStamina())
-        {
-            PlayerCombat.Stamina.StopRecovery();
-            rb.velocity = new Vector3();
-            SetState(PlayerState.Attacking);
-            if (!sword)
-            {
-                anim.SetTrigger("Bow");
-                Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector2 vel = mousePos - (Vector2)transform.position;
-                vel.Normalize();
-                Combat.storedVelocity = vel;
-            }
-            else
-                anim.SetTrigger("Attack" + Random.Range(0, attackAnimCount).ToString());
+        if (!Combat.EnoughStamina())
+            return;
 
-            float point = Input.mousePosition.x;
-            if (point < Screen.width / 2)
-                spr.transform.eulerAngles = new Vector3(0, 180, 0);
-            else
-                spr.transform.eulerAngles = new Vector3(0, 0, 0);
-        }
+        LaunchAttack();
+        anim.SetTrigger("Attack");
+        anim.SetInteger("attackIndex", Random.Range(0, attackAnimCount));
+    }
+
+    void LaunchAttack()
+    {
+        PlayerCombat.Stamina.StopRecovery();
+        //Stop();
+        SetState(PlayerState.Attacking);
+        float point = Input.mousePosition.x;
+        if (point < Screen.width / 2)
+            spr.transform.eulerAngles = new Vector3(0, 180, 0);
+        else
+            spr.transform.eulerAngles = new Vector3(0, 0, 0);
+    }
+
+    void LaunchSecondaryAttack()
+    {
+        if (!Combat.EnoughStamina())
+            return;
+
+        LaunchAttack();
+        anim.SetTrigger("Bow");
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 vel = mousePos - (Vector2)transform.position;
+        vel.Normalize();
+        Combat.storedVelocity = vel;
     }
 
     void ManageStates()
     {
         if (rb.velocity.sqrMagnitude < 0.1f && currentState == PlayerState.Moving)
-            SetState(PlayerState.Idle);
-        if (rb.velocity.sqrMagnitude > 0.1f && currentState == PlayerState.Idle)
+        {
+            if (Target != null)
+                SetState(PlayerState.InFight);
+            else
+                SetState(PlayerState.Idle);
+        }
+        if (rb.velocity.sqrMagnitude > 0.1f && currentState != PlayerState.Moving)
             SetState(PlayerState.Moving);
     }
 

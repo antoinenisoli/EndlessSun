@@ -1169,26 +1169,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 822972059179743088, guid: c1ec0bc398df03a4481b74c86a620929,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.7075472
-      objectReference: {fileID: 0}
-    - target: {fileID: 822972059179743088, guid: c1ec0bc398df03a4481b74c86a620929,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.7075472
-      objectReference: {fileID: 0}
-    - target: {fileID: 822972059179743088, guid: c1ec0bc398df03a4481b74c86a620929,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.7075472
-      objectReference: {fileID: 0}
-    - target: {fileID: 822972059179743088, guid: c1ec0bc398df03a4481b74c86a620929,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 822972060138402177, guid: c1ec0bc398df03a4481b74c86a620929,
         type: 3}
       propertyPath: m_Name
@@ -1248,31 +1228,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
-        type: 3}
-      propertyPath: relationManager.mainRelations.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
-        type: 3}
-      propertyPath: relationManager.mainRelations.Array.data[0].targetTeam
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
-        type: 3}
-      propertyPath: relationManager.mainRelations.Array.data[1].targetTeam
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
-        type: 3}
-      propertyPath: relationManager.mainRelations.Array.data[0].relationType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3437488683681455469, guid: c1ec0bc398df03a4481b74c86a620929,
-        type: 3}
-      propertyPath: relationManager.mainRelations.Array.data[1].relationType
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1ec0bc398df03a4481b74c86a620929, type: 3}

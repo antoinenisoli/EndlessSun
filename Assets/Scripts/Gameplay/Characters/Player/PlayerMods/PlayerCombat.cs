@@ -47,9 +47,8 @@ public class PlayerCombat : PlayerMod
     public void Attack()
     {
         Stamina.StaminaCost(attackStaminaCost);
-        player.SetState(PlayerState.Idle);
+        player.SetState(PlayerState.InFight);
         RaycastHit2D[] colls = Physics2D.CircleCastAll(player.transform.position, attackRadius, player.spr.transform.right, attackRange, player.targetLayer);
-        player.idleSword = true;
         if (colls.Length > 0)
             CameraManager.Instance.CameraShake(0.2f);
         else

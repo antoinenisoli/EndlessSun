@@ -23,6 +23,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected Material hitMat;
     [SerializeField] protected float pushForce = 0.5f;
     protected Material baseMat;
+    public Entity Target;
     public LayerMask targetLayer;
     public SpriteRenderer spr;
     [SerializeField] protected CharacterProfile profileToCopy;
@@ -58,6 +59,14 @@ public class Entity : MonoBehaviour
         Health.Init(this);
     }
 
+    public virtual void SetTarget(Entity target)
+    {
+        if (Target != null)
+            oldTarget = Target;
+
+        Target = target;
+    }
+
     public void AddMod(CharacterMod mod)
     {
         myMods.Add(mod);
@@ -70,7 +79,10 @@ public class Entity : MonoBehaviour
         return AttributeList.ComputeDamages();
     }
 
-    public virtual void Stop() { }
+    public virtual void Stop() 
+    { 
+        //rb.velocity = new Vector2(); 
+    }
 
     public virtual void ManageAnimations()
     {
@@ -127,6 +139,8 @@ public class Entity : MonoBehaviour
     public virtual void DoUpdate()
     {
         ManageAnimations();
+        if (Target && Target.health.isDead)
+            SetTarget(null);
     }
 
     public void Update()
