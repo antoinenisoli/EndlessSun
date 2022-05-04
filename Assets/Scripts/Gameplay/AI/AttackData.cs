@@ -27,7 +27,7 @@ namespace CustomAI.BehaviorTree
             foreach (var item in colliders)
             {
                 Entity entity = item.GetComponentInParent<Entity>();
-                if (entity && !myNPC.IsFriendly(entity))
+                if (entity && !entity.Health.isDead && !myNPC.IsFriendly(entity))
                     entity.TakeDamages(myNPC.ComputeDamages(), myNPC);
             }
         }

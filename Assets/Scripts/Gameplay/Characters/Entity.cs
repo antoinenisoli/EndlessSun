@@ -103,6 +103,7 @@ public class Entity : MonoBehaviour
     public void Push(Vector2 force)
     {
         Stun();
+        print("push!!");
         rb.AddForce(force, ForceMode2D.Impulse);
     }
 

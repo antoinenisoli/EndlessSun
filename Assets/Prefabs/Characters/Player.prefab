@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161909141}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.020313585, y: -0.853, z: -0.065048106}
+  m_LocalPosition: {x: -0.020313585, y: -0.853, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 822972059179743091}
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822972059179743090}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.020313585, y: 1.119, z: 0.065048106}
+  m_LocalPosition: {x: 0.020313585, y: 1.119, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 158522192948777189}
@@ -256,6 +256,7 @@ MonoBehaviour:
       targetTeam: 2
   hitMat: {fileID: 2100000, guid: 574180534a5588443b8ccbac622ea54d, type: 2}
   pushForce: 0.5
+  Target: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -266,16 +267,15 @@ MonoBehaviour:
     currentValue: 0
     maxValue: 0
     isDead: 0
+  currentState: 0
   tilemapLayer:
     serializedVersion: 2
     m_Bits: 2048
   walkSpeed: 8
   runSpeed: 15
-  currentState: 0
   sprintCost: 0.5
   movementSmoothing: 0.15
   attackAnimCount: 3
-  idleSword: 0
   interactionRadius: 0.5
   interactLayer:
     serializedVersion: 2

@@ -69,7 +69,7 @@ public class NPC : Actor
         if (myBehavior)
             myBehavior.Stun();
 
-        pushed = true;
+        //pushed = true;
     }
 
     public override void UnStun()

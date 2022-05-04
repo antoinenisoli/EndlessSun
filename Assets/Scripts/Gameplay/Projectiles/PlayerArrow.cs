@@ -22,7 +22,7 @@ public class PlayerArrow : MonoBehaviour
         if (entity == player)
             return;
 
-        if (entity && rb.velocity.sqrMagnitude > minimumForce)
+        if (entity && !entity.Health.isDead && rb.velocity.sqrMagnitude > minimumForce)
         {
             entity.TakeDamages(1, player, transform.position);
             Destroy(gameObject);

@@ -60,7 +60,7 @@ public class PlayerCombat : PlayerMod
             if (entity == player)
                 return;
 
-            if (entity && player.IsHostile(entity))
+            if (entity && !entity.Health.isDead && player.IsHostile(entity))
                 entity.TakeDamages(player.ComputeDamages(), player, item.point);
         }
     }

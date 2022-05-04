@@ -7,10 +7,10 @@ using UnityEngine.EventSystems;
 public enum PlayerState
 {
     Idle,
+    InFight,
     Moving,
     Sprinting,
     Attacking,
-    InFight,
     Dead,
     Deactivated,
 }
@@ -103,9 +103,9 @@ public class PlayerController2D : Entity
     public override void ManageAnimations()
     {
         base.ManageAnimations();
-        anim.SetBool("IdleSword", currentState == PlayerState.InFight);
         anim.SetFloat("Speed", rb.velocity.sqrMagnitude);
         anim.speed = Mathf.Lerp(anim.speed, sprinting ? 2 : 1, Time.deltaTime * 10f);
+        anim.SetFloat("StateIndex", (int)currentState);
     }
 
     public override void Death()
@@ -202,8 +202,8 @@ public class PlayerController2D : Entity
             return;
 
         LaunchAttack();
-        anim.SetTrigger("Attack");
-        anim.SetInteger("attackIndex", Random.Range(0, attackAnimCount));
+        anim.SetTrigger("MainAttack");
+        anim.SetFloat("attackIndex", Random.Range(0, attackAnimCount));
     }
 
     void LaunchAttack()
@@ -224,7 +224,7 @@ public class PlayerController2D : Entity
             return;
 
         LaunchAttack();
-        anim.SetTrigger("Bow");
+        anim.SetTrigger("SecondaryAttack");
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 vel = mousePos - (Vector2)transform.position;
         vel.Normalize();
@@ -233,6 +233,9 @@ public class PlayerController2D : Entity
 
     void ManageStates()
     {
+        if (currentState == PlayerState.Idle && Target) 
+            SetState(PlayerState.InFight);
+
         if (rb.velocity.sqrMagnitude < 0.1f && currentState == PlayerState.Moving)
         {
             if (Target != null)
@@ -240,6 +243,7 @@ public class PlayerController2D : Entity
             else
                 SetState(PlayerState.Idle);
         }
+
         if (rb.velocity.sqrMagnitude > 0.1f && currentState != PlayerState.Moving)
             SetState(PlayerState.Moving);
     }
