@@ -19,13 +19,13 @@ namespace CustomAI.BehaviorTree
 
         public bool NearToTarget()
         {
-            float distance = Vector2.Distance(actor.Target.transform.position, actor.transform.position);
+            float distance = Vector2.Distance(actor.MainTarget.transform.position, actor.transform.position);
             return distance < chaseMinDistance;
         }
 
         public override bool Step()
         {
-            actor.Move(actor.Target.transform.position, speedMultiplier);
+            actor.Move(actor.MainTarget.transform.position, speedMultiplier);
             return NearToTarget();
         }
 

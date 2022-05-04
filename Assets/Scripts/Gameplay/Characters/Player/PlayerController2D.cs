@@ -21,7 +21,7 @@ public class PlayerController2D : Entity
     public override HealthStat Health => playerHealth;
 
     [Header(nameof(PlayerController2D))]
-    public PlayerState currentState;
+    public PlayerState playerState;
     [SerializeField] LayerMask tilemapLayer;
 
     [Header("__Sprint")]
@@ -70,9 +70,9 @@ public class PlayerController2D : Entity
     bool CanMove()
     {
         return 
-            currentState != PlayerState.Attacking 
-            && currentState != PlayerState.Dead
-            && currentState != PlayerState.Deactivated
+            playerState != PlayerState.Attacking 
+            && playerState != PlayerState.Dead
+            && playerState != PlayerState.Deactivated
             ;
     }
 
@@ -95,9 +95,20 @@ public class PlayerController2D : Entity
         }
     }
 
-    public void SetState(PlayerState newState)
+    public void SetPlayerState(PlayerState newState)
     {
-        currentState = newState;
+        playerState = newState;
+    }
+
+    public override void SetEntityState(EntityState newState)
+    {
+        if (newState != EntityState.Wait)
+        {
+            anim.SetTrigger("SetFightMode");
+        }
+
+        anim.SetFloat("StateIndex", (int)newState);
+        base.SetEntityState(newState);
     }
 
     public override void ManageAnimations()
@@ -105,14 +116,13 @@ public class PlayerController2D : Entity
         base.ManageAnimations();
         anim.SetFloat("Speed", rb.velocity.sqrMagnitude);
         anim.speed = Mathf.Lerp(anim.speed, sprinting ? 2 : 1, Time.deltaTime * 10f);
-        anim.SetFloat("StateIndex", (int)currentState);
     }
 
     public override void Death()
     {
         base.Death();
         rb.velocity = new Vector2();
-        SetState(PlayerState.Dead);
+        SetPlayerState(PlayerState.Dead);
         anim.SetTrigger("Die");
     }
 
@@ -206,11 +216,17 @@ public class PlayerController2D : Entity
         anim.SetFloat("attackIndex", Random.Range(0, attackAnimCount));
     }
 
+    public override void Stop()
+    {
+        base.Stop();
+        rb.velocity = new Vector2();
+    }
+
     void LaunchAttack()
     {
         PlayerCombat.Stamina.StopRecovery();
-        //Stop();
-        SetState(PlayerState.Attacking);
+        Stop();
+        SetPlayerState(PlayerState.Attacking);
         float point = Input.mousePosition.x;
         if (point < Screen.width / 2)
             spr.transform.eulerAngles = new Vector3(0, 180, 0);
@@ -233,19 +249,19 @@ public class PlayerController2D : Entity
 
     void ManageStates()
     {
-        if (currentState == PlayerState.Idle && Target) 
-            SetState(PlayerState.InFight);
+        if (playerState == PlayerState.Idle && entityState == EntityState.InFight)
+            SetPlayerState(PlayerState.InFight);
 
-        if (rb.velocity.sqrMagnitude < 0.1f && currentState == PlayerState.Moving)
+        if (rb.velocity.sqrMagnitude < 0.1f && playerState == PlayerState.Moving)
         {
-            if (Target != null)
-                SetState(PlayerState.InFight);
+            if (entityState == EntityState.InFight)
+                SetPlayerState(PlayerState.InFight);
             else
-                SetState(PlayerState.Idle);
+                SetPlayerState(PlayerState.Idle);
         }
 
-        if (rb.velocity.sqrMagnitude > 0.1f && currentState != PlayerState.Moving)
-            SetState(PlayerState.Moving);
+        if (rb.velocity.sqrMagnitude > 0.1f && playerState != PlayerState.Moving)
+            SetPlayerState(PlayerState.Moving);
     }
 
     Interactable ClosestInteractable()

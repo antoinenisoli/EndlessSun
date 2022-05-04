@@ -4,13 +4,11 @@ using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 
-public enum Team
+public enum EntityState
 {
-    Player,
-    NPCs,
-    Monsters,
-    Natives,
-    Animals,
+    Normal,
+    InFight,
+    Wait,
 }
 
 public class Entity : MonoBehaviour
@@ -19,22 +17,23 @@ public class Entity : MonoBehaviour
     public AttributeList AttributeList => CharacterProfile.AttributeList;
 
     [Header("Entity")]
+    public EntityState entityState;
     public RelationManager relationManager;
     [SerializeField] protected Material hitMat;
     [SerializeField] protected float pushForce = 0.5f;
     protected Material baseMat;
-    public Entity Target;
+    public Entity MainTarget;
     public LayerMask targetLayer;
     public SpriteRenderer spr;
     [SerializeField] protected CharacterProfile profileToCopy;
-    [HideInInspector] public CharacterProfile CharacterProfile;
     [SerializeField] protected HealthStat health;
+    public List<Entity> engagedEntities = new List<Entity>();
 
     protected Rigidbody2D rb;
     protected Vector3 m_Velocity;
     protected Animator anim;
-    protected Entity oldTarget;
     protected List<CharacterMod> myMods = new List<CharacterMod>();
+    [HideInInspector] public CharacterProfile CharacterProfile;
 
     public virtual void Awake()
     {    
@@ -61,10 +60,21 @@ public class Entity : MonoBehaviour
 
     public virtual void SetTarget(Entity target)
     {
-        if (Target != null)
-            oldTarget = Target;
+        if (!target)
+            if (MainTarget && engagedEntities.Contains(MainTarget))
+                engagedEntities.Remove(MainTarget);
 
-        Target = target;
+        MainTarget = target;
+    }
+
+    public void NewTarget(Entity target)
+    {
+        if (!engagedEntities.Contains(target))
+        {
+            engagedEntities.Add(target);
+            Stop();
+            SetTarget(target);
+        }
     }
 
     public void AddMod(CharacterMod mod)
@@ -82,6 +92,11 @@ public class Entity : MonoBehaviour
     public virtual void Stop() 
     { 
         //rb.velocity = new Vector2(); 
+    }
+
+    public virtual void SetEntityState(EntityState newState)
+    {
+        entityState = newState;
     }
 
     public virtual void ManageAnimations()
@@ -109,6 +124,17 @@ public class Entity : MonoBehaviour
 
     public virtual void TakeDamages(float amount, Entity aggressor = null, Vector2 impactPoint = default)
     {
+        rb.isKinematic = false;
+        if (aggressor)
+        {
+            NewTarget(aggressor);
+            if (aggressor.BalanceDraw(this))
+            {
+                Vector2 direction = (impactPoint - (Vector2)transform.position).normalized;
+                Push(direction * pushForce);
+            }
+        }
+
         Health.ModifyValue(-amount);
         StartCoroutine(Flash());
         if (Health.isDead)
@@ -137,11 +163,34 @@ public class Entity : MonoBehaviour
         spr.material = baseMat;
     }
 
+    void ManageEngagedEntities()
+    {
+        if (MainTarget && MainTarget.health.isDead)
+            SetTarget(null);
+
+        for (int i = 0; i < engagedEntities.Count; i++)
+        {
+            Entity thisEntity = engagedEntities[i];
+            if (thisEntity.health.isDead)
+                engagedEntities.Remove(thisEntity);
+        }
+
+        if (engagedEntities.Count > 0)
+        {
+            if (entityState == EntityState.Normal)
+                SetEntityState(EntityState.InFight);
+        }
+        else
+        {
+            if (entityState == EntityState.InFight)
+                SetEntityState(EntityState.Normal);
+        }
+    }
+
     public virtual void DoUpdate()
     {
         ManageAnimations();
-        if (Target && Target.health.isDead)
-            SetTarget(null);
+        ManageEngagedEntities();
     }
 
     public void Update()

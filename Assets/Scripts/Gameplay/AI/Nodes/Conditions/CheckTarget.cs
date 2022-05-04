@@ -15,10 +15,10 @@ namespace CustomAI.BehaviorTree
 
         public override bool Check()
         {
-            if (!myActor.Target)
+            if (!myActor.MainTarget)
                 return false;
 
-            if (myActor.Target.Health.isDead)
+            if (myActor.MainTarget.Health.isDead)
                 return false;
 
             return true;

@@ -23,7 +23,7 @@ namespace CustomAI.BehaviorTree
 
         public override bool Step()
         {
-            return actor.Target || !done;
+            return actor.MainTarget || !done;
         }
     }
 }

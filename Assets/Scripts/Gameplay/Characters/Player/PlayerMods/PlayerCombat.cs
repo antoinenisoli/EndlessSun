@@ -47,7 +47,7 @@ public class PlayerCombat : PlayerMod
     public void Attack()
     {
         Stamina.StaminaCost(attackStaminaCost);
-        player.SetState(PlayerState.InFight);
+        player.SetPlayerState(PlayerState.InFight);
         RaycastHit2D[] colls = Physics2D.CircleCastAll(player.transform.position, attackRadius, player.spr.transform.right, attackRange, player.targetLayer);
         if (colls.Length > 0)
             CameraManager.Instance.CameraShake(0.2f);
@@ -68,7 +68,7 @@ public class PlayerCombat : PlayerMod
     public void FireArrow()
     {
         Stamina.StaminaCost(bowStaminaCost);
-        player.SetState(PlayerState.Idle);
+        player.SetPlayerState(PlayerState.Idle);
         GameObject arrow = Instantiate(arrowPrefab, player.transform.position, arrowPrefab.transform.rotation);
         Rigidbody2D arrowRB = arrow.GetComponent<Rigidbody2D>();
         float rot_z = Mathf.Atan2(storedVelocity.y, storedVelocity.x) * Mathf.Rad2Deg;

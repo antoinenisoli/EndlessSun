@@ -15,36 +15,6 @@ public abstract class Actor : Entity
     public bool isReacting;
     [SerializeField] protected float reactDuration = 0.5f;
 
-    public List<Entity> aggressors = new List<Entity>();
-
-    public override void SetTarget(Entity target)
-    {
-        if (!target)
-        {
-            if (Target)
-            {
-                if (aggressors.Contains(Target))
-                    aggressors.Remove(Target);
-
-                Target.SetTarget(null);
-            }
-        }
-        else
-            target.SetTarget(this);
-
-        base.SetTarget(target);
-    }
-
-    public void NewAgressor(Entity aggressor)
-    {
-        if (!aggressors.Contains(aggressor))
-        {
-            aggressors.Add(aggressor);
-            Stop();
-            SetTarget(aggressor);
-        }
-    }
-
     public virtual void ReactToTarget()
     {
         Stop();
@@ -67,8 +37,8 @@ public abstract class Actor : Entity
 
     public Vector2 TargetPosition()
     {
-        if (Target)
-            return Target.transform.position;
+        if (MainTarget)
+            return MainTarget.transform.position;
         else
         {
             return destinationPoint.position;
@@ -103,27 +73,11 @@ public abstract class Actor : Entity
 
     public bool CheckDistance(float minDistance)
     {
-        if (!Target)
+        if (!MainTarget)
             return false;
 
-        float dist = Vector2.Distance(Target.transform.position, transform.position);
+        float dist = Vector2.Distance(MainTarget.transform.position, transform.position);
         return dist < minDistance;
-    }
-
-    public override void TakeDamages(float amount, Entity aggressor = null, Vector2 impactPoint = default)
-    {
-        rb.isKinematic = false;
-        if (aggressor)
-        {
-            NewAgressor(aggressor);
-            if (aggressor.BalanceDraw(this))
-            {
-                Vector2 direction = (impactPoint - (Vector2)transform.position).normalized;
-                Push(direction * pushForce);
-            }
-        }
-
-        base.TakeDamages(amount, aggressor);
     }
 
     public override void DoUpdate()

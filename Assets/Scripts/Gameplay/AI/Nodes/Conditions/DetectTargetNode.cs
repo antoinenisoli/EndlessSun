@@ -29,7 +29,8 @@ namespace CustomAI.BehaviorTree
                         if (distance < aggroDistance && !entity.Health.isDead)
                         {
                             Entity target = entity;
-                            actor.NewAgressor(target);
+                            actor.NewTarget(target);
+                            target.NewTarget(actor);
                             return true;
                         }
                     }

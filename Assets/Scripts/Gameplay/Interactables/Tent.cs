@@ -14,13 +14,13 @@ public class Tent : Interactable
     public override void Interact()
     {
         EventManager.Instance.onPlayerSleep.Invoke();
-        GameManager.Player.SetState(PlayerState.Deactivated);
+        GameManager.Player.SetPlayerState(PlayerState.Deactivated);
     }
 
     public void PlayerAwake()
     {
         GameManager.Player.transform.position = entrance.position;
-        GameManager.Player.SetState(PlayerState.Idle);
+        GameManager.Player.SetPlayerState(PlayerState.Idle);
         PlayerSurvival.Instance.Energy.Init(GameManager.Player);
         GridManager.Instance.GenerateMap();
     }

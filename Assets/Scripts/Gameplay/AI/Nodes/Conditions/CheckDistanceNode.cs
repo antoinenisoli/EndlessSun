@@ -19,9 +19,9 @@ namespace CustomAI.BehaviorTree
 
         public override bool Check()
         {
-            if (actor.Target)
+            if (actor.MainTarget)
             {
-                float distance = Vector2.Distance(actor.Target.transform.position, actor.transform.position);
+                float distance = Vector2.Distance(actor.MainTarget.transform.position, actor.transform.position);
                 if (distance < range)
                     return true;
             }

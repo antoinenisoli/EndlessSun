@@ -19,7 +19,7 @@ namespace CustomAI.BehaviorTree
 
         public Vector2 TargetPosition()
         {
-            return actor.Target.transform.position;
+            return actor.MainTarget.transform.position;
         }
 
         public bool FarEnough()

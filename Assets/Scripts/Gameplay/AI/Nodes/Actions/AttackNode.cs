@@ -15,7 +15,7 @@ namespace CustomAI.BehaviorTree
 
         protected Vector2 oppositeDirection => (currentPosition - targetPos).normalized;
         protected Vector2 currentPosition => myNPC.transform.position;
-        protected Vector2 targetPos => myNPC.Target.transform.position;
+        protected Vector2 targetPos => myNPC.MainTarget.transform.position;
 
         public AttackNode(NPC myNPC, float stayDistantRange, float stepBackDelay = 0.15f, float speedMultiplier = 1)
         {
