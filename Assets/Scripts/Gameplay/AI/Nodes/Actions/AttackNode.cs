@@ -10,13 +10,13 @@ namespace CustomAI.BehaviorTree
         protected float attackTimer;
 
         protected float stayDistantRange;
-        float stepBackTimer, stepBackDelay;
+        protected float stepBackTimer, stepBackDelay;
 
         protected Vector2 oppositeDirection => (currentPosition - targetPos).normalized;
         protected Vector2 currentPosition => myNPC.transform.position;
         protected Vector2 targetPos => myNPC.Target.transform.position;
 
-        public AttackNode(NPC myNPC, float stayDistantRange, float stepBackDelay = 0.5f)
+        public AttackNode(NPC myNPC, float stayDistantRange, float stepBackDelay = 0.15f)
         {
             this.myNPC = myNPC;
             this.stayDistantRange = stayDistantRange;
@@ -33,23 +33,30 @@ namespace CustomAI.BehaviorTree
             return false;
         }
 
-        protected virtual void StayAway()
+        void KeepDistance()
+        {
+            Vector2 awayVector = targetPos + oppositeDirection * stayDistantRange;
+            myNPC.Move(awayVector);
+        }
+
+        protected virtual void MovingBehavior()
+        {
+            myNPC.Stop();
+            stepBackTimer = 0;
+        }
+
+        void StayAway()
         {
             float distance = Vector2.Distance(currentPosition, targetPos);
             if (distance < stayDistantRange)
             {
-                stepBackTimer += Time.deltaTime;
                 if (stepBackTimer > stepBackDelay)
-                {
-                    Vector2 awayVector = targetPos + oppositeDirection * stayDistantRange;
-                    myNPC.Move(awayVector);
-                }
+                    KeepDistance();
+
+                stepBackTimer += Time.deltaTime;
             }
             else
-            {
-                myNPC.Stop();
-                stepBackTimer = 0;              
-            }
+                MovingBehavior();             
         }
 
         public override void Execute()

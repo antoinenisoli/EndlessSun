@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CustomAI
 {
-    [RequireComponent(typeof(Actor))]
+    [RequireComponent(typeof(NPC))]
     public abstract class AIGlobalBehavior : MonoBehaviour
     {
         [HideInInspector] public Actor myActor;

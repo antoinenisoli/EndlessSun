@@ -16,7 +16,7 @@ namespace CustomAI.BehaviorTree
 
         public override void Execute()
         {
-            Debug.Log("RESET NODE");
+            //Debug.Log("RESET NODE");
             done = true;
             actor.ResetActor();
         }

@@ -15,7 +15,6 @@ public class NPC : Actor
 
     [Header("Attack")]
     public float attackRate = 1f;
-    [SerializeField] float attackRange = 5f;
     
     Vector3 detectIconBaseScale;
     [HideInInspector] public Vector2 startPosition;

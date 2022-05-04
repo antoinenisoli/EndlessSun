@@ -83,7 +83,7 @@ namespace CustomAI.BehaviorTree
             Selector selector = new Selector();
             CheckTarget checkTarget = new CheckTarget(myActor);
             DetectTargetNode detectTarget = new DetectTargetNode(myActor, aggroRange.range);
-            EnableReactionNode react = new EnableReactionNode(myActor, true);
+            ReactionNode react = new ReactionNode(myActor);
             SequenceNode scanSequence = new SequenceNode();
 
             scanSequence.Attach(detectTarget);

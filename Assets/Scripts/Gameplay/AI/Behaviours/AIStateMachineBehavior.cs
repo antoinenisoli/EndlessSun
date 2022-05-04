@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace CustomAI
 {
-    [RequireComponent(typeof(NPC))]
     public class AIStateMachineBehavior : AIGlobalBehavior
     {
         protected SubBehavior behaviour;

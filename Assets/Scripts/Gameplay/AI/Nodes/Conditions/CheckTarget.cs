@@ -18,6 +18,9 @@ namespace CustomAI.BehaviorTree
             if (!myActor.Target)
                 return false;
 
+            if (myActor.Target.Health.isDead)
+                return false;
+
             return true;
         }
     }

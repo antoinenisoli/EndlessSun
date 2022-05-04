@@ -4,24 +4,19 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class EnableReactionNode : AIActionNode
+    public class ReactionNode : AIActionNode
     {
         Actor actor;
-        bool enable;
 
-        public EnableReactionNode(Actor actor, bool enable)
+        public ReactionNode(Actor actor)
         {
             this.actor = actor;
-            this.enable = enable;
         }
 
         public override void Execute()
         {
-            actor.isReacting = enable;
-            //Debug.Log(enable);
-            actor.Stop();
-            if (enable)
-                actor.ReactToTarget();
+            //Debug.Log("reaction");
+            actor.ReactToTarget();
         }
 
         public override bool Step()
