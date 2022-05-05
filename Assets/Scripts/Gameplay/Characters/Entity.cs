@@ -122,8 +122,17 @@ public class Entity : MonoBehaviour
         rb.AddForce(force, ForceMode2D.Impulse);
     }
 
+    protected virtual void HitFeedback()
+    {
+        anim.SetTrigger("Hit");
+        GameObject blood = VFXManager.Instance.PlayVFX("BloodFX", transform.position);
+        int random = Random.Range(0, 2);
+        blood.transform.Rotate(Vector2.up * 180 * random);
+    }
+
     public virtual void TakeDamages(float amount, Entity aggressor = null, Vector2 impactPoint = default)
     {
+        HitFeedback();
         rb.isKinematic = false;
         if (aggressor)
         {

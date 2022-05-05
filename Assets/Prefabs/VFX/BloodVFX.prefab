@@ -1,0 +1,158 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2536501755874780276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2536501755874780273}
+  - component: {fileID: 2536501755874780278}
+  - component: {fileID: 2536501755874780279}
+  m_Layer: 0
+  m_Name: BloodVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2536501755874780273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536501755874780276}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.0775, y: 3.0775, z: 3.0775}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2536501755874780278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536501755874780276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2609759cbfc635b47aa994fd3d8aedea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startAnim: Blood2
+  playOnStart: 1
+  animRenderer: {fileID: 2536501755874780279}
+  animations:
+  - name: Blood1
+    frameRate: 0.06
+    speed: 1
+    destroyOnEnd: 1
+    execution: 0
+    mainSprite: {fileID: 21300000, guid: 4fd645ac903a16642b9d1a40ac4a59d7, type: 3}
+    sprites:
+    - {fileID: 21300000, guid: 4fd645ac903a16642b9d1a40ac4a59d7, type: 3}
+    - {fileID: 21300000, guid: 3e669f0b603072b4cbf6f38b99ce5d8f, type: 3}
+    - {fileID: 21300000, guid: 6993cc75fbdb5214280692a6a95a2b6e, type: 3}
+    - {fileID: 21300000, guid: 37d1f9a1fbff37145bc3f87aeb00f41c, type: 3}
+    - {fileID: 21300000, guid: 28c6c1eb8f38c0e4c82629165c73fe35, type: 3}
+    - {fileID: 21300000, guid: d89db337437d0684199196890f92f140, type: 3}
+    - {fileID: 21300000, guid: e7d2d08b8198cb640906daea2ea21358, type: 3}
+    - {fileID: 21300000, guid: 5167804759d73f04db0e72c12579450f, type: 3}
+    - {fileID: 21300000, guid: 57751ef91c15d164bbfaa222baabc502, type: 3}
+    - {fileID: 0}
+  - name: Blood2
+    frameRate: 0.06
+    speed: 2
+    destroyOnEnd: 1
+    execution: 0
+    mainSprite: {fileID: 21300000, guid: 4fd645ac903a16642b9d1a40ac4a59d7, type: 3}
+    sprites:
+    - {fileID: 21300000, guid: c99966fbac1b6bd4faa161deca27fc36, type: 3}
+    - {fileID: 21300000, guid: 0df9363faa3693c459eb8478d3c89ebe, type: 3}
+    - {fileID: 21300000, guid: c9ef480217b491e4ca1d915b935e84d5, type: 3}
+    - {fileID: 21300000, guid: 588dfe10effba4348b93aba53ecea611, type: 3}
+    - {fileID: 21300000, guid: 2d85abc863e457f45baafaa5df8c921e, type: 3}
+    - {fileID: 21300000, guid: a62bda7628b16ed4ca2cd44a549c3f6f, type: 3}
+    - {fileID: 21300000, guid: a95137d5278e845408e220010542b863, type: 3}
+    - {fileID: 21300000, guid: a3fe9b8235b547a4cb60256a429c5e23, type: 3}
+    - {fileID: 21300000, guid: 46cc13f25998c8049af3af3658e6f665, type: 3}
+    - {fileID: 21300000, guid: 9a9a85f107badce4699faf9e9fd3bd8c, type: 3}
+    - {fileID: 0}
+  - name: Blood3
+    frameRate: 0.06
+    speed: 2
+    destroyOnEnd: 1
+    execution: 0
+    mainSprite: {fileID: 21300000, guid: 4fd645ac903a16642b9d1a40ac4a59d7, type: 3}
+    sprites:
+    - {fileID: 21300000, guid: d9861199ae5ff8b449498b86821e0dec, type: 3}
+    - {fileID: 21300000, guid: c9a3f7f03833b7e4aa35b9bff12904d4, type: 3}
+    - {fileID: 21300000, guid: 97cc53886ee699a4781c339fd7611b92, type: 3}
+    - {fileID: 21300000, guid: 5f57c9361e9214147bbacf1959db3413, type: 3}
+    - {fileID: 21300000, guid: c972625f4359e584096a4afbe2e0594d, type: 3}
+    - {fileID: 21300000, guid: 6bf0000b749357b4b8fd0bef1b9f932f, type: 3}
+    - {fileID: 21300000, guid: 3ace98d50e8d1d84d899c9ea6cded3c1, type: 3}
+    - {fileID: 21300000, guid: aea084809dd071247932339503107cd0, type: 3}
+    - {fileID: 21300000, guid: dabfcc5e9b60ea1479504c198252497a, type: 3}
+    - {fileID: 21300000, guid: b2957f56bc1326f4a8b8db1f8258beda, type: 3}
+    - {fileID: 21300000, guid: fd32b096097d2834587ef3e12acead8c, type: 3}
+    - {fileID: 21300000, guid: 385d06559081b9f4d8c3d534ad0aa475, type: 3}
+    - {fileID: 21300000, guid: 865be2ca28026af449c4cecb39c53451, type: 3}
+    - {fileID: 21300000, guid: 8c92028fb8103574fa8802cf54ba5055, type: 3}
+    - {fileID: 0}
+--- !u!212 &2536501755874780279
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536501755874780276}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 500
+  m_Sprite: {fileID: 21300000, guid: d89db337437d0684199196890f92f140, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0

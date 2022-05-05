@@ -94,6 +94,9 @@ MonoBehaviour:
   - prefab: {fileID: 5125797678298976626, guid: c107b5b632dfbd24d851ef3f27abe14f,
       type: 3}
     name: XPCoin
+  - prefab: {fileID: 2536501755874780276, guid: df6b9a8146f3fbc498e6abbb133c8acc,
+      type: 3}
+    name: BloodFX
 --- !u!1 &7590599331487752248
 GameObject:
   m_ObjectHideFlags: 0
