@@ -550,27 +550,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76218e0b1b326bc45bd129076d0cf33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityState: 0
   relationManager:
     myTeam: 2
     myEntity: {fileID: 5771832891146833179}
     mainRelations:
     - relationType: 2
       targetTeam: 0
+    - relationType: 2
+      targetTeam: 3
+    - relationType: 0
+      targetTeam: 4
+    - relationType: 2
+      targetTeam: 1
     - relationType: 1
       targetTeam: 2
   hitMat: {fileID: 2100000, guid: 574180534a5588443b8ccbac622ea54d, type: 2}
   pushForce: 0.5
+  MainTarget: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
   spr: {fileID: 306397839665844428}
   profileToCopy: {fileID: 11400000, guid: 5c7a085510773ef4296c377115ed26d0, type: 2}
-  CharacterProfile: {fileID: 0}
   health:
     currentValue: 0
     maxValue: 3
     isDead: 0
-  Target: {fileID: 0}
+  engagedEntities: []
+  CharacterProfile: {fileID: 0}
   State: 0
   aiAgent: {fileID: 4056470052857826569}
   destinationSetter: {fileID: 3755676585018260752}
@@ -578,7 +586,6 @@ MonoBehaviour:
   myBehavior: {fileID: 5771832891146833183}
   isReacting: 0
   reactDuration: 0.5
-  aggressors: []
   attackRate: 1.5
   detectIcon: {fileID: 8475530416972840369}
   healthBarPivot: {fileID: 4517169896015901272}

@@ -177,6 +177,9 @@ public class Entity : MonoBehaviour
 
         if (engagedEntities.Count > 0)
         {
+            if (!MainTarget)
+                MainTarget = engagedEntities[0];
+
             if (entityState == EntityState.Normal)
                 SetEntityState(EntityState.InFight);
         }

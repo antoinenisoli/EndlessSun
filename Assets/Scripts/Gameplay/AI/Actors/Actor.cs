@@ -21,18 +21,21 @@ public abstract class Actor : Entity
         StartCoroutine(Reaction());
     }
 
-    public void ResetActor()
-    {
-        Stop();
-        SetTarget(null);
-    }
-
     IEnumerator Reaction()
     {
         anim.SetTrigger("React");
         isReacting = true;
         yield return new WaitForSeconds(reactDuration);
         isReacting = false;
+    }
+
+    public void ResetActor()
+    {
+        Stop();
+        if (MainTarget)
+            MainTarget.SetTarget(null);
+
+        SetTarget(null);
     }
 
     public Vector2 TargetPosition()

@@ -31,7 +31,7 @@ MonoBehaviour:
       value: 5
   Health:
     currentValue: 0
-    maxValue: 50
+    maxValue: 25
   Mana:
     currentValue: 0
     maxValue: 50
