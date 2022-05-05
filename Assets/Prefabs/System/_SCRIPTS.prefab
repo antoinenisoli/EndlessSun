@@ -97,6 +97,9 @@ MonoBehaviour:
   - prefab: {fileID: 2536501755874780276, guid: df6b9a8146f3fbc498e6abbb133c8acc,
       type: 3}
     name: BloodFX
+  - prefab: {fileID: 3311420239245904262, guid: 0da031a4496bc8449b6faa7db4fb5a75,
+      type: 3}
+    name: BodyExplode
 --- !u!1 &7590599331487752248
 GameObject:
   m_ObjectHideFlags: 0

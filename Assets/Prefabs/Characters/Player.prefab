@@ -267,7 +267,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 1024
-  spr: {fileID: 822972059179743088}
+  spriteRenderer: {fileID: 822972059179743088}
   profileToCopy: {fileID: 11400000, guid: d06c5e40d37a7d544af5008b45ae3169, type: 2}
   health:
     currentValue: 0

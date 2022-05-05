@@ -24,7 +24,7 @@ public class Entity : MonoBehaviour
     protected Material baseMat;
     public Entity MainTarget;
     public LayerMask targetLayer;
-    public SpriteRenderer spr;
+    public SpriteRenderer spriteRenderer;
     [SerializeField] protected CharacterProfile profileToCopy;
     [SerializeField] protected HealthStat health;
     public List<Entity> engagedEntities = new List<Entity>();
@@ -44,7 +44,7 @@ public class Entity : MonoBehaviour
         rb = GetComponentInParent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
         InitStats();
-        baseMat = spr.material;
+        baseMat = spriteRenderer.material;
     }
 
     public virtual void Start() { }
@@ -125,7 +125,7 @@ public class Entity : MonoBehaviour
     protected virtual void HitFeedback()
     {
         anim.SetTrigger("Hit");
-        GameObject blood = VFXManager.Instance.PlayVFX("BloodFX", transform.position);
+        GameObject blood = VFXManager.Instance.PlayVFX("BloodFX", spriteRenderer.transform.position);
         int random = Random.Range(0, 2);
         blood.transform.Rotate(Vector2.up * 180 * random);
     }
@@ -145,6 +145,7 @@ public class Entity : MonoBehaviour
         }
 
         Health.ModifyValue(-amount);
+        StopCoroutine(Flash());
         StartCoroutine(Flash());
         if (Health.isDead)
             Death();
@@ -165,11 +166,11 @@ public class Entity : MonoBehaviour
 
     IEnumerator Flash()
     {
-        spr.material = hitMat;
-        spr.transform.DOComplete();
-        spr.transform.DOPunchScale(Vector3.one * -0.2f, 0.1f);
-        yield return new WaitForEndOfFrame();
-        spr.material = baseMat;
+        spriteRenderer.material = hitMat;
+        spriteRenderer.transform.DOComplete();
+        spriteRenderer.transform.DOPunchScale(Vector3.one * -0.2f, 0.1f);
+        yield return new WaitForSeconds(0.2f);
+        spriteRenderer.material = baseMat;
     }
 
     void ManageEngagedEntities()

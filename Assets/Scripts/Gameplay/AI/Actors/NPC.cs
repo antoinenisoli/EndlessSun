@@ -72,6 +72,12 @@ public class NPC : Actor
         //pushed = true;
     }
 
+    public override void Death()
+    {
+        base.Death();
+        VFXManager.Instance.PlayVFX("BodyExplode", spriteRenderer.transform.position);
+    }
+
     public override void UnStun()
     {
         base.UnStun();

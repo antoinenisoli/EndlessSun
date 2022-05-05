@@ -83,10 +83,10 @@ public class PlayerController2D : Entity
             inputX = Input.GetAxisRaw("Horizontal");
             inputY = Input.GetAxisRaw("Vertical");
 
-            if (inputX < 0 && spr.transform.rotation.eulerAngles == Vector3.zero)
-                spr.transform.eulerAngles = new Vector3(0, 180, 0);
-            if (inputX > 0 && spr.transform.rotation.eulerAngles == Vector3.up * 180)
-                spr.transform.eulerAngles = new Vector3(0, 0, 0);
+            if (inputX < 0 && spriteRenderer.transform.rotation.eulerAngles == Vector3.zero)
+                spriteRenderer.transform.eulerAngles = new Vector3(0, 180, 0);
+            if (inputX > 0 && spriteRenderer.transform.rotation.eulerAngles == Vector3.up * 180)
+                spriteRenderer.transform.eulerAngles = new Vector3(0, 0, 0);
         }
         else
         {
@@ -129,10 +129,10 @@ public class PlayerController2D : Entity
     protected override void HitFeedback()
     {
         base.HitFeedback();
-        if (GameManager.Instance)
-            GameManager.Instance.FreezeFrame(0.4f, 0f);
+        //Feedbacks.FreezeGame(0, 0.15f);
+        Feedbacks.SlowMotion(0, 0.4f);
         if (CameraManager.Instance)
-            CameraManager.Instance.CameraShake(0.15f, 10);
+            CameraManager.Instance.CameraShake(0.25f, 15f);
     }
 
     public void LevelUp()
@@ -142,7 +142,7 @@ public class PlayerController2D : Entity
         StopAllCoroutines();
         StartCoroutine(LevelUpFeedback(1.5f));
         StartCoroutine(Glow(1.5f, Color.white));
-        GameManager.Instance.FreezeFrame(0.4f);
+        Feedbacks.SlowMotion(0, 0.4f);
     }
 
     public IEnumerator Glow(float delay, Color targetColor = new Color())
@@ -157,10 +157,10 @@ public class PlayerController2D : Entity
             intensity = Mathf.Lerp(intensity, 2f, timer / delay);
             float factor = Mathf.Pow(2, intensity);
             Color col = new Color(targetColor.r * factor, targetColor.g * factor, targetColor.b * factor);
-            spr.material.SetColor("_Tint", col);
+            spriteRenderer.material.SetColor("_Tint", col);
         }
 
-        spr.material.SetColor("_Tint", Color.white);
+        spriteRenderer.material.SetColor("_Tint", Color.white);
     }
 
     IEnumerator LevelUpFeedback(float delay)
@@ -227,9 +227,9 @@ public class PlayerController2D : Entity
         SetPlayerState(PlayerState.Attacking);
         float point = Input.mousePosition.x;
         if (point < Screen.width / 2)
-            spr.transform.eulerAngles = new Vector3(0, 180, 0);
+            spriteRenderer.transform.eulerAngles = new Vector3(0, 180, 0);
         else
-            spr.transform.eulerAngles = new Vector3(0, 0, 0);
+            spriteRenderer.transform.eulerAngles = new Vector3(0, 0, 0);
     }
 
     void LaunchSecondaryAttack()

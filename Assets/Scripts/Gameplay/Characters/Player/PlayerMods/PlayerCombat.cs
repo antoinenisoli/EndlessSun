@@ -31,12 +31,12 @@ public class PlayerCombat : PlayerMod
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(player.transform.position, player.spr.transform.right * attackRange);
-        Gizmos.DrawWireSphere(player.transform.position + player.spr.transform.right * attackRange, attackRadius);
+        Gizmos.DrawRay(player.transform.position, player.spriteRenderer.transform.right * attackRange);
+        Gizmos.DrawWireSphere(player.transform.position + player.spriteRenderer.transform.right * attackRange, attackRadius);
         Color clone = Color.red;
         clone.a = 0.25f;
         Gizmos.color = clone;
-        Gizmos.DrawSphere(player.transform.position + player.spr.transform.right * attackRange, attackRadius);
+        Gizmos.DrawSphere(player.transform.position + player.spriteRenderer.transform.right * attackRange, attackRadius);
     }
 
     public bool EnoughStamina()
@@ -48,9 +48,9 @@ public class PlayerCombat : PlayerMod
     {
         Stamina.StaminaCost(attackStaminaCost);
         player.SetPlayerState(PlayerState.InFight);
-        RaycastHit2D[] colls = Physics2D.CircleCastAll(player.transform.position, attackRadius, player.spr.transform.right, attackRange, player.targetLayer);
+        RaycastHit2D[] colls = Physics2D.CircleCastAll(player.transform.position, attackRadius, player.spriteRenderer.transform.right, attackRange, player.targetLayer);
         if (colls.Length > 0)
-            CameraManager.Instance.CameraShake(0.2f);
+            CameraManager.Instance.CameraShake(0.15f, 15);
         else
             return;
 
