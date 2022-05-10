@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3311420239245904257}
   - component: {fileID: 3311420239245904256}
   - component: {fileID: 3311420239245904263}
+  - component: {fileID: -3418845601527561160}
   m_Layer: 0
   m_Name: BodyExplodeFX
   m_TagString: Untagged
@@ -1558,10 +1559,6 @@ ParticleSystem:
     rowMode: 1
     sprites:
     - sprite: {fileID: -4660681954556571027, guid: 2950a673ce64a7d499c0b025ed4fc133,
-        type: 3}
-    - sprite: {fileID: 8449991429946877879, guid: 2950a673ce64a7d499c0b025ed4fc133,
-        type: 3}
-    - sprite: {fileID: 436606010274949162, guid: 2950a673ce64a7d499c0b025ed4fc133,
         type: 3}
     flipU: 0
     flipV: 0
@@ -4886,6 +4883,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &-3418845601527561160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3311420239245904262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e27cd972c6ecb7d45bbd9240d627ba8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 3
 --- !u!1 &4978578559533454626
 GameObject:
   m_ObjectHideFlags: 0

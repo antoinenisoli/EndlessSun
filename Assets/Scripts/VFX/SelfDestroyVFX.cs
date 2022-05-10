@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class SelfDestroyVFX : MonoBehaviour
 {
-    ParticleSystem fx => GetComponent<ParticleSystem>();
+    [SerializeField] float delay = 3f;
 
     IEnumerator Start()
     {
-        fx.Play();
-        yield return new WaitForSeconds(fx.main.duration + fx.main.startLifetimeMultiplier);
+        ParticleSystem fx = GetComponent<ParticleSystem>();
+        if (fx)
+        {
+            fx.Play();
+            yield return new WaitForSeconds(fx.main.duration + fx.main.startLifetimeMultiplier);
+        }
+        else
+            yield return new WaitForSeconds(delay);
+
         Destroy(gameObject);
     }
 }
