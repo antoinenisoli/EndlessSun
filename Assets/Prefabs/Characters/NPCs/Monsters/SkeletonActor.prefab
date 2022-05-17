@@ -585,7 +585,7 @@ MonoBehaviour:
   destinationPoint: {fileID: 3312177370995541547}
   myBehavior: {fileID: 5771832891146833183}
   isReacting: 0
-  reactDuration: 0.5
+  reactDuration: 0.9
   attackRate: 1.5
   detectIcon: {fileID: 8475530416972840369}
   healthBarPivot: {fileID: 4517169896015901272}

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class RegularBT : BehaviorTree
+    public class TrenchObserver : BehaviorTree
     {
-        [Header(nameof(RegularBT))]
+        [Header(nameof(TrenchObserver))]
         public int healthThreshold = 0;
         [SerializeField] ShowSphereGizmo attackPointGizmo;
 
@@ -23,7 +23,7 @@ namespace CustomAI.BehaviorTree
         [Header("Distance checks")]
         public DistanceCheck chaseRange = new DistanceCheck(2f, Color.white);
         public DistanceCheck aggroRange = new DistanceCheck(15f, Color.white);
-        public DistanceCheck sightRange = new DistanceCheck(20f, Color.white);    
+        public DistanceCheck sightRange = new DistanceCheck(20f, Color.white);
 
         private void OnDrawGizmos()
         {
