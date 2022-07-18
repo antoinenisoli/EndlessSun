@@ -206,7 +206,7 @@ public class PlayerController2D : Entity
 
     void LaunchPrimaryAttack()
     {
-        if (!Combat.EnoughStamina())
+        if (!Combat.CanAttack())
             return;
 
         LaunchAttack();
@@ -234,7 +234,7 @@ public class PlayerController2D : Entity
 
     void LaunchSecondaryAttack()
     {
-        if (!Combat.EnoughStamina())
+        if (!Combat.CanAttack())
             return;
 
         LaunchAttack();

@@ -151,6 +151,11 @@ public class Entity : MonoBehaviour
             Death();
     }
 
+    public void Heal(float amount)
+    {
+        Health.ModifyValue(amount);
+    }
+
     #region "ToOverride"
     public virtual void Attack() { }
     public virtual void Stun() { }

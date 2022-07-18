@@ -376,17 +376,17 @@ MonoBehaviour:
   hunger:
     currentValue: 0
     maxValue: 1000
-    changeAmount: 1
+    changeAmount: 0
     thisStat: 0
   thirsty:
     currentValue: 0
     maxValue: 1000
-    changeAmount: 1
+    changeAmount: 0
     thisStat: 1
   energy:
     currentValue: 0
     maxValue: 1000
-    changeAmount: 1
+    changeAmount: 0
     thisStat: 2
 --- !u!1 &4071406047616465356
 GameObject:

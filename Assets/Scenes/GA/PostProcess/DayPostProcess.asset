@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
   m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 0
     m_Value: 0
   contrast:
     m_OverrideState: 0
-    m_Value: 20
+    m_Value: -33
     min: -100
     max: 100
   colorFilter:
@@ -35,7 +35,7 @@ MonoBehaviour:
     max: 180
   saturation:
     m_OverrideState: 0
-    m_Value: 34
+    m_Value: -1
     min: -100
     max: 100
 --- !u!114 &-2599257708259503973
@@ -53,8 +53,8 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   color:
-    m_OverrideState: 0
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 0.9642911, b: 0.35283017, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
@@ -63,12 +63,12 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.093
+    m_Value: 0.29
     min: 0
     max: 1
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.722
+    m_Value: 1
     min: 0.01
     max: 1
   rounded:
@@ -113,7 +113,7 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 1.16
     min: 0
   scatter:
     m_OverrideState: 0
@@ -125,8 +125,8 @@ MonoBehaviour:
     m_Value: 65472
     min: 0
   tint:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 0.5395587, b: 0, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
   m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   shadows:
     m_OverrideState: 0
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
   m_Name: LiftGammaGain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   lift:
     m_OverrideState: 0

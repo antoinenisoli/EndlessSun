@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace CustomAI.BehaviorTree
 {
-    public class CheckDistanceNode : AIConditionNode
+    public abstract class CheckDistanceNode : AIConditionNode
     {
-        Actor actor;
-        float range;
-        bool eraseTarget;
+        protected Actor actor;
+        protected float range;
+        protected bool eraseTarget;
 
         public CheckDistanceNode(Actor actor, float range, bool eraseTarget = false)
         {
@@ -16,6 +16,8 @@ namespace CustomAI.BehaviorTree
             this.range = range;
             this.eraseTarget = eraseTarget;
         }
+
+        protected abstract bool DistanceType();
 
         public override bool Check()
         {

@@ -7,7 +7,7 @@ namespace CustomAI.BehaviorTree
     public class TrenchObserver : BehaviorTree
     {
         [Header(nameof(TrenchObserver))]
-        public int healthThreshold = 0;
+        public int targetHalthThreshold = 0;
         [SerializeField] ShowSphereGizmo attackPointGizmo;
 
         [Space()]
@@ -21,9 +21,9 @@ namespace CustomAI.BehaviorTree
         [SerializeField] float fleeSpeed = 1.3f;
 
         [Header("Distance checks")]
+        public DistanceCheck observationRange = new DistanceCheck(2f, Color.white);
+        public DistanceCheck sightRange = new DistanceCheck(2f, Color.white);
         public DistanceCheck chaseRange = new DistanceCheck(2f, Color.white);
-        public DistanceCheck aggroRange = new DistanceCheck(15f, Color.white);
-        public DistanceCheck sightRange = new DistanceCheck(20f, Color.white);
 
         private void OnDrawGizmos()
         {
@@ -40,78 +40,34 @@ namespace CustomAI.BehaviorTree
             attack.Attack();
         }
 
-        SequenceNode SetupFight()
+        SequenceNode SetupFlee()
         {
-            SequenceNode fightSequence = new SequenceNode();
-            CheckDistanceNode inSightNode = new CheckDistanceNode(myActor, sightRange.range, true);
+            SequenceNode sequence = new SequenceNode();
+            IsCloseNode closeNode = new IsCloseNode(myActor, observationRange.range);
+            RunAwayNode runAway = new RunAwayNode(myActor, sightRange.range, fleeSpeed);
 
-            fightSequence.Attach(SetupGetTarget(), inSightNode, SetupChase());
-
-            return fightSequence;
-        }
-
-        Selector SetupChase()
-        {
-            ChaseNode chaseNode = new ChaseNode(myActor, chaseRange.range, chaseSpeed);
-            Selector chaseSelector = new Selector();
-
-            chaseSelector.Attach(SetupAttack(), chaseNode);
-
-            return chaseSelector;
-        }
-
-        SequenceNode SetupPatrol()
-        {
-            SequenceNode mainSequence = new SequenceNode();
-            float randomDelay = GameDevHelper.RandomInRange(patrol.randomDelayBounds);
-            WaitNode wait = new WaitNode(randomDelay);
-            PatrolNode patrolNode = new PatrolNode(patrol);
-
-            mainSequence.Attach(wait, patrolNode);
-
-            return mainSequence;
-        }
-
-        SequenceNode SetupAttack()
-        {
-            SequenceNode mainSequence = new SequenceNode();
-            CheckDistanceNode inRange = new CheckDistanceNode(myActor, attack.attackRange.range);
-            AttackNode attackNode = attack.GenerateNode();
-
-            mainSequence.Attach(SetupGetTarget(), inRange, attackNode);
-
-            return mainSequence;
+            sequence.Attach(closeNode, runAway);
+            return sequence;
         }
 
         Selector SetupGetTarget()
         {
             Selector selector = new Selector();
             CheckTarget checkTarget = new CheckTarget(myActor);
-            DetectTargetNode detectTarget = new DetectTargetNode(myActor, aggroRange.range);
-            ReactionNode react = new ReactionNode(myActor);
-            SequenceNode scanSequence = new SequenceNode();
+            CheckHealthNode checkHealth = new CheckHealthNode(myActor, targetHalthThreshold);
+            ChaseNode chaseNode = new ChaseNode(myActor, chaseRange.range);
 
-            scanSequence.Attach(detectTarget, react);
-            selector.Attach(checkTarget, scanSequence);
+            selector.Attach(checkTarget, checkHealth, chaseNode);
             return selector;
-        }
-
-        SequenceNode SetupHealthCheck()
-        {
-            SequenceNode mainSequence = new SequenceNode();
-            CheckTarget checkTarget = new CheckTarget(myActor);
-            CheckHealthNode checkHealth = new CheckHealthNode(myActor, healthThreshold);
-            RunAwayNode runAway = new RunAwayNode(myActor, sightRange.range, fleeSpeed);
-
-            mainSequence.Attach(checkTarget, checkHealth, runAway);
-
-            return mainSequence;
         }
 
         public override AINode MakeTree()
         {
             Selector topSelector = new Selector();
-            topSelector.Attach(SetupHealthCheck(), SetupFight(), SetupPatrol());
+            SequenceNode fleeSequence = SetupFlee();
+            Selector getTargetSelector = SetupGetTarget();
+
+            topSelector.Attach(fleeSequence, getTargetSelector);
             return topSelector;
         }
     }

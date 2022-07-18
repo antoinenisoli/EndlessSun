@@ -12,7 +12,8 @@ public class PlayerCombat : PlayerMod
     [SerializeField] float attackStaminaCost = 15f;
     [SerializeField] int attackAnimCount = 3;
     [Range(0, 1)] public float attackRadius = 0.5f, attackRange = 0.5f;
-    [SerializeField] float pushForce = 5f;
+    [SerializeField] float pushForce = 5f, attackDelay = 0.3f;
+    float attackTimer;
 
     [Header("Bow")]
     [SerializeField] float bowStaminaCost = 15f;
@@ -39,13 +40,14 @@ public class PlayerCombat : PlayerMod
         Gizmos.DrawSphere(player.transform.position + player.spriteRenderer.transform.right * attackRange, attackRadius);
     }
 
-    public bool EnoughStamina()
+    public bool CanAttack()
     {
-        return Stamina.CurrentValue > 0;
+        return Stamina.CurrentValue > 0 && attackTimer >= attackDelay;
     }
 
     public void Attack()
     {
+        attackTimer = 0;
         Stamina.StaminaCost(attackStaminaCost);
         player.SetPlayerState(PlayerState.InFight);
         RaycastHit2D[] colls = Physics2D.CircleCastAll(player.transform.position, attackRadius, player.spriteRenderer.transform.right, attackRange, player.targetLayer);
@@ -67,6 +69,7 @@ public class PlayerCombat : PlayerMod
 
     public void FireArrow()
     {
+        attackTimer = 0;
         Stamina.StaminaCost(bowStaminaCost);
         player.SetPlayerState(PlayerState.Idle);
         GameObject arrow = Instantiate(arrowPrefab, player.transform.position, arrowPrefab.transform.rotation);
@@ -81,5 +84,6 @@ public class PlayerCombat : PlayerMod
         float computeEnergy = PlayerSurvival.Instance.Energy.MaxValue - PlayerSurvival.Instance.Energy.CurrentValue;
         Stamina.MaxValue = Stamina.BaseMaxValue - computeEnergy;
         Stamina.Update();
+        attackTimer += Time.deltaTime;
     }
 }

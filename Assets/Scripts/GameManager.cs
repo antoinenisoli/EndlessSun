@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Cinemachine;
 
 public class GameManager : MonoBehaviour
@@ -21,5 +22,10 @@ public class GameManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+    }
+
+    public void Reload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

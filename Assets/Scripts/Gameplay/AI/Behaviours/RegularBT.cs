@@ -43,7 +43,7 @@ namespace CustomAI.BehaviorTree
         SequenceNode SetupFight()
         {
             SequenceNode fightSequence = new SequenceNode();
-            CheckDistanceNode inSightNode = new CheckDistanceNode(myActor, sightRange.range, true);
+            IsCloseNode inSightNode = new IsCloseNode(myActor, sightRange.range, true);
 
             fightSequence.Attach(SetupGetTarget(), inSightNode, SetupChase());
 
@@ -75,7 +75,7 @@ namespace CustomAI.BehaviorTree
         SequenceNode SetupAttack()
         {
             SequenceNode mainSequence = new SequenceNode();
-            CheckDistanceNode inRange = new CheckDistanceNode(myActor, attack.attackRange.range);
+            IsCloseNode inRange = new IsCloseNode(myActor, attack.attackRange.range);
             AttackNode attackNode = attack.GenerateNode();
 
             mainSequence.Attach(SetupGetTarget(), inRange, attackNode);
