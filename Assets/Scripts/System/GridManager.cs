@@ -1,13 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Collections;
 using System.Collections.Generic;
-using System;
-using UnityEngine.UI;
 using System.IO;
-using Pathfinding;
 using System.Linq;
-using UnityEditor.Tilemaps;
 
 public class GridManager : MonoBehaviour 
 {

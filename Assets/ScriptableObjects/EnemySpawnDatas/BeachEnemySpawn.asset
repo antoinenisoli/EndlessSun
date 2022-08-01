@@ -17,6 +17,6 @@ MonoBehaviour:
   - name: 'EnemySkeleton '
     prefab: {fileID: 2153383651100463869, guid: 470a50fbec55b4649b54180c0654f4d8,
       type: 3}
-    probability: 10
-    weight: 10
-  accumulatedWeights: 10
+    probability: 45
+    weight: 100
+  accumulatedWeights: 100

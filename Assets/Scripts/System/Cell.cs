@@ -15,7 +15,6 @@ public class Cell : MonoBehaviour
     public CellType myType;
     public Vector2Int coordinates;
     public List<Vector2Int> neighbours;
-    [SerializeField] LabelIcon idx;
 
     [Header("Region")]
     public Region myRegion;

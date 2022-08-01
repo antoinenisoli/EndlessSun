@@ -18,4 +18,4 @@ MonoBehaviour:
     type: 3}
   spawnData: {fileID: 11400000, guid: 942487015359e704daed9b6ba25c01d4, type: 2}
   islandColor: {r: 0.764151, g: 0.30669424, b: 0, a: 0.6039216}
-  spawnerProb: 0
+  spawnerProb: 30
